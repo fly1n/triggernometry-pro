@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<TriggernometryExport Version="1">
+  <ExportedFolder Id="3fd5351e-c205-4e9c-8191-7f889f73ada9" Name="RawLoglineParse" Enabled="true">
+    <Folders>
+      <Folder Id="1e6bc2dd-062c-45cc-99a5-b02cd8377fbd" Name="ServerMessageHeader" Enabled="true">
+        <Folders />
+        <Triggers>
+          <Trigger Enabled="true" Name="GroundEffect" Id="f6df1bd8-f0bc-4d72-bbb3-023ecf45b174" RegularExpression="(?&lt;targetID&gt;[0-9A-F]{8}):(?&lt;EffectFilter&gt;[0-9A-F]{4})(?&lt;param1&gt;[0-9A-F]{4})\|[0-9A-F]{4}(?&lt;param2&gt;[0-9A-F]{4})\|[0-9A-F]{8}\|[0-9A-F]{8}\|[0-9A-F]{8}\|(?&lt;actorID&gt;[0-9A-F]{8})\|[0-9A-F]{8}\|[0-9A-F]{8}\|[0-9A-F]{8}\|[0-9A-F]{8}\|[0-9A-F]{8}\|[0-9A-F]{8}\|(?&lt;posX&gt;[0-9A-F]{8})\|(?&lt;posY&gt;[0-9A-F]{8})\|(?&lt;posZ&gt;[0-9A-F]{8})">
+            <Actions>
+              <Action OrderNumber="1" LogMessageText="[GroundEffect] GE:${param2}:${numeric:round(X8float(${posX}),4)}:${numeric:round(X8float(${posY}),4)}:${numeric:round(X8float(${posZ}),4)}:${actorID}:${_ffxiventity[${actorID}].name}:${targetID}:${_ffxiventity[${targetID}].name}:${EffectFilter}:${param1}" LogLevel="Warning" MouseX="" MouseY="" TextAuraFontSize="9" TextAuraFontName="宋体" ActionType="LogMessage">
+                <Condition Enabled="false" Grouping="Or" />
+              </Action>
+            </Actions>
+            <Condition Enabled="true" Grouping="Or">
+              <ConditionSingle Enabled="true" ExpressionL="${EffectFilter}" ExpressionTypeL="String" ExpressionR="0004" ExpressionTypeR="String" ConditionType="StringEqualNocase" />
+              <ConditionSingle Enabled="true" ExpressionL="${EffectFilter}" ExpressionTypeL="String" ExpressionR="0005" ExpressionTypeR="String" ConditionType="StringEqualNocase" />
+            </Condition>
+          </Trigger>
+          <Trigger Enabled="true" Name="ActorCast" Id="6a618c9e-8b0f-423f-a869-6256a89c396d" RegularExpression="(?&lt;actorID&gt;[0-9A-F]{8}):[0-9A-F]{4}(?&lt;actionID&gt;[0-9A-F]{4})\|[0-9A-F]{8}\|(?&lt;castTime&gt;[0-9A-F]{8})\|(?&lt;targetID&gt;[0-9A-F]{8})\|[0-9A-F]{8}\|[0-9A-F]{8}\|(?&lt;posY&gt;[0-9A-F]{4})(?&lt;posX&gt;[0-9A-F]{4})\|[0-9A-F]{4}(?&lt;posZ&gt;[0-9A-F]{4})">
+            <Actions>
+              <Action OrderNumber="1" LogMessageText="[ActorCast] 14:${actionID}:${_ffxiventity[${actorID}].name}:${actorID} starts using ${actionID} on ${_ffxiventity[${targetID}].name}:${targetID} in ${numeric:round(X8float(${castTime}),2)} seconds on ${numeric:round(X4pos(${posX}),2)}:${numeric:round(X4pos(${posY}),2)}:${numeric:round(X4pos(${posZ}),2)}" LogLevel="Warning" MouseX="" MouseY="" TextAuraFontSize="9" TextAuraFontName="宋体" ActionType="LogMessage">
+                <Condition Enabled="false" Grouping="Or" />
+              </Action>
+            </Actions>
+            <Condition Enabled="false" Grouping="Or" />
+          </Trigger>
+          <Trigger Enabled="true" Name="testPos4" Id="e3aa7d87-759c-4b88-b8b9-d0898c28535f" RegularExpression="">
+            <Actions>
+              <Action OrderNumber="1" LogMessageText="${numeric:(hex2dec(800C)-32767)/32.767} ${numeric:X4pos(800C)}" LogLevel="Warning" MouseX="" MouseY="" TextAuraFontSize="9" TextAuraFontName="宋体" ActionType="LogMessage">
+                <Condition Enabled="false" Grouping="Or" />
+              </Action>
+            </Actions>
+            <Condition Enabled="false" Grouping="Or" />
+          </Trigger>
+        </Triggers>
+      </Folder>
+    </Folders>
+    <Triggers>
+      <Trigger Enabled="true" Source="OriginalLog" Name="ServerMessageHeader" Id="2c8a6a04-66bf-4c33-95a0-3ca24430aa2e" RegularExpression="252\|.{33}\|[0-9A-F]{8}\|(?&lt;mainID&gt;[0-9A-F]{8})\|[0-9A-F]{8}\|[0-9A-F]{8}\|(?&lt;opcode&gt;[0-9A-F]{4})[0-9A-F]{4}\|[0-9A-F]{8}\|[0-9A-F]{8}\|[0-9A-F]{8}\|(?&lt;details&gt;.*)" DebugLevel="None">
+        <Actions>
+          <Action OrderNumber="1" LogMessageText="ServerMessageHeader ${mainID}:${opcode}:${details}" MouseX="" MouseY="" TextAuraFontSize="9" TextAuraFontName="宋体" ActionType="LogMessage">
+            <Condition Enabled="false" Grouping="Or" />
+          </Action>
+          <Action OrderNumber="2" LogLevel="-1" MouseX="" MouseY="" TextAuraFontSize="9" TextAuraFontName="宋体" TriggerId="6a618c9e-8b0f-423f-a869-6256a89c396d" TriggerText="${mainID}:${details}" ActionType="Trigger">
+            <Condition Enabled="true" Grouping="Or">
+              <ConditionSingle Enabled="true" ExpressionL="${opcode}" ExpressionTypeL="String" ExpressionR="${tvarrl:OpcodeTable[ActorCast][1]}" ExpressionTypeR="String" ConditionType="StringEqualNocase" />
+            </Condition>
+          </Action>
+          <Action OrderNumber="3" LogLevel="-1" MouseX="" MouseY="" TextAuraFontSize="9" TextAuraFontName="宋体" TriggerId="f6df1bd8-f0bc-4d72-bbb3-023ecf45b174" TriggerText="${mainID}:${details}" ActionType="Trigger">
+            <Condition Enabled="true" Grouping="Or">
+              <ConditionSingle Enabled="true" ExpressionL="${opcode}" ExpressionTypeL="String" ExpressionR="${tvarrl:OpcodeTable[GroundEffect][1]}" ExpressionTypeR="String" ConditionType="StringEqualNocase" />
+            </Condition>
+          </Action>
+        </Actions>
+        <Condition Enabled="false" Grouping="Or" />
+      </Trigger>
+      <Trigger Enabled="true" Source="None" Name="InitOpcode" Id="5445e555-4cee-4585-b6d7-d1cc8dacb148" RegularExpression="">
+        <Actions>
+          <Action OrderNumber="1" DiskFileOp="ReadCSVIntoTableVariable" DiskFileOpName="D:\develop\triggernometry\OpcodeTable.csv" DiskFileOpVar="OpcodeTable" LogLevel="-1" MouseX="" MouseY="" TextAuraFontSize="9" TextAuraFontName="宋体" ActionType="DiskFile">
+            <Condition Enabled="false" Grouping="Or" />
+          </Action>
+        </Actions>
+        <Condition Enabled="false" Grouping="Or" />
+      </Trigger>
+      <Trigger Enabled="true" Name="encounterTest" Id="bf327957-ebb8-42f5-bfd4-f44ae510546c" RegularExpression="">
+        <Actions>
+          <Action OrderNumber="1" LogLevel="-1" MouseX="" MouseY="" VariableOp="SetString" VariableName="activeEncounter" VariableExpression="${_activeencounter}" TextAuraFontSize="9" TextAuraFontName="宋体" ActionType="Variable">
+            <Condition Enabled="false" Grouping="Or" />
+            <Conditions />
+          </Action>
+        </Actions>
+        <Condition Enabled="false" Grouping="Or" />
+      </Trigger>
+    </Triggers>
+  </ExportedFolder>
+</TriggernometryExport>
