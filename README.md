@@ -10,23 +10,23 @@ Add a new Trigger event source "Original log lines", which allow triggers to acc
 for more information about this:
 https://github.com/quisquous/cactbot/blob/main/docs/LogGuide.md#fb-debug
 
-##Additional math functions
+## Additional math functions
 ```
 X8float = converts a base16 (hex) 4-bytes array to float types.
 X4pos = converts a base16 (hex) uint16 types to a ffxiv ingame-position expression as follows: pos = (uint16 - 32767)/32.767, this is used in ActorCast type network packet.
 ```
 
-##Reduction of combatant states update interval
+## Reduction of combatant states update interval
 Reduce update interval of combatant stats to 10ms (from original 1000ms), Enhance the real-time performance of memory data. But it is still limited by the memory update interval of ffxiv_act_plugin, which is 100ms.
 
-##Customizable encounter format
+## Customizable encounter format
 Modify ExportActiveEncounter and ExportLastEncounter function. Now we have encounter information in the selected miniparse format instead of default format.
 ```
 _lastencounter = ACT DPS information from the last encounter in selected miniparse format
 _activeencounter = ACT DPS information from the ongoing encounter in selected miniparse format
 ```
 
-##More combatant properties available
+## More combatant properties available
 Add more Properties available in _ffxivparty and _ffxiventity:
 ```
 name = Name of the actor
@@ -59,7 +59,7 @@ bnpcid
 pointer = Hexadecimal pointer address of character data in memory.
 ```
 
-##Direct Memory Reading Function
+## Direct Memory Reading Function
 Add Combatant Memory Reading Function. This is a dangerous function which can read all the memory information of a certain combatant. Starting from the memory pointer, read every 16 Bytes (1234ABCD) as a unit. The result is returned as a string value. 
 ```
 _ffxiventity[1234ABCD].memory[8,4] = Begin at 8 units offsets from memory pointer address, and read 4 units. 
