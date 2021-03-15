@@ -413,7 +413,7 @@ namespace Triggernometry.PluginBridges
             {
                 Int64 old = Interlocked.Read(ref LastCheck);
                 Int64 now = DateTime.Now.Ticks;
-                if (((now - old) / TimeSpan.TicksPerMillisecond) < 1000)
+                if (((now - old) / TimeSpan.TicksPerMillisecond) < 10)
                 {
                     return;
                 }
