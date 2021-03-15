@@ -1,3 +1,4 @@
+#Documentation
 ## About this branch
 Modified by NiniTechnology. Some additional features and functions will be added in the future to optimize the user experience.
 
