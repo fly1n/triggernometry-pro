@@ -23,10 +23,6 @@ _lastencounter = ACT DPS information from the last encounter in selected minipar
 _activeencounter = ACT DPS information from the ongoing encounter in selected miniparse format
 ```
 
-Triggernometry has a Wiki, containing useful information and documentation:
-
-https://github.com/paissaheavyindustries/Triggernometry/wiki
-
 5.Add more Properties available in _ffxivparty and _ffxiventity:
 ```
 name = Name of the actor
@@ -59,6 +55,10 @@ bnpcid
 pointer = Hexadecimal pointer address of character data in memory.
 ```
 
+## original triggernometry readme information
+Triggernometry has a Wiki, containing useful information and documentation:
+
+https://github.com/paissaheavyindustries/Triggernometry/wiki
 To get answers to some commonly asked questions, and to get more information on how to use Triggernometry, you can find more information in the Triggernometry FAQ and examples section:
 
 https://github.com/paissaheavyindustries/Triggernometry/wiki/Triggernometry-FAQ-and-examples
