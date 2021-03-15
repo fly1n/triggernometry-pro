@@ -17,8 +17,11 @@ X4pos = converts a base16 (hex) uint16 types to a ffxiv ingame-position expressi
 
 3.Reduce update interval of combatant stats to 10ms (from original 1000ms), Enhance the real-time performance of memory data. But it is still limited by the memory update interval of ffxiv_act_plugin, which is 100ms.
 
-
-
+4.Modify ExportActiveEncounter and ExportLastEncounter function. Now we have encounter information in the selected miniparse format instead of default format.
+```
+_lastencounter = ACT DPS information from the last encounter in selected miniparse format
+_activeencounter = ACT DPS information from the ongoing encounter in selected miniparse format
+```
 
 Triggernometry has a Wiki, containing useful information and documentation:
 
