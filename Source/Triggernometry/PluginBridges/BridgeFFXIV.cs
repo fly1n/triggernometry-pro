@@ -4,6 +4,8 @@ using System.Reflection;
 using System.Threading;
 using System.Diagnostics;
 using Triggernometry.Variables;
+using System.Runtime.InteropServices;
+using System.Text;
 
 namespace Triggernometry.PluginBridges
 {
@@ -13,6 +15,7 @@ namespace Triggernometry.PluginBridges
 
         private static string ActPluginName = "FFXIV_ACT_Plugin.dll";
         private static string ActPluginType = "FFXIV_ACT_Plugin";
+        private static IntPtr hProcessFFXIV;
 
         private static VariableDictionary NullCombatant = new VariableDictionary();
 
@@ -749,7 +752,86 @@ namespace Triggernometry.PluginBridges
             }
             return p.ProcessName;
         }
+        [DllImport("kernel32.dll")]
+        private static extern IntPtr OpenProcess(ProcessAccessFlags processAccess, bool bInheritHandle, int processId);
 
+        [DllImport("kernel32.dll", SetLastError = true)]
+        private static extern bool ReadProcessMemory(IntPtr hProcess, IntPtr lpBaseAddress, [Out] byte[] lpBuffer, int dwSize, out IntPtr lpNumberOfBytesRead);
+
+        [DllImport("kernel32.dll", SetLastError = true)]
+        private static extern bool WriteProcessMemory(IntPtr hProcess, IntPtr lpBaseAddress, byte[] lpBuffer, int nSize, out IntPtr lpNumberOfBytesWritten);
+
+        [DllImport("kernel32.dll", SetLastError = true)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        private static extern bool CloseHandle(IntPtr hObject);
+
+        [DllImport("psapi.dll", SetLastError = true)]
+        private static extern bool GetModuleInformation(IntPtr hProcess, IntPtr hModule, out ModuleInfo lpmodinfo, uint cb);
+
+        [DllImport("psapi.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
+        private static extern int EnumProcessModules(IntPtr hProcess, [Out] IntPtr lphModule, uint cb, out uint lpcbNeeded);
+
+        [DllImport("psapi.dll", SetLastError = true)]
+        private static extern int GetModuleFileNameEx(IntPtr hProcess, IntPtr hModule, StringBuilder lpFilename, int nSize);
+
+        [StructLayout(LayoutKind.Sequential)]
+        private struct ModuleInfo
+        {
+            public IntPtr lpBaseOfDll;
+            public uint SizeOfImage;
+            public IntPtr EntryPoint;
+        }
+
+        [Flags]
+        private enum ProcessAccessFlags : uint
+        {
+            All = 0x001F0FFF,
+            Terminate = 0x00000001,
+            CreateThread = 0x00000002,
+            VirtualMemoryOperation = 0x00000008,
+            VirtualMemoryRead = 0x00000010,
+            VirtualMemoryWrite = 0x00000020,
+            DuplicateHandle = 0x00000040,
+            CreateProcess = 0x000000080,
+            SetQuota = 0x00000100,
+            SetInformation = 0x00000200,
+            QueryInformation = 0x00000400,
+            QueryLimitedInformation = 0x00001000,
+            Synchronize = 0x00100000
+        }
+        private const ProcessAccessFlags ProcessFlags =
+            ProcessAccessFlags.VirtualMemoryRead
+            | ProcessAccessFlags.VirtualMemoryWrite
+            | ProcessAccessFlags.VirtualMemoryOperation
+            | ProcessAccessFlags.QueryInformation;
+        public static void ReadFFXIVMemory(IntPtr ptr, byte[] buffer, int length)
+        {
+            try
+            {
+                var new_pid = GetProcessId();
+                if (hProcessFFXIV == IntPtr.Zero)
+                {
+                    hProcessFFXIV = OpenProcess(ProcessFlags, false, new_pid);
+
+                }
+
+                IntPtr read;
+                ReadProcessMemory(hProcessFFXIV, ptr, buffer, length, out read);
+
+            }
+            catch (Exception e)
+            {
+                hProcessFFXIV = IntPtr.Zero;
+            }
+
+        }
+        public static void CloseHandleFFXIV()
+        {
+            if (hProcessFFXIV != IntPtr.Zero)
+            {
+                CloseHandle(hProcessFFXIV);
+            }
+        }
     }
 
 }

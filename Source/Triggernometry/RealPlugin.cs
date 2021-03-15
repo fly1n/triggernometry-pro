@@ -2586,6 +2586,7 @@ namespace Triggernometry
                 ui.CloseForms();
             }
             PluginBridges.BridgeFFXIV.UnsubscribeFromNetworkEvents(this);
+            PluginBridges.BridgeFFXIV.CloseHandleFFXIV();
             if (_obs != null)
             {
                 _obs.Dispose();

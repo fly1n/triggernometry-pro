@@ -10,6 +10,7 @@ using System.Text.RegularExpressions;
 using System.ComponentModel;
 using System.Web.Script.Serialization;
 using Triggernometry.Variables;
+using System.Runtime.InteropServices;
 
 namespace Triggernometry
 {
@@ -28,6 +29,7 @@ namespace Triggernometry
         internal static Regex rex = new Regex(@"\$\{(?<id>[^\}\{\$]*)\}");
         internal static Regex rexnum = new Regex(@"\$(?<id>[0-9]+)");
         internal static Regex rexnump = new Regex(@"\[(?<index>.+?)\]\.(?<prop>[a-zA-Z]+)");
+        internal static Regex rexnumpnumnum = new Regex(@"\[(?<index>.+?)\]\.(?<prop>[a-zA-Z]+)\[(?<arg1>[0-9]+?),(?<arg2>[0-9]+?)\]");
         internal static Regex rexlidx = new Regex(@"(?<name>[^\[]+)\[(?<index>.+?)\]");
         internal static Regex rextidx = new Regex(@"(?<name>[^\[]+)\[(?<column>.+?)\]\[(?<row>.+?)\]");
         internal static Regex rexlprp = new Regex(@"(?<name>[^\.]+)\.(?<prop>[a-zA-Z]+)(\((?<arg>[^\)]+)\)){0,1}");
@@ -992,6 +994,7 @@ namespace Triggernometry
                         }
                         else if (x.IndexOf("_ffxivparty") == 0)
                         {
+
                             mx = rexnump.Match(x);
                             if (mx.Success == true)
                             {
@@ -1025,7 +1028,7 @@ namespace Triggernometry
                         }
                         else if (x.IndexOf("_ffxiventity") == 0)
                         {
-                            mx = rexnump.Match(x);
+                            mx = rexnumpnumnum.Match(x);
                             if (mx.Success == true)
                             {
                                 string gindex = mx.Groups["index"].Value;
@@ -1043,10 +1046,49 @@ namespace Triggernometry
                                 }
                                 if (vc != null)
                                 {
-                                    val = vc.GetValue(gprop).ToString();
+                                    if (gprop == "memory")
+                                    {
+                                        int arg1, arg2;
+                                        int.TryParse(mx.Groups["arg1"].Value, out arg1);
+                                        int.TryParse(mx.Groups["arg2"].Value, out arg2);
+                                        byte[] buffer = new byte[arg2 * 4];
+                                        Int64 ptr = Convert.ToInt64(vc.GetValue("pointer").ToString(), 16);
+                                        PluginBridges.BridgeFFXIV.ReadFFXIVMemory((IntPtr)(ptr + arg1 * 4), buffer, arg2 * 4);
+                                        val = "";
+                                        for (int iptr = 0; iptr < arg2 * 4; iptr += 4)
+                                        {
+                                            val += BitConverter.ToUInt32(buffer, iptr).ToString("X8");
+                                        }
+                                    }
+                                    found = true;
                                 }
+
                             }
-                            found = true;
+                            else
+                            {
+                                mx = rexnump.Match(x);
+                                if (mx.Success == true)
+                                {
+                                    string gindex = mx.Groups["index"].Value;
+                                    string gprop = mx.Groups["prop"].Value;
+                                    Int64 honk;
+                                    VariableDictionary vc = null;
+                                    bool foundid = false;
+                                    if (Int64.TryParse(gindex, System.Globalization.NumberStyles.HexNumber, CultureInfo.InvariantCulture, out honk) == true)
+                                    {
+                                        vc = PluginBridges.BridgeFFXIV.GetIdEntity(gindex, out foundid);
+                                    }
+                                    if (foundid == false)
+                                    {
+                                        vc = PluginBridges.BridgeFFXIV.GetNamedEntity(gindex);
+                                    }
+                                    if (vc != null)
+                                    {
+                                        val = vc.GetValue(gprop).ToString();
+                                    }
+                                }
+                                found = true;
+                            }
                         }
                         else if (x == "_ffxivtime")
                         {
