@@ -60,9 +60,10 @@ pointer = Hexadecimal pointer address of character data in memory.
 ```
 
 ## Direct Memory Reading Function
-Add Combatant Memory Reading Function. This is a dangerous function which can read all the memory information of a certain combatant. Starting from the memory pointer, read every 16 Bytes (1234ABCD) as a unit. The result is returned as a string value. 
+Add Combatant Memory Reading Function. This is a dangerous function which can read all the memory information of a certain combatant. Starting from the memory pointer, read every 4 Bytes as a unit. The result is returned as a string value. 
 ```
-_ffxiventity[1234ABCD].memory[8,4] = Begin at 8 units offsets from memory pointer address, and read 4 units. 
+_ffxiventity[1234ABCD].memory[160,4] = Begin at memory offset 160 from combatant pointer address, and read 4 bytes. According to the data structure listed below, we can know that the return value represents a posX value of the entity in float type.
+${numeric:round(X8float(${_ffxiventity[1234ABCD].memory[160,4]}),4)} = Through the combination of these functions, the posX coordinates of the character can be obtained, parsed as a float type, and 4 decimal places are retained.
 ```
 The memory structure of a combatant is listed below as a reference. This code is copied from FFXIV_ACT_Plugin.Memory.Models.Combatant64Struct.
 ```
