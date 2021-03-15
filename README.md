@@ -1,7 +1,8 @@
 # About this branch
 Modified by NiniTechnology. Some additional features and functions will be added in the future to optimize the user experience.
 
-1.Add a new Trigger event source "Original log lines", which allow triggers to access raw log lines. Raw log lines contains more information and they can be useful when we need to test our triggers. They often have information like this: 
+## Original log lines as trigger event source
+Add a new Trigger event source "Original log lines", which allow triggers to access raw log lines. Raw log lines contains more information and they can be useful when we need to test our triggers. They often have information like this: 
 
 ```
 251|2019-05-21T19:11:02.0268703-07:00|ProcessTCPInfo: New connection detected for Process [2644]:192.168.1.70:49413=>204.2.229.85:55021|909171c500bed915f8d79fc04d3589fa
@@ -9,21 +10,24 @@ Modified by NiniTechnology. Some additional features and functions will be added
 for more information about this:
 https://github.com/quisquous/cactbot/blob/main/docs/LogGuide.md#fb-debug
 
-2.Add more math functions.
+## Additional math functions
 ```
 X8float = converts a base16 (hex) 4-bytes array to float types.
 X4pos = converts a base16 (hex) uint16 types to a ffxiv ingame-position expression as follows: pos = (uint16 - 32767)/32.767, this is used in ActorCast type network packet.
 ```
 
-3.Reduce update interval of combatant stats to 10ms (from original 1000ms), Enhance the real-time performance of memory data. But it is still limited by the memory update interval of ffxiv_act_plugin, which is 100ms.
+## Reduction of combatant states update interval
+Reduce update interval of combatant stats to 10ms (from original 1000ms), Enhance the real-time performance of memory data. But it is still limited by the memory update interval of ffxiv_act_plugin, which is 100ms.
 
-4.Modify ExportActiveEncounter and ExportLastEncounter function. Now we have encounter information in the selected miniparse format instead of default format.
+## Customizable encounter format
+Modify ExportActiveEncounter and ExportLastEncounter function. Now we have encounter information in the selected miniparse format instead of default format.
 ```
 _lastencounter = ACT DPS information from the last encounter in selected miniparse format
 _activeencounter = ACT DPS information from the ongoing encounter in selected miniparse format
 ```
 
-5.Add more Properties available in _ffxivparty and _ffxiventity:
+## More combatant properties available
+Add more Properties available in _ffxivparty and _ffxiventity:
 ```
 name = Name of the actor
 job = Current job as a three letter acronym (AST, CUL, MIN, SMN, etc)
@@ -53,6 +57,106 @@ castdurationmax
 bnpcnameid
 bnpcid
 pointer = Hexadecimal pointer address of character data in memory.
+```
+
+## Direct Memory Reading Function
+Add Combatant Memory Reading Function. This is a dangerous function which can read all the memory information of a certain combatant. Starting from the memory pointer, read every 4 Bytes as a unit. The result is returned as a string value. 
+```
+_ffxiventity[1234ABCD].memory[160,4] = Begin at memory offset 160 from combatant pointer address, and read 4 bytes. According to the data structure listed below, we can know that the return value represents a posX value of the entity in float type.
+${numeric:round(X8float(${_ffxiventity[1234ABCD].memory[160,4]}),4)} = Through the combination of these functions, the posX coordinates of the character can be obtained, parsed as a float type, and 4 decimal places are retained.
+```
+The memory structure of a combatant is listed below as a reference. This code is copied from FFXIV_ACT_Plugin.Memory.Models.Combatant64Struct.
+```
+public struct Combatant64Struct
+{
+    // Fields
+    [FixedBuffer(typeof(byte), 0x40), FieldOffset(0x30)]
+    public <Name>e__FixedBuffer Name;
+    [FieldOffset(0x74)]
+    public uint ID;
+    [FieldOffset(0x80)]
+    public uint BNpcID;
+    [FieldOffset(0x84)]
+    public uint OwnerID;
+    [FieldOffset(140)]
+    public byte Type;
+    [FieldOffset(0x92)]
+    public byte EffectiveDistance;
+    [FieldOffset(160)]
+    public float PosX;
+    [FieldOffset(0xa4)]
+    public float PosZ;
+    [FieldOffset(0xa8)]
+    public float PosY;
+    [FieldOffset(0xb0)]
+    public float Heading;
+    [FieldOffset(560)]
+    public uint PCTargetID;
+    [FieldOffset(0x18b0)]
+    public uint NPCTargetID;
+    [FieldOffset(0x1920)]
+    public uint BNpcNameID;
+    [FieldOffset(0x193c)]
+    public ushort CurrentWorldID;
+    [FieldOffset(0x193e)]
+    public ushort HomeWorldID;
+    [FieldOffset(0x1c4)]
+    public uint CurrentHP;
+    [FieldOffset(0x1c8)]
+    public uint MaxHP;
+    [FieldOffset(460)]
+    public uint CurrentMP;
+    [FieldOffset(0x1d4)]
+    public ushort CurrentGP;
+    [FieldOffset(470)]
+    public ushort MaxGP;
+    [FieldOffset(0x1d8)]
+    public ushort CurrentCP;
+    [FieldOffset(0x1da)]
+    public ushort MaxCP;
+    [FieldOffset(0x1e2)]
+    public byte Job;
+    [FieldOffset(0x1e3)]
+    public byte Level;
+    [FixedBuffer(typeof(byte), 540), FieldOffset(0x19d8)]
+    public <Effects>e__FixedBuffer Effects;
+    [FieldOffset(0x1b60)]
+    public byte IsCasting1;
+    [FieldOffset(0x1b62)]
+    public byte IsCasting2;
+    [FieldOffset(0x1b64)]
+    public uint CastBuffID;
+    [FieldOffset(0x1b70)]
+    public uint CastTargetID;
+    [FieldOffset(0x1b94)]
+    public float CastDurationCurrent;
+    [FieldOffset(0x1b98)]
+    public float CastDurationMax;
+    [FieldOffset(0x1ba0)]
+    public OutgoingAbilityStruct OutgoingAbility;
+    [FixedBuffer(typeof(byte), 0xe10), FieldOffset(0x1cd0)]
+    public <IncomingAbilities>e__FixedBuffer IncomingAbilities;
+
+    // Nested Types
+    [StructLayout(LayoutKind.Sequential, Size=540), CompilerGenerated, UnsafeValueType]
+    public struct <Effects>e__FixedBuffer
+    {
+        public byte FixedElementField;
+    }
+
+    [StructLayout(LayoutKind.Sequential, Size=0xe10), CompilerGenerated, UnsafeValueType]
+    public struct <IncomingAbilities>e__FixedBuffer
+    {
+        public byte FixedElementField;
+    }
+
+    [StructLayout(LayoutKind.Sequential, Size=0x40), CompilerGenerated, UnsafeValueType]
+    public struct <Name>e__FixedBuffer
+    {
+        public byte FixedElementField;
+    }
+}
+
 ```
 
 # Original Triggernometry Readme
