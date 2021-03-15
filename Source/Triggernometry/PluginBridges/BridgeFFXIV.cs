@@ -73,6 +73,7 @@ namespace Triggernometry.PluginBridges
             vc.SetValue("worldid", 0);
             vc.SetValue("worldname", "");
             vc.SetValue("currentworldid", 0);
+
         }
 
         public static void SetupNullCombatant()
@@ -274,26 +275,29 @@ namespace Triggernometry.PluginBridges
 
         public static void PopulateClumpFromCombatant(VariableDictionary vc, dynamic cmx, int inParty, int inAlliance, int orderNum)
         {
-            vc.SetValue("name", cmx.Name);
-            vc.SetValue("currenthp", cmx.CurrentHP);
-            vc.SetValue("currentmp", cmx.CurrentMP);
-            vc.SetValue("currentgp", cmx.CurrentGP);
-            vc.SetValue("currentcp", cmx.CurrentCP);
-            vc.SetValue("maxhp", cmx.MaxHP);
-            vc.SetValue("maxmp", cmx.MaxMP);
-            vc.SetValue("maxgp", cmx.MaxGP);
-            vc.SetValue("maxcp", cmx.MaxCP);
-            vc.SetValue("level", cmx.Level);
-            vc.SetValue("jobid", cmx.Job);
-            vc.SetValue("job", TranslateJob(cmx.Job.ToString()));
-            vc.SetValue("role", TranslateRole(cmx.Job.ToString()));
-            vc.SetValue("x", cmx.PosX);
-            vc.SetValue("y", cmx.PosY);
-            vc.SetValue("z", cmx.PosZ);
+            if (cmx.ID == 0) return;
             vc.SetValue("id", ConvertToHex(cmx.ID));
-            vc.SetValue("inparty", inParty);
-            vc.SetValue("inalliance", inAlliance);
-            vc.SetValue("order", orderNum);
+            vc.SetValue("ownerid", ConvertToHex(cmx.OwnerID));
+            vc.SetValue("type", cmx.type);
+            vc.SetValue("jobid", cmx.Job);
+            vc.SetValue("level", cmx.Level);
+            if (cmx.Name != null)
+            {
+                vc.SetValue("name", cmx.Name);
+            }
+            else {
+                vc.SetValue("name", "");
+            }
+            vc.SetValue("currenthp", cmx.CurrentHP);
+            vc.SetValue("maxhp", cmx.MaxHP);
+            vc.SetValue("currentmp", cmx.CurrentMP);
+            vc.SetValue("maxmp", cmx.MaxMP);
+            vc.SetValue("currentcp", cmx.CurrentCP);
+            vc.SetValue("maxcp", cmx.MaxCP);
+            vc.SetValue("currentgp", cmx.CurrentGP);
+            vc.SetValue("maxgp", cmx.MaxGP);
+            vc.SetValue("iscasting", Convert.ToInt32(cmx.IsCasting));
+            vc.SetValue("castbuffid", ConvertToHex(cmx.CastBuffID));
             if (cmx.IsCasting == true)
             {
                 vc.SetValue("casttargetid", ConvertToHex(cmx.CastTargetID));
@@ -302,6 +306,18 @@ namespace Triggernometry.PluginBridges
             {
                 vc.SetValue("casttargetid", 0);
             }
+
+            vc.SetValue("castdurationcurrent", cmx.CastDurationCurrent);
+            vc.SetValue("castdurationmax", cmx.CastDurationMax);
+            vc.SetValue("x", cmx.PosX);
+            vc.SetValue("y", cmx.PosY);
+            vc.SetValue("z", cmx.PosZ);
+            vc.SetValue("heading", cmx.Heading);
+            vc.SetValue("currentworldid", cmx.CurrentWorldID);
+            vc.SetValue("worldid", cmx.WorldID);
+            vc.SetValue("worldname", cmx.WorldName);
+            vc.SetValue("bnpcnameid", ConvertToHex(cmx.BNpcNameID));
+            vc.SetValue("bnpcid", ConvertToHex(cmx.BNpcID));
             if (cmx.TargetID > 0)
             {
                 vc.SetValue("targetid", ConvertToHex(cmx.TargetID));
@@ -310,13 +326,13 @@ namespace Triggernometry.PluginBridges
             {
                 vc.SetValue("targetid", 0);
             }
-            vc.SetValue("heading", cmx.Heading);
+            vc.SetValue("job", TranslateJob(cmx.Job.ToString()));
+            vc.SetValue("role", TranslateRole(cmx.Job.ToString()));
+            vc.SetValue("inparty", inParty);
+            vc.SetValue("inalliance", inAlliance);
+            vc.SetValue("order", orderNum);
             vc.SetValue("distance", cmx.EffectiveDistance);
-            vc.SetValue("worldid", cmx.WorldID);
-            vc.SetValue("worldname", cmx.WorldName);
-            vc.SetValue("currentworldid", cmx.CurrentWorldID);
-            vc.SetValue("homeworldid", cmx.WorldID);
-            vc.SetValue("homeworldname", cmx.WorldName);
+            vc.SetValue("pointer", cmx.Pointer.ToString("X12"));
         }
 
         private static object GetInstance()
