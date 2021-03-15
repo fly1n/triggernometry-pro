@@ -20,7 +20,8 @@ X4pos = converts a base16 (hex) uint16 types to a ffxiv ingame-position expressi
 Reduce update interval of combatant stats to 10ms (from original 1000ms), Enhance the real-time performance of memory data. But it is still limited by the memory update interval of ffxiv_act_plugin, which is 100ms.
 
 ## Customizable encounter format
-Modify ExportActiveEncounter and ExportLastEncounter function. Now we have encounter information in the selected miniparse format instead of default format.
+Modify ExportActiveEncounter and ExportLastEncounter function. Now we have encounter exported in the selected miniparse window format instead of default format. 
+The encounter export data contains a lot of interesting information, mainly related to the player's damage and healing statistics. It's customizable through ACT Options->Output Display->Mini Parse Window->Mini-Parse Text Formatting.
 ```
 _lastencounter = ACT DPS information from the last encounter in selected miniparse format
 _activeencounter = ACT DPS information from the ongoing encounter in selected miniparse format
@@ -65,6 +66,7 @@ Add Combatant Memory Reading Function. This is a dangerous function which can re
 _ffxiventity[1234ABCD].memory[160,4] = Begin at memory offset 160 from combatant pointer address, and read 4 bytes. According to the data structure listed below, we can know that the return value represents a posX value of the entity in float type.
 ${numeric:round(X8float(${_ffxiventity[1234ABCD].memory[160,4]}),4)} = Through the combination of these functions, the posX coordinates of the character can be obtained, parsed as a float type, and 4 decimal places are retained.
 ```
+Direct memory reading is the fastest way to access memory data of a combatant. Each time this expression is evaluated, the latest memory data will be returned immediately. Please be careful not to read the memory at too high a frequency, which may cause performance problems. On the other hand, direct memory reading will also allow you to access some unclassified information, which may help your research on game mechanics.
 The memory structure of a combatant is listed below as a reference. This code is copied from FFXIV_ACT_Plugin.Memory.Models.Combatant64Struct.
 ```
 public struct Combatant64Struct
