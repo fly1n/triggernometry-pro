@@ -15,7 +15,7 @@ X8float = converts a base16 (hex) 4-bytes array to float types.
 X4pos = converts a base16 (hex) uint16 types to a ffxiv ingame-position expression as follows: pos = (uint16 - 32767)/32.767, this is used in ActorCast type network packet.
 ```
 
-4.Reduce update interval of combatant stats to 10ms (from original 1000ms), Enhance the real-time performance of memory data. But it is still limited by the memory update interval of ffxiv_act_plugin, which is 100ms.
+3.Reduce update interval of combatant stats to 10ms (from original 1000ms), Enhance the real-time performance of memory data. But it is still limited by the memory update interval of ffxiv_act_plugin, which is 100ms.
 
 
 
