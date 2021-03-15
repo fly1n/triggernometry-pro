@@ -55,6 +55,104 @@ bnpcid
 pointer = Hexadecimal pointer address of character data in memory.
 ```
 
+6. Add Combatant Memory Reading Function. This is a dangerous function which can read all the memory information of a certain combatant. Starting from the memory pointer, read every 16 Bytes (1234ABCD) as a unit. The result is returned as a string value. 
+```
+_ffxiventity[1234ABCD].memory[8,4] = Begin at 8 units offsets from memory pointer address, and read 4 units. 
+```
+The memory structure of a combatant is listed below as a reference. This code is copied from FFXIV_ACT_Plugin.Memory.Models.Combatant64Struct.
+```
+public struct Combatant64Struct
+{
+    // Fields
+    [FixedBuffer(typeof(byte), 0x40), FieldOffset(0x30)]
+    public <Name>e__FixedBuffer Name;
+    [FieldOffset(0x74)]
+    public uint ID;
+    [FieldOffset(0x80)]
+    public uint BNpcID;
+    [FieldOffset(0x84)]
+    public uint OwnerID;
+    [FieldOffset(140)]
+    public byte Type;
+    [FieldOffset(0x92)]
+    public byte EffectiveDistance;
+    [FieldOffset(160)]
+    public float PosX;
+    [FieldOffset(0xa4)]
+    public float PosZ;
+    [FieldOffset(0xa8)]
+    public float PosY;
+    [FieldOffset(0xb0)]
+    public float Heading;
+    [FieldOffset(560)]
+    public uint PCTargetID;
+    [FieldOffset(0x18b0)]
+    public uint NPCTargetID;
+    [FieldOffset(0x1920)]
+    public uint BNpcNameID;
+    [FieldOffset(0x193c)]
+    public ushort CurrentWorldID;
+    [FieldOffset(0x193e)]
+    public ushort HomeWorldID;
+    [FieldOffset(0x1c4)]
+    public uint CurrentHP;
+    [FieldOffset(0x1c8)]
+    public uint MaxHP;
+    [FieldOffset(460)]
+    public uint CurrentMP;
+    [FieldOffset(0x1d4)]
+    public ushort CurrentGP;
+    [FieldOffset(470)]
+    public ushort MaxGP;
+    [FieldOffset(0x1d8)]
+    public ushort CurrentCP;
+    [FieldOffset(0x1da)]
+    public ushort MaxCP;
+    [FieldOffset(0x1e2)]
+    public byte Job;
+    [FieldOffset(0x1e3)]
+    public byte Level;
+    [FixedBuffer(typeof(byte), 540), FieldOffset(0x19d8)]
+    public <Effects>e__FixedBuffer Effects;
+    [FieldOffset(0x1b60)]
+    public byte IsCasting1;
+    [FieldOffset(0x1b62)]
+    public byte IsCasting2;
+    [FieldOffset(0x1b64)]
+    public uint CastBuffID;
+    [FieldOffset(0x1b70)]
+    public uint CastTargetID;
+    [FieldOffset(0x1b94)]
+    public float CastDurationCurrent;
+    [FieldOffset(0x1b98)]
+    public float CastDurationMax;
+    [FieldOffset(0x1ba0)]
+    public OutgoingAbilityStruct OutgoingAbility;
+    [FixedBuffer(typeof(byte), 0xe10), FieldOffset(0x1cd0)]
+    public <IncomingAbilities>e__FixedBuffer IncomingAbilities;
+
+    // Nested Types
+    [StructLayout(LayoutKind.Sequential, Size=540), CompilerGenerated, UnsafeValueType]
+    public struct <Effects>e__FixedBuffer
+    {
+        public byte FixedElementField;
+    }
+
+    [StructLayout(LayoutKind.Sequential, Size=0xe10), CompilerGenerated, UnsafeValueType]
+    public struct <IncomingAbilities>e__FixedBuffer
+    {
+        public byte FixedElementField;
+    }
+
+    [StructLayout(LayoutKind.Sequential, Size=0x40), CompilerGenerated, UnsafeValueType]
+    public struct <Name>e__FixedBuffer
+    {
+        public byte FixedElementField;
+    }
+}
+
+```
+
 # Original Triggernometry Readme
 Triggernometry has a Wiki, containing useful information and documentation:
 
