@@ -1051,13 +1051,13 @@ namespace Triggernometry
                                         int arg1, arg2;
                                         int.TryParse(mx.Groups["arg1"].Value, out arg1);
                                         int.TryParse(mx.Groups["arg2"].Value, out arg2);
-                                        byte[] buffer = new byte[arg2 * 4];
+                                        byte[] buffer = new byte[arg2 ];
                                         Int64 ptr = Convert.ToInt64(vc.GetValue("pointer").ToString(), 16);
-                                        PluginBridges.BridgeFFXIV.ReadFFXIVMemory((IntPtr)(ptr + arg1 * 4), buffer, arg2 * 4);
+                                        PluginBridges.BridgeFFXIV.ReadFFXIVMemory((IntPtr)(ptr + arg1 ), buffer, arg2 );
                                         val = "";
-                                        for (int iptr = 0; iptr < arg2 * 4; iptr += 4)
+                                        for (int iptr = 0; iptr < arg2 ; iptr += 4)
                                         {
-                                            val += BitConverter.ToUInt32(buffer, iptr).ToString("X8");
+                                            val += BitConverter.ToUInt32(buffer, iptr).ToString("X8")+" ";
                                         }
                                     }
                                     found = true;
