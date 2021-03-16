@@ -1881,7 +1881,7 @@
             this.tableLayoutPanel11.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel11.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
             this.tableLayoutPanel11.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70F));
-            this.tableLayoutPanel11.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 116F));
+            this.tableLayoutPanel11.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 117F));
             this.tableLayoutPanel11.Controls.Add(this.btnHide, 3, 1);
             this.tableLayoutPanel11.Controls.Add(this.cbxAuraDisplay, 1, 3);
             this.tableLayoutPanel11.Controls.Add(this.lblAuraDisplay, 0, 3);
@@ -1936,10 +1936,10 @@
             // btnHide
             // 
             this.btnHide.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnHide.Location = new System.Drawing.Point(591, 29);
+            this.btnHide.Location = new System.Drawing.Point(590, 29);
             this.btnHide.Margin = new System.Windows.Forms.Padding(0, 0, 4, 0);
             this.btnHide.Name = "btnHide";
-            this.btnHide.Size = new System.Drawing.Size(113, 36);
+            this.btnHide.Size = new System.Drawing.Size(114, 36);
             this.btnHide.TabIndex = 50;
             this.btnHide.Text = "Hide";
             this.btnHide.UseVisualStyleBackColor = true;
@@ -2171,10 +2171,10 @@
             // 
             this.btnBrowseAura.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnBrowseAura.Image = ((System.Drawing.Image)(resources.GetObject("btnBrowseAura.Image")));
-            this.btnBrowseAura.Location = new System.Drawing.Point(591, 65);
+            this.btnBrowseAura.Location = new System.Drawing.Point(590, 65);
             this.btnBrowseAura.Margin = new System.Windows.Forms.Padding(0, 0, 4, 0);
             this.btnBrowseAura.Name = "btnBrowseAura";
-            this.btnBrowseAura.Size = new System.Drawing.Size(113, 36);
+            this.btnBrowseAura.Size = new System.Drawing.Size(114, 36);
             this.btnBrowseAura.TabIndex = 12;
             this.btnBrowseAura.UseVisualStyleBackColor = true;
             this.btnBrowseAura.Click += new System.EventHandler(this.button2_Click);
@@ -2190,7 +2190,7 @@
             this.expAuraImage.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.expAuraImage.Name = "expAuraImage";
             this.expAuraImage.ReadOnly = false;
-            this.expAuraImage.Size = new System.Drawing.Size(384, 25);
+            this.expAuraImage.Size = new System.Drawing.Size(383, 25);
             this.expAuraImage.TabIndex = 11;
             this.expAuraImage.EnabledChanged += new System.EventHandler(this.expAuraImage_EnabledChanged);
             // 
@@ -2267,7 +2267,7 @@
             this.expAuraName.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.expAuraName.Name = "expAuraName";
             this.expAuraName.ReadOnly = false;
-            this.expAuraName.Size = new System.Drawing.Size(384, 25);
+            this.expAuraName.Size = new System.Drawing.Size(383, 25);
             this.expAuraName.TabIndex = 10;
             this.expAuraName.EnabledChanged += new System.EventHandler(this.expAuraName_EnabledChanged);
             // 
@@ -2571,7 +2571,7 @@
             this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
             this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70F));
-            this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 102F));
+            this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 103F));
             this.tableLayoutPanel13.Controls.Add(this.lblTextAuraOutline, 0, 5);
             this.tableLayoutPanel13.Controls.Add(this.btnTextAuraFont, 3, 3);
             this.tableLayoutPanel13.Controls.Add(this.lblTextAuraFont, 0, 3);
@@ -2644,10 +2644,10 @@
             // btnTextAuraFont
             // 
             this.btnTextAuraFont.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnTextAuraFont.Location = new System.Drawing.Point(605, 96);
+            this.btnTextAuraFont.Location = new System.Drawing.Point(604, 96);
             this.btnTextAuraFont.Margin = new System.Windows.Forms.Padding(0, 0, 4, 0);
             this.btnTextAuraFont.Name = "btnTextAuraFont";
-            this.btnTextAuraFont.Size = new System.Drawing.Size(99, 36);
+            this.btnTextAuraFont.Size = new System.Drawing.Size(100, 36);
             this.btnTextAuraFont.TabIndex = 52;
             this.btnTextAuraFont.Text = "...";
             this.btnTextAuraFont.UseVisualStyleBackColor = true;
@@ -2668,10 +2668,10 @@
             // btnTextAuraHide
             // 
             this.btnTextAuraHide.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnTextAuraHide.Location = new System.Drawing.Point(605, 29);
+            this.btnTextAuraHide.Location = new System.Drawing.Point(604, 29);
             this.btnTextAuraHide.Margin = new System.Windows.Forms.Padding(0, 0, 4, 0);
             this.btnTextAuraHide.Name = "btnTextAuraHide";
-            this.btnTextAuraHide.Size = new System.Drawing.Size(99, 36);
+            this.btnTextAuraHide.Size = new System.Drawing.Size(100, 36);
             this.btnTextAuraHide.TabIndex = 50;
             this.btnTextAuraHide.Text = "Hide";
             this.btnTextAuraHide.UseVisualStyleBackColor = true;
@@ -2719,11 +2719,11 @@
             this.expTextAuraTTLTick.Dock = System.Windows.Forms.DockStyle.Top;
             this.expTextAuraTTLTick.Expression = "";
             this.expTextAuraTTLTick.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.Numeric;
-            this.expTextAuraTTLTick.Location = new System.Drawing.Point(325, 373);
+            this.expTextAuraTTLTick.Location = new System.Drawing.Point(324, 373);
             this.expTextAuraTTLTick.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.expTextAuraTTLTick.Name = "expTextAuraTTLTick";
             this.expTextAuraTTLTick.ReadOnly = false;
-            this.expTextAuraTTLTick.Size = new System.Drawing.Size(379, 25);
+            this.expTextAuraTTLTick.Size = new System.Drawing.Size(380, 25);
             this.expTextAuraTTLTick.TabIndex = 24;
             this.expTextAuraTTLTick.EnabledChanged += new System.EventHandler(this.expTextAuraTTLTick_EnabledChanged);
             // 
@@ -2734,11 +2734,11 @@
             this.expTextAuraOTick.Dock = System.Windows.Forms.DockStyle.Top;
             this.expTextAuraOTick.Expression = "";
             this.expTextAuraOTick.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.Numeric;
-            this.expTextAuraOTick.Location = new System.Drawing.Point(325, 342);
+            this.expTextAuraOTick.Location = new System.Drawing.Point(324, 342);
             this.expTextAuraOTick.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.expTextAuraOTick.Name = "expTextAuraOTick";
             this.expTextAuraOTick.ReadOnly = false;
-            this.expTextAuraOTick.Size = new System.Drawing.Size(379, 25);
+            this.expTextAuraOTick.Size = new System.Drawing.Size(380, 25);
             this.expTextAuraOTick.TabIndex = 23;
             this.expTextAuraOTick.EnabledChanged += new System.EventHandler(this.expTextAuraOTick_EnabledChanged);
             // 
@@ -2749,11 +2749,11 @@
             this.expTextAuraHTick.Dock = System.Windows.Forms.DockStyle.Top;
             this.expTextAuraHTick.Expression = "";
             this.expTextAuraHTick.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.Numeric;
-            this.expTextAuraHTick.Location = new System.Drawing.Point(325, 311);
+            this.expTextAuraHTick.Location = new System.Drawing.Point(324, 311);
             this.expTextAuraHTick.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.expTextAuraHTick.Name = "expTextAuraHTick";
             this.expTextAuraHTick.ReadOnly = false;
-            this.expTextAuraHTick.Size = new System.Drawing.Size(379, 25);
+            this.expTextAuraHTick.Size = new System.Drawing.Size(380, 25);
             this.expTextAuraHTick.TabIndex = 21;
             this.expTextAuraHTick.EnabledChanged += new System.EventHandler(this.expTextAuraHTick_EnabledChanged);
             // 
@@ -2764,11 +2764,11 @@
             this.expTextAuraWTick.Dock = System.Windows.Forms.DockStyle.Top;
             this.expTextAuraWTick.Expression = "";
             this.expTextAuraWTick.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.Numeric;
-            this.expTextAuraWTick.Location = new System.Drawing.Point(325, 280);
+            this.expTextAuraWTick.Location = new System.Drawing.Point(324, 280);
             this.expTextAuraWTick.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.expTextAuraWTick.Name = "expTextAuraWTick";
             this.expTextAuraWTick.ReadOnly = false;
-            this.expTextAuraWTick.Size = new System.Drawing.Size(379, 25);
+            this.expTextAuraWTick.Size = new System.Drawing.Size(380, 25);
             this.expTextAuraWTick.TabIndex = 19;
             this.expTextAuraWTick.EnabledChanged += new System.EventHandler(this.expTextAuraWTick_EnabledChanged);
             // 
@@ -2779,11 +2779,11 @@
             this.expTextAuraYTick.Dock = System.Windows.Forms.DockStyle.Top;
             this.expTextAuraYTick.Expression = "";
             this.expTextAuraYTick.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.Numeric;
-            this.expTextAuraYTick.Location = new System.Drawing.Point(325, 249);
+            this.expTextAuraYTick.Location = new System.Drawing.Point(324, 249);
             this.expTextAuraYTick.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.expTextAuraYTick.Name = "expTextAuraYTick";
             this.expTextAuraYTick.ReadOnly = false;
-            this.expTextAuraYTick.Size = new System.Drawing.Size(379, 25);
+            this.expTextAuraYTick.Size = new System.Drawing.Size(380, 25);
             this.expTextAuraYTick.TabIndex = 17;
             this.expTextAuraYTick.EnabledChanged += new System.EventHandler(this.expTextAuraYTick_EnabledChanged);
             // 
@@ -2794,11 +2794,11 @@
             this.expTextAuraXTick.Dock = System.Windows.Forms.DockStyle.Top;
             this.expTextAuraXTick.Expression = "";
             this.expTextAuraXTick.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.Numeric;
-            this.expTextAuraXTick.Location = new System.Drawing.Point(325, 218);
+            this.expTextAuraXTick.Location = new System.Drawing.Point(324, 218);
             this.expTextAuraXTick.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.expTextAuraXTick.Name = "expTextAuraXTick";
             this.expTextAuraXTick.ReadOnly = false;
-            this.expTextAuraXTick.Size = new System.Drawing.Size(379, 25);
+            this.expTextAuraXTick.Size = new System.Drawing.Size(380, 25);
             this.expTextAuraXTick.TabIndex = 15;
             this.expTextAuraXTick.EnabledChanged += new System.EventHandler(this.expTextAuraXTick_EnabledChanged);
             // 
@@ -2809,10 +2809,10 @@
             this.tableLayoutPanel13.SetColumnSpan(this.lblTextAuraUpdValues, 2);
             this.lblTextAuraUpdValues.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblTextAuraUpdValues.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.lblTextAuraUpdValues.Location = new System.Drawing.Point(325, 192);
+            this.lblTextAuraUpdValues.Location = new System.Drawing.Point(324, 192);
             this.lblTextAuraUpdValues.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblTextAuraUpdValues.Name = "lblTextAuraUpdValues";
-            this.lblTextAuraUpdValues.Size = new System.Drawing.Size(379, 23);
+            this.lblTextAuraUpdValues.Size = new System.Drawing.Size(380, 23);
             this.lblTextAuraUpdValues.TabIndex = 41;
             this.lblTextAuraUpdValues.Text = "Update tick (20 ms) expressions";
             this.lblTextAuraUpdValues.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2827,7 +2827,7 @@
             this.expTextAuraOIni.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.expTextAuraOIni.Name = "expTextAuraOIni";
             this.expTextAuraOIni.ReadOnly = false;
-            this.expTextAuraOIni.Size = new System.Drawing.Size(114, 25);
+            this.expTextAuraOIni.Size = new System.Drawing.Size(113, 25);
             this.expTextAuraOIni.TabIndex = 22;
             // 
             // expTextAuraHIni
@@ -2840,7 +2840,7 @@
             this.expTextAuraHIni.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.expTextAuraHIni.Name = "expTextAuraHIni";
             this.expTextAuraHIni.ReadOnly = false;
-            this.expTextAuraHIni.Size = new System.Drawing.Size(114, 25);
+            this.expTextAuraHIni.Size = new System.Drawing.Size(113, 25);
             this.expTextAuraHIni.TabIndex = 20;
             // 
             // expTextAuraWIni
@@ -2853,7 +2853,7 @@
             this.expTextAuraWIni.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.expTextAuraWIni.Name = "expTextAuraWIni";
             this.expTextAuraWIni.ReadOnly = false;
-            this.expTextAuraWIni.Size = new System.Drawing.Size(114, 25);
+            this.expTextAuraWIni.Size = new System.Drawing.Size(113, 25);
             this.expTextAuraWIni.TabIndex = 18;
             // 
             // lblTextAuraTtlExp
@@ -2941,7 +2941,7 @@
             this.expTextAuraYIni.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.expTextAuraYIni.Name = "expTextAuraYIni";
             this.expTextAuraYIni.ReadOnly = false;
-            this.expTextAuraYIni.Size = new System.Drawing.Size(114, 25);
+            this.expTextAuraYIni.Size = new System.Drawing.Size(113, 25);
             this.expTextAuraYIni.TabIndex = 16;
             // 
             // lblTextAuraY
@@ -2966,7 +2966,7 @@
             this.expTextAuraXIni.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.expTextAuraXIni.Name = "expTextAuraXIni";
             this.expTextAuraXIni.ReadOnly = false;
-            this.expTextAuraXIni.Size = new System.Drawing.Size(114, 25);
+            this.expTextAuraXIni.Size = new System.Drawing.Size(113, 25);
             this.expTextAuraXIni.TabIndex = 14;
             // 
             // lblTextAuraX
@@ -2992,7 +2992,7 @@
             this.expTextAuraName.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.expTextAuraName.Name = "expTextAuraName";
             this.expTextAuraName.ReadOnly = false;
-            this.expTextAuraName.Size = new System.Drawing.Size(398, 25);
+            this.expTextAuraName.Size = new System.Drawing.Size(397, 25);
             this.expTextAuraName.TabIndex = 10;
             this.expTextAuraName.EnabledChanged += new System.EventHandler(this.expTextAuraName_EnabledChanged);
             // 
@@ -3047,7 +3047,7 @@
             this.lblTextAuraIniValues.Location = new System.Drawing.Point(203, 192);
             this.lblTextAuraIniValues.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblTextAuraIniValues.Name = "lblTextAuraIniValues";
-            this.lblTextAuraIniValues.Size = new System.Drawing.Size(114, 23);
+            this.lblTextAuraIniValues.Size = new System.Drawing.Size(113, 23);
             this.lblTextAuraIniValues.TabIndex = 40;
             this.lblTextAuraIniValues.Text = "Initial values";
             this.lblTextAuraIniValues.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3069,7 +3069,7 @@
             // txtTextAuraFont
             // 
             this.txtTextAuraFont.Dock = System.Windows.Forms.DockStyle.Top;
-            this.txtTextAuraFont.Location = new System.Drawing.Point(325, 99);
+            this.txtTextAuraFont.Location = new System.Drawing.Point(324, 99);
             this.txtTextAuraFont.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.txtTextAuraFont.Name = "txtTextAuraFont";
             this.txtTextAuraFont.ReadOnly = true;
@@ -3088,7 +3088,7 @@
             this.colorSelector1.Location = new System.Drawing.Point(204, 99);
             this.colorSelector1.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
             this.colorSelector1.Name = "colorSelector1";
-            this.colorSelector1.Size = new System.Drawing.Size(112, 30);
+            this.colorSelector1.Size = new System.Drawing.Size(111, 30);
             this.colorSelector1.TabIndex = 54;
             this.colorSelector1.TextColor = System.Drawing.Color.Empty;
             this.colorSelector1.TextOutlineColor = System.Drawing.Color.Empty;
@@ -3122,6 +3122,7 @@
             // 
             // tableLayoutPanel14
             // 
+            this.tableLayoutPanel14.AutoSize = true;
             this.tableLayoutPanel14.ColumnCount = 2;
             this.tableLayoutPanel14.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel14.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -3139,8 +3140,8 @@
             this.tableLayoutPanel14.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel14.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel14.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel14.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
-            this.tableLayoutPanel14.Size = new System.Drawing.Size(729, 125);
+            this.tableLayoutPanel14.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel14.Size = new System.Drawing.Size(729, 130);
             this.tableLayoutPanel14.TabIndex = 2;
             // 
             // cbxReparseLog
@@ -3149,10 +3150,11 @@
             this.cbxReparseLog.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.tableLayoutPanel14.SetColumnSpan(this.cbxReparseLog, 3);
             this.cbxReparseLog.Dock = System.Windows.Forms.DockStyle.Top;
-            this.cbxReparseLog.Location = new System.Drawing.Point(4, 97);
-            this.cbxReparseLog.Margin = new System.Windows.Forms.Padding(4, 6, 3, 6);
+            this.cbxReparseLog.Location = new System.Drawing.Point(4, 101);
+            this.cbxReparseLog.Margin = new System.Windows.Forms.Padding(0);
             this.cbxReparseLog.Name = "cbxReparseLog";
-            this.cbxReparseLog.Size = new System.Drawing.Size(722, 19);
+            this.cbxReparseLog.Padding = new System.Windows.Forms.Padding(0, 2, 0, 2);
+            this.cbxReparseLog.Size = new System.Drawing.Size(722, 23);
             this.cbxReparseLog.TabIndex = 20;
             this.cbxReparseLog.Text = "Reparse as ACT Log line";
             this.cbxReparseLog.UseVisualStyleBackColor = true;
@@ -3192,9 +3194,10 @@
             this.tableLayoutPanel14.SetColumnSpan(this.cbxProcessLog, 3);
             this.cbxProcessLog.Dock = System.Windows.Forms.DockStyle.Top;
             this.cbxProcessLog.Location = new System.Drawing.Point(4, 66);
-            this.cbxProcessLog.Margin = new System.Windows.Forms.Padding(4, 6, 3, 6);
+            this.cbxProcessLog.Margin = new System.Windows.Forms.Padding(0);
             this.cbxProcessLog.Name = "cbxProcessLog";
-            this.cbxProcessLog.Size = new System.Drawing.Size(722, 19);
+            this.cbxProcessLog.Padding = new System.Windows.Forms.Padding(0, 2, 0, 2);
+            this.cbxProcessLog.Size = new System.Drawing.Size(722, 23);
             this.cbxProcessLog.TabIndex = 19;
             this.cbxProcessLog.Text = "Process message as log line";
             this.cbxProcessLog.UseVisualStyleBackColor = true;
@@ -5249,6 +5252,7 @@
             this.tableLayoutPanel13.ResumeLayout(false);
             this.tableLayoutPanel13.PerformLayout();
             this.tabLogMessage.ResumeLayout(false);
+            this.tabLogMessage.PerformLayout();
             this.tableLayoutPanel14.ResumeLayout(false);
             this.tableLayoutPanel14.PerformLayout();
             this.tabListVariable.ResumeLayout(false);
