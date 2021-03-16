@@ -1180,6 +1180,7 @@ namespace Triggernometry
         }
 
         internal bool _LogProcess { get; set; } = false;
+        internal bool _LogReparse { get; set; } = false;
         [XmlAttribute]
         public string LogProcess
         {

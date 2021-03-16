@@ -48,6 +48,14 @@ namespace Triggernometry
             pos = (pos - center) / factor;
             return (double)pos;
         }
+        public double Hex2Heading4Function(string[] x)
+        {
+            float pos = UInt16.Parse(x[0], System.Globalization.NumberStyles.HexNumber);
+            float factor = 32767f;
+            float center = 32767f;
+            pos = -(pos - center) / factor* ((float)Math.PI);
+            return (double)pos;
+        }
         public double IfFunction(double a, double b, double c)
         {
             return (a == 0) ? c : b;
@@ -237,6 +245,7 @@ namespace Triggernometry
                 LocalStringFunctions.Add("hex2dec", x => Hex2DecFunction(x));
                 LocalStringFunctions.Add("X8float", x => Hex2FloatFunction(x));
                 LocalStringFunctions.Add("X4pos", x => Hex2Pos4Function(x));
+                LocalStringFunctions.Add("X4heading", x => Hex2Heading4Function(x));
             }
 
             if (loadPreDefinedVariables)

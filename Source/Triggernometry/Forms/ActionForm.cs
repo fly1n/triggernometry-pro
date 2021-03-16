@@ -497,6 +497,7 @@ namespace Triggernometry.Forms
                 expTextAuraHTick.Expression = a._TextAuraHTickExpression;
                 expTextAuraOTick.Expression = a._TextAuraOTickExpression;
                 cbxProcessLog.Checked = a._LogProcess;
+                cbxReparseLog.Checked = a._LogReparse;
                 expTextAuraTTLTick.Expression = a._TextAuraTTLTickExpression;
                 expLogMessageText.Expression = a._LogMessageText;
                 cbxLogMessageLevel.SelectedIndex = (int)a._LogLevel;
@@ -573,6 +574,7 @@ namespace Triggernometry.Forms
             a._PlaySoundMyself = chkSoundMyOutput.Checked;
             a._UseTTSTextExpression = expTextToSay.Expression;
             a._LogProcess = cbxProcessLog.Checked;
+            a._LogReparse = cbxReparseLog.Checked;
             a._UseTTSVolumeExpression = expSpeechVolume.Expression;
             a._UseTTSRateExpression = expSpeechRate.Expression;
             a._UseTTSExclusive = chkSpeechExclusive.Checked;

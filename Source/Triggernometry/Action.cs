@@ -14,6 +14,7 @@ using System.IO;
 using System.Text.RegularExpressions;
 using Triggernometry.Variables;
 using CsvHelper;
+using Advanced_Combat_Tracker;
 
 namespace Triggernometry
 {
@@ -1758,6 +1759,10 @@ namespace Triggernometry
                             {
                                 ctx.plug.LogLineQueuer(ctx.EvaluateStringExpression(ActionContextLogger, ctx, _LogMessageText), "", LogEvent.SourceEnum.Log);
                             }
+                            if (_LogReparse == true)
+                            {
+                                ACT_Reparse(ctx.EvaluateStringExpression(ActionContextLogger, ctx, _LogMessageText));
+                            }
                             else
                             {
                                 RealPlugin.DebugLevelEnum dl = RealPlugin.DebugLevelEnum.Error;
@@ -2341,6 +2346,20 @@ namespace Triggernometry
                 ctx.plug.QueueAction(ctx, ctx.trig, qa != null ? qa.mutex : null, NextAction, dt);
             }
 		}
+        void ACT_Reparse(string message, uint typenum = 13) {
+            DateTime now = DateTime.Now;
+            //var log = now.ToString("[yyyy/MM/dd HH:mm:ss.fff]") + " " + message;
+            //this.defaultListener.Write(log);
+            string[] textArray1 = new string[5];
+            textArray1[0] = typenum.ToString().PadLeft(2, '0');
+            textArray1[1] = "|";
+            textArray1[2] = now.ToString("O");
+            textArray1[3] = "|";
+            textArray1[4] = message;
+            string logLine = string.Concat(textArray1);
+            Advanced_Combat_Tracker.ActGlobals.oFormActMain.ParseRawLogLine(false, DateTime.Now, logLine);
+
+        }
 
         internal void Mywmp_PlayStateChange(int NewState)
         {
@@ -2513,6 +2532,7 @@ namespace Triggernometry
             a._OBSSourceName = _OBSSourceName;
             a._OBSJSONPayload = _OBSJSONPayload;
             a._LogProcess = _LogProcess;
+            a._LogReparse = _LogReparse;
             a._JsonOperationType = _JsonOperationType;
             a._JsonCacheRequest = _JsonCacheRequest;
             a._JsonEndpointExpression = _JsonEndpointExpression;

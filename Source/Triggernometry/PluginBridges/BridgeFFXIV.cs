@@ -338,7 +338,7 @@ namespace Triggernometry.PluginBridges
             vc.SetValue("pointer", cmx.Pointer.ToString("X12"));
         }
 
-        private static object GetInstance()
+        public static object GetInstance()
         {            
             RealPlugin.PluginWrapper wrap = RealPlugin.InstanceHook(ActPluginName, ActPluginType);
             switch (wrap.state)
@@ -369,6 +369,12 @@ namespace Triggernometry.PluginBridges
         {
             return plug.GetType().GetProperty("DataRepository", BindingFlags.GetProperty | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
         }
+        private static PropertyInfo GetDataSubscription(object plug)
+        {
+            return plug.GetType().GetProperty("DataSubscription", BindingFlags.GetProperty | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+        }
+
+
 
         private class CombatantData
         {

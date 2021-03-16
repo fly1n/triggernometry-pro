@@ -2019,6 +2019,7 @@ namespace Triggernometry
                     RepositoryUpdates();
                 });
                 tx.Start();
+                NetworkReceivedDelegateBeginInvoke(PluginBridges.BridgeFFXIV.GetInstance());
             }
             catch (Exception ex)
             {
@@ -2581,6 +2582,7 @@ namespace Triggernometry
 
         public void DeInitPlugin()
         {
+            NetworkReceivedDelegateEndInvoke(PluginBridges.BridgeFFXIV.GetInstance());
             if (ui != null)
             {
                 ui.CloseForms();
@@ -3058,6 +3060,34 @@ namespace Triggernometry
             {
                 FilteredAddToLog(DebugLevelEnum.Error, I18n.Translate("internal/Plugin/procex", "Exception ({0}) when processing log line ({1}) in zone ({2})", ex.Message, logLine, detectedZone));
             }
+        }
+        
+        private void NetworkReceivedDelegateBeginInvoke(dynamic plug)
+        {
+            var pluginSubscription = plug.DataSubscription;
+            var mySub = (FFXIV_ACT_Plugin.Common.IDataSubscription)pluginSubscription;
+            mySub.NetworkReceived += (string connection, long epoch, byte[] message) => OnMessageReceived(connection, epoch, message);
+        }
+        private void NetworkReceivedDelegateEndInvoke(dynamic plug)
+        {
+            var pluginSubscription = plug.DataSubscription;
+            var mySub = (FFXIV_ACT_Plugin.Common.IDataSubscription)pluginSubscription;
+            mySub.NetworkReceived -= (string connection, long epoch, byte[] message) => OnMessageReceived(connection, epoch, message);
+        }
+        public void OnMessageReceived(string connection, long epoch, byte[] message)
+        {
+            StringBuilder builder = new StringBuilder(message.Length * 3);
+            for (int i = 0; i < (message.Length / 4); i++)
+            {
+                if (i < 0x10)
+                {
+                    builder.Append(BitConverter.ToUInt32(message, i * 4).ToString("X8") + ":");
+                }
+            }
+            DateTime now = DateTime.Now;
+            var str =  "Trlog:" + builder.ToString();
+            LogLineQueuer(str, currentZone, LogEvent.SourceEnum.OriginalLog);
+
         }
         public void BeforeLogLineRead(bool isImport, string logLine, string detectedZone)
         {

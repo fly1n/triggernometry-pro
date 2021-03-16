@@ -139,7 +139,8 @@ namespace TriggernometryProxy
             FailsafeRegisterHook("InstanceHook", "GetInstance");
             GetPluginNameAndPath();
             ActGlobals.oFormActMain.OnLogLineRead += OFormActMain_OnLogLineRead;
-            ActGlobals.oFormActMain.BeforeLogLineRead += OFormActMain_BeforeLogLineRead;
+            //ActGlobals.oFormActMain.BeforeLogLineRead += OFormActMain_BeforeLogLineRead;
+           
             Instance.InitPlugin(pluginScreenSpace, pluginStatusText);
         }
 
