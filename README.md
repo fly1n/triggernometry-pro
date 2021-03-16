@@ -10,10 +10,14 @@ To use the original log lines as event source, you need to check **(DEBUG) Enabl
 for more information about this:
 https://github.com/quisquous/cactbot/blob/main/docs/LogGuide.md#fb-debug
 
+## Log message reparsed as act loglines
+Add an option **"Reparse as ACT log line"** in Log Message Action. If you select this option, the specified log message will be re-parsed into an ACT log lines and can be accessed through the ACT encounter logs window. These logs will also be processed by all plugins like other parsed logs.
+
 ## Additional math functions
 ```
 X8float = converts a base16 (hex) 4-bytes array to float types.
 X4pos = converts a base16 (hex) uint16 types to a ffxiv ingame-position expression as follows: pos = (uint16 - 32767)/32.767, this is used in ActorCast type network packet.
+X4Heading = converts a base16 (hex) uint16 types to a ffxiv ingame-heading expression as follows: pos = (uint16 - 32767)/32767*PI, this is used in some network packet.
 ```
 
 ## Reduction of combatant states update interval
@@ -170,7 +174,6 @@ To get answers to some commonly asked questions, and to get more information on 
 https://github.com/paissaheavyindustries/Triggernometry/wiki/Triggernometry-FAQ-and-examples
 
 ## Discord
-
 Triggernometry also has a publicly available Discord server for announcements, suggestions, and questions related to the plugin. Feel free to join at:
 
 https://discord.gg/6f9MY55
