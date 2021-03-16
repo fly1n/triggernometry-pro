@@ -2,32 +2,37 @@
 Modified by NiniTechnology. Some additional features and functions will be added in the future to optimize the user experience.
 
 ## Original log lines as trigger event source
-Add a new Trigger event source "Original log lines", which allow triggers to access raw log lines. Raw log lines contains more information and they can be useful when we need to test our triggers. They often have information like this: 
-
+Add a new Trigger event source "Original log lines", which allow triggers to access raw log lines. Raw log lines contains more information and they can be useful when we look for the network data format of unknown mechanism. They often have information like this: 
 ```
 251|2019-05-21T19:11:02.0268703-07:00|ProcessTCPInfo: New connection detected for Process [2644]:192.168.1.70:49413=>204.2.229.85:55021|909171c500bed915f8d79fc04d3589fa
 ```
+To use the original log lines as event source, you need to check **(DEBUG) Enable Debug Options** and **(DEBUG) Log all Network Packets** in **ACT Plugins->FFXIV Settings page**. It can cause performance problems and write a huge amount of information in the log file.
 for more information about this:
 https://github.com/quisquous/cactbot/blob/main/docs/LogGuide.md#fb-debug
+
+## Log message reparsed as ACT loglines
+Add an option **"Reparse as ACT log line"** in Log Message Action. If you select this option, the specified log message will be re-parsed into an ACT log lines and can be accessed through the ACT encounter logs window. These logs will also be processed by all plugins like other parsed logs.
 
 ## Additional math functions
 ```
 X8float = converts a base16 (hex) 4-bytes array to float types.
 X4pos = converts a base16 (hex) uint16 types to a ffxiv ingame-position expression as follows: pos = (uint16 - 32767)/32.767, this is used in ActorCast type network packet.
+X4Heading = converts a base16 (hex) uint16 types to a ffxiv ingame-heading expression as follows: pos = (uint16 - 32767)/32767*PI, this is used in some network packet.
 ```
 
 ## Reduction of combatant states update interval
 Reduce update interval of combatant stats to 10ms (from original 1000ms), Enhance the real-time performance of memory data. But it is still limited by the memory update interval of ffxiv_act_plugin, which is 100ms.
 
 ## Customizable encounter format
-Modify ExportActiveEncounter and ExportLastEncounter function. Now we have encounter information in the selected miniparse format instead of default format.
+Modify ExportActiveEncounter and ExportLastEncounter function. Now we have encounter exported in the selected miniparse window format instead of default format. 
+The encounter export data contains a lot of interesting information, mainly related to the player's damage and healing statistics. It's customizable through **ACT Options->Output Display->Mini Parse Window->Mini-Parse Text Formatting**.
 ```
 _lastencounter = ACT DPS information from the last encounter in selected miniparse format
 _activeencounter = ACT DPS information from the ongoing encounter in selected miniparse format
 ```
 
 ## More combatant properties available
-Add more Properties available in _ffxivparty and _ffxiventity:
+Add more Properties available in *_ffxivparty* and *_ffxiventity*:
 ```
 name = Name of the actor
 job = Current job as a three letter acronym (AST, CUL, MIN, SMN, etc)
@@ -65,7 +70,8 @@ Add Combatant Memory Reading Function. This is a dangerous function which can re
 _ffxiventity[1234ABCD].memory[160,4] = Begin at memory offset 160 from combatant pointer address, and read 4 bytes. According to the data structure listed below, we can know that the return value represents a posX value of the entity in float type.
 ${numeric:round(X8float(${_ffxiventity[1234ABCD].memory[160,4]}),4)} = Through the combination of these functions, the posX coordinates of the character can be obtained, parsed as a float type, and 4 decimal places are retained.
 ```
-The memory structure of a combatant is listed below as a reference. This code is copied from FFXIV_ACT_Plugin.Memory.Models.Combatant64Struct.
+Direct memory reading is the fastest way to access memory data of a combatant. Each time this expression is evaluated, the latest memory data will be returned immediately. Please be careful not to read the memory at too high a frequency, which may cause performance problems. On the other hand, direct memory reading will also allow you to access some unclassified information, which may help your research on game mechanics.
+The memory structure of a combatant is listed below as a reference. This code is copied from *FFXIV_ACT_Plugin.Memory.Models.Combatant64Struct*.
 ```
 public struct Combatant64Struct
 {
@@ -168,7 +174,6 @@ To get answers to some commonly asked questions, and to get more information on 
 https://github.com/paissaheavyindustries/Triggernometry/wiki/Triggernometry-FAQ-and-examples
 
 ## Discord
-
 Triggernometry also has a publicly available Discord server for announcements, suggestions, and questions related to the plugin. Feel free to join at:
 
 https://discord.gg/6f9MY55
