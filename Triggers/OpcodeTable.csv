@@ -1,5 +1,13 @@
 ActorCast,034C
 Ability1,027F
 Ability8,009B
-GroundEffect,0336
+GroundEffect,336
 MapEffect,007D
+AddedNewCombatant,02C9
+TargetSelect,0171
+TextContent,02E8
+NpcYell,0226
+ActorControl,00C2
+BuffList,0243
+ObjectMove,006B
+
