@@ -10,7 +10,7 @@ To use the original log lines as event source, you need to check **(DEBUG) Enabl
 for more information about this:
 https://github.com/quisquous/cactbot/blob/main/docs/LogGuide.md#fb-debug
 
-## Log message reparsed as act loglines
+## Log message reparsed as ACT loglines
 Add an option **"Reparse as ACT log line"** in Log Message Action. If you select this option, the specified log message will be re-parsed into an ACT log lines and can be accessed through the ACT encounter logs window. These logs will also be processed by all plugins like other parsed logs.
 
 ## Additional math functions
