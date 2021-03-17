@@ -60,6 +60,7 @@
             this.lblStatus = new System.Windows.Forms.ToolStripLabel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.btnClose = new System.Windows.Forms.Button();
+            this.btn_Overlay = new System.Windows.Forms.Button();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -75,22 +76,25 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.btn_Overlay);
             this.panel2.Controls.Add(this.splitContainer1);
             this.panel2.Controls.Add(this.tlsMain);
             this.panel2.Controls.Add(this.panel3);
             this.panel2.Controls.Add(this.btnClose);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 0);
+            this.panel2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.panel2.Name = "panel2";
-            this.panel2.Padding = new System.Windows.Forms.Padding(10);
-            this.panel2.Size = new System.Drawing.Size(734, 461);
+            this.panel2.Padding = new System.Windows.Forms.Padding(13, 12, 13, 12);
+            this.panel2.Size = new System.Drawing.Size(979, 532);
             this.panel2.TabIndex = 2;
             // 
             // splitContainer1
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
-            this.splitContainer1.Location = new System.Drawing.Point(10, 35);
+            this.splitContainer1.Location = new System.Drawing.Point(13, 39);
+            this.splitContainer1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
@@ -103,8 +107,9 @@
             this.splitContainer1.Panel2.Controls.Add(this.tableLayoutPanel1);
             this.splitContainer1.Panel2.Controls.Add(this.tableLayoutPanel2);
             this.splitContainer1.Panel2.Controls.Add(this.capSearch);
-            this.splitContainer1.Size = new System.Drawing.Size(714, 371);
-            this.splitContainer1.SplitterDistance = 510;
+            this.splitContainer1.Size = new System.Drawing.Size(953, 429);
+            this.splitContainer1.SplitterDistance = 747;
+            this.splitContainer1.SplitterWidth = 5;
             this.splitContainer1.TabIndex = 18;
             // 
             // dgvLog
@@ -122,6 +127,7 @@
             this.dgvLog.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvLog.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgvLog.Location = new System.Drawing.Point(0, 0);
+            this.dgvLog.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.dgvLog.Name = "dgvLog";
             this.dgvLog.ReadOnly = true;
             this.dgvLog.RowHeadersVisible = false;
@@ -129,7 +135,7 @@
             this.dgvLog.ShowCellErrors = false;
             this.dgvLog.ShowEditingIcon = false;
             this.dgvLog.ShowRowErrors = false;
-            this.dgvLog.Size = new System.Drawing.Size(510, 371);
+            this.dgvLog.Size = new System.Drawing.Size(747, 429);
             this.dgvLog.TabIndex = 0;
             this.dgvLog.VirtualMode = true;
             // 
@@ -159,10 +165,11 @@
             // 
             // contextMenuStrip1
             // 
+            this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ctxCopy});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(103, 26);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(121, 30);
             this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
             // 
             // ctxCopy
@@ -172,7 +179,7 @@
             this.ctxEverythingToClipboard});
             this.ctxCopy.Image = ((System.Drawing.Image)(resources.GetObject("ctxCopy.Image")));
             this.ctxCopy.Name = "ctxCopy";
-            this.ctxCopy.Size = new System.Drawing.Size(102, 22);
+            this.ctxCopy.Size = new System.Drawing.Size(120, 26);
             this.ctxCopy.Text = "Copy";
             // 
             // ctxSelectionToClipboard
@@ -180,7 +187,7 @@
             this.ctxSelectionToClipboard.Enabled = false;
             this.ctxSelectionToClipboard.Image = ((System.Drawing.Image)(resources.GetObject("ctxSelectionToClipboard.Image")));
             this.ctxSelectionToClipboard.Name = "ctxSelectionToClipboard";
-            this.ctxSelectionToClipboard.Size = new System.Drawing.Size(197, 22);
+            this.ctxSelectionToClipboard.Size = new System.Drawing.Size(255, 26);
             this.ctxSelectionToClipboard.Text = "Selection to clipboard";
             this.ctxSelectionToClipboard.Click += new System.EventHandler(this.copySelectionToClipboardToolStripMenuItem_Click);
             // 
@@ -188,7 +195,7 @@
             // 
             this.ctxEverythingToClipboard.Image = ((System.Drawing.Image)(resources.GetObject("ctxEverythingToClipboard.Image")));
             this.ctxEverythingToClipboard.Name = "ctxEverythingToClipboard";
-            this.ctxEverythingToClipboard.Size = new System.Drawing.Size(197, 22);
+            this.ctxEverythingToClipboard.Size = new System.Drawing.Size(255, 26);
             this.ctxEverythingToClipboard.Text = "Everything to clipboard";
             this.ctxEverythingToClipboard.Click += new System.EventHandler(this.copyAllToClipboardToolStripMenuItem_Click);
             // 
@@ -196,18 +203,20 @@
             // 
             this.panel1.Controls.Add(this.btnSearch);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 168);
+            this.panel1.Location = new System.Drawing.Point(0, 190);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(200, 61);
+            this.panel1.Size = new System.Drawing.Size(201, 70);
             this.panel1.TabIndex = 8;
             // 
             // btnSearch
             // 
             this.btnSearch.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.btnSearch.Image = ((System.Drawing.Image)(resources.GetObject("btnSearch.Image")));
-            this.btnSearch.Location = new System.Drawing.Point(0, 26);
+            this.btnSearch.Location = new System.Drawing.Point(0, 30);
+            this.btnSearch.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(200, 35);
+            this.btnSearch.Size = new System.Drawing.Size(201, 40);
             this.btnSearch.TabIndex = 0;
             this.btnSearch.Text = "Search";
             this.btnSearch.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -223,14 +232,15 @@
             this.tableLayoutPanel1.Controls.Add(this.rexSearch, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.lblRegularExpression, 0, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 113);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 126);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(200, 55);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(201, 64);
             this.tableLayoutPanel1.TabIndex = 7;
             // 
             // rexSearch
@@ -239,20 +249,22 @@
             this.rexSearch.Dock = System.Windows.Forms.DockStyle.Top;
             this.rexSearch.Expression = "";
             this.rexSearch.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.Regex;
-            this.rexSearch.Location = new System.Drawing.Point(3, 32);
+            this.rexSearch.Location = new System.Drawing.Point(4, 36);
+            this.rexSearch.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.rexSearch.Name = "rexSearch";
             this.rexSearch.ReadOnly = false;
-            this.rexSearch.Size = new System.Drawing.Size(194, 20);
+            this.rexSearch.Size = new System.Drawing.Size(193, 25);
             this.rexSearch.TabIndex = 8;
             // 
             // lblRegularExpression
             // 
             this.lblRegularExpression.AutoSize = true;
             this.lblRegularExpression.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblRegularExpression.Location = new System.Drawing.Point(3, 0);
+            this.lblRegularExpression.Location = new System.Drawing.Point(4, 0);
+            this.lblRegularExpression.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblRegularExpression.Name = "lblRegularExpression";
-            this.lblRegularExpression.Padding = new System.Windows.Forms.Padding(0, 15, 0, 1);
-            this.lblRegularExpression.Size = new System.Drawing.Size(194, 29);
+            this.lblRegularExpression.Padding = new System.Windows.Forms.Padding(0, 17, 0, 1);
+            this.lblRegularExpression.Size = new System.Drawing.Size(193, 33);
             this.lblRegularExpression.TabIndex = 0;
             this.lblRegularExpression.Text = "Regular expression";
             // 
@@ -265,13 +277,14 @@
             this.tableLayoutPanel2.Controls.Add(this.cbxLevel, 0, 2);
             this.tableLayoutPanel2.Controls.Add(this.lblEventLevel, 0, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 30);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 35);
+            this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 3;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(200, 83);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(201, 91);
             this.tableLayoutPanel2.TabIndex = 6;
             // 
             // cbxLevelMethod
@@ -286,9 +299,10 @@
             "Level must be higher or equal to (≥)",
             "Level must be higher than (>)",
             "Level must not be equal to (≠)"});
-            this.cbxLevelMethod.Location = new System.Drawing.Point(3, 32);
+            this.cbxLevelMethod.Location = new System.Drawing.Point(4, 36);
+            this.cbxLevelMethod.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.cbxLevelMethod.Name = "cbxLevelMethod";
-            this.cbxLevelMethod.Size = new System.Drawing.Size(194, 21);
+            this.cbxLevelMethod.Size = new System.Drawing.Size(193, 23);
             this.cbxLevelMethod.TabIndex = 5;
             // 
             // cbxLevel
@@ -296,19 +310,21 @@
             this.cbxLevel.Dock = System.Windows.Forms.DockStyle.Top;
             this.cbxLevel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxLevel.FormattingEnabled = true;
-            this.cbxLevel.Location = new System.Drawing.Point(3, 59);
+            this.cbxLevel.Location = new System.Drawing.Point(4, 65);
+            this.cbxLevel.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.cbxLevel.Name = "cbxLevel";
-            this.cbxLevel.Size = new System.Drawing.Size(194, 21);
+            this.cbxLevel.Size = new System.Drawing.Size(193, 23);
             this.cbxLevel.TabIndex = 4;
             // 
             // lblEventLevel
             // 
             this.lblEventLevel.AutoSize = true;
             this.lblEventLevel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblEventLevel.Location = new System.Drawing.Point(3, 0);
+            this.lblEventLevel.Location = new System.Drawing.Point(4, 0);
+            this.lblEventLevel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblEventLevel.Name = "lblEventLevel";
-            this.lblEventLevel.Padding = new System.Windows.Forms.Padding(0, 15, 0, 1);
-            this.lblEventLevel.Size = new System.Drawing.Size(194, 29);
+            this.lblEventLevel.Padding = new System.Windows.Forms.Padding(0, 17, 0, 1);
+            this.lblEventLevel.Size = new System.Drawing.Size(193, 33);
             this.lblEventLevel.TabIndex = 1;
             this.lblEventLevel.Text = "Event level";
             // 
@@ -319,22 +335,24 @@
             this.capSearch.CaptionShadowColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.capSearch.Dock = System.Windows.Forms.DockStyle.Top;
             this.capSearch.Location = new System.Drawing.Point(0, 0);
+            this.capSearch.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
             this.capSearch.Name = "capSearch";
-            this.capSearch.Size = new System.Drawing.Size(200, 30);
+            this.capSearch.Size = new System.Drawing.Size(201, 35);
             this.capSearch.TabIndex = 5;
             // 
             // tlsMain
             // 
             this.tlsMain.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.tlsMain.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.tlsMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnCopy,
             this.toolStripSeparator3,
             this.btnClear,
             this.btnSearchOptions,
             this.lblStatus});
-            this.tlsMain.Location = new System.Drawing.Point(10, 10);
+            this.tlsMain.Location = new System.Drawing.Point(13, 12);
             this.tlsMain.Name = "tlsMain";
-            this.tlsMain.Size = new System.Drawing.Size(714, 25);
+            this.tlsMain.Size = new System.Drawing.Size(953, 27);
             this.tlsMain.TabIndex = 3;
             // 
             // btnCopy
@@ -345,7 +363,7 @@
             this.btnCopy.Image = ((System.Drawing.Image)(resources.GetObject("btnCopy.Image")));
             this.btnCopy.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnCopy.Name = "btnCopy";
-            this.btnCopy.Size = new System.Drawing.Size(64, 22);
+            this.btnCopy.Size = new System.Drawing.Size(81, 24);
             this.btnCopy.Text = "Copy";
             this.btnCopy.DropDownOpening += new System.EventHandler(this.toolStripDropDownButton1_DropDownOpening);
             // 
@@ -354,7 +372,7 @@
             this.btnSelectionToClipboard.Enabled = false;
             this.btnSelectionToClipboard.Image = ((System.Drawing.Image)(resources.GetObject("btnSelectionToClipboard.Image")));
             this.btnSelectionToClipboard.Name = "btnSelectionToClipboard";
-            this.btnSelectionToClipboard.Size = new System.Drawing.Size(197, 22);
+            this.btnSelectionToClipboard.Size = new System.Drawing.Size(255, 26);
             this.btnSelectionToClipboard.Text = "Selection to clipboard";
             this.btnSelectionToClipboard.Click += new System.EventHandler(this.selectionToClipboardToolStripMenuItem_Click);
             // 
@@ -362,21 +380,21 @@
             // 
             this.btnEverythingToClipboard.Image = ((System.Drawing.Image)(resources.GetObject("btnEverythingToClipboard.Image")));
             this.btnEverythingToClipboard.Name = "btnEverythingToClipboard";
-            this.btnEverythingToClipboard.Size = new System.Drawing.Size(197, 22);
+            this.btnEverythingToClipboard.Size = new System.Drawing.Size(255, 26);
             this.btnEverythingToClipboard.Text = "Everything to clipboard";
             this.btnEverythingToClipboard.Click += new System.EventHandler(this.everythingToClipboardToolStripMenuItem_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 27);
             // 
             // btnClear
             // 
             this.btnClear.Image = ((System.Drawing.Image)(resources.GetObject("btnClear.Image")));
             this.btnClear.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(74, 22);
+            this.btnClear.Size = new System.Drawing.Size(98, 24);
             this.btnClear.Text = "Clear log";
             this.btnClear.Click += new System.EventHandler(this.toolStripButton2_Click);
             // 
@@ -389,7 +407,7 @@
             this.btnSearchOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnSearchOptions.Image")));
             this.btnSearchOptions.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnSearchOptions.Name = "btnSearchOptions";
-            this.btnSearchOptions.Size = new System.Drawing.Size(105, 22);
+            this.btnSearchOptions.Size = new System.Drawing.Size(142, 24);
             this.btnSearchOptions.Text = "Search options";
             this.btnSearchOptions.CheckedChanged += new System.EventHandler(this.btnSearchOptions_CheckedChanged);
             // 
@@ -397,38 +415,54 @@
             // 
             this.lblStatus.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(39, 22);
+            this.lblStatus.Size = new System.Drawing.Size(54, 24);
             this.lblStatus.Text = "Status";
             // 
             // panel3
             // 
             this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel3.Location = new System.Drawing.Point(10, 406);
+            this.panel3.Location = new System.Drawing.Point(13, 468);
+            this.panel3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(714, 10);
+            this.panel3.Size = new System.Drawing.Size(953, 12);
             this.panel3.TabIndex = 17;
             // 
             // btnClose
             // 
             this.btnClose.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btnClose.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.btnClose.Location = new System.Drawing.Point(10, 416);
+            this.btnClose.Location = new System.Drawing.Point(13, 480);
+            this.btnClose.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(714, 35);
+            this.btnClose.Size = new System.Drawing.Size(953, 40);
             this.btnClose.TabIndex = 16;
             this.btnClose.Text = "Close";
             this.btnClose.UseVisualStyleBackColor = true;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
+            // btn_Overlay
+            // 
+            this.btn_Overlay.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.btn_Overlay.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.btn_Overlay.Location = new System.Drawing.Point(13, 428);
+            this.btn_Overlay.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.btn_Overlay.Name = "btn_Overlay";
+            this.btn_Overlay.Size = new System.Drawing.Size(953, 40);
+            this.btn_Overlay.TabIndex = 19;
+            this.btn_Overlay.Text = "Overlay";
+            this.btn_Overlay.UseVisualStyleBackColor = true;
+            this.btn_Overlay.Click += new System.EventHandler(this.Btn_Overlay_Click);
+            // 
             // LogForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnClose;
-            this.ClientSize = new System.Drawing.Size(734, 461);
+            this.ClientSize = new System.Drawing.Size(979, 532);
             this.Controls.Add(this.panel2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
-            this.MinimumSize = new System.Drawing.Size(700, 500);
+            this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.MinimumSize = new System.Drawing.Size(927, 570);
             this.Name = "LogForm";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
@@ -485,5 +519,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colTimestamp;
         private System.Windows.Forms.DataGridViewTextBoxColumn colLevel;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMessage;
+        internal System.Windows.Forms.Button btn_Overlay;
     }
 }

@@ -1197,7 +1197,21 @@ namespace Triggernometry
                 _LogProcess = Boolean.Parse(value);
             }
         }
-
+        public string LogReparse
+        {
+            get
+            {
+                if (_LogReparse == false)
+                {
+                    return null;
+                }
+                return _LogReparse.ToString();
+            }
+            set
+            {
+                _LogReparse = Boolean.Parse(value);
+            }
+        }
         internal LogMessageEnum _LogLevel { get; set; } = LogMessageEnum.Error;
         [XmlAttribute]
         public string LogLevel

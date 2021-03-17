@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Text.RegularExpressions;
+using Advanced_Combat_Tracker;
 
 namespace Triggernometry.Forms
 {
@@ -271,6 +272,29 @@ namespace Triggernometry.Forms
             Close();
         }
 
+        private void Btn_Overlay_Click(object sender, EventArgs e)
+        {
+            WpfApp1.OverlayWindow overlay = new WpfApp1.OverlayWindow(plug);
+            overlay.Show();
+            var cc = ActGlobals.oFormActMain.AutoScaleBaseSize;
+            ActGlobals.oFormActMain.AutoScaleMode = AutoScaleMode.Dpi;
+            ActGlobals.oFormActMain.PerformAutoScale();
+            //using (Forms.OverlayForm overlay = new Forms.OverlayForm())
+            // {
+            //cf.plug = plug;
+            //cf.trvTrigger.ImageList = imageList1;
+            //cf.trvTrigger.Nodes.Add((TreeNode)treeView1.Nodes[0].Clone());
+            //CloseTree(cf.trvTrigger.Nodes[0]);
+            //cf.SettingsFromConfiguration(plug.cfg);
+            // if (overlay.ShowDialog() == DialogResult.OK)
+            // {
+            //lock (plug.cfg) // verified
+            // {
+            //overlay.SettingsToConfiguration(plug.cfg);
+            //}
+            //  }
+            //  }
+        }
     }
 
 }

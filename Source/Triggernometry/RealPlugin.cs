@@ -141,7 +141,7 @@ namespace Triggernometry
                 //System.Diagnostics.Debug.WriteLine("### {0} - Queuing acquisition for context: {1}", this.name, ctx.ToString());
                 MutexTicket m = new MutexTicket(ctx);
                 lock (this)
-                {                    
+                {
                     acquireQueue.Add(m);
                 }
                 //System.Diagnostics.Debug.WriteLine("### {0} - Queued acquisition {1} for context: {2}", this.name, m.GetHashCode(), ctx.ToString());
@@ -560,7 +560,7 @@ namespace Triggernometry
                         string ax = ctx.EvaluateStringExpression(a.ActionContextLogger, ctx, a._AuraName);
                         FilteredAddToLog(DebugLevelEnum.Info, I18n.Translate("internal/Plugin/actimageaura", "Activating image aura '{0}'", ax));
                         try
-                        { 
+                        {
                             Scarborough.ScarboroughImage si = new Scarborough.ScarboroughImage(sc);
                             si.ImageExpression = a._AuraImage;
                             si.InitXExpression = a._AuraXIniExpression;
@@ -605,7 +605,7 @@ namespace Triggernometry
                     }
                     break;
             }
-        } 
+        }
 
         internal void LegacyImageAuraManagement(Context ctx, Action a)
         {
@@ -637,7 +637,7 @@ namespace Triggernometry
                                     acf = new Forms.AuraContainerForm(Forms.AuraContainerForm.AuraTypeEnum.Image);
                                     acf.plug = this;
                                     acf.AuraName = ax;
-                                    newAura = true;                                    
+                                    newAura = true;
                                 }
                                 acf.AuraPrepare();
                                 acf.ctx = ctx;
@@ -669,7 +669,7 @@ namespace Triggernometry
                                 if (i > 100)
                                 {
                                     i = 100;
-                                }                                
+                                }
                                 acf.PresentableOpacity = i;
                                 acf.XExpression = a._AuraXTickExpression;
                                 acf.YExpression = a._AuraYTickExpression;
@@ -907,7 +907,7 @@ namespace Triggernometry
                                     }
                                 }
                                 if (acf.AuraFont == null)
-                                {                                    
+                                {
                                     FontStyle fs = FontStyle.Regular;
                                     if ((a._TextAuraEffect & Action.TextAuraEffectEnum.Bold) != 0)
                                     {
@@ -929,7 +929,7 @@ namespace Triggernometry
                                     if (ex < 1)
                                     {
                                         ex = 1;
-                                    }                                    
+                                    }
                                     acf.AuraFont = new Font(a._TextAuraFontName, ex, fs, GraphicsUnit.Point);
                                 }
                                 acf.BackgroundColor = a._TextAuraBackgroundClInt;
@@ -1292,11 +1292,11 @@ namespace Triggernometry
                     }
                     break;
                 case Trigger.TriggerSourceEnum.None:
-                    break;            }
+                    break; }
         }
 
         internal void TriggerDisabled(Trigger t)
-        {            
+        {
             switch (t._Source)
             {
                 case Trigger.TriggerSourceEnum.Log:
@@ -1359,7 +1359,7 @@ namespace Triggernometry
         internal Folder GetFolderById(Guid id, Repository repo)
         {
             if (repo != null)
-            {                
+            {
                 return RecursiveFolderSearch(repo.Root, id, repo);
             }
             else
@@ -1533,7 +1533,7 @@ namespace Triggernometry
             WindowsMediaPlayer mywmp;
             if (a._PlaySoundExclusive == true)
             {
-                mywmp = new WindowsMediaPlayer();                
+                mywmp = new WindowsMediaPlayer();
                 lock (a.players) // verified
                 {
                     a.players.Add(mywmp);
@@ -1637,10 +1637,11 @@ namespace Triggernometry
             }
             if (errorWarnState == true)
             {
-                ui.HideErrorThing(null, null);                
+                ui.HideErrorThing(null, null);
             }
         }
-
+        public delegate void LogRefreshDelegate(InternalLog log);
+        public LogRefreshDelegate logRefreshDelegate;
         internal void UnfilteredAddToLog(DebugLevelEnum level, string msg)
         {
             InternalLog il = new InternalLog() { Timestamp = DateTime.Now, Level = level, Message = msg };
@@ -1659,6 +1660,7 @@ namespace Triggernometry
             lock (log) // verified
             {
                 log.Enqueue(il);
+                if (logRefreshDelegate != null) logRefreshDelegate(il);
                 if (log.Count > 100000)
                 {
                     log.Dequeue();
@@ -1865,14 +1867,18 @@ namespace Triggernometry
 
         public void IfYouSeeThisErrorYouNeedToRestartACT()
         {
-            complainAboutReload = true;            
+            complainAboutReload = true;
         }
+        public void onLogRefreshDefault(InternalLog log)
+        {
 
+        }
         public void InitPlugin(TabPage pluginScreenSpace, Label pluginStatusText)
         {
             Language ld = new Language();
             ld.LanguageName = "English (default)";
             ld.MissingKeyHandling = Language.MissingHandlingEnum.OutputKey;
+            logRefreshDelegate = new LogRefreshDelegate(onLogRefreshDefault);
             I18n.DefaultLanguage = ld;
             I18n.AddLanguage(ld);
             ChangeLanguage(null);
@@ -2014,6 +2020,7 @@ namespace Triggernometry
                 _obs = new ObsController();                
                 pluginStatusText.Text = I18n.Translate("internal/Plugin/iniready", "Ready");
                 FilteredAddToLog(DebugLevelEnum.Info, I18n.Translate("internal/Plugin/inited", "Initialized"));
+                
                 Task tx = new Task(() =>
                 {
                     RepositoryUpdates();
@@ -2582,13 +2589,18 @@ namespace Triggernometry
 
         public void DeInitPlugin()
         {
+            if (configBroken == false)
+            {
+                SaveCurrentConfig();
+            }
+
             NetworkReceivedDelegateEndInvoke(PluginBridges.BridgeFFXIV.GetInstance());
+            PluginBridges.BridgeFFXIV.UnsubscribeFromNetworkEvents(this);
+            PluginBridges.BridgeFFXIV.CloseHandleFFXIV();
             if (ui != null)
             {
                 ui.CloseForms();
             }
-            PluginBridges.BridgeFFXIV.UnsubscribeFromNetworkEvents(this);
-            PluginBridges.BridgeFFXIV.CloseHandleFFXIV();
             if (_obs != null)
             {
                 _obs.Dispose();
@@ -2633,10 +2645,7 @@ namespace Triggernometry
                 QueueWakeupEvent.Dispose();
                 QueueWakeupEvent = null;
             }
-            if (configBroken == false)
-            {
-                SaveCurrentConfig();
-            }
+
             //SaveDefaultLanguage(Path.Combine(path, "default.triglations.xml"));
             if (cts != null)
             {
@@ -2774,7 +2783,7 @@ namespace Triggernometry
             lock (EventQueue)
             {
                 EventQueue.Enqueue(le);
-                QueueWakeupEvent.Set();
+                if(QueueWakeupEvent!=null) QueueWakeupEvent.Set();
             }            
         }
 
@@ -3061,7 +3070,6 @@ namespace Triggernometry
                 FilteredAddToLog(DebugLevelEnum.Error, I18n.Translate("internal/Plugin/procex", "Exception ({0}) when processing log line ({1}) in zone ({2})", ex.Message, logLine, detectedZone));
             }
         }
-        
         private void NetworkReceivedDelegateBeginInvoke(dynamic plug)
         {
             var pluginSubscription = plug.DataSubscription;
@@ -3079,13 +3087,11 @@ namespace Triggernometry
             StringBuilder builder = new StringBuilder(message.Length * 3);
             for (int i = 0; i < (message.Length / 4); i++)
             {
-                if (i < 0x10)
-                {
-                    builder.Append(BitConverter.ToUInt32(message, i * 4).ToString("X8") + ":");
-                }
+                builder.Append(BitConverter.ToUInt32(message, i * 4).ToString("X8") + ":");
+
             }
             DateTime now = DateTime.Now;
-            var str =  "Trlog:" + builder.ToString();
+            var str = "Trlog:" + builder.ToString();
             LogLineQueuer(str, currentZone, LogEvent.SourceEnum.OriginalLog);
 
         }

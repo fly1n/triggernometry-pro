@@ -231,7 +231,7 @@ namespace TriggernometryProxy
         public void DeInitPlugin()
         {            
             ActGlobals.oFormActMain.OnLogLineRead -= OFormActMain_OnLogLineRead;
-            ActGlobals.oFormActMain.BeforeLogLineRead -= OFormActMain_BeforeLogLineRead;
+            //ActGlobals.oFormActMain.BeforeLogLineRead -= OFormActMain_BeforeLogLineRead;
             Instance.DeInitPlugin();
             HideCornerNotification();
         }
