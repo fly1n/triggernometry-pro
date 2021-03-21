@@ -70,7 +70,16 @@ Add Combatant Memory Reading Function. This is a dangerous function which can re
 _ffxiventity[1234ABCD].memory[160,4] = Begin at memory offset 160 from combatant pointer address, and read 4 bytes. According to the data structure listed below, we can know that the return value represents a posX value of the entity in float type.
 ${numeric:round(X8float(${_ffxiventity[1234ABCD].memory[160,4]}),4)} = Through the combination of these functions, the posX coordinates of the character can be obtained, parsed as a float type, and 4 decimal places are retained.
 ```
-Direct memory reading is the fastest way to access memory data of a combatant. Each time this expression is evaluated, the latest memory data will be returned immediately. Please be careful not to read the memory at too high a frequency, which may cause performance problems. On the other hand, direct memory reading will also allow you to access some unclassified information, which may help your research on game mechanics.
+Add another Direct Memory Reading Function.
+```
+ _ffxivmemory[010012341234ABCD,100,64] = Begin at memory address 0x010012341234ABCD, move forward at an offset of 100 bytes, and read 64 bytes.
+```
+All Memory function will return 4byte Hexes as groups, seperate by a space char. For an example:
+```
+1234ABCD 2234ABCD 3234ABCD 
+```
+
+Direct memory reading is the fastest way to access memory data of a combatant or an address. Each time this expression is evaluated, the latest memory data will be returned immediately. Please be careful not to read the memory at too high a frequency, which may cause performance problems. On the other hand, direct memory reading will also allow you to access some unclassified information, which may help your research on game mechanics.
 The memory structure of a combatant is listed below as a reference. This code is copied from *FFXIV_ACT_Plugin.Memory.Models.Combatant64Struct*.
 ```
 public struct Combatant64Struct
