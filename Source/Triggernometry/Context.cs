@@ -31,6 +31,7 @@ namespace Triggernometry
         internal static Regex rexnump = new Regex(@"\[(?<index>.+?)\]\.(?<prop>[a-zA-Z]+)");
         internal static Regex rexnumpnumnum = new Regex(@"\[(?<index>.+?)\]\.(?<prop>[a-zA-Z]+)\[(?<arg1>[0-9]+?),(?<arg2>[0-9]+?)\]");
         internal static Regex rexlidx = new Regex(@"(?<name>[^\[]+)\[(?<index>.+?)\]");
+        internal static Regex rexlidx3 = new Regex(@"(?<name>[^\[]+)\[(?<index1>.+?),(?<index2>.+?),(?<index3>.+?)\]");
         internal static Regex rextidx = new Regex(@"(?<name>[^\[]+)\[(?<column>.+?)\]\[(?<row>.+?)\]");
         internal static Regex rexlprp = new Regex(@"(?<name>[^\.]+)\.(?<prop>[a-zA-Z]+)(\((?<arg>[^\)]+)\)){0,1}");
         internal static Regex rexfunc = new Regex(@"(?<name>[^\(]{1,})(\((?<arg>[^\)]+)\)){0,1}");
@@ -388,6 +389,33 @@ namespace Triggernometry
                                 }
                                 val = curdir.ToString();
                                 found = true;
+                            }
+                        }
+                        else if (x.IndexOf("_ffxivmemory") == 0)
+                        {
+                            mx = rexlidx3.Match(x);
+                            if (mx.Success == true)
+                            {
+                                Int64 pointer;
+                                Int64 offset;
+                                int length;
+                                if (Int64.TryParse(mx.Groups["index1"].Value, System.Globalization.NumberStyles.HexNumber, CultureInfo.InvariantCulture, out pointer) == true)
+                                {
+                                    if (Int64.TryParse(mx.Groups["index2"].Value, System.Globalization.NumberStyles.Integer, CultureInfo.InvariantCulture, out offset) == true)
+                                    {
+                                        int.TryParse(mx.Groups["index3"].Value, out length);
+                                        byte[] buffer = new byte[length];
+                                        IntPtr ptr = (IntPtr)(pointer+offset);
+                                        PluginBridges.BridgeFFXIV.ReadFFXIVMemory((IntPtr)ptr, buffer, length);
+                                        val = "";
+                                        for (int iptr = 0; iptr < length; iptr += 4)
+                                        {
+                                            val += BitConverter.ToUInt32(buffer, iptr).ToString("X8") + " ";
+                                        }
+                                        found = true;
+                                    }
+                                }
+
                             }
                         }
                         // check if scalar variable exists

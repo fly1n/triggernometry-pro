@@ -1763,18 +1763,17 @@ namespace Triggernometry
                             {
                                 ACT_Reparse(ctx.EvaluateStringExpression(ActionContextLogger, ctx, _LogMessageText));
                             }
-                            else
+
+                            RealPlugin.DebugLevelEnum dl = RealPlugin.DebugLevelEnum.Error;
+                            switch (_LogLevel)
                             {
-                                RealPlugin.DebugLevelEnum dl = RealPlugin.DebugLevelEnum.Error;
-                                switch (_LogLevel)
-                                {
-                                    case LogMessageEnum.Error: dl = RealPlugin.DebugLevelEnum.Error; break;
-                                    case LogMessageEnum.Info: dl = RealPlugin.DebugLevelEnum.Info; break;
-                                    case LogMessageEnum.Verbose: dl = RealPlugin.DebugLevelEnum.Verbose; break;
-                                    case LogMessageEnum.Warning: dl = RealPlugin.DebugLevelEnum.Warning; break;
-                                }
-                                AddToLog(ctx, dl, ctx.EvaluateStringExpression(ActionContextLogger, ctx, _LogMessageText));
+                                case LogMessageEnum.Error: dl = RealPlugin.DebugLevelEnum.Error; break;
+                                case LogMessageEnum.Info: dl = RealPlugin.DebugLevelEnum.Info; break;
+                                case LogMessageEnum.Verbose: dl = RealPlugin.DebugLevelEnum.Verbose; break;
+                                case LogMessageEnum.Warning: dl = RealPlugin.DebugLevelEnum.Warning; break;
                             }
+                            AddToLog(ctx, dl, ctx.EvaluateStringExpression(ActionContextLogger, ctx, _LogMessageText));
+
                         }
                         break;
                     #endregion

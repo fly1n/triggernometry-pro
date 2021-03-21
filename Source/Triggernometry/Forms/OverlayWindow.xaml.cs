@@ -85,7 +85,8 @@ namespace WpfApp1
 
         }
 
-        private void Topboard_MouseDown(object sender, MouseButtonEventArgs e)
+
+        private void Topboard_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             this.DragMove();
         }

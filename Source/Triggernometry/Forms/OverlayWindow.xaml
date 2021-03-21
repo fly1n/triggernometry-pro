@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Triggernometry Pro" Background="{x:Null}" d:DesignWidth="531.2" d:DesignHeight="514" Topmost="True" WindowStyle="None" AllowsTransparency="True" ResizeMode="CanResizeWithGrip" >
 
-    <Border BorderThickness="1"  CornerRadius="6,6,6,6"  Name="backboard" BorderBrush="#CC000000" Margin="5">
+    <Border BorderThickness="1" CornerRadius="6,6,6,6"  Name="backboard" BorderBrush="#CC000000" Margin="5">
 
 
         <Border.Effect>
@@ -20,13 +20,22 @@
                 <GradientStop Color="#B28C8C8C"/>
             </LinearGradientBrush>
         </Border.Background>
-
+        <Border.Resources>
+            <Style x:Key="FFXIVTransparentOverlayBorder" TargetType="Border">
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="false">
+                        <Setter Property ="Background" Value="Transparent"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+            <Style TargetType="Border" BasedOn="{StaticResource FFXIVTransparentOverlayBorder}"/>
+        </Border.Resources>
         <Grid x:Name="LogsGrid" Margin="-4.8,-4.8,-5,-4.6">
             <Grid.RowDefinitions>
                 <RowDefinition Height="24"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <Border  CornerRadius="6,6,6,6"  Name="topboard" BorderThickness="5,5,5,0" Margin="0" Cursor="SizeAll" MouseDown="Topboard_MouseDown" Background="#00000000">
+            <Border  CornerRadius="6,6,6,6"  Name="topboard" BorderThickness="5,5,5,0" Margin="0" Cursor="SizeAll" Background="#00000000" MouseLeftButtonDown="Topboard_MouseLeftButtonDown">
                 <Label Content="Triggernometry Pro" Margin="-43.8,0,0,-4" Foreground="#FFD7D7D7" Background="{x:Null}" RenderTransformOrigin="0.5,0.5" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" ScrollViewer.VerticalScrollBarVisibility="Disabled" Padding="0" MinHeight="20" VerticalAlignment="Bottom" FontSize="18" HorizontalAlignment="Left" Width="183" FontStretch="ExtraExpanded">
                     <Label.RenderTransform>
                         <TransformGroup>
@@ -92,7 +101,6 @@
                             </Setter.Value>
                         </Setter>
                     </Style>
-
                     <!--滚动条上下按钮-->
                     <Style x:Key="VerticalScrollBarPageButton2" TargetType="{x:Type RepeatButton}">
                         <Setter Property="OverridesDefaultStyle"  Value="true"/>
@@ -172,8 +180,7 @@
                             </Trigger>
                         </Style.Triggers>
                     </Style>
-                    <Style x:Key="for_scrollviewer"
-           TargetType="{x:Type ScrollViewer}">
+                    <Style x:Key="for_scrollviewer" TargetType="{x:Type ScrollViewer}">
                         <Setter Property="BorderBrush" Value="LightGray"/>
                         <Setter Property="BorderThickness" Value="0"/>
                         <Setter Property="Template">
@@ -282,7 +289,6 @@
                             </Setter.Value>
                         </Setter>
                     </Style>
-
                     <!--默认ScrollBar-->
                     <Style TargetType="ScrollBar" BasedOn="{StaticResource for_scrollbar}"/>
                 </DataGrid.Resources>
@@ -295,7 +301,7 @@
                 <DataGrid.ColumnHeaderStyle>
                     <Style TargetType="DataGridColumnHeader">
                         <Setter Property="Background" Value="#00000000"></Setter>
-                        <Setter Property="Foreground" Value="#FFD1D1D1"></Setter>
+                        <Setter Property="Foreground" Value="#FFE4DAC2"></Setter>
                         <Setter Property="BorderThickness" Value="0"></Setter>
                         <Setter Property="BorderBrush" Value="White"></Setter>
                         <Setter Property="HorizontalContentAlignment" Value="Left"></Setter>
@@ -303,8 +309,8 @@
                 </DataGrid.ColumnHeaderStyle>
                 <DataGrid.RowStyle>
                     <Style TargetType="DataGridRow">
-                        <Setter Property="Background" Value="#FF575757" />
-                        <Setter Property="Foreground" Value="#FFCACACA" />
+                        <Setter Property="Background" Value="#FF626262" />
+                        <Setter Property="Foreground" Value="#FFE4E4E4" />
                     </Style>
                 </DataGrid.RowStyle>
 
@@ -315,7 +321,7 @@
                                 <Setter Property="Foreground" Value="#FFA2A2A2" />
                             </DataTrigger>
                             <DataTrigger Binding="{Binding Level}" Value="Info">
-                                <Setter Property="Foreground" Value="#FFFDFFE5" />
+                                <Setter Property="Foreground" Value="#FFF0F0F0" />
                             </DataTrigger>
                             <DataTrigger Binding="{Binding Level}" Value="Warning">
                                 <Setter Property="Foreground" Value="#FFFFD375" />
@@ -329,7 +335,7 @@
             </DataGrid>
             <CheckBox x:Name="checkErrorLog" Content="Error" HorizontalAlignment="Left" Margin="205.332,10,0,0" VerticalAlignment="Top" Background="#FFBFBFBF" Foreground="#FFFF7575" BorderBrush="#FFADADAD" IsChecked="True" UseLayoutRounding="False" Grid.RowSpan="2"/>
             <CheckBox x:Name="checkWarningLog" Content="Warning" HorizontalAlignment="Left" Margin="266.283,8.8,0,0" VerticalAlignment="Top" Background="#FFBFBFBF" Foreground="#FFFFD375" BorderBrush="#FFADADAD" IsChecked="True" UseLayoutRounding="False"/>
-            <CheckBox x:Name="checkInfoLog" Content="Info" HorizontalAlignment="Left" Margin="347.549,8.8,0,0" VerticalAlignment="Top" Background="#FFBFBFBF" Foreground="#FFFDFFE5" BorderBrush="#FFADADAD"  IsChecked="True" UseLayoutRounding="False"/>
+            <CheckBox x:Name="checkInfoLog" Content="Info" HorizontalAlignment="Left" Margin="347.549,8.8,0,0" VerticalAlignment="Top" Background="#FFBFBFBF" Foreground="#FFF0F0F0" BorderBrush="#FFADADAD"  IsChecked="True" UseLayoutRounding="False"/>
             <CheckBox x:Name="checkDebugLog" Content="Debug" HorizontalAlignment="Left" Margin="406.681,8.8,0,0" VerticalAlignment="Top" Background="#FFBCBCBC" Foreground="#FFA2A2A2" BorderBrush="#FFADADAD" IsChecked="True" UseLayoutRounding="False"/>
         </Grid>
     </Border>
