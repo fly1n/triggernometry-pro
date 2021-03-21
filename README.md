@@ -18,6 +18,12 @@ Add an option **"Reparse as ACT log line"** in Log Message Action. If you select
 X8float = converts a base16 (hex) 4-bytes array to float types.
 X4pos = converts a base16 (hex) uint16 types to a ffxiv ingame-position expression as follows: pos = (uint16 - 32767)/32.767, this is used in ActorCast type network packet.
 X4Heading = converts a base16 (hex) uint16 types to a ffxiv ingame-heading expression as follows: pos = (uint16 - 32767)/32767*PI, this is used in some network packet.
+max(x1, x2, x3, ...) = the largest of any number of variables
+min(x1, x2, x3, ...) = the smallest of any number of variables
+distanceToLine(x0, y0, x1, y1, x2, y2) = Find the shortest distance from (x, y) to the straight line connecting two other points.
+direction(x0, y0, x1, y1) = Direction from (x0, y0) to (x1, y1) in radians (South 0, North ±PI)
+orderByDistance(index, x0, y0, x1, y1, x2, y2, ...) = Sort the points in the list [(x1,y1),(x2,y2),(x3,y3), ...] according to the distance to (x0, y0), and return the sorted position of the point with the specified ID in the new order.
+orderByDistanceToLine(index, x_line0, y_line0, x_line1, y_line1, x1, y1, x2, y2, ...) = Sort the points in the list [(x1,y1),(x2,y2),(x3,y3), ...] according to the distance to the straight line connecting (x_line0, y_line0)->(x_line1, y_line1), and return the sorted position of the point with the specified ID in the new order.
 ```
 
 ## Reduction of combatant states update interval
