@@ -30,6 +30,10 @@ The encounter export data contains a lot of interesting information, mainly rela
 _lastencounter = ACT DPS information from the last encounter in selected miniparse format
 _activeencounter = ACT DPS information from the ongoing encounter in selected miniparse format
 ```
+## Automatic code completion for expressions
+Automatic code completion function for regular expressions, mathematics, and string expressions.
+Press the arrow and space, or use the mouse to select the code hint to complete the expression.
+This is awesome!
 
 ## More combatant properties available
 Add more Properties available in *_ffxivparty* and *_ffxiventity*:
