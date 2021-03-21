@@ -463,7 +463,7 @@
             this.btnOk.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(200, 40);
-            this.btnOk.TabIndex = 0;
+            this.btnOk.TabIndex = 100;
             this.btnOk.Text = "OK";
             this.btnOk.UseVisualStyleBackColor = true;
             // 
@@ -502,7 +502,7 @@
             this.tabTriggerCondition.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.tabTriggerCondition.Name = "tabTriggerCondition";
             this.tabTriggerCondition.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.tabTriggerCondition.Size = new System.Drawing.Size(877, 375);
+            this.tabTriggerCondition.Size = new System.Drawing.Size(878, 367);
             this.tabTriggerCondition.TabIndex = 5;
             this.tabTriggerCondition.Text = "Trigger condition";
             this.tabTriggerCondition.UseVisualStyleBackColor = true;
@@ -514,7 +514,7 @@
             this.cndCondition.Location = new System.Drawing.Point(4, 3);
             this.cndCondition.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
             this.cndCondition.Name = "cndCondition";
-            this.cndCondition.Size = new System.Drawing.Size(869, 369);
+            this.cndCondition.Size = new System.Drawing.Size(870, 361);
             this.cndCondition.TabIndex = 4;
             // 
             // tabScheduling
@@ -800,9 +800,9 @@
             this.tableLayoutPanel16.Name = "tableLayoutPanel16";
             this.tableLayoutPanel16.RowCount = 1;
             this.tableLayoutPanel16.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel16.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 33F));
-            this.tableLayoutPanel16.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 33F));
-            this.tableLayoutPanel16.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 33F));
+            this.tableLayoutPanel16.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
+            this.tableLayoutPanel16.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
+            this.tableLayoutPanel16.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
             this.tableLayoutPanel16.Size = new System.Drawing.Size(860, 29);
             this.tableLayoutPanel16.TabIndex = 3;
             // 
@@ -843,7 +843,7 @@
             this.tabDescription.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.tabDescription.Name = "tabDescription";
             this.tabDescription.Padding = new System.Windows.Forms.Padding(9, 8, 9, 8);
-            this.tabDescription.Size = new System.Drawing.Size(877, 375);
+            this.tabDescription.Size = new System.Drawing.Size(878, 367);
             this.tabDescription.TabIndex = 4;
             this.tabDescription.Text = "Description";
             this.tabDescription.UseVisualStyleBackColor = true;
@@ -862,7 +862,7 @@
             this.tableLayoutPanel23.RowCount = 2;
             this.tableLayoutPanel23.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel23.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel23.Size = new System.Drawing.Size(859, 359);
+            this.tableLayoutPanel23.Size = new System.Drawing.Size(860, 351);
             this.tableLayoutPanel23.TabIndex = 3;
             // 
             // chkReadmeTrigger
@@ -870,10 +870,10 @@
             this.chkReadmeTrigger.AutoSize = true;
             this.chkReadmeTrigger.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.chkReadmeTrigger.Dock = System.Windows.Forms.DockStyle.Top;
-            this.chkReadmeTrigger.Location = new System.Drawing.Point(4, 334);
+            this.chkReadmeTrigger.Location = new System.Drawing.Point(4, 326);
             this.chkReadmeTrigger.Margin = new System.Windows.Forms.Padding(4, 6, 3, 6);
             this.chkReadmeTrigger.Name = "chkReadmeTrigger";
-            this.chkReadmeTrigger.Size = new System.Drawing.Size(852, 19);
+            this.chkReadmeTrigger.Size = new System.Drawing.Size(853, 19);
             this.chkReadmeTrigger.TabIndex = 8;
             this.chkReadmeTrigger.Text = "Specify trigger as readme for repositories";
             this.chkReadmeTrigger.UseVisualStyleBackColor = true;
@@ -888,7 +888,7 @@
             this.txtDescription.Multiline = true;
             this.txtDescription.Name = "txtDescription";
             this.txtDescription.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtDescription.Size = new System.Drawing.Size(851, 322);
+            this.txtDescription.Size = new System.Drawing.Size(852, 314);
             this.txtDescription.TabIndex = 0;
             this.txtDescription.WordWrap = false;
             // 

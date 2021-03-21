@@ -56,6 +56,89 @@ namespace Triggernometry
             pos = -(pos - center) / factor* ((float)Math.PI);
             return (double)pos;
         }
+        public struct Position {
+            public double x;
+            public double y;
+            public Position(double _x,double _y)
+            {
+                x = _x;
+                y = _y;
+            }
+            public double DistanceTo(Position pos) {
+                var dx = x - pos.x;
+                var dy = y - pos.y;
+                return Math.Sqrt(dx * dx + dy * dy);
+            }
+            public double DistanceToLine(Position pos1,Position pos2)
+            {
+                if ((pos1.x == pos2.x) && (pos1.y == pos2.y))pos2.x += 1;
+                var dx1 = pos1.x - x;
+                var dy1 = pos1.y - y;
+                var dx2 = pos2.x - x;
+                var dy2 = pos2.y - y;
+                var dx3 = pos1.x - pos2.x;
+                var dy3 = pos1.y - pos2.y;
+                var d = Math.Abs(dx1*dy2 - dx2*dy1) / Math.Sqrt(dx3*dx3 + dy3*dy3);
+                return d;
+            }
+            public override string ToString()
+            {
+                return "(" + x.ToString() + "," + y.ToString() + ")";
+            }
+        }
+        private double OrderByDistanceFunction(double[] input)
+        {
+            if (input.Count() < 5) return 0;
+            int order = (Int32)input[0];
+            Position pos0 = new Position(input[1], input[2]);
+            List<Position> dests = new List<Position>();
+            List<int> index = new List<int>();
+            int i;
+            int count = 0;
+            for (i=3;i+1< input.Count(); i += 2)
+            {
+                dests.Add(new Position(input[i], input[i + 1]));
+                index.Add(count);
+                count += 1;
+            }
+            index.Sort((x, y) =>
+                {
+                    var x_distance = dests[x].DistanceTo(pos0);
+                    var y_distance = dests[y].DistanceTo(pos0);
+                    if (x_distance > y_distance) return 1;
+                    if (x_distance < y_distance) return -1;
+                    return 0;
+                }
+            );
+            return index[order];
+        }
+        private double OrderByDistanceToLineFunction(double[] input)
+        {
+            if (input.Count() < 7) return 0;
+            int order = (Int32)input[0];
+            Position pos0 = new Position(input[1], input[2]);
+            Position pos1 = new Position(input[3], input[4]);
+            List<Position> dests = new List<Position>();
+            List<int> index = new List<int>();
+            int i;
+            int count = 0;
+            for (i = 5; i + 1 < input.Count(); i += 2)
+            {
+                dests.Add(new Position(input[i], input[i + 1]));
+                index.Add(count);
+                count += 1;
+            }
+            index.Sort((x, y) =>
+            {
+                var x_distance = dests[x].DistanceToLine(pos0,pos1);
+                var y_distance = dests[y].DistanceToLine(pos0,pos1);
+                if (x_distance > y_distance) return 1;
+                if (x_distance < y_distance) return -1;
+                return 0;
+            }
+            );
+            return index[order];
+        }
         public double IfFunction(double a, double b, double c)
         {
             return (a == 0) ? c : b;
@@ -174,7 +257,7 @@ namespace Triggernometry
 
                 LocalFunctions.Add("sin", x => Math.Sin(x[0]));
                 LocalFunctions.Add("sinh", x => Math.Sinh(x[0]));
-                LocalFunctions.Add("arcsin", x => Math.Asin(x[0]));                
+                LocalFunctions.Add("arcsin", x => Math.Asin(x[0]));
 
                 LocalFunctions.Add("tan", x => Math.Tan(x[0]));
                 LocalFunctions.Add("tanh", x => Math.Tanh(x[0]));
@@ -184,10 +267,37 @@ namespace Triggernometry
                 LocalFunctions.Add("degtorad", x => x[0] / 180.0 * Math.PI);
 
                 LocalFunctions.Add("arctan2", x => Math.Atan2(x[0], x[1]));
-                LocalFunctions.Add("distance", x => Math.Sqrt(Math.Pow((x[2]-x[0]), 2.0) + Math.Pow((x[3] - x[1]), 2.0)));
+                LocalFunctions.Add("distance", x => Math.Sqrt(Math.Pow((x[2] - x[0]), 2.0) + Math.Pow((x[3] - x[1]), 2.0)));
+                LocalFunctions.Add("distanceToLine", x => {
+                    Position pos = new Position(x[0], x[1]);
+                    Position pos1 = new Position(x[2], x[3]);
+                    Position pos2 = new Position(x[4], x[5]);
+                    return pos.DistanceToLine(pos1, pos2);
+                }
+                );
+                LocalFunctions.Add("direction", x => {
+                    var dx = x[2] - x[0];
+                    var dy = x[3] - x[1];
+                    return Math.Atan2(dy, dx);
+                });
 
-                LocalFunctions.Add("max", x => Math.Max(x[0], x[1]));
-                LocalFunctions.Add("min", x => Math.Min(x[0], x[1]));
+                LocalFunctions.Add("max", x =>
+                {
+                    double max = x[0];
+                    for(int i = 1; i < x.Count(); i++)
+                    {
+                        max= Math.Max(x[0], max);
+                    }
+                    return max;
+                });
+                LocalFunctions.Add("min", x => {
+                    double min = x[0];
+                    for (int i = 1; i < x.Count(); i++)
+                    {
+                        min = Math.Min(x[0], min);
+                    }
+                    return min;
+                });
                 LocalFunctions.Add("random", x => RandomNumber(x[0], x[1]));
 
                 LocalFunctions.Add("sqrt", x => Math.Sqrt(x[0]));
@@ -241,6 +351,8 @@ namespace Triggernometry
                 LocalFunctions.Add("or", x => OrFunction(x));
                 LocalFunctions.Add("and", x => AndFunction(x));
                 LocalFunctions.Add("if", x => IfFunction(x[0], x[1], x[2]));
+                LocalFunctions.Add("orderByDistance", x => OrderByDistanceFunction(x));
+                LocalFunctions.Add("orderByDistanceToLine", x => OrderByDistanceToLineFunction(x));
 
                 LocalStringFunctions.Add("hex2dec", x => Hex2DecFunction(x));
                 LocalStringFunctions.Add("X8float", x => Hex2FloatFunction(x));
@@ -267,6 +379,8 @@ namespace Triggernometry
                 LocalVariables.Add("minor", 0.38196601125010515179541316563436189);
             }
         }
+
+
 
         #region Properties
 

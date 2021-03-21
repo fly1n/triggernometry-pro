@@ -29,11 +29,13 @@ namespace Triggernometry
         internal static Regex rex = new Regex(@"\$\{(?<id>[^\}\{\$]*)\}");
         internal static Regex rexnum = new Regex(@"\$(?<id>[0-9]+)");
         internal static Regex rexnump = new Regex(@"\[(?<index>.+?)\]\.(?<prop>[a-zA-Z]+)");
+        internal static Regex rexnumprp3 = new Regex(@"\[(?<index>.+?)\]\.(?<prop>[a-zA-Z]+)(\((?<arg1>[^,]+),(?<arg2>[^,]+),(?<arg3>[^\)]+)\))");
         internal static Regex rexnumpnumnum = new Regex(@"\[(?<index>.+?)\]\.(?<prop>[a-zA-Z]+)\[(?<arg1>[0-9]+?),(?<arg2>[0-9]+?)\]");
         internal static Regex rexlidx = new Regex(@"(?<name>[^\[]+)\[(?<index>.+?)\]");
         internal static Regex rexlidx3 = new Regex(@"(?<name>[^\[]+)\[(?<index1>.+?),(?<index2>.+?),(?<index3>.+?)\]");
         internal static Regex rextidx = new Regex(@"(?<name>[^\[]+)\[(?<column>.+?)\]\[(?<row>.+?)\]");
         internal static Regex rexlprp = new Regex(@"(?<name>[^\.]+)\.(?<prop>[a-zA-Z]+)(\((?<arg>[^\)]+)\)){0,1}");
+        internal static Regex rexlprp3 = new Regex(@"(?<name>[^\.]+)\.(?<prop>[a-zA-Z]+)(\((?<arg1>[^,]+),(?<arg2>[^,]+),(?<arg3>[^\)]+)\))");
         internal static Regex rexfunc = new Regex(@"(?<name>[^\(]{1,})(\((?<arg>[^\)]+)\)){0,1}");
         internal Dictionary<string, string> namedgroups;
 		internal List<string> numgroups;
@@ -1035,7 +1037,7 @@ namespace Triggernometry
                                 if (Int64.TryParse(gindex, System.Globalization.NumberStyles.HexNumber, CultureInfo.InvariantCulture, out honk) == true)
                                 {
                                     vc = PluginBridges.BridgeFFXIV.GetIdPartyMember(gindex, out foundid);
-                                }                                
+                                }
                                 if (foundid == false)
                                 {
                                     if (Int32.TryParse(gindex, out iindex) == true)
@@ -1052,6 +1054,7 @@ namespace Triggernometry
                                     val = vc.GetValue(gprop).ToString();
                                 }
                             }
+
                             found = true;
                         }
                         else if (x.IndexOf("_ffxiventity") == 0)

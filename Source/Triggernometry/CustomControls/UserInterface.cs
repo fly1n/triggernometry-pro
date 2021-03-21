@@ -2023,6 +2023,12 @@ namespace Triggernometry.CustomControls
             btnEdit_Click(sender, e);
         }
 
+        private void BtnSave_Click(object sender, EventArgs e)
+        {
+            saveConfigurationManuallyToolStripMenuItem_Click(sender, e);
+        }
+
+
     }
 
 }

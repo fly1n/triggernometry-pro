@@ -1840,6 +1840,13 @@ namespace Triggernometry.Forms
             expJsonPayload.Enabled = (cbxJsonType.SelectedIndex == 0);
         }
 
+        private void ActionForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                btnOk_Click(sender, e);
+            }
+        }
     }
 
 }
