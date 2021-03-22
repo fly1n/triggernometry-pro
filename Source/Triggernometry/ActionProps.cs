@@ -137,6 +137,8 @@ namespace Triggernometry
             PopFirst,
             SortAlphaAsc,
             SortAlphaDesc,
+            SortNumericAsc,
+            SortNumericDesc,
             SortFfxivPartyAsc,
             SortFfxivPartyDesc,
             Copy,

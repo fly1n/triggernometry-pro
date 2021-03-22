@@ -236,7 +236,45 @@ namespace Triggernometry.Variables
             LastChanged = DateTime.Now;
             LastChanger = changer;
         }
+        public void SortNumericAsc(string changer)
+        {
+            
+            Values.Sort((a, b) => {
+                double d1 = 0d;
+                double d2 =0d;
+                try
+                {
+                    double.TryParse(a.ToString(),out d1);
+                    double.TryParse(b.ToString(),out d2);
+                }catch(Exception e)
+                {
+                    return 0;
+                }
+                return d1.CompareTo(d2);
+                });
+            LastChanged = DateTime.Now;
+            LastChanger = changer;
+        }
+        public void SortNumericDesc(string changer)
+        {
 
+            Values.Sort((a, b) => {
+                double d1 = 0d;
+                double d2 = 0d;
+                try
+                {
+                    double.TryParse(a.ToString(), out d1);
+                    double.TryParse(b.ToString(), out d2);
+                }
+                catch (Exception e)
+                {
+                    return 0;
+                }
+                return -1*(d1.CompareTo(d2));
+            });
+            LastChanged = DateTime.Now;
+            LastChanger = changer;
+        }
         public void SortFfxivPartyAsc(Configuration cfg, string changer)
         {
             Values.Sort((a, b) =>

@@ -1617,6 +1617,26 @@ namespace Triggernometry
                                         AddToLog(ctx, RealPlugin.DebugLevelEnum.Verbose, I18n.Translate("internal/Action/listsortdesc", "List variable ({0}) sorted in descending order", varname));
                                     }
                                     break;
+                                case ListVariableOpEnum.SortNumericAsc:
+                                    {
+                                        lock (ctx.plug.sessionvars.List)
+                                        {
+                                            VariableList vl = GetListVariable(ctx.plug, varname, false);
+                                            vl.SortNumericAsc(changer);
+                                        }
+                                        AddToLog(ctx, RealPlugin.DebugLevelEnum.Verbose, I18n.Translate("internal/Action/listsortasc", "List variable ({0}) sorted in ascending order", varname));
+                                    }
+                                    break;
+                                case ListVariableOpEnum.SortNumericDesc:
+                                    {
+                                        lock (ctx.plug.sessionvars.List)
+                                        {
+                                            VariableList vl = GetListVariable(ctx.plug, varname, false);
+                                            vl.SortNumericDesc(changer);
+                                        }
+                                        AddToLog(ctx, RealPlugin.DebugLevelEnum.Verbose, I18n.Translate("internal/Action/listsortdesc", "List variable ({0}) sorted in descending order", varname));
+                                    }
+                                    break;
                                 case ListVariableOpEnum.SortFfxivPartyAsc:
                                     {
                                         lock (ctx.plug.sessionvars.List)

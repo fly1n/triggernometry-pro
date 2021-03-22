@@ -1439,7 +1439,7 @@ namespace Triggernometry.Forms
                     expLvarTarget.Enabled = false;
                     expLvarIndex.Enabled = false;
                     break;
-                case 9: // Sort list in ffxiv party ascending order
+                case 9: // Sort list in an numeric ascending order
                     expLvarName.Enabled = true;
                     expLvarName.ExpressionType = CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
                     expLvarValue.Enabled = false;
@@ -1447,7 +1447,7 @@ namespace Triggernometry.Forms
                     expLvarTarget.Enabled = false;
                     expLvarIndex.Enabled = false;
                     break;
-                case 10: // Sort list in ffxiv party descending order
+                case 10: // Sort list in an numeric descending order
                     expLvarName.Enabled = true;
                     expLvarName.ExpressionType = CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
                     expLvarValue.Enabled = false;
@@ -1455,7 +1455,23 @@ namespace Triggernometry.Forms
                     expLvarTarget.Enabled = false;
                     expLvarIndex.Enabled = false;
                     break;
-                case 11: // Copy whole list variable to another list variable
+                case 11: // Sort list in ffxiv party ascending order
+                    expLvarName.Enabled = true;
+                    expLvarName.ExpressionType = CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
+                    expLvarValue.Enabled = false;
+                    cbxLvarExpType.Enabled = false;
+                    expLvarTarget.Enabled = false;
+                    expLvarIndex.Enabled = false;
+                    break;
+                case 12: // Sort list in ffxiv party descending order
+                    expLvarName.Enabled = true;
+                    expLvarName.ExpressionType = CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
+                    expLvarValue.Enabled = false;
+                    cbxLvarExpType.Enabled = false;
+                    expLvarTarget.Enabled = false;
+                    expLvarIndex.Enabled = false;
+                    break;
+                case 13: // Copy whole list variable to another list variable
                     expLvarName.Enabled = true;
                     expLvarName.ExpressionType = CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
                     expLvarValue.Enabled = false;
@@ -1463,7 +1479,7 @@ namespace Triggernometry.Forms
                     expLvarTarget.Enabled = true;
                     expLvarIndex.Enabled = false;
                     break;
-                case 12: // Insert list variable into another list variable
+                case 14: // Insert list variable into another list variable
                     expLvarName.Enabled = true;
                     expLvarName.ExpressionType = CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
                     expLvarValue.Enabled = false;
@@ -1471,7 +1487,7 @@ namespace Triggernometry.Forms
                     expLvarTarget.Enabled = true;
                     expLvarIndex.Enabled = true;
                     break;
-                case 13: // Join all values in the list variable into a single string (separator in expression)
+                case 15: // Join all values in the list variable into a single string (separator in expression)
                     expLvarName.Enabled = true;
                     expLvarName.ExpressionType = CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
                     expLvarValue.Enabled = true;
@@ -1479,7 +1495,7 @@ namespace Triggernometry.Forms
                     expLvarTarget.Enabled = true;
                     expLvarIndex.Enabled = false;
                     break;
-                case 14: // Split a scalar variable into a list variable (separator in expression)
+                case 16: // Split a scalar variable into a list variable (separator in expression)
                     expLvarName.Enabled = true;
                     expLvarName.ExpressionType = CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
                     expLvarValue.Enabled = true;
@@ -1487,7 +1503,7 @@ namespace Triggernometry.Forms
                     expLvarTarget.Enabled = true;
                     expLvarIndex.Enabled = false;
                     break;
-                case 15: // Unset all list variables
+                case 17: // Unset all list variables
                     expLvarName.Enabled = false;
                     expLvarName.ExpressionType = CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
                     expLvarValue.Enabled = false;
@@ -1495,7 +1511,7 @@ namespace Triggernometry.Forms
                     expLvarTarget.Enabled = false;
                     expLvarIndex.Enabled = false;
                     break;
-                case 16: // Unset by regex
+                case 18: // Unset by regex
                     expLvarName.Enabled = true;
                     expLvarName.ExpressionType = CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.Regex;
                     expLvarValue.Enabled = false;

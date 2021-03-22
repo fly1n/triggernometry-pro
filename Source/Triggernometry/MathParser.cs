@@ -353,6 +353,7 @@ namespace Triggernometry
                 LocalFunctions.Add("if", x => IfFunction(x[0], x[1], x[2]));
                 LocalFunctions.Add("orderByDistance", x => OrderByDistanceFunction(x));
                 LocalFunctions.Add("orderByDistanceToLine", x => OrderByDistanceToLineFunction(x));
+               // LocalFunctions.Add("sortByDistance",x->
 
                 LocalStringFunctions.Add("hex2dec", x => Hex2DecFunction(x));
                 LocalStringFunctions.Add("X8float", x => Hex2FloatFunction(x));

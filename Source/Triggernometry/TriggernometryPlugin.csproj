@@ -55,7 +55,7 @@
     </Reference>
     <Reference Include="FFXIV_ACT_Plugin.Common, Version=2.0.4.10, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\Games\FFXIV\ACT_v3.3\FFXIV_ACT_Plugin_SDK_2.0.8.6\SDK\FFXIV_ACT_Plugin.Common.dll</HintPath>
+      <HintPath>..\..\..\..\Games\FFXIV\ACT_v3.3\FFXIV_ACT_Plugin_SDK_2.0.8.0\SDK\FFXIV_ACT_Plugin.Common.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
