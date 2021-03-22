@@ -64,7 +64,7 @@
             "_ffxiventity",
             "_ffxivparty",
             "_ffxivplayer"});
-            this.textBox1.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.textBox1.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.textBox1.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.textBox1.Dock = System.Windows.Forms.DockStyle.Top;
             this.textBox1.Location = new System.Drawing.Point(24, 0);
