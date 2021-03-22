@@ -286,7 +286,7 @@ namespace Triggernometry
                     double max = x[0];
                     for(int i = 1; i < x.Count(); i++)
                     {
-                        max= Math.Max(x[0], max);
+                        max= Math.Max(x[i], max);
                     }
                     return max;
                 });
@@ -294,7 +294,7 @@ namespace Triggernometry
                     double min = x[0];
                     for (int i = 1; i < x.Count(); i++)
                     {
-                        min = Math.Min(x[0], min);
+                        min = Math.Min(x[i], min);
                     }
                     return min;
                 });
