@@ -22,6 +22,9 @@ max(x1, x2, x3, ...) = the largest of any number of variables
 min(x1, x2, x3, ...) = the smallest of any number of variables
 distanceToLine(x0, y0, x1, y1, x2, y2) = Find the shortest distance from (x, y) to the straight line connecting two other points.
 direction(x0, y0, x1, y1) = Direction from (x0, y0) to (x1, y1) in radians (South 0, North ±PI)
+dirToClock(dir) = converts a direction value in radians to an integer between 0-7. (North = 0, +1 every 45° clockwise). 
+dirToClock(dir, number) = converts a direction value in radians to an integer between 0-(number-1). (North = 0, +1 every 360°/number clockwise). 
+dirToClock(dir, number, offset) = converts a direction value in radians to an integer between 0-(number-1). (North with offset in radians = 0, +1 every 360°/number clockwise)). 
 orderByDistance(index, x0, y0, x1, y1, x2, y2, ...) = Sort the points in the list [(x1,y1),(x2,y2),(x3,y3), ...] according to the distance to (x0, y0), and return the sorted position of the point with the specified ID in the new order.
 orderByDistanceToLine(index, x_line0, y_line0, x_line1, y_line1, x1, y1, x2, y2, ...) = Sort the points in the list [(x1,y1),(x2,y2),(x3,y3), ...] according to the distance to the straight line connecting (x_line0, y_line0)->(x_line1, y_line1), and return the sorted position of the point with the specified ID in the new order.
 ```
