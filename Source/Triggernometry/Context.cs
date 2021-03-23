@@ -1018,6 +1018,10 @@ namespace Triggernometry
                                                 val = String.Format("{0:" + args[1] + "}", converted);
                                             }
                                             break;
+                                        case "hex2str":
+                                            {
+
+                                            }break;
                                     }
                                 }
                             }

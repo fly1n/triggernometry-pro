@@ -962,7 +962,24 @@ namespace Triggernometry
             {
                 return;
             }
-            ctx.plug.UnfilteredAddToLog(level, message);
+            var myName = "";
+            var myAction = 0;
+            var myActionType = "";
+            if (ctx.trig != null) { 
+                myName = ctx.trig.Name;
+            }
+            if (ctx.ActionResults!=null)
+            {
+                try
+                {
+                    myAction = ctx.ActionResults.Count;
+                    myActionType = ctx.trig.Actions[myAction].ActionType.ToString();
+                }catch(Exception e)
+                {
+
+                }
+            }
+            ctx.plug.UnfilteredAddToLog(level, "["+myName+":AC_"+myAction.ToString("00")+":"+myActionType+"]"+message);
         }
 
         private VariableList GetListVariable(RealPlugin p, string varname, bool createNew)
