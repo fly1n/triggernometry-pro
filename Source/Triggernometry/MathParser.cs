@@ -280,7 +280,7 @@ namespace Triggernometry
                     var dy = x[3] - x[1];
                     return Math.Atan2(dy, dx);
                 });
-
+                LocalFunctions.Add("dir8", x => ((Int32)(Math.Round(4 - x[0] * 4 / Math.PI)) % 8) );
                 LocalFunctions.Add("max", x =>
                 {
                     double max = x[0];
