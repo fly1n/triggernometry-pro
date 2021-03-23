@@ -279,7 +279,7 @@ namespace Triggernometry.CustomControls
 
         private string GetLastWord(TextBox textBox)
         {
-            string txt = textBox.Text.Substring(0, textBox.SelectionStart);
+            string txt = textBox.Text.Substring(0, Math.Max(0,textBox.SelectionStart));
             if (isRegexTextBox())
             {
                 char[] seperators = new char[] { ')', ':' };
@@ -288,7 +288,7 @@ namespace Triggernometry.CustomControls
             }
             else
             {
-                char[] seperators = new char[] { '(', ')', '{', '}', ',',':' };
+                char[] seperators = new char[] { '(', ')', '{', '}', ',',':','+','*','-','/','%' };
                 string[] splits = txt.Split(seperators);
                 return (splits.LastOrDefault() ?? "").Trim();
             }
@@ -474,9 +474,19 @@ namespace Triggernometry.CustomControls
         {
             var lastWord = GetLastWord(this.textBox1);
             var nextWord = this.autoListBox.Text;
-            this.textBox1.Text = this.textBox1.Text.Substring(0, this.textBox1.Text.Length - lastWord.Length);
-            this.textBox1.AppendText(nextWord);
-            this.textBox1.Select(this.textBox1.TextLength, 0);
+            if (lastWord.Contains("."))
+            {
+                lastWord = lastWord.Split(attributeSplitters, StringSplitOptions.None).LastOrDefault();
+            }
+            if (lastWord.Contains(":"))
+            {
+                lastWord = lastWord.Split(stringFunctionSplitters, StringSplitOptions.None).LastOrDefault();
+            }
+            var substr1 = this.textBox1.Text.Substring(0, this.textBox1.SelectionStart - lastWord.Length);
+            var substr2 = this.textBox1.Text.Substring(this.textBox1.SelectionStart, this.textBox1.Text.Length-this.textBox1.SelectionStart);
+            this.textBox1.Text = substr1;
+            this.textBox1.AppendText(nextWord + substr2);
+            this.textBox1.Select(substr1.Length+nextWord.Length, 0);
             this.autoListBox.Visible = false;
         }
 
