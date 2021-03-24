@@ -10,7 +10,9 @@ Add a new Trigger event source "Original log lines", which allow triggers to acc
 
 For more information about this:
 https://github.com/quisquous/cactbot/blob/main/docs/LogGuide.md#fb-debug
+
 In order to facilitate writing regular expressions, **all separators "|" in the original logs are replaced with ":" and replace the origin header with a Trlog: label**
+
 The original log lines in this version will have information like this:
 ```
 Trlog:00000040:1034ABCD:1034ABCD:00000003:01A90024:003C0000:
