@@ -278,9 +278,12 @@ namespace Triggernometry
                 LocalFunctions.Add("direction", x => {
                     var dx = x[2] - x[0];
                     var dy = x[3] - x[1];
-                    return Math.Atan2(dy, dx);
+                    var heading = -Math.Atan2(dy, dx) + Math.PI / 2;
+                    if (heading > Math.PI) heading -= 2*Math.PI;
+                    else if (heading < -Math.PI) heading += 2 * Math.PI;
+                    return heading;
                 });
-                LocalFunctions.Add("dir8", x => ((Int32)(Math.Round(4 - x[0] * 4 / Math.PI)) % 8) );
+
                 LocalFunctions.Add("max", x =>
                 {
                     double max = x[0];
@@ -341,7 +344,20 @@ namespace Triggernometry
                             return 0; // false
                     }
                 });
-
+                LocalFunctions.Add("dirToClock", delegate (double[] input)
+                {
+                    //direction，clocknum，direction-bias
+                    
+                    int clock_count;
+                    double bias;
+                    if (input.Length >= 2) clock_count = (Int32)input[1];
+                    else clock_count = 8;
+                    if (input.Length >= 3) bias = input[2];
+                    else bias =0;
+                    double dir = -input[0] + Math.PI- bias;
+                    int clock = ((Int32)Math.Round(dir / (2 * Math.PI) * clock_count)) % clock_count;
+                    return clock;
+                });
                 //LocalFunctions.Add("round", x => Math.Round(x[0]));
                 LocalFunctions.Add("truncate", x => x[0] < 0 ? -Math.Floor(-x[0]) : Math.Floor(x[0]));
                 LocalFunctions.Add("floor", x => Math.Floor(x[0]));

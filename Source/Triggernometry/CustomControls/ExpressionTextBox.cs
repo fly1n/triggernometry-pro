@@ -316,7 +316,7 @@ namespace Triggernometry.CustomControls
             "log(x)","round(x)","round(x,y)","floor(x)","ceiling(x)","sign(x)",
             "hex2dec(x)","if(x,y,z)","func:","X8float(x)","X4pos(x)","X4Heading(x)",
             "distanceToLine(x0,y0,x1,y1,x2,y2)",
-            "direction(x,y)","orderByDistance(index,x_center,y_center,x1,y1,x2,y2, ...)",
+            "direction(x1,y1,x2,y2)","orderByDistance(index,x_center,y_center,x1,y1,x2,y2, ...)",
             "orderByDistanceToLine(index,x_line1,y_line1,x_line2,y_line2,x1,y1,x2,y2, ...)",
             "numeric:","string:","var:xxx","lvar:xxx.size",
             "lvar:xxx.indexof(hello warudo)","lvar:xxx.lastindexof(hello warudo)",
