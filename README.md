@@ -7,7 +7,8 @@ Add a new Trigger event source "Original log lines", which allow triggers to acc
 251|2019-05-21T19:11:02.0268703-07:00|ProcessTCPInfo: New connection detected for Process [2644]:192.168.1.70:49413=>204.2.229.85:55021|909171c500bed915f8d79fc04d3589fa
 ```
 ~~To use the original log lines as event source, you need to check **(DEBUG) Enable Debug Options** and **(DEBUG) Log all Network Packets** in **ACT Plugins->FFXIV Settings page**. It can cause performance problems and write a huge amount of information in the log file.~~
-for more information about this:
+
+For more information about this:
 https://github.com/quisquous/cactbot/blob/main/docs/LogGuide.md#fb-debug
 In order to facilitate writing regular expressions, **all separators "|" in the original logs are replaced with ":" and replace the origin header with a Trlog: label**
 The original log lines in this version will have information like this:
