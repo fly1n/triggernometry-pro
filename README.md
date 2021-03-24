@@ -6,13 +6,26 @@ Add a new Trigger event source "Original log lines", which allow triggers to acc
 ```
 251|2019-05-21T19:11:02.0268703-07:00|ProcessTCPInfo: New connection detected for Process [2644]:192.168.1.70:49413=>204.2.229.85:55021|909171c500bed915f8d79fc04d3589fa
 ```
-To use the original log lines as event source, you need to check **(DEBUG) Enable Debug Options** and **(DEBUG) Log all Network Packets** in **ACT Plugins->FFXIV Settings page**. It can cause performance problems and write a huge amount of information in the log file.
+~~To use the original log lines as event source, you need to check **(DEBUG) Enable Debug Options** and **(DEBUG) Log all Network Packets** in **ACT Plugins->FFXIV Settings page**. It can cause performance problems and write a huge amount of information in the log file.~~
 for more information about this:
 https://github.com/quisquous/cactbot/blob/main/docs/LogGuide.md#fb-debug
+In order to facilitate writing regular expressions, **all separators "|" in the original logs are replaced with ":" and replace the origin header with a Trlog: label**
+The original log lines in this version will have information like this:
+```
+Trlog:00000040:1034ABCD:1034ABCD:00000003:01A90024:003C0000:
+```
+You can now switch trigger event source to "Original log lines" without any additional settings.
 
 ## Log message reparsed as ACT loglines
 Add an option **"Reparse as ACT log line"** in Log Message Action. If you select this option, the specified log message will be re-parsed into an ACT log lines and can be accessed through the ACT encounter logs window. These logs will also be processed by all plugins like other parsed logs.
 
+## Enhanced real-time internal logs display
+A new overlay window is designed to display internal-logs, click the **Options -> View Logs -> Overlay** button to see it, and multiple overlay windows can be displayed at the same time. 
+
+The text content of the plug-in logs has been optimized, and the source triggers and events of the logs have been added to the header. They have information like this: 
+```
+2021-03-24 08:08:26.077	Info	[party_init:AC_11:TableVariable]Queuing trigger 'party_init (442aa6cf-4953-4bfc-bf64-dfc342187ce1)' action 'Set table variable (party) value at (2,${i}) with numeric expression (${i})' to 2021-03-24 08:08:26.077 slot 242
+```
 ## Additional math functions
 ```
 X8float = converts a base16 (hex) 4-bytes array to float types.
