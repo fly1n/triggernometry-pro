@@ -28,6 +28,8 @@ dirToClock(dir, number, offset) = converts a direction value in radians to an in
 orderByDistance(index, x0, y0, x1, y1, x2, y2, ...) = Sort the points in the list [(x1,y1),(x2,y2),(x3,y3), ...] according to the distance to (x0, y0), and return the sorted position of the point with the specified ID in the new order.
 orderByDistanceToLine(index, x_line0, y_line0, x_line1, y_line1, x1, y1, x2, y2, ...) = Sort the points in the list [(x1,y1),(x2,y2),(x3,y3), ...] according to the distance to the straight line connecting (x_line0, y_line0)->(x_line1, y_line1), and return the sorted position of the point with the specified ID in the new order.
 ```
+## More List Variables Operations
+Add functions of sorting by numeric value (ascend or descend).
 
 ## Reduction of combatant states update interval
 Reduce update interval of combatant stats to 10ms (from original 1000ms), Enhance the real-time performance of memory data. But it is still limited by the memory update interval of ffxiv_act_plugin, which is 100ms.
@@ -186,6 +188,10 @@ public struct Combatant64Struct
 }
 
 ```
+# Compatibility issues
+1.Any trigger and xml file in the original version can be imported into this version and run correctly.
+2.Triggers that include the **new log source** or **new list variables processing methods** defined in this version cannot be imported into the original version. Using the original version of Triggernometry to load the existing user configuration or xml file will cause an xml parsing error.
+3.Switching to the original version of Triggernometry and saving user settings will cause compatible additional settings (such as the reparse function) to be lost and reset to the default value.
 
 # Original Triggernometry Readme
 Triggernometry has a Wiki, containing useful information and documentation:
