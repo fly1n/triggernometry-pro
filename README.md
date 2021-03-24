@@ -190,7 +190,9 @@ public struct Combatant64Struct
 ```
 # Compatibility issues
 1.Any trigger and xml file in the original version can be imported into this version and run correctly.
+
 2.Triggers that include the **new log source** or **new list variables processing methods** defined in this version cannot be imported into the original version. Using the original version of Triggernometry to load the existing user configuration or xml file will cause an xml parsing error.
+
 3.Switching to the original version of Triggernometry and saving user settings will cause compatible additional settings (such as the reparse function) to be lost and reset to the default value.
 
 # Original Triggernometry Readme
