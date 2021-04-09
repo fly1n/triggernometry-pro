@@ -37,6 +37,9 @@ namespace Triggernometry.PluginBridges
         public static int NumPartyMembers = 0;
         public static int PrevNumPartyMembers = 0;
         public static VariableDictionary Myself;
+        public static List<string> OverridePartyOrder = new List<string>(new String[8]{
+            "","","","","","","",""
+        });
 
         internal static bool ckw = false;
 
@@ -438,7 +441,7 @@ namespace Triggernometry.PluginBridges
             {
                 Int64 old = Interlocked.Read(ref LastCheck);
                 Int64 now = DateTime.Now.Ticks;
-                if (((now - old) / TimeSpan.TicksPerMillisecond) < 10)
+                if (((now - old) / TimeSpan.TicksPerMillisecond) < 100)
                 {
                     return;
                 }
@@ -510,6 +513,7 @@ namespace Triggernometry.PluginBridges
                     }
                     PrevNumPartyMembers = NumPartyMembers;
                     phase = 8;
+
                     if (cfg.FfxivPartyOrdering == Configuration.FfxivPartyOrderingEnum.CustomSelfFirst)
                     {
                         //DebugPlayerSorting("a1", PartyMembers);
@@ -569,8 +573,35 @@ namespace Triggernometry.PluginBridges
 
         public static int SortPlayers(VariableDictionary a, VariableDictionary b)
         {
-            int av = cfg.GetPartyOrderValue(a.GetValue("jobid").ToString());
-            int bv = cfg.GetPartyOrderValue(b.GetValue("jobid").ToString());
+            string name_a = a.GetValue("name").ToString();
+            string name_b = b.GetValue("name").ToString();
+            int av = -1;
+            int bv = -1;
+            if (name_a.Length > 0 && name_b.Length > 0)
+            {
+                try
+                {
+                    av = OverridePartyOrder.IndexOf(name_a);
+                    bv = OverridePartyOrder.IndexOf(name_b);
+                }catch (Exception e)
+                {
+                    av = -1;
+                    bv = -1;
+                }
+            }
+            if ((av >= 0) && (bv >= 0))
+            {
+                if (av < bv)
+                {
+                    return -1;
+                }
+                if (av > bv)
+                {
+                    return 1;
+                }
+            }
+            av = cfg.GetPartyOrderValue(a.GetValue("jobid").ToString());
+            bv = cfg.GetPartyOrderValue(b.GetValue("jobid").ToString());
             if (av < bv)
             {
                 //System.Diagnostics.Debug.WriteLine(a.GetValue("name") + " (" + av + ") < " + b.GetValue("name") + " (" + bv + ")");
@@ -711,6 +742,11 @@ namespace Triggernometry.PluginBridges
                 }
             }
             return NullCombatant;
+        }
+        public static void SetOverridePartyOrder(string name, int order) {
+            if (order > 8) return;
+            if (order <= 0) return;
+            OverridePartyOrder[order - 1] = name;
         }
 
         public static Process GetProcess()

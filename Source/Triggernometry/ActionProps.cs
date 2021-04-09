@@ -39,7 +39,8 @@ namespace Triggernometry
             Mutex,
             Placeholder,
             NamedCallback,
-            Mouse
+            Mouse,
+            PartyOrder,
         }
 
         public enum VariableOpEnum
@@ -2548,7 +2549,38 @@ namespace Triggernometry
         }
 
         #endregion
+        #region Action specific properties - PartyOrder
 
+        internal string _PartyOrderPlayerName = "";
+        [XmlAttribute]
+        public string PartyOrderPlayerName
+        {
+            get
+            {
+
+                return _PartyOrderPlayerName;
+            }
+            set
+            {
+                _PartyOrderPlayerName = value;
+            }
+        }
+
+        internal string _PartyOrderPartyOrder = "";
+        [XmlAttribute]
+        public string PartyOrderPartyOrder
+        {
+            get
+            {
+
+                return _PartyOrderPartyOrder;
+            }
+            set
+            {
+                _PartyOrderPartyOrder = value;
+            }
+        }
+        #endregion 
     }
 
 }

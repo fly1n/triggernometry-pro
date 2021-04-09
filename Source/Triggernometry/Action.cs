@@ -920,6 +920,9 @@ namespace Triggernometry
                             }
                     }
                     break;
+                case ActionTypeEnum.PartyOrder:
+                    temp += I18n.Translate("internal/Action/overridepartyorder", "Override party order for player {0} to {1}",_PartyOrderPlayerName ,_PartyOrderPartyOrder );
+                    break;
                 default:
                     temp += I18n.Translate("internal/Action/descunknown", "unknown action type");
                     break;
@@ -2219,7 +2222,7 @@ namespace Triggernometry
                                 switch (_TriggerOp)
                                 {
                                     case TriggerOpEnum.CancelAllTrigger:
-                                        ctx.plug.ClearActionQueue();
+                                        ctx.plug.ClearActionQueue(ctx.trig);
                                         break;
                                     case TriggerOpEnum.CancelTrigger:
                                         ctx.plug.CancelAllQueuedActionsFromTrigger(t);
@@ -2285,7 +2288,7 @@ namespace Triggernometry
                             {
                                 if (_TriggerOp == TriggerOpEnum.CancelAllTrigger)
                                 {
-                                    ctx.plug.ClearActionQueue();
+                                    ctx.plug.ClearActionQueue(ctx.trig);
                                 }
                                 else
                                 {
@@ -2368,7 +2371,23 @@ namespace Triggernometry
                             ctx.plug.InvokeNamedCallback(cbname, cbparm);
                         }
                         break;
-                        #endregion
+                    #endregion
+                    #region Implementation - Party order
+                    case ActionTypeEnum.PartyOrder:
+                        {
+                            string playername = ctx.EvaluateStringExpression(ActionContextLogger, ctx, _PartyOrderPlayerName);
+                            int partyorder = (int)ctx.EvaluateNumericExpression(ActionContextLogger, ctx, _PartyOrderPartyOrder);
+                            
+                            if (partyorder > 0 && partyorder <= 8)
+                            {
+                                AddToLog(ctx, RealPlugin.DebugLevelEnum.Verbose, I18n.Translate("internal/Action/partyorder", "Override party order for player ({0}) to index ({1})", playername, partyorder.ToString()));
+                                PluginBridges.BridgeFFXIV.OverridePartyOrder[partyorder-1] = playername;
+                            }
+
+
+                        }
+                        break;
+                    #endregion
                 }
             }
 			catch (Exception ex)
@@ -2603,6 +2622,8 @@ namespace Triggernometry
             a._MouseCoordType = _MouseCoordType;
             a._MouseX = _MouseX;
             a._MouseY = _MouseY;
+            a._PartyOrderPartyOrder = _PartyOrderPartyOrder;
+            a._PartyOrderPlayerName = _PartyOrderPlayerName;
         }
 
         private string SendJson(Context ctx, Action.HTTPMethodEnum method, string url, string json, bool expectNoContent)

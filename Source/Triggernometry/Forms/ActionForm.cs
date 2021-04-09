@@ -283,7 +283,9 @@ namespace Triggernometry.Forms
                 expWmsgTitle.Expression = "";
                 expWmsgCode.Expression = "";
                 expWmsgWparam.Expression = "";
-                expWmsgLparam.Expression = "";                
+                expWmsgLparam.Expression = "";
+                expPlayerName.Expression = "";
+                expPartyOrder.Expression = "";
                 FontInfoContainer fic = new FontInfoContainer();
                 fic.Name = Font.Name;
                 fic.Size = Font.SizeInPoints;
@@ -370,6 +372,9 @@ namespace Triggernometry.Forms
                 expLvarValue.Expression = a._ListVariableExpression;
                 cbxLvarExpType.SelectedIndex = (int)a._ListVariableExpressionType;
                 cbxLvarOperation.SelectedIndex = (int)a._ListVariableOp;
+                expPlayerName.Expression = a._PartyOrderPlayerName;
+                expPartyOrder.Expression = a._PartyOrderPartyOrder;
+                
                 if ((a._TriggerForceType & Action.TriggerForceTypeEnum.SkipRegexp) != 0)
                 {
                     cbxFiringOptions.SetItemChecked(0, true);
@@ -599,6 +604,8 @@ namespace Triggernometry.Forms
             a._ListVariableName = expLvarName.Expression;
             a._ListVariableOp = (Action.ListVariableOpEnum)cbxLvarOperation.SelectedIndex;
             a._ListVariableTarget = expLvarTarget.Expression;
+            a._PartyOrderPartyOrder = expPartyOrder.Expression;
+            a._PartyOrderPlayerName = expPlayerName.Expression;
             TreeNode tn = trvTrigger.SelectedNode;
             if (tn != null)
             {

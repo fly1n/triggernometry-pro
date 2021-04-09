@@ -1337,11 +1337,25 @@ namespace Triggernometry
             }
         }
 
-        internal void ClearActionQueue()
-        {
+        internal void ClearActionQueue(Trigger t=null)
+        { 
             lock (ActionQueue) // verified
             {
-                ActionQueue.Clear();
+                if (t != null)
+                {
+                    for (int i=ActionQueue.Count-1;i>=0;i--)
+                    {
+                        QueuedAction q = ActionQueue[i];
+                        if (ActionQueue[i].ctx.trig.Id != t.Id)
+                        {
+                            ActionQueue.Remove(q);
+                        }
+                    }
+                }
+                else
+                {
+                    ActionQueue.Clear();
+                }
             }
         }
 
@@ -3084,15 +3098,18 @@ namespace Triggernometry
         }
         public void OnMessageReceived(string connection, long epoch, byte[] message)
         {
-            StringBuilder builder = new StringBuilder(message.Length * 3);
-            for (int i = 0; i < (message.Length / 4); i++)
+            if (this.ActiveOriginalTextTriggers.Count > 0)
             {
-                builder.Append(BitConverter.ToUInt32(message, i * 4).ToString("X8") + ":");
+                StringBuilder builder = new StringBuilder(message.Length * 3);
+                for (int i = 0; i < (message.Length / 4); i++)
+                {
+                    builder.Append(BitConverter.ToUInt32(message, i * 4).ToString("X8") + ":");
 
+                }
+                DateTime now = DateTime.Now;
+                var str = "Trlog:" + builder.ToString();
+                LogLineQueuer(str, currentZone, LogEvent.SourceEnum.OriginalLog);
             }
-            DateTime now = DateTime.Now;
-            var str = "Trlog:" + builder.ToString();
-            LogLineQueuer(str, currentZone, LogEvent.SourceEnum.OriginalLog);
 
         }
         public void BeforeLogLineRead(bool isImport, string logLine, string detectedZone)
