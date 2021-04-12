@@ -31,6 +31,7 @@ namespace Triggernometry
         internal static Regex rexnump = new Regex(@"\[(?<index>.+?)\]\.(?<prop>[a-zA-Z]+)");
         internal static Regex rexnumprp3 = new Regex(@"\[(?<index>.+?)\]\.(?<prop>[a-zA-Z]+)(\((?<arg1>[^,]+),(?<arg2>[^,]+),(?<arg3>[^\)]+)\))");
         internal static Regex rexnumpnumnum = new Regex(@"\[(?<index>.+?)\]\.(?<prop>[a-zA-Z]+)\[(?<arg1>[0-9]+?),(?<arg2>[0-9]+?)\]");
+        internal static Regex rexnumparg = new Regex(@"\[(?<index>.+?)\]\.(?<prop>[a-zA-Z]+)\((?<arg>[^\)]+)\)");
         internal static Regex rexlidx = new Regex(@"(?<name>[^\[]+)\[(?<index>.+?)\]");
         internal static Regex rexlidx3 = new Regex(@"(?<name>[^\[]+)\[(?<index1>.+?),(?<index2>.+?),(?<index3>.+?)\]");
         internal static Regex rextidx = new Regex(@"(?<name>[^\[]+)\[(?<column>.+?)\]\[(?<row>.+?)\]");
@@ -904,6 +905,16 @@ namespace Triggernometry
                                                 val = funcval.PadRight(Int32.Parse(args[1]), (char)Int32.Parse(args[0]));
                                             }
                                             break;
+                                        case "job": // padright(charcode,length)
+                                            if (argc != 1)
+                                            {
+                                                throw new ArgumentException(I18n.Translate("internal/Context/padrightargerror", "Job function requires one argument, {0} were given", argc));
+                                            }
+                                            else
+                                            {
+                                                val = PluginBridges.BridgeFFXIV.TranslateJob(funcval, args[0]);
+                                            }
+                                            break;
                                         case "substring": // substring(startindex, length) or substring(startindex)
                                             if (argc != 1 && argc != 2)
                                             {
@@ -1028,8 +1039,9 @@ namespace Triggernometry
                         }
                         else if (x.IndexOf("_ffxivparty") == 0)
                         {
-
+                                
                             mx = rexnump.Match(x);
+                            var mx2 = rexnumparg.Match(x);
                             if (mx.Success == true)
                             {
                                 string gindex = mx.Groups["index"].Value;
@@ -1055,7 +1067,21 @@ namespace Triggernometry
                                 }
                                 if (vc != null)
                                 {
-                                    val = vc.GetValue(gprop).ToString();
+                                    if (gprop == "job")
+                                    {
+                                        var mxx = rexnumparg.Match(x);
+                                        if (mxx.Success)
+                                        {
+                                            string arg1 = mxx.Groups["arg"].Value;
+                                            val = PluginBridges.BridgeFFXIV.TranslateJob(vc.GetValue(gprop).ToString(), arg1);
+                                            mx = mxx;
+                                        }
+                                        else
+                                        {
+                                            val = vc.GetValue(gprop).ToString();
+                                        }
+                                    }
+                                    
                                 }
                             }
 
@@ -1119,7 +1145,17 @@ namespace Triggernometry
                                     }
                                     if (vc != null)
                                     {
-                                        val = vc.GetValue(gprop).ToString();
+                                        var mxx = rexnumparg.Match(x);
+                                        if (mxx.Success)
+                                        {
+                                            string arg1 = mxx.Groups["arg"].Value;
+                                            val = PluginBridges.BridgeFFXIV.TranslateJob(vc.GetValue(gprop).ToString(), arg1);
+                                            mx = mxx;
+                                        }
+                                        else
+                                        {
+                                            val = vc.GetValue(gprop).ToString();
+                                        }
                                     }
                                 }
                                 found = true;
@@ -1321,6 +1357,24 @@ namespace Triggernometry
                         {
                             val = plug.MaxY.ToString(CultureInfo.InvariantCulture);
                             found = true;
+                        }
+                        else if (x == "_mousex")
+                        {
+                            RealPlugin.WindowsUtils.POINT point;
+                            if (RealPlugin.WindowsUtils.GetCursorPos(out point))
+                            {
+                                val = point.X.ToString(CultureInfo.InvariantCulture);
+                                found = true;
+                            }
+                        }
+                        else if (x == "_mousey")
+                        {
+                            RealPlugin.WindowsUtils.POINT point;
+                            if (RealPlugin.WindowsUtils.GetCursorPos(out point))
+                            {
+                                val = point.Y.ToString(CultureInfo.InvariantCulture);
+                                found = true;
+                            }
                         }
                     }
                 }

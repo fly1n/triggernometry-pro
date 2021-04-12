@@ -375,6 +375,21 @@ namespace Triggernometry
             private static extern IntPtr GetForegroundWindow();
             [DllImport("user32.dll")]
             static extern void mouse_event(uint dwFlags, int dx, int dy, uint dwData, int dwExtraInfo);
+            [DllImport("user32.dll")]
+            public static extern bool GetCursorPos(out POINT lpPoint);
+
+            [StructLayout(LayoutKind.Sequential)]
+            public struct POINT
+            {
+                public int X;
+                public int Y;
+                public POINT(int x, int y)
+                {
+                    this.X = x;
+                    this.Y = y;
+                }
+            }
+
 
             public static void SendMouse(MouseEventFlags flags, MouseEventDataXButtons buttons, int x, int y)
             {
@@ -2020,6 +2035,7 @@ namespace Triggernometry
                 int PrimaryX = 0, PrimaryY = 0;
                 foreach (Screen s in Screen.AllScreens)
                 {
+                    
                     FilteredAddToLog(DebugLevelEnum.Info, String.Format("{0}{1}: {2},{3} - {4},{5}", s.DeviceName, s.Primary == true ? " (*)" : "", s.Bounds.Left, s.Bounds.Top, s.Bounds.Left + s.Bounds.Width, s.Bounds.Top + s.Bounds.Height));
                     if (s.WorkingArea.Left < MinX)
                     {

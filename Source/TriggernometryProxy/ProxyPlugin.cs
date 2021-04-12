@@ -33,8 +33,11 @@ namespace TriggernometryProxy
         {
             CosturaUtility.Initialize();
         }
-
-        public int RegisterNamedCallback(string name, object callback, object o)
+        public int RegisterNamedCallback(string name,CustomCallbackDelegate callback, object o)
+        {
+            return RegisterNamedCallbackObject(name, (object)callback, o);
+        }
+        public int RegisterNamedCallbackObject(string name, object callback, object o)
         {
             if (name == null)
             {

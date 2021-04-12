@@ -279,6 +279,41 @@ namespace Triggernometry.PluginBridges
             return "";
         }
 
+        public static string TranslateJob(string strIn,string strType)
+        {
+            int[] dictindex = new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 9 };
+            int returnIndex = 5;
+            switch (strType)
+            {
+                case "ID":returnIndex = 0;break;
+                case "CN": returnIndex = 1; break;
+                case "TCN": returnIndex = 2; break;
+                case "CN2": returnIndex = 3; break;
+                case "CN1": returnIndex = 4; break;
+
+                case "EN": returnIndex = 5; break;
+                case "EN3": returnIndex = 6; break;
+                case "JP": returnIndex = 7; break;
+                case "JP2": returnIndex = 8; break;
+                case "JP1": returnIndex = 9; break;
+
+                case "RoleEN": returnIndex = 10; break;
+                case "RoleEN1": returnIndex = 11; break;
+                case "RoleCN": returnIndex = 12; break;
+                case "SubRoleEN": returnIndex = 13; break;
+                case "MacroPos": returnIndex = 14; break;
+
+                default: break;
+            }
+            foreach(int j in dictindex)
+            {
+                for (int i = 0; i < joblist.GetLength(0); i++)
+                {
+                    if (strIn == joblist[i,j]) return joblist[i, returnIndex];
+                }
+            }
+            return "";
+        }
         public static void PopulateClumpFromCombatant(VariableDictionary vc, dynamic cmx, int inParty, int inAlliance, int orderNum)
         {
             if (cmx.ID == 0) return;
@@ -874,6 +909,49 @@ namespace Triggernometry.PluginBridges
                 CloseHandle(hProcessFFXIV);
             }
         }
+
+        public static string[,] joblist = new string[,] {
+                {"0",   "冒险者",  "冒險者",  "冒险",   "冒",    "adventurer",   "ADV",  "すっぴん士",    "冒",    "冒",    "None", "N",    "冒险",   "adventurer",   "None"},
+                {"1",   "剑术师",  "劍術師",  "剑术",   "剑",    "gladiator",    "GLA",  "剣術士",  "剣",    "剣",    "Tank", "T",    "坦克",   "Tank", "ST"},
+                {"2",   "格斗家",  "格鬥家",  "格斗",   "格",    "pugilist", "PGL",  "格闘士",  "格",    "格",    "DPS",  "D",    "近战",   "Melee",    "D1"},
+                {"3",   "斧术师",  "斧術師",  "斧术",   "斧",    "marauder", "MRD",  "斧術士",  "斧",    "斧",    "Tank", "T",    "坦克",   "Tank", "MT"},
+                {"4",   "枪术师",  "槍術師",  "枪术",   "无",    "lancer",   "LNC",  "槍術士",  "槍",    "槍",    "DPS",  "D",    "近战",   "Melee",    "D1"},
+                {"5",   "弓箭手",  "弓箭手",  "弓手",   "弓",    "archer",   "ARC",  "弓術士",  "弓",    "弓",    "DPS",  "D",    "远敏",   "Ranged",   "D3"},
+                {"6",   "幻术师",  "幻術師",  "幻术",   "幻",    "conjurer", "CNJ",  "幻術士",  "幻",    "幻",    "Healer",   "H",    "治疗",   "Healer",   "H1"},
+                {"7",   "咒术师",  "咒術師",  "咒术",   "咒",    "thaumaturge",  "THM",  "呪術士",  "呪",    "呪",    "DPS",  "D",    "法系",   "Ranged",   "D4"},
+                {"8",   "刻木匠",  "刻木匠",  "刻木",   "木",    "carpenter",    "CRP",  "木工師",  "木",    "木",    "Crafter",  "C",    "制作",   "Crafter",  "None"},
+                {"9",   "锻铁匠",  "鍛鐵匠",  "锻铁",   "锻",    "blacksmith",   "BSM",  "鍛冶師",  "鍛",    "鍛",    "Crafter",  "C",    "制作",   "Crafter",  "None"},
+                {"10",  "铸甲匠",  "鑄甲匠",  "铸甲",   "甲",    "armorer",  "ARM",  "甲冑師",  "甲",    "甲",    "Crafter",  "C",    "制作",   "Crafter",  "None"},
+                {"11",  "雕金匠",  "雕金匠",  "雕金",   "雕",    "goldsmith",    "GSM",  "彫金師",  "彫",    "彫",    "Crafter",  "C",    "制作",   "Crafter",  "None"},
+                {"12",  "制革匠",  "製革匠",  "制革",   "革",    "leatherworker",    "LTW",  "革細工師", "革",    "革",    "Crafter",  "C",    "制作",   "Crafter",  "None"},
+                {"13",  "裁衣匠",  "裁衣匠",  "裁缝",   "裁",    "weaver",   "WVR",  "裁縫師",  "裁",    "裁",    "Crafter",  "C",    "制作",   "Crafter",  "None"},
+                {"14",  "炼金术士", "鍊金術士", "炼金", "炼",    "alchemist",    "ALC",  "錬金術師", "錬",    "錬",    "Crafter",  "C",    "制作",   "Crafter",  "None"},
+                {"15",  "烹调师",  "烹調師",  "烹调",   "烹",    "culinarian",   "CUL",  "調理師",  "調",    "調",    "Crafter",  "C",    "制作",   "Crafter",  "None"},
+                {"16",  "采矿工",  "採礦工",  "矿工",   "矿",    "miner",    "MIN",  "採掘師",  "採",    "採",    "Gatherer", "G",    "采集",   "Gatherer", "None"},
+                {"17",  "园艺工",  "園藝工",  "园艺",   "园",    "botanist", "BTN",  "園芸師",  "園",    "園",    "Gatherer", "G",    "采集",   "Gatherer", "None"},
+                {"18",  "捕鱼人",  "捕魚人",  "钓鱼",   "鱼",    "fisher",   "FSH",  "漁師",   "漁",    "漁",    "Gatherer", "G",    "采集",   "Gatherer", "None"},
+                {"19",  "骑士",   "騎士",   "骑士",   "骑",      "paladin",  "PLD",  "ナイト",  "ナイト",  "ナ",    "Tank", "T",    "坦克",   "Tank", "ST"},
+                {"20",  "武僧",   "武僧",   "武僧",   "僧",      "monk", "MNK",  "モンク",  "モンク",  "モ",    "DPS",  "D",    "近战",   "Melee",    "D1"},
+                {"21",  "战士",   "戰士",   "战士",   "战",      "warrior",  "WAR",  "戦士",   "戦士",   "戦",    "Tank", "T",    "坦克",   "Tank", "MT"},
+                {"22",  "龙骑士",  "龍騎士",  "龙骑",   "龙",    "dragoon",  "DRG",  "竜騎士",  "竜",    "竜",    "DPS",  "D",    "近战",   "Melee",    "D2"},
+                {"23",  "吟游诗人", "吟遊詩人", "诗人",   "诗",  "bard", "BRD",  "吟遊詩人", "詩人",   "吟",    "DPS",  "D",    "远敏",   "Ranged",   "D3"},
+                {"24",  "白魔法师", "白魔法師", "白魔",   "白",  "white mage",   "WHM",  "白魔道士", "白",    "白",    "Healer",   "H",    "治疗",   "Healer",   "H1"},
+                {"25",  "黑魔法师", "黑魔法師", "黑魔",   "黑",  "black mage",   "BLM",  "黒魔道士", "黒",    "黒",    "DPS",  "D",    "法系",   "Caster",   "D4"},
+                {"26",  "秘术师",  "秘術師",  "秘术",   "秘",    "arcanist", "ACN",  "巴術士",  "巴",    "巴",    "DPS",  "D",    "法系",   "Caster",   "D4"},
+                {"27",  "召唤师",  "召喚師",  "召唤",   "召",    "summoner", "SMN",  "召喚士",  "召喚",   "召",    "DPS",  "D",    "法系",   "Caster",   "D4"},
+                {"28",  "学者",   "學者",   "学者",   "学",      "scholar",  "SCH",  "学者",   "学者",   "学",    "Healer",   "H",    "治疗",   "Healer",   "H2"},
+                {"29",  "双剑师",  "雙劍師",  "双剑",   "双",    "rogue",    "ROG",  "双剣士",  "双",    "双",    "DPS",  "D",    "近战",   "Melee",    "D2"},
+                {"30",  "忍者",   "忍者",   "忍者",   "忍",      "ninja",    "NIN",  "忍者",   "忍者",   "忍",    "DPS",  "D",    "近战",   "Melee",    "D2"},
+                {"31",  "机工士",  "機工士",  "机工",   "机",    "machinist",    "MCH",  "機工士",  "機工",   "機",    "DPS",  "D",    "远敏",   "Ranged",   "D3"},
+                {"32",  "暗黑骑士", "暗黑騎士", "暗骑",   "暗",  "dark knight",  "DRK",  "暗黒騎士", "暗黒",   "暗",    "Tank", "T",    "坦克",   "Tank", "MT"},
+                {"33",  "占星术士", "占星術士", "占星",   "星",  "astrologian",  "AST",  "占星術師", "占星",   "占",    "Healer",   "H",    "治疗",   "Healer",   "H1"},
+                {"34",  "武士",   "武士",   "武士",   "侍",      "samurai",  "SAM",  "侍",    "侍",    "侍",    "DPS",  "D",    "近战",   "Melee",    "D1"},
+                {"35",  "赤魔法师", "赤魔法師", "赤魔",   "赤",  "red mage", "RDM",  "赤魔道士", "赤",    "赤",    "DPS",  "D",    "法系",   "Caster",   "D4"},
+                {"36",  "青魔法师", "青魔法師", "青魔",   "青",  "blue mage",    "BLU",  "青魔道士", "青",    "青",    "DPS",  "D",    "青魔",   "Blue", "None"},
+                {"37",  "绝枪战士", "絕槍戰士", "枪刃",   "枪",  "gunbreaker",   "GNB",  "ガンブレイカー",  "ガンブレイ",    "ガ",    "Tank", "T",    "坦克",   "Tank", "ST"},
+                {"38",  "舞者",   "舞者",   "舞者",   "舞",      "dancer",   "DNC",  "踊り子",  "踊り",   "踊",    "DPS",  "D",    "远敏",   "Ranged",   "D3"},
+                {"39",  "贤者",   "賢者",   "贤者",   "贤",      "sage", "SAG",  "賢者",   "賢者",   "賢",    "Healer",   "H",    "治疗",   "Healer",   "H2"},
+         };
     }
 
 }
