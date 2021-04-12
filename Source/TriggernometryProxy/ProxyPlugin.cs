@@ -24,16 +24,17 @@ namespace TriggernometryProxy
         private Control CornerPopup = null;
         private bool complained = false;
         private int callbackIdCounter = 0;
-        private List<Tuple<int, string, CustomCallbackDelegate, object>> queuedRegs = new List<Tuple<int, string, CustomCallbackDelegate, object>>();
+        private List<Tuple<int, string, object, object>> queuedRegs = new List<Tuple<int, string, object, object>>();
 
-        public delegate dynamic CustomCallbackDelegate(object o, string param);
-        
+        public delegate void CustomCallbackDelegate(object o, string param);
+        public delegate object CustomCallbackDelegateWithReturn(object o, string param);
+
         public ProxyPlugin()
         {
             CosturaUtility.Initialize();
         }
 
-        public int RegisterNamedCallback(string name, CustomCallbackDelegate callback, object o)
+        public int RegisterNamedCallback(string name, object callback, object o)
         {
             if (name == null)
             {
@@ -52,7 +53,7 @@ namespace TriggernometryProxy
                 }
                 else
                 {
-                    queuedRegs.Add(new Tuple<int, string, CustomCallbackDelegate, object>(newid, name, callback, o));
+                    queuedRegs.Add(new Tuple<int, string, object, object>(newid, name, callback, o));
                 }
             }
             return newid;
@@ -110,7 +111,7 @@ namespace TriggernometryProxy
             lock (this)
             {
                 Instance = new Triggernometry.RealPlugin();
-                foreach (Tuple<int, string, CustomCallbackDelegate, object> t in queuedRegs)
+                foreach (Tuple<int, string, object, object> t in queuedRegs)
                 {
                     Instance.RegisterNamedCallback(t.Item1, t.Item2, t.Item3, t.Item4);
                 }

@@ -3646,12 +3646,12 @@ namespace Triggernometry
             }
         }
 
-        public void RegisterNamedCallback(int id, string name, Delegate del, object o)
+        public void RegisterNamedCallback(int id, string name, object del, object o)
         {
             
             NamedCallback nc = new NamedCallback();
             nc.Id = id;
-            nc.Callback = del;
+            nc.Callback = (Delegate)del;
             nc.Obj = o;
             nc.Name = name;
             nc.MyPlugin = this;
