@@ -1439,7 +1439,23 @@ namespace Triggernometry
                 _NamedCallbackParam = value;
             }
         }
-
+        internal string _NamedCallbackReturnScalarName = "";
+        [XmlAttribute]
+        public string NamedCallbackReturnScalarName
+        {
+            get
+            {
+                if (_NamedCallbackReturnScalarName == "")
+                {
+                    return null;
+                }
+                return _NamedCallbackReturnScalarName;
+            }
+            set
+            {
+                _NamedCallbackReturnScalarName = value;
+            }
+        }
         #endregion
         #region Action specific properties - OBS
 

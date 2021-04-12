@@ -557,6 +557,7 @@ namespace Triggernometry.Forms
                 chkOverrideDesc.Checked = a._DescriptionOverride;
                 expCallbackName.Expression = a._NamedCallbackName;
                 expCallbackParam.Expression = a._NamedCallbackParam;
+                expCallbackReturnScalarName.Expression = a._NamedCallbackReturnScalarName;
                 cbxMouseOp.SelectedIndex = (int)a._MouseOpType;
                 cbxMouseCoord.SelectedIndex = (int)a._MouseCoordType;
                 expMouseX.Expression = a._MouseX;
@@ -770,6 +771,7 @@ namespace Triggernometry.Forms
             a._DescriptionOverride = chkOverrideDesc.Checked;
             a._NamedCallbackName = expCallbackName.Expression;
             a._NamedCallbackParam = expCallbackParam.Expression;
+            a._NamedCallbackReturnScalarName = expCallbackReturnScalarName.Expression;
             a._MouseOpType = (Action.MouseOpEnum)cbxMouseOp.SelectedIndex;
             a._MouseCoordType = (Action.MouseCoordEnum)cbxMouseCoord.SelectedIndex;
             a._MouseX = expMouseX.Expression;

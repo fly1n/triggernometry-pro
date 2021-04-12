@@ -50,14 +50,42 @@ namespace Triggernometry
         public class NamedCallback
         {
 
+            public RealPlugin MyPlugin { get; set; }
             public int Id { get; set; }
             public string Name { get; set; }
             public Delegate Callback { get; set; }
             public object Obj { get; set; }
 
-            public void Invoke(string val)
+
+            public void Invoke(string val,string returnScalarName="")
             {
-                Callback.DynamicInvoke(new object[] { Obj, val });
+                //string outstr = "";
+                object result=Callback.DynamicInvoke(new object[] { Obj, val});
+                if (result != null)
+                {
+                    try
+                    {
+                        string outstr = (string)result;
+                        if (outstr == "" || outstr == null) return;
+                        if (returnScalarName == "" || returnScalarName == null) return;
+                        if (MyPlugin == null) return;
+                        
+                        lock (MyPlugin.sessionvars.Scalar) // verified
+                        {
+                            if (MyPlugin.sessionvars.Scalar.ContainsKey(returnScalarName) == false)
+                            {
+                                MyPlugin.sessionvars.Scalar[returnScalarName] = new VariableScalar();
+                            }
+                            VariableScalar x = MyPlugin.sessionvars.Scalar[returnScalarName];
+                            x.Value = outstr;
+                        }
+                    }catch(Exception e)
+                    {
+
+                    }
+                }
+
+                        
             }
 
         }
@@ -3595,7 +3623,7 @@ namespace Triggernometry
             return 0;
         }
 
-        internal void InvokeNamedCallback(string name, string val)
+        internal void InvokeNamedCallback(string name, string val,string returnScalarName="")
         {
             List<NamedCallback> cbs = new List<NamedCallback>();
             lock (callbacksByName)
@@ -3609,7 +3637,7 @@ namespace Triggernometry
             {
                 try
                 {
-                    nc.Invoke(val);
+                    nc.Invoke(val,returnScalarName);
                 }
                 catch (Exception ex)
                 {
@@ -3626,6 +3654,7 @@ namespace Triggernometry
             nc.Callback = del;
             nc.Obj = o;
             nc.Name = name;
+            nc.MyPlugin = this;
             lock (callbacksById)
             {
                 callbacksById[id] = nc;

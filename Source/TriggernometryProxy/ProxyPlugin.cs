@@ -26,7 +26,7 @@ namespace TriggernometryProxy
         private int callbackIdCounter = 0;
         private List<Tuple<int, string, CustomCallbackDelegate, object>> queuedRegs = new List<Tuple<int, string, CustomCallbackDelegate, object>>();
 
-        public delegate void CustomCallbackDelegate(object o, string param);
+        public delegate dynamic CustomCallbackDelegate(object o, string param);
         
         public ProxyPlugin()
         {

@@ -2367,8 +2367,9 @@ namespace Triggernometry
                         {
                             string cbname = ctx.EvaluateStringExpression(ActionContextLogger, ctx, _NamedCallbackName);
                             string cbparm = ctx.EvaluateStringExpression(ActionContextLogger, ctx, _NamedCallbackParam);
+                            string cbreturn = ctx.EvaluateStringExpression(ActionContextLogger, ctx, _NamedCallbackReturnScalarName);
                             AddToLog(ctx, RealPlugin.DebugLevelEnum.Verbose, I18n.Translate("internal/Action/callbackinvoke", "Invoking named callback ({0}) with parameter ({1})", cbname, cbparm));
-                            ctx.plug.InvokeNamedCallback(cbname, cbparm);
+                            ctx.plug.InvokeNamedCallback(cbname, cbparm, cbreturn);
                         }
                         break;
                     #endregion
@@ -2618,6 +2619,7 @@ namespace Triggernometry
             a._DescriptionOverride = _DescriptionOverride;
             a._NamedCallbackParam = _NamedCallbackParam;
             a._NamedCallbackName = _NamedCallbackName;
+            a._NamedCallbackReturnScalarName = _NamedCallbackReturnScalarName;
             a._MouseOpType = _MouseOpType;
             a._MouseCoordType = _MouseCoordType;
             a._MouseX = _MouseX;

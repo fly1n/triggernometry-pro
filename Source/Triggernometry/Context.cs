@@ -268,12 +268,12 @@ namespace Triggernometry
                         }
                         else if (x == "_systemtime")
                         {
-                            val = ((long)(DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0)).TotalSeconds).ToString();
+                            val = ((long)(DateTime.Now - new DateTime(1970, 1, 1, 0, 0, 0)).TotalSeconds).ToString();
                             found = true;
                         }
                         else if (x == "_systemtimems")
                         {
-                            val = ((long)(DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0)).TotalMilliseconds).ToString();
+                            val = ((long)(DateTime.Now - new DateTime(1970, 1, 1, 0, 0, 0)).TotalMilliseconds).ToString();
                             found = true;
                         }
                         else if (x == "_ffxivplayer")
