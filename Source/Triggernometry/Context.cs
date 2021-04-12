@@ -1081,7 +1081,10 @@ namespace Triggernometry
                                             val = vc.GetValue(gprop).ToString();
                                         }
                                     }
-                                    
+                                    else
+                                    {
+                                        val = vc.GetValue(gprop).ToString();
+                                    }
                                 }
                             }
 
@@ -1107,6 +1110,7 @@ namespace Triggernometry
                                 }
                                 if (vc != null)
                                 {
+
                                     if (gprop == "memory")
                                     {
                                         int arg1, arg2;
@@ -1145,12 +1149,19 @@ namespace Triggernometry
                                     }
                                     if (vc != null)
                                     {
-                                        var mxx = rexnumparg.Match(x);
-                                        if (mxx.Success)
+                                        if (gprop == "job")
                                         {
-                                            string arg1 = mxx.Groups["arg"].Value;
-                                            val = PluginBridges.BridgeFFXIV.TranslateJob(vc.GetValue(gprop).ToString(), arg1);
-                                            mx = mxx;
+                                            var mxx = rexnumparg.Match(x);
+                                            if (mxx.Success)
+                                            {
+                                                string arg1 = mxx.Groups["arg"].Value;
+                                                val = PluginBridges.BridgeFFXIV.TranslateJob(vc.GetValue(gprop).ToString(), arg1);
+                                                mx = mxx;
+                                            }
+                                            else
+                                            {
+                                                val = vc.GetValue(gprop).ToString();
+                                            }
                                         }
                                         else
                                         {
