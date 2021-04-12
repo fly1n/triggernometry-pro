@@ -119,7 +119,9 @@ The method here can be one of the following type:
 "MacroPos": Usually occupied position as a suggestion in some in-game macro (MT, ST, H1, H2, D1, D2, D3, D4), although it does not mean that they will be assigned to that location every time.
 ```
 ## More String Function
+```
 "job(description method)": convert the input string to specified description method of a job listed above. The input string can be a jobid or jobnames in different description method.
+```
 
 ## More Special variables
 ```
