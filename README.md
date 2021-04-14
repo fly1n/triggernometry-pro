@@ -33,7 +33,7 @@ The text content of the plug-in logs has been optimized, and the source triggers
 ```
 X8float = converts a base16 (hex) 4-bytes array to float types.
 X4pos = converts a base16 (hex) uint16 types to a ffxiv ingame-position expression as follows: pos = (uint16 - 32767)/32.767, this is used in ActorCast type network packet.
-X4Heading = converts a base16 (hex) uint16 types to a ffxiv ingame-heading expression as follows: pos = (uint16 - 32767)/32767*PI, this is used in some network packet.
+X4heading = converts a base16 (hex) uint16 types to a ffxiv ingame-heading expression as follows: pos = (uint16 - 32767)/32767*PI, this is used in some network packet.
 max(x1, x2, x3, ...) = the largest of any number of variables
 min(x1, x2, x3, ...) = the smallest of any number of variables
 distanceToLine(x0, y0, x1, y1, x2, y2) = Find the shortest distance from (x, y) to the straight line connecting two other points.
