@@ -53,6 +53,8 @@ this event will override the current party order with a given player name and it
 Add functions of sorting by numeric value (ascend or descend).
 #### Enhanced named callback function:
 Now we can return a string from a named callback function and store it to specified scalar variable.
+#### More file operation:
+Additional file operations "Append new line into file", "Clear and rewrite line into file", "Clear and rewrite list variable into file" and "Clear and rewrite table variable into file".
 
 ## Reduction of combatant states update interval
 Reduce update interval of combatant stats to 10ms (from original 1000ms), Enhance the real-time performance of memory data. But it is still limited by the memory update interval of ffxiv_act_plugin, which is 100ms.
