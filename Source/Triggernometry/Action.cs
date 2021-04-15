@@ -882,6 +882,18 @@ namespace Triggernometry
                                     temp += I18n.Translate("internal/Action/descfilereadcsvtable", "read CSV file ({0}) into table variable ({1})", _DiskFileOpName, _DiskFileOpVar);
                                 }
                                 break;
+                            case DiskFileOpEnum.AppendNewLineIntoFile:
+                                temp += I18n.Translate("internal/Action/descfilewriteline", "append new line ({1}) into file ({0})", _DiskFileOpName, _DiskFileOpVar);
+                                break;
+                            case DiskFileOpEnum.ClearAndRewriteLineIntoFile:
+                                temp += I18n.Translate("internal/Action/descfilerewriteline", "clear and rewrite line ({1}) into file ({0})", _DiskFileOpName, _DiskFileOpVar);
+                                break;
+                            case DiskFileOpEnum.ClearAndRewriteListVariableIntoFile:
+                                temp += I18n.Translate("internal/Action/descfilerewritelist", "clear and rewrite list variable ({1}) into file ({0})", _DiskFileOpName, _DiskFileOpVar);
+                                break;
+                            case DiskFileOpEnum.ClearAndRewriteTableVariableIntoFile:
+                                temp += I18n.Translate("internal/Action/descfilerewritetable", "clear and rewrite table variable ({1}) into file ({0})", _DiskFileOpName, _DiskFileOpVar);
+                                break;
                         }
                     }
                     break;
@@ -1232,6 +1244,65 @@ namespace Triggernometry
                                             x.LastChanged = DateTime.Now;
                                         }
                                         AddToLog(ctx, RealPlugin.DebugLevelEnum.Verbose, I18n.Translate("internal/Action/filescalarset", "Scalar variable ({0}) value read from file ({1})", varname, filename));
+                                    }
+                                    break;
+                                case DiskFileOpEnum.AppendNewLineIntoFile:
+                                    {
+                                        string data = varname + "\n";
+                                        byte[] myByte = System.Text.Encoding.UTF8.GetBytes(data);
+                                        using (FileStream fsWrite = new FileStream(filename, FileMode.Append))
+                                        {
+                                            fsWrite.Write(myByte, 0, myByte.Length);
+                                        };
+                                    }
+                                    break;
+                                case DiskFileOpEnum.ClearAndRewriteLineIntoFile:
+                                    {
+                                        string data = varname;
+                                        if (data.Length > 0)
+                                        {
+                                            data += "\n";
+                                        }
+                                        byte[] myByte = System.Text.Encoding.UTF8.GetBytes(data);
+                                        using (FileStream fsWrite = new FileStream(filename, FileMode.Create))
+                                        {
+                                            fsWrite.Write(myByte, 0, myByte.Length);
+                                        };
+                                    }
+                                    break;
+                                case DiskFileOpEnum.ClearAndRewriteListVariableIntoFile:
+                                    {
+                                        string data = "";
+                                        VariableList vl = GetListVariable(ctx.plug, varname, false);
+                                        for (int i_row = 0; i_row < vl.Values.Count; i_row++)
+                                        {
+                                            data += vl.Values[i_row] + "\n";
+                                        }
+                                        byte[] myByte = System.Text.Encoding.UTF8.GetBytes(data);
+                                        using (FileStream fsWrite = new FileStream(filename, FileMode.Create))
+                                        {
+                                            fsWrite.Write(myByte, 0, myByte.Length);
+                                        };
+                                    }
+                                    break;
+                                case DiskFileOpEnum.ClearAndRewriteTableVariableIntoFile:
+                                    {
+                                        string data = "";
+                                        VariableTable vt = GetTableVariable(ctx.plug, varname, false);
+                                        for(int i_row = 0; i_row < vt.Rows.Count; i_row++)
+                                        {
+                                            for(int i_col = 0; i_col < vt.Rows[i_row].Values.Count; i_col++)
+                                            {
+                                                data += vt.Rows[i_row].Values[i_col];
+                                                if(i_col<vt.Rows[i_row].Values.Count-1) data += ",";
+                                            }
+                                            data += "\n";
+                                        }
+                                        byte[] myByte = System.Text.Encoding.UTF8.GetBytes(data);
+                                        using (FileStream fsWrite = new FileStream(filename, FileMode.Create))
+                                        {
+                                            fsWrite.Write(myByte, 0, myByte.Length);
+                                        };
                                     }
                                     break;
                             }

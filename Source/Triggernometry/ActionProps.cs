@@ -79,7 +79,11 @@ namespace Triggernometry
         {
             ReadIntoVariable,
             ReadIntoListVariable,
-            ReadCSVIntoTableVariable
+            ReadCSVIntoTableVariable,
+            AppendNewLineIntoFile,
+            ClearAndRewriteLineIntoFile,
+            ClearAndRewriteListVariableIntoFile,
+            ClearAndRewriteTableVariableIntoFile,
         }
 
         public enum TriggerOpEnum
