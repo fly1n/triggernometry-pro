@@ -252,6 +252,7 @@ namespace Triggernometry.Forms
                 expAuraTTLTick.Expression = "";
                 cbxFolderOp.SelectedIndex = 0;
                 cbxEncounterOp.SelectedIndex = 0;
+                cbxEncounterSwingType.SelectedIndex = 0;
                 expEncounterAbilityType.Expression = "";
                 expEncounterActorName.Expression = "";
                 expEncounterDamage.Expression = "";
@@ -418,6 +419,7 @@ namespace Triggernometry.Forms
                 }
                 cbxFolderOp.SelectedIndex = (int)a._FolderOp;
                 cbxEncounterOp.SelectedIndex = (int)a._EncounterOp;
+                cbxEncounterSwingType.SelectedIndex = (int)a._EncounterSwingType;
                 expEncounterAbilityType.Expression = a._EncounterAbilityType;
                 expEncounterActorName.Expression = a._EncounterActorName;
                 expEncounterDamage.Expression = a._EncounterDamage;
@@ -640,6 +642,7 @@ namespace Triggernometry.Forms
             }
             a._FolderOp = (Action.FolderOpEnum)cbxFolderOp.SelectedIndex;
             a._EncounterOp = (Action.EncounterOpEnum)cbxEncounterOp.SelectedIndex;
+            a._EncounterSwingType = (Action.SwingTypeEnum)cbxEncounterSwingType.SelectedIndex;
             a._EncounterAbilityType = expEncounterAbilityType.Expression;
             a._EncounterActorName = expEncounterActorName.Expression;
             a._EncounterDamage = expEncounterDamage.Expression;

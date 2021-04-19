@@ -449,7 +449,7 @@ namespace Triggernometry
         public delegate void TabPageDelegate(TabPage tp);
         public delegate void TtsDelegate(string text);
         public delegate void SoundDelegate(string filename, int volume);
-        public delegate void EncounterDelegate(string ability, string actor, string target, int damage, string damageType);
+        public delegate void EncounterDelegate(string swingType,string ability, string actor, string target, int damage, string damageType);
         public delegate List<CustomTriggerCategoryProxy> CustomTriggerDelegate();
         public delegate PluginWrapper InstanceDelegate(string ActPluginName, string ActPluginType);
 

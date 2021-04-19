@@ -105,6 +105,23 @@ namespace Triggernometry
             EndEncounter,
             StartEncounter
         }
+        public enum SwingTypeEnum
+        {
+            None,
+            Autoattack ,
+            Ability  ,
+            Healing ,
+            HoT ,
+            Dispel,
+            DoT ,
+            Buff ,
+            Debuff ,
+            PowerDrain,
+            PowerHealing ,
+            TPDrain ,
+            TPHeal ,
+            Threat 
+        }
         public enum AuraOpEnum
         {
             ActivateAura,
@@ -562,6 +579,26 @@ namespace Triggernometry
             set
             {
                 _EncounterAbilityType = value;
+            }
+        }
+        internal SwingTypeEnum _EncounterSwingType = SwingTypeEnum.None;
+        [XmlAttribute]
+        public string EncounterSwingType
+        {
+            get
+            {
+                if (_EncounterSwingType != SwingTypeEnum.None)
+                {
+                    return _EncounterSwingType.ToString();
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                _EncounterSwingType = (SwingTypeEnum)Enum.Parse(typeof(SwingTypeEnum), value);
             }
         }
         internal string _EncounterActorName = "";

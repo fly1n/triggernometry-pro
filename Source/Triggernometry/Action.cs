@@ -1326,13 +1326,13 @@ namespace Triggernometry
                                     ctx.plug.EndCombatHook();
                                     break;
                                 case EncounterOpEnum.StartEncounter:
-
+                                    string swingType = _EncounterSwingType.ToString();
                                     string ability = ctx.EvaluateStringExpression(ActionContextLogger, ctx, _EncounterAbilityType);
                                     string actor = ctx.EvaluateStringExpression(ActionContextLogger, ctx, _EncounterActorName);
                                     string target = ctx.EvaluateStringExpression(ActionContextLogger, ctx, _EncounterTargetName);
                                     int damage = (int)ctx.EvaluateNumericExpression(ActionContextLogger, ctx, _EncounterDamage);
                                     string damageType = ctx.EvaluateStringExpression(ActionContextLogger, ctx, _EncounterDamageType);
-                                    ctx.plug.StartCombatHook(ability, actor, target, damage, damageType);
+                                    ctx.plug.StartCombatHook(swingType,ability, actor, target, damage, damageType);
                                     break;
                             }
                         }
@@ -2644,6 +2644,7 @@ namespace Triggernometry
             a._FolderOp = _FolderOp;
             a._FolderId = _FolderId;
             a._EncounterOp = _EncounterOp;
+            a._EncounterSwingType = _EncounterSwingType;
             a._EncounterAbilityType = _EncounterAbilityType;
             a._EncounterActorName = _EncounterActorName;
             a._EncounterDamage = _EncounterDamage;

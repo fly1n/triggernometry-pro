@@ -38,49 +38,37 @@
             this.tbcActionSettings = new System.Windows.Forms.TabControl();
             this.tabSystemBeep = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.expBeepLength = new Triggernometry.CustomControls.ExpressionTextBox();
-            this.expBeepFrequency = new Triggernometry.CustomControls.ExpressionTextBox();
             this.lblBeepLength = new System.Windows.Forms.Label();
             this.lblBeepFrequency = new System.Windows.Forms.Label();
             this.tabPlaySoundFile = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.chkSoundMyOutput = new System.Windows.Forms.CheckBox();
             this.chkSoundExclusive = new System.Windows.Forms.CheckBox();
-            this.expSoundVolume = new Triggernometry.CustomControls.ExpressionTextBox();
             this.lblSoundVolume = new System.Windows.Forms.Label();
             this.lblSoundFile = new System.Windows.Forms.Label();
             this.button3 = new System.Windows.Forms.Button();
-            this.expSoundFile = new Triggernometry.CustomControls.ExpressionTextBox();
             this.tabTextToSpeech = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.chkSpeechMyOutput = new System.Windows.Forms.CheckBox();
             this.chkSpeechExclusive = new System.Windows.Forms.CheckBox();
-            this.expSpeechRate = new Triggernometry.CustomControls.ExpressionTextBox();
             this.lblSpeechRate = new System.Windows.Forms.Label();
-            this.expSpeechVolume = new Triggernometry.CustomControls.ExpressionTextBox();
             this.lblSpeechVolume = new System.Windows.Forms.Label();
             this.lblTextToSay = new System.Windows.Forms.Label();
-            this.expTextToSay = new Triggernometry.CustomControls.ExpressionTextBox();
             this.tabLaunchProcess = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.cbxProcessWindowStyle = new System.Windows.Forms.ComboBox();
             this.lblProcessWindowStyle = new System.Windows.Forms.Label();
-            this.expProcessWorkingDir = new Triggernometry.CustomControls.ExpressionTextBox();
             this.lblProcessWorkingDir = new System.Windows.Forms.Label();
-            this.expProcessParameters = new Triggernometry.CustomControls.ExpressionTextBox();
             this.lblProcessParameters = new System.Windows.Forms.Label();
             this.lblProcessName = new System.Windows.Forms.Label();
             this.button6 = new System.Windows.Forms.Button();
-            this.expProcessName = new Triggernometry.CustomControls.ExpressionTextBox();
             this.panel4 = new System.Windows.Forms.Panel();
             this.lblProcessWarning = new System.Windows.Forms.Label();
             this.tabTriggerOperation = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel10 = new System.Windows.Forms.TableLayoutPanel();
             this.lblFiringOptions = new System.Windows.Forms.Label();
-            this.expTriggerZone = new Triggernometry.CustomControls.ExpressionTextBox();
             this.lblTriggerZone = new System.Windows.Forms.Label();
             this.lblTrigger = new System.Windows.Forms.Label();
-            this.expTriggerText = new Triggernometry.CustomControls.ExpressionTextBox();
             this.lblTriggerText = new System.Windows.Forms.Label();
             this.lblTriggerOp = new System.Windows.Forms.Label();
             this.cbxTriggerOp = new System.Windows.Forms.ComboBox();
@@ -91,22 +79,17 @@
             this.btnKeycodesLink = new System.Windows.Forms.Button();
             this.txtKeyCodesLink = new System.Windows.Forms.TextBox();
             this.lblKeypressInfo = new System.Windows.Forms.Label();
-            this.expKeypress = new Triggernometry.CustomControls.ExpressionTextBox();
-            this.expWindowTitle = new Triggernometry.CustomControls.ExpressionTextBox();
             this.lblKeypress = new System.Windows.Forms.Label();
             this.lblKeypressWindow = new System.Windows.Forms.Label();
             this.cbxKeypressMethod = new System.Windows.Forms.ComboBox();
             this.lblKeypressMethod = new System.Windows.Forms.Label();
             this.btnSendKeysLink = new System.Windows.Forms.Button();
             this.lblKeypresses = new System.Windows.Forms.Label();
-            this.expKeypresses = new Triggernometry.CustomControls.ExpressionTextBox();
             this.lblKeypressesInfo = new System.Windows.Forms.Label();
             this.txtSendKeysLink = new System.Windows.Forms.TextBox();
             this.tabScript = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
-            this.expExecScriptAssemblies = new Triggernometry.CustomControls.ExpressionTextBox();
             this.lblExecScriptAssemblies = new System.Windows.Forms.Label();
-            this.expExecScriptCode = new Triggernometry.CustomControls.ExpressionTextBox();
             this.lblExecScriptCode = new System.Windows.Forms.Label();
             this.lblExecScriptLang = new System.Windows.Forms.Label();
             this.cbxExecScriptLang = new System.Windows.Forms.ComboBox();
@@ -114,15 +97,12 @@
             this.lblScriptWarning = new System.Windows.Forms.Label();
             this.tabMessageBox = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
-            this.expMessageBoxText = new Triggernometry.CustomControls.ExpressionTextBox();
             this.lblMessageBoxText = new System.Windows.Forms.Label();
             this.lblMessageBoxIcon = new System.Windows.Forms.Label();
             this.cbxMessageBoxIcon = new System.Windows.Forms.ComboBox();
             this.tabVariable = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel9 = new System.Windows.Forms.TableLayoutPanel();
-            this.expVariableExpression = new Triggernometry.CustomControls.ExpressionTextBox();
             this.lblVariableExpression = new System.Windows.Forms.Label();
-            this.expVariableName = new Triggernometry.CustomControls.ExpressionTextBox();
             this.lblVariableName = new System.Windows.Forms.Label();
             this.lblVariableOp = new System.Windows.Forms.Label();
             this.cbxVariableOp = new System.Windows.Forms.ComboBox();
@@ -131,28 +111,15 @@
             this.btnHide = new System.Windows.Forms.Button();
             this.cbxAuraDisplay = new System.Windows.Forms.ComboBox();
             this.lblAuraDisplay = new System.Windows.Forms.Label();
-            this.expAuraTTLTick = new Triggernometry.CustomControls.ExpressionTextBox();
-            this.expAuraOTick = new Triggernometry.CustomControls.ExpressionTextBox();
-            this.expAuraHTick = new Triggernometry.CustomControls.ExpressionTextBox();
-            this.expAuraWTick = new Triggernometry.CustomControls.ExpressionTextBox();
-            this.expAuraYTick = new Triggernometry.CustomControls.ExpressionTextBox();
-            this.expAuraXTick = new Triggernometry.CustomControls.ExpressionTextBox();
             this.lblUpdateTickExp = new System.Windows.Forms.Label();
-            this.expAuraOIni = new Triggernometry.CustomControls.ExpressionTextBox();
-            this.expAuraHIni = new Triggernometry.CustomControls.ExpressionTextBox();
-            this.expAuraWIni = new Triggernometry.CustomControls.ExpressionTextBox();
             this.lblAuraTtl = new System.Windows.Forms.Label();
             this.lblAuraOpacity = new System.Windows.Forms.Label();
             this.lblAuraWidth = new System.Windows.Forms.Label();
             this.lblAuraHeight = new System.Windows.Forms.Label();
             this.btnBrowseAura = new System.Windows.Forms.Button();
-            this.expAuraImage = new Triggernometry.CustomControls.ExpressionTextBox();
             this.lblAuraImage = new System.Windows.Forms.Label();
-            this.expAuraYIni = new Triggernometry.CustomControls.ExpressionTextBox();
             this.lblAuraY = new System.Windows.Forms.Label();
-            this.expAuraXIni = new Triggernometry.CustomControls.ExpressionTextBox();
             this.lblAuraX = new System.Windows.Forms.Label();
-            this.expAuraName = new Triggernometry.CustomControls.ExpressionTextBox();
             this.lblAuraName = new System.Windows.Forms.Label();
             this.lblAuraOp = new System.Windows.Forms.Label();
             this.cbxAuraOp = new System.Windows.Forms.ComboBox();
@@ -166,17 +133,19 @@
             this.trvFolder = new System.Windows.Forms.TreeView();
             this.tabEndEncounter = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel27 = new System.Windows.Forms.TableLayoutPanel();
-            this.expEncounterAbilityType = new Triggernometry.CustomControls.ExpressionTextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.cbxEncounterOp = new System.Windows.Forms.ComboBox();
             this.lblEndEncNoParams = new System.Windows.Forms.Label();
             this.tabDiscordWebhook = new System.Windows.Forms.TabPage();
             this.discordTableLayout = new System.Windows.Forms.TableLayoutPanel();
             this.cbxDiscordTts = new System.Windows.Forms.CheckBox();
-            this.expDiscordMessage = new Triggernometry.CustomControls.ExpressionTextBox();
             this.lblDiscordMessage = new System.Windows.Forms.Label();
             this.lblDiscordUrl = new System.Windows.Forms.Label();
-            this.expDiscordUrl = new Triggernometry.CustomControls.ExpressionTextBox();
             this.tabTextAura = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel13 = new System.Windows.Forms.TableLayoutPanel();
             this.lblTextAuraOutline = new System.Windows.Forms.Label();
@@ -185,34 +154,20 @@
             this.btnTextAuraHide = new System.Windows.Forms.Button();
             this.cbxTextAuraAlignment = new System.Windows.Forms.ComboBox();
             this.lblTextAuraAlignment = new System.Windows.Forms.Label();
-            this.expTextAuraTTLTick = new Triggernometry.CustomControls.ExpressionTextBox();
-            this.expTextAuraOTick = new Triggernometry.CustomControls.ExpressionTextBox();
-            this.expTextAuraHTick = new Triggernometry.CustomControls.ExpressionTextBox();
-            this.expTextAuraWTick = new Triggernometry.CustomControls.ExpressionTextBox();
-            this.expTextAuraYTick = new Triggernometry.CustomControls.ExpressionTextBox();
-            this.expTextAuraXTick = new Triggernometry.CustomControls.ExpressionTextBox();
             this.lblTextAuraUpdValues = new System.Windows.Forms.Label();
-            this.expTextAuraOIni = new Triggernometry.CustomControls.ExpressionTextBox();
-            this.expTextAuraHIni = new Triggernometry.CustomControls.ExpressionTextBox();
-            this.expTextAuraWIni = new Triggernometry.CustomControls.ExpressionTextBox();
             this.lblTextAuraTtlExp = new System.Windows.Forms.Label();
             this.lblTextAuraOpacity = new System.Windows.Forms.Label();
             this.lblTextAuraWidth = new System.Windows.Forms.Label();
             this.lblTextAuraHeight = new System.Windows.Forms.Label();
-            this.expTextAuraText = new Triggernometry.CustomControls.ExpressionTextBox();
             this.lblTextAuraText = new System.Windows.Forms.Label();
-            this.expTextAuraYIni = new Triggernometry.CustomControls.ExpressionTextBox();
             this.lblTextAuraY = new System.Windows.Forms.Label();
-            this.expTextAuraXIni = new Triggernometry.CustomControls.ExpressionTextBox();
             this.lblTextAuraX = new System.Windows.Forms.Label();
-            this.expTextAuraName = new Triggernometry.CustomControls.ExpressionTextBox();
             this.lblTextAuraName = new System.Windows.Forms.Label();
             this.lblTextAuraOp = new System.Windows.Forms.Label();
             this.cbxTextAuraOp = new System.Windows.Forms.ComboBox();
             this.lblTextAuraIniValues = new System.Windows.Forms.Label();
             this.btnTextAuraGuide = new System.Windows.Forms.Button();
             this.txtTextAuraFont = new System.Windows.Forms.TextBox();
-            this.colorSelector1 = new Triggernometry.CustomControls.ColorSelector();
             this.cbxTextAuraOutline = new System.Windows.Forms.CheckBox();
             this.tabLogMessage = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel14 = new System.Windows.Forms.TableLayoutPanel();
@@ -221,32 +176,24 @@
             this.lblLogMessageLevel = new System.Windows.Forms.Label();
             this.cbxProcessLog = new System.Windows.Forms.CheckBox();
             this.lblLogMessageText = new System.Windows.Forms.Label();
-            this.expLogMessageText = new Triggernometry.CustomControls.ExpressionTextBox();
             this.tabListVariable = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel17 = new System.Windows.Forms.TableLayoutPanel();
             this.cbxLvarExpType = new System.Windows.Forms.ComboBox();
             this.lblLvarExpType = new System.Windows.Forms.Label();
-            this.expLvarTarget = new Triggernometry.CustomControls.ExpressionTextBox();
             this.lblLvarTarget = new System.Windows.Forms.Label();
-            this.expLvarIndex = new Triggernometry.CustomControls.ExpressionTextBox();
             this.lblLvarIndex = new System.Windows.Forms.Label();
-            this.expLvarValue = new Triggernometry.CustomControls.ExpressionTextBox();
             this.lblLvarValue = new System.Windows.Forms.Label();
-            this.expLvarName = new Triggernometry.CustomControls.ExpressionTextBox();
             this.lblLvarName = new System.Windows.Forms.Label();
             this.lblLvarOperation = new System.Windows.Forms.Label();
             this.cbxLvarOperation = new System.Windows.Forms.ComboBox();
             this.tabObsControl = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel18 = new System.Windows.Forms.TableLayoutPanel();
             this.lblObsJSONPayload = new System.Windows.Forms.Label();
-            this.expObsJSONPayload = new Triggernometry.CustomControls.ExpressionTextBox();
-            this.expObsSourceName = new Triggernometry.CustomControls.ExpressionTextBox();
             this.lblObsSourceName = new System.Windows.Forms.Label();
             this.cbxObsOpType = new System.Windows.Forms.ComboBox();
             this.lblObsOpType = new System.Windows.Forms.Label();
             this.btnObsWebsocketLink = new System.Windows.Forms.Button();
             this.lblObsSceneName = new System.Windows.Forms.Label();
-            this.expObsSceneName = new Triggernometry.CustomControls.ExpressionTextBox();
             this.lblObsWebsocketInfo = new System.Windows.Forms.Label();
             this.txtObsWebsocketLink = new System.Windows.Forms.TextBox();
             this.tabGenericJson = new System.Windows.Forms.TabPage();
@@ -255,20 +202,13 @@
             this.lblJsonType = new System.Windows.Forms.Label();
             this.cbxJsonCache = new System.Windows.Forms.CheckBox();
             this.lblJsonInstructions = new System.Windows.Forms.Label();
-            this.expJsonFiring = new Triggernometry.CustomControls.ExpressionTextBox();
             this.lblJsonFiring = new System.Windows.Forms.Label();
-            this.expJsonPayload = new Triggernometry.CustomControls.ExpressionTextBox();
             this.lblJsonPayload = new System.Windows.Forms.Label();
             this.lblJsonEndpoint = new System.Windows.Forms.Label();
-            this.expJsonEndpoint = new Triggernometry.CustomControls.ExpressionTextBox();
             this.tabWindowMessage = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel19 = new System.Windows.Forms.TableLayoutPanel();
-            this.expWmsgLparam = new Triggernometry.CustomControls.ExpressionTextBox();
             this.lblWmsgLparam = new System.Windows.Forms.Label();
-            this.expWmsgWparam = new Triggernometry.CustomControls.ExpressionTextBox();
             this.lblWmsgWparam = new System.Windows.Forms.Label();
-            this.expWmsgCode = new Triggernometry.CustomControls.ExpressionTextBox();
-            this.expWmsgTitle = new Triggernometry.CustomControls.ExpressionTextBox();
             this.lblWmsgCode = new System.Windows.Forms.Label();
             this.lblWmsgTitle = new System.Windows.Forms.Label();
             this.panel7 = new System.Windows.Forms.Panel();
@@ -276,33 +216,25 @@
             this.tabFile = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel20 = new System.Windows.Forms.TableLayoutPanel();
             this.cbxFileOpCache = new System.Windows.Forms.CheckBox();
-            this.expFileOpVariable = new Triggernometry.CustomControls.ExpressionTextBox();
             this.lblFileOpVariable = new System.Windows.Forms.Label();
             this.cbxFileOpType = new System.Windows.Forms.ComboBox();
             this.lblFileOpType = new System.Windows.Forms.Label();
             this.lblFileOpName = new System.Windows.Forms.Label();
-            this.expFileOpName = new Triggernometry.CustomControls.ExpressionTextBox();
             this.panel9 = new System.Windows.Forms.Panel();
             this.lblFileWarning = new System.Windows.Forms.Label();
             this.tabTableVariable = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel21 = new System.Windows.Forms.TableLayoutPanel();
-            this.expTvarRow = new Triggernometry.CustomControls.ExpressionTextBox();
             this.lblTvarRow = new System.Windows.Forms.Label();
             this.cbxTvarExpType = new System.Windows.Forms.ComboBox();
             this.lblTvarExpType = new System.Windows.Forms.Label();
-            this.expTvarTarget = new Triggernometry.CustomControls.ExpressionTextBox();
             this.lblTvarTarget = new System.Windows.Forms.Label();
-            this.expTvarColumn = new Triggernometry.CustomControls.ExpressionTextBox();
             this.lblTvarColumn = new System.Windows.Forms.Label();
-            this.expTvarValue = new Triggernometry.CustomControls.ExpressionTextBox();
             this.lblTvarValue = new System.Windows.Forms.Label();
-            this.expTvarName = new Triggernometry.CustomControls.ExpressionTextBox();
             this.lblTvarName = new System.Windows.Forms.Label();
             this.lblTvarOpType = new System.Windows.Forms.Label();
             this.cbxTvarOpType = new System.Windows.Forms.ComboBox();
             this.tabMutex = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel22 = new System.Windows.Forms.TableLayoutPanel();
-            this.expMutexName = new Triggernometry.CustomControls.ExpressionTextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.cbxMutexOp = new System.Windows.Forms.ComboBox();
@@ -310,32 +242,24 @@
             this.lblPlaceholderNoParams = new System.Windows.Forms.Label();
             this.tabNamedCallback = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel24 = new System.Windows.Forms.TableLayoutPanel();
-            this.expCallbackReturnScalarName = new Triggernometry.CustomControls.ExpressionTextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.expCallbackParam = new Triggernometry.CustomControls.ExpressionTextBox();
             this.lblCallbackParam = new System.Windows.Forms.Label();
             this.lblCallbackName = new System.Windows.Forms.Label();
-            this.expCallbackName = new Triggernometry.CustomControls.ExpressionTextBox();
             this.tabMouse = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel25 = new System.Windows.Forms.TableLayoutPanel();
             this.cbxMouseCoord = new System.Windows.Forms.ComboBox();
-            this.expMouseY = new Triggernometry.CustomControls.ExpressionTextBox();
             this.lblMouseY = new System.Windows.Forms.Label();
             this.lblMouseX = new System.Windows.Forms.Label();
-            this.expMouseX = new Triggernometry.CustomControls.ExpressionTextBox();
             this.lblMouseCoord = new System.Windows.Forms.Label();
             this.lblMouseOp = new System.Windows.Forms.Label();
             this.cbxMouseOp = new System.Windows.Forms.ComboBox();
             this.tabPartyOrder = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel26 = new System.Windows.Forms.TableLayoutPanel();
-            this.expPartyOrder = new Triggernometry.CustomControls.ExpressionTextBox();
             this.lblPartyOrder = new System.Windows.Forms.Label();
             this.lblPlayerName = new System.Windows.Forms.Label();
-            this.expPlayerName = new Triggernometry.CustomControls.ExpressionTextBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel6 = new System.Windows.Forms.Panel();
-            this.btnTest = new Triggernometry.CustomControls.SplitButton();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnOk = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
@@ -347,7 +271,6 @@
             this.stsMouseHelp = new System.Windows.Forms.StatusStrip();
             this.tlsMouseLocation = new System.Windows.Forms.ToolStripStatusLabel();
             this.tabActionCondition = new System.Windows.Forms.TabPage();
-            this.cndCondition = new Triggernometry.CustomControls.ConditionViewer();
             this.tabScheduling = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel15 = new System.Windows.Forms.TableLayoutPanel();
             this.chkExecuteAsync = new System.Windows.Forms.CheckBox();
@@ -355,7 +278,6 @@
             this.cbxRefireOption2 = new System.Windows.Forms.ComboBox();
             this.cbxRefireOption1 = new System.Windows.Forms.ComboBox();
             this.lblRefireOption1 = new System.Windows.Forms.Label();
-            this.expExecutionDelay = new Triggernometry.CustomControls.ExpressionTextBox();
             this.tabDebugging = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel16 = new System.Windows.Forms.TableLayoutPanel();
             this.cbxLoggingLevel = new System.Windows.Forms.ComboBox();
@@ -368,17 +290,97 @@
             this.panel8 = new System.Windows.Forms.Panel();
             this.lblReadOnly = new System.Windows.Forms.Label();
             this.timer2 = new System.Windows.Forms.Timer(this.components);
+            this.expBeepLength = new Triggernometry.CustomControls.ExpressionTextBox();
+            this.expBeepFrequency = new Triggernometry.CustomControls.ExpressionTextBox();
+            this.expSoundVolume = new Triggernometry.CustomControls.ExpressionTextBox();
+            this.expSoundFile = new Triggernometry.CustomControls.ExpressionTextBox();
+            this.expSpeechRate = new Triggernometry.CustomControls.ExpressionTextBox();
+            this.expSpeechVolume = new Triggernometry.CustomControls.ExpressionTextBox();
+            this.expTextToSay = new Triggernometry.CustomControls.ExpressionTextBox();
+            this.expProcessWorkingDir = new Triggernometry.CustomControls.ExpressionTextBox();
+            this.expProcessParameters = new Triggernometry.CustomControls.ExpressionTextBox();
+            this.expProcessName = new Triggernometry.CustomControls.ExpressionTextBox();
+            this.expTriggerZone = new Triggernometry.CustomControls.ExpressionTextBox();
+            this.expTriggerText = new Triggernometry.CustomControls.ExpressionTextBox();
+            this.expKeypress = new Triggernometry.CustomControls.ExpressionTextBox();
+            this.expWindowTitle = new Triggernometry.CustomControls.ExpressionTextBox();
+            this.expKeypresses = new Triggernometry.CustomControls.ExpressionTextBox();
+            this.expExecScriptAssemblies = new Triggernometry.CustomControls.ExpressionTextBox();
+            this.expExecScriptCode = new Triggernometry.CustomControls.ExpressionTextBox();
+            this.expMessageBoxText = new Triggernometry.CustomControls.ExpressionTextBox();
+            this.expVariableExpression = new Triggernometry.CustomControls.ExpressionTextBox();
+            this.expVariableName = new Triggernometry.CustomControls.ExpressionTextBox();
+            this.expAuraTTLTick = new Triggernometry.CustomControls.ExpressionTextBox();
+            this.expAuraOTick = new Triggernometry.CustomControls.ExpressionTextBox();
+            this.expAuraHTick = new Triggernometry.CustomControls.ExpressionTextBox();
+            this.expAuraWTick = new Triggernometry.CustomControls.ExpressionTextBox();
+            this.expAuraYTick = new Triggernometry.CustomControls.ExpressionTextBox();
+            this.expAuraXTick = new Triggernometry.CustomControls.ExpressionTextBox();
+            this.expAuraOIni = new Triggernometry.CustomControls.ExpressionTextBox();
+            this.expAuraHIni = new Triggernometry.CustomControls.ExpressionTextBox();
+            this.expAuraWIni = new Triggernometry.CustomControls.ExpressionTextBox();
+            this.expAuraImage = new Triggernometry.CustomControls.ExpressionTextBox();
+            this.expAuraYIni = new Triggernometry.CustomControls.ExpressionTextBox();
+            this.expAuraXIni = new Triggernometry.CustomControls.ExpressionTextBox();
+            this.expAuraName = new Triggernometry.CustomControls.ExpressionTextBox();
+            this.expEncounterDamageType = new Triggernometry.CustomControls.ExpressionTextBox();
+            this.expEncounterDamage = new Triggernometry.CustomControls.ExpressionTextBox();
+            this.expEncounterTargetName = new Triggernometry.CustomControls.ExpressionTextBox();
+            this.expEncounterActorName = new Triggernometry.CustomControls.ExpressionTextBox();
+            this.expEncounterAbilityType = new Triggernometry.CustomControls.ExpressionTextBox();
+            this.expDiscordMessage = new Triggernometry.CustomControls.ExpressionTextBox();
+            this.expDiscordUrl = new Triggernometry.CustomControls.ExpressionTextBox();
+            this.expTextAuraTTLTick = new Triggernometry.CustomControls.ExpressionTextBox();
+            this.expTextAuraOTick = new Triggernometry.CustomControls.ExpressionTextBox();
+            this.expTextAuraHTick = new Triggernometry.CustomControls.ExpressionTextBox();
+            this.expTextAuraWTick = new Triggernometry.CustomControls.ExpressionTextBox();
+            this.expTextAuraYTick = new Triggernometry.CustomControls.ExpressionTextBox();
+            this.expTextAuraXTick = new Triggernometry.CustomControls.ExpressionTextBox();
+            this.expTextAuraOIni = new Triggernometry.CustomControls.ExpressionTextBox();
+            this.expTextAuraHIni = new Triggernometry.CustomControls.ExpressionTextBox();
+            this.expTextAuraWIni = new Triggernometry.CustomControls.ExpressionTextBox();
+            this.expTextAuraText = new Triggernometry.CustomControls.ExpressionTextBox();
+            this.expTextAuraYIni = new Triggernometry.CustomControls.ExpressionTextBox();
+            this.expTextAuraXIni = new Triggernometry.CustomControls.ExpressionTextBox();
+            this.expTextAuraName = new Triggernometry.CustomControls.ExpressionTextBox();
+            this.colorSelector1 = new Triggernometry.CustomControls.ColorSelector();
+            this.expLogMessageText = new Triggernometry.CustomControls.ExpressionTextBox();
+            this.expLvarTarget = new Triggernometry.CustomControls.ExpressionTextBox();
+            this.expLvarIndex = new Triggernometry.CustomControls.ExpressionTextBox();
+            this.expLvarValue = new Triggernometry.CustomControls.ExpressionTextBox();
+            this.expLvarName = new Triggernometry.CustomControls.ExpressionTextBox();
+            this.expObsJSONPayload = new Triggernometry.CustomControls.ExpressionTextBox();
+            this.expObsSourceName = new Triggernometry.CustomControls.ExpressionTextBox();
+            this.expObsSceneName = new Triggernometry.CustomControls.ExpressionTextBox();
+            this.expJsonFiring = new Triggernometry.CustomControls.ExpressionTextBox();
+            this.expJsonPayload = new Triggernometry.CustomControls.ExpressionTextBox();
+            this.expJsonEndpoint = new Triggernometry.CustomControls.ExpressionTextBox();
+            this.expWmsgLparam = new Triggernometry.CustomControls.ExpressionTextBox();
+            this.expWmsgWparam = new Triggernometry.CustomControls.ExpressionTextBox();
+            this.expWmsgCode = new Triggernometry.CustomControls.ExpressionTextBox();
+            this.expWmsgTitle = new Triggernometry.CustomControls.ExpressionTextBox();
+            this.expFileOpVariable = new Triggernometry.CustomControls.ExpressionTextBox();
+            this.expFileOpName = new Triggernometry.CustomControls.ExpressionTextBox();
+            this.expTvarRow = new Triggernometry.CustomControls.ExpressionTextBox();
+            this.expTvarTarget = new Triggernometry.CustomControls.ExpressionTextBox();
+            this.expTvarColumn = new Triggernometry.CustomControls.ExpressionTextBox();
+            this.expTvarValue = new Triggernometry.CustomControls.ExpressionTextBox();
+            this.expTvarName = new Triggernometry.CustomControls.ExpressionTextBox();
+            this.expMutexName = new Triggernometry.CustomControls.ExpressionTextBox();
+            this.expCallbackReturnScalarName = new Triggernometry.CustomControls.ExpressionTextBox();
+            this.expCallbackParam = new Triggernometry.CustomControls.ExpressionTextBox();
+            this.expCallbackName = new Triggernometry.CustomControls.ExpressionTextBox();
+            this.expMouseY = new Triggernometry.CustomControls.ExpressionTextBox();
+            this.expMouseX = new Triggernometry.CustomControls.ExpressionTextBox();
+            this.expPartyOrder = new Triggernometry.CustomControls.ExpressionTextBox();
+            this.expPlayerName = new Triggernometry.CustomControls.ExpressionTextBox();
+            this.cndCondition = new Triggernometry.CustomControls.ConditionViewer();
+            this.expExecutionDelay = new Triggernometry.CustomControls.ExpressionTextBox();
+            this.btnTest = new Triggernometry.CustomControls.SplitButton();
             this.expressionTextBox1 = new Triggernometry.CustomControls.ExpressionTextBox();
             this.expressionTextBox2 = new Triggernometry.CustomControls.ExpressionTextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.expEncounterActorName = new Triggernometry.CustomControls.ExpressionTextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.expEncounterTargetName = new Triggernometry.CustomControls.ExpressionTextBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.expEncounterDamage = new Triggernometry.CustomControls.ExpressionTextBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.expEncounterDamageType = new Triggernometry.CustomControls.ExpressionTextBox();
+            this.cbxEncounterSwingType = new System.Windows.Forms.ComboBox();
+            this.label10 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.grpGeneralSettings.SuspendLayout();
             this.tbcActionSettings.SuspendLayout();
@@ -618,32 +620,6 @@
             this.tableLayoutPanel2.Size = new System.Drawing.Size(729, 58);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
-            // expBeepLength
-            // 
-            this.expBeepLength.AutoSize = true;
-            this.expBeepLength.Dock = System.Windows.Forms.DockStyle.Top;
-            this.expBeepLength.Expression = "";
-            this.expBeepLength.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.Numeric;
-            this.expBeepLength.Location = new System.Drawing.Point(171, 31);
-            this.expBeepLength.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.expBeepLength.Name = "expBeepLength";
-            this.expBeepLength.ReadOnly = false;
-            this.expBeepLength.Size = new System.Drawing.Size(554, 25);
-            this.expBeepLength.TabIndex = 13;
-            // 
-            // expBeepFrequency
-            // 
-            this.expBeepFrequency.AutoSize = true;
-            this.expBeepFrequency.Dock = System.Windows.Forms.DockStyle.Top;
-            this.expBeepFrequency.Expression = "";
-            this.expBeepFrequency.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.Numeric;
-            this.expBeepFrequency.Location = new System.Drawing.Point(171, 2);
-            this.expBeepFrequency.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.expBeepFrequency.Name = "expBeepFrequency";
-            this.expBeepFrequency.ReadOnly = false;
-            this.expBeepFrequency.Size = new System.Drawing.Size(554, 25);
-            this.expBeepFrequency.TabIndex = 12;
-            // 
             // lblBeepLength
             // 
             this.lblBeepLength.AutoSize = true;
@@ -734,20 +710,6 @@
             this.chkSoundExclusive.Text = "Use exclusive sound player to prevent conflicts with other sounds";
             this.chkSoundExclusive.UseVisualStyleBackColor = true;
             // 
-            // expSoundVolume
-            // 
-            this.expSoundVolume.AutoSize = true;
-            this.tableLayoutPanel3.SetColumnSpan(this.expSoundVolume, 2);
-            this.expSoundVolume.Dock = System.Windows.Forms.DockStyle.Top;
-            this.expSoundVolume.Expression = "";
-            this.expSoundVolume.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.Numeric;
-            this.expSoundVolume.Location = new System.Drawing.Point(227, 38);
-            this.expSoundVolume.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.expSoundVolume.Name = "expSoundVolume";
-            this.expSoundVolume.ReadOnly = false;
-            this.expSoundVolume.Size = new System.Drawing.Size(498, 25);
-            this.expSoundVolume.TabIndex = 16;
-            // 
             // lblSoundVolume
             // 
             this.lblSoundVolume.AutoSize = true;
@@ -783,19 +745,6 @@
             this.button3.TabIndex = 13;
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
-            // 
-            // expSoundFile
-            // 
-            this.expSoundFile.AutoSize = true;
-            this.expSoundFile.Dock = System.Windows.Forms.DockStyle.Top;
-            this.expSoundFile.Expression = "";
-            this.expSoundFile.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
-            this.expSoundFile.Location = new System.Drawing.Point(227, 2);
-            this.expSoundFile.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.expSoundFile.Name = "expSoundFile";
-            this.expSoundFile.ReadOnly = false;
-            this.expSoundFile.Size = new System.Drawing.Size(445, 25);
-            this.expSoundFile.TabIndex = 14;
             // 
             // tabTextToSpeech
             // 
@@ -864,19 +813,6 @@
             this.chkSpeechExclusive.Text = "Use exclusive speech synthesizer to prevent conflicts with other speech";
             this.chkSpeechExclusive.UseVisualStyleBackColor = true;
             // 
-            // expSpeechRate
-            // 
-            this.expSpeechRate.AutoSize = true;
-            this.expSpeechRate.Dock = System.Windows.Forms.DockStyle.Top;
-            this.expSpeechRate.Expression = "";
-            this.expSpeechRate.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.Numeric;
-            this.expSpeechRate.Location = new System.Drawing.Point(267, 60);
-            this.expSpeechRate.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.expSpeechRate.Name = "expSpeechRate";
-            this.expSpeechRate.ReadOnly = false;
-            this.expSpeechRate.Size = new System.Drawing.Size(458, 25);
-            this.expSpeechRate.TabIndex = 16;
-            // 
             // lblSpeechRate
             // 
             this.lblSpeechRate.AutoSize = true;
@@ -888,19 +824,6 @@
             this.lblSpeechRate.TabIndex = 15;
             this.lblSpeechRate.Text = "Speech speed rate (-10 ... +10)";
             this.lblSpeechRate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // expSpeechVolume
-            // 
-            this.expSpeechVolume.AutoSize = true;
-            this.expSpeechVolume.Dock = System.Windows.Forms.DockStyle.Top;
-            this.expSpeechVolume.Expression = "";
-            this.expSpeechVolume.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.Numeric;
-            this.expSpeechVolume.Location = new System.Drawing.Point(267, 31);
-            this.expSpeechVolume.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.expSpeechVolume.Name = "expSpeechVolume";
-            this.expSpeechVolume.ReadOnly = false;
-            this.expSpeechVolume.Size = new System.Drawing.Size(458, 25);
-            this.expSpeechVolume.TabIndex = 14;
             // 
             // lblSpeechVolume
             // 
@@ -925,19 +848,6 @@
             this.lblTextToSay.TabIndex = 7;
             this.lblTextToSay.Text = "Text to say";
             this.lblTextToSay.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // expTextToSay
-            // 
-            this.expTextToSay.AutoSize = true;
-            this.expTextToSay.Dock = System.Windows.Forms.DockStyle.Top;
-            this.expTextToSay.Expression = "";
-            this.expTextToSay.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
-            this.expTextToSay.Location = new System.Drawing.Point(267, 2);
-            this.expTextToSay.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.expTextToSay.Name = "expTextToSay";
-            this.expTextToSay.ReadOnly = false;
-            this.expTextToSay.Size = new System.Drawing.Size(458, 25);
-            this.expTextToSay.TabIndex = 12;
             // 
             // tabLaunchProcess
             // 
@@ -1010,20 +920,6 @@
             this.lblProcessWindowStyle.Text = "Process window";
             this.lblProcessWindowStyle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // expProcessWorkingDir
-            // 
-            this.expProcessWorkingDir.AutoSize = true;
-            this.tableLayoutPanel5.SetColumnSpan(this.expProcessWorkingDir, 2);
-            this.expProcessWorkingDir.Dock = System.Windows.Forms.DockStyle.Top;
-            this.expProcessWorkingDir.Expression = "";
-            this.expProcessWorkingDir.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
-            this.expProcessWorkingDir.Location = new System.Drawing.Point(203, 67);
-            this.expProcessWorkingDir.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.expProcessWorkingDir.Name = "expProcessWorkingDir";
-            this.expProcessWorkingDir.ReadOnly = false;
-            this.expProcessWorkingDir.Size = new System.Drawing.Size(522, 25);
-            this.expProcessWorkingDir.TabIndex = 18;
-            // 
             // lblProcessWorkingDir
             // 
             this.lblProcessWorkingDir.AutoSize = true;
@@ -1035,20 +931,6 @@
             this.lblProcessWorkingDir.TabIndex = 17;
             this.lblProcessWorkingDir.Text = "Working directory";
             this.lblProcessWorkingDir.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // expProcessParameters
-            // 
-            this.expProcessParameters.AutoSize = true;
-            this.tableLayoutPanel5.SetColumnSpan(this.expProcessParameters, 2);
-            this.expProcessParameters.Dock = System.Windows.Forms.DockStyle.Top;
-            this.expProcessParameters.Expression = "";
-            this.expProcessParameters.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
-            this.expProcessParameters.Location = new System.Drawing.Point(203, 38);
-            this.expProcessParameters.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.expProcessParameters.Name = "expProcessParameters";
-            this.expProcessParameters.ReadOnly = false;
-            this.expProcessParameters.Size = new System.Drawing.Size(522, 25);
-            this.expProcessParameters.TabIndex = 16;
             // 
             // lblProcessParameters
             // 
@@ -1085,19 +967,6 @@
             this.button6.TabIndex = 13;
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
-            // 
-            // expProcessName
-            // 
-            this.expProcessName.AutoSize = true;
-            this.expProcessName.Dock = System.Windows.Forms.DockStyle.Top;
-            this.expProcessName.Expression = "";
-            this.expProcessName.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
-            this.expProcessName.Location = new System.Drawing.Point(203, 2);
-            this.expProcessName.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.expProcessName.Name = "expProcessName";
-            this.expProcessName.ReadOnly = false;
-            this.expProcessName.Size = new System.Drawing.Size(469, 25);
-            this.expProcessName.TabIndex = 14;
             // 
             // panel4
             // 
@@ -1183,20 +1052,6 @@
             this.lblFiringOptions.Text = "Firing options";
             this.lblFiringOptions.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // expTriggerZone
-            // 
-            this.expTriggerZone.AutoSize = true;
-            this.expTriggerZone.Dock = System.Windows.Forms.DockStyle.Top;
-            this.expTriggerZone.Expression = "";
-            this.expTriggerZone.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
-            this.expTriggerZone.Location = new System.Drawing.Point(187, 58);
-            this.expTriggerZone.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.expTriggerZone.Name = "expTriggerZone";
-            this.expTriggerZone.ReadOnly = false;
-            this.expTriggerZone.Size = new System.Drawing.Size(538, 25);
-            this.expTriggerZone.TabIndex = 25;
-            this.expTriggerZone.EnabledChanged += new System.EventHandler(this.expTriggerZone_EnabledChanged);
-            // 
             // lblTriggerZone
             // 
             this.lblTriggerZone.AutoSize = true;
@@ -1221,20 +1076,6 @@
             this.lblTrigger.TabIndex = 23;
             this.lblTrigger.Text = "Trigger";
             this.lblTrigger.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // expTriggerText
-            // 
-            this.expTriggerText.AutoSize = true;
-            this.expTriggerText.Dock = System.Windows.Forms.DockStyle.Top;
-            this.expTriggerText.Expression = "";
-            this.expTriggerText.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
-            this.expTriggerText.Location = new System.Drawing.Point(187, 29);
-            this.expTriggerText.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.expTriggerText.Name = "expTriggerText";
-            this.expTriggerText.ReadOnly = false;
-            this.expTriggerText.Size = new System.Drawing.Size(538, 25);
-            this.expTriggerText.TabIndex = 16;
-            this.expTriggerText.EnabledChanged += new System.EventHandler(this.expTriggerText_EnabledChanged);
             // 
             // lblTriggerText
             // 
@@ -1401,34 +1242,6 @@
     "hift are represented as additions to the original keycode. Keycode constants are" +
     " described on this webpage:";
             // 
-            // expKeypress
-            // 
-            this.expKeypress.AutoSize = true;
-            this.tableLayoutPanel6.SetColumnSpan(this.expKeypress, 2);
-            this.expKeypress.Dock = System.Windows.Forms.DockStyle.Top;
-            this.expKeypress.Expression = "";
-            this.expKeypress.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.Numeric;
-            this.expKeypress.Location = new System.Drawing.Point(179, 177);
-            this.expKeypress.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.expKeypress.Name = "expKeypress";
-            this.expKeypress.ReadOnly = false;
-            this.expKeypress.Size = new System.Drawing.Size(546, 25);
-            this.expKeypress.TabIndex = 26;
-            // 
-            // expWindowTitle
-            // 
-            this.expWindowTitle.AutoSize = true;
-            this.tableLayoutPanel6.SetColumnSpan(this.expWindowTitle, 2);
-            this.expWindowTitle.Dock = System.Windows.Forms.DockStyle.Top;
-            this.expWindowTitle.Expression = "";
-            this.expWindowTitle.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
-            this.expWindowTitle.Location = new System.Drawing.Point(179, 148);
-            this.expWindowTitle.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.expWindowTitle.Name = "expWindowTitle";
-            this.expWindowTitle.ReadOnly = false;
-            this.expWindowTitle.Size = new System.Drawing.Size(546, 25);
-            this.expWindowTitle.TabIndex = 25;
-            // 
             // lblKeypress
             // 
             this.lblKeypress.AutoSize = true;
@@ -1505,20 +1318,6 @@
             this.lblKeypresses.Text = "Keypresses to send";
             this.lblKeypresses.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // expKeypresses
-            // 
-            this.expKeypresses.AutoSize = true;
-            this.tableLayoutPanel6.SetColumnSpan(this.expKeypresses, 2);
-            this.expKeypresses.Dock = System.Windows.Forms.DockStyle.Top;
-            this.expKeypresses.Expression = "";
-            this.expKeypresses.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
-            this.expKeypresses.Location = new System.Drawing.Point(179, 29);
-            this.expKeypresses.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.expKeypresses.Name = "expKeypresses";
-            this.expKeypresses.ReadOnly = false;
-            this.expKeypresses.Size = new System.Drawing.Size(546, 25);
-            this.expKeypresses.TabIndex = 14;
-            // 
             // lblKeypressesInfo
             // 
             this.lblKeypressesInfo.AutoSize = true;
@@ -1580,19 +1379,6 @@
             this.tableLayoutPanel7.Size = new System.Drawing.Size(729, 85);
             this.tableLayoutPanel7.TabIndex = 5;
             // 
-            // expExecScriptAssemblies
-            // 
-            this.expExecScriptAssemblies.AutoSize = true;
-            this.expExecScriptAssemblies.Dock = System.Windows.Forms.DockStyle.Top;
-            this.expExecScriptAssemblies.Expression = "";
-            this.expExecScriptAssemblies.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
-            this.expExecScriptAssemblies.Location = new System.Drawing.Point(267, 58);
-            this.expExecScriptAssemblies.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.expExecScriptAssemblies.Name = "expExecScriptAssemblies";
-            this.expExecScriptAssemblies.ReadOnly = false;
-            this.expExecScriptAssemblies.Size = new System.Drawing.Size(458, 25);
-            this.expExecScriptAssemblies.TabIndex = 23;
-            // 
             // lblExecScriptAssemblies
             // 
             this.lblExecScriptAssemblies.AutoSize = true;
@@ -1604,19 +1390,6 @@
             this.lblExecScriptAssemblies.TabIndex = 22;
             this.lblExecScriptAssemblies.Text = "List of assemblies to reference";
             this.lblExecScriptAssemblies.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // expExecScriptCode
-            // 
-            this.expExecScriptCode.AutoSize = true;
-            this.expExecScriptCode.Dock = System.Windows.Forms.DockStyle.Top;
-            this.expExecScriptCode.Expression = "";
-            this.expExecScriptCode.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
-            this.expExecScriptCode.Location = new System.Drawing.Point(267, 29);
-            this.expExecScriptCode.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.expExecScriptCode.Name = "expExecScriptCode";
-            this.expExecScriptCode.ReadOnly = false;
-            this.expExecScriptCode.Size = new System.Drawing.Size(458, 25);
-            this.expExecScriptCode.TabIndex = 16;
             // 
             // lblExecScriptCode
             // 
@@ -1717,19 +1490,6 @@
             this.tableLayoutPanel8.Size = new System.Drawing.Size(729, 56);
             this.tableLayoutPanel8.TabIndex = 6;
             // 
-            // expMessageBoxText
-            // 
-            this.expMessageBoxText.AutoSize = true;
-            this.expMessageBoxText.Dock = System.Windows.Forms.DockStyle.Top;
-            this.expMessageBoxText.Expression = "";
-            this.expMessageBoxText.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
-            this.expMessageBoxText.Location = new System.Drawing.Point(147, 29);
-            this.expMessageBoxText.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.expMessageBoxText.Name = "expMessageBoxText";
-            this.expMessageBoxText.ReadOnly = false;
-            this.expMessageBoxText.Size = new System.Drawing.Size(578, 25);
-            this.expMessageBoxText.TabIndex = 16;
-            // 
             // lblMessageBoxText
             // 
             this.lblMessageBoxText.AutoSize = true;
@@ -1806,20 +1566,6 @@
             this.tableLayoutPanel9.Size = new System.Drawing.Size(729, 85);
             this.tableLayoutPanel9.TabIndex = 6;
             // 
-            // expVariableExpression
-            // 
-            this.expVariableExpression.AutoSize = true;
-            this.expVariableExpression.Dock = System.Windows.Forms.DockStyle.Top;
-            this.expVariableExpression.Expression = "";
-            this.expVariableExpression.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
-            this.expVariableExpression.Location = new System.Drawing.Point(179, 58);
-            this.expVariableExpression.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.expVariableExpression.Name = "expVariableExpression";
-            this.expVariableExpression.ReadOnly = false;
-            this.expVariableExpression.Size = new System.Drawing.Size(546, 25);
-            this.expVariableExpression.TabIndex = 23;
-            this.expVariableExpression.EnabledChanged += new System.EventHandler(this.expVariableExpression_EnabledChanged);
-            // 
             // lblVariableExpression
             // 
             this.lblVariableExpression.AutoSize = true;
@@ -1831,20 +1577,6 @@
             this.lblVariableExpression.TabIndex = 22;
             this.lblVariableExpression.Text = "Expression";
             this.lblVariableExpression.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // expVariableName
-            // 
-            this.expVariableName.AutoSize = true;
-            this.expVariableName.Dock = System.Windows.Forms.DockStyle.Top;
-            this.expVariableName.Expression = "";
-            this.expVariableName.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
-            this.expVariableName.Location = new System.Drawing.Point(179, 29);
-            this.expVariableName.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.expVariableName.Name = "expVariableName";
-            this.expVariableName.ReadOnly = false;
-            this.expVariableName.Size = new System.Drawing.Size(546, 25);
-            this.expVariableName.TabIndex = 16;
-            this.expVariableName.EnabledChanged += new System.EventHandler(this.expVariableName_EnabledChanged);
             // 
             // lblVariableName
             // 
@@ -2001,96 +1733,6 @@
             this.lblAuraDisplay.Text = "Display method";
             this.lblAuraDisplay.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // expAuraTTLTick
-            // 
-            this.expAuraTTLTick.AutoSize = true;
-            this.tableLayoutPanel11.SetColumnSpan(this.expAuraTTLTick, 2);
-            this.expAuraTTLTick.Dock = System.Windows.Forms.DockStyle.Top;
-            this.expAuraTTLTick.Expression = "";
-            this.expAuraTTLTick.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.Numeric;
-            this.expAuraTTLTick.Location = new System.Drawing.Point(317, 295);
-            this.expAuraTTLTick.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.expAuraTTLTick.Name = "expAuraTTLTick";
-            this.expAuraTTLTick.ReadOnly = false;
-            this.expAuraTTLTick.Size = new System.Drawing.Size(387, 25);
-            this.expAuraTTLTick.TabIndex = 24;
-            this.expAuraTTLTick.EnabledChanged += new System.EventHandler(this.expAuraTTLTick_EnabledChanged);
-            // 
-            // expAuraOTick
-            // 
-            this.expAuraOTick.AutoSize = true;
-            this.tableLayoutPanel11.SetColumnSpan(this.expAuraOTick, 2);
-            this.expAuraOTick.Dock = System.Windows.Forms.DockStyle.Top;
-            this.expAuraOTick.Expression = "";
-            this.expAuraOTick.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.Numeric;
-            this.expAuraOTick.Location = new System.Drawing.Point(317, 266);
-            this.expAuraOTick.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.expAuraOTick.Name = "expAuraOTick";
-            this.expAuraOTick.ReadOnly = false;
-            this.expAuraOTick.Size = new System.Drawing.Size(387, 25);
-            this.expAuraOTick.TabIndex = 23;
-            this.expAuraOTick.EnabledChanged += new System.EventHandler(this.expAuraOTick_EnabledChanged);
-            // 
-            // expAuraHTick
-            // 
-            this.expAuraHTick.AutoSize = true;
-            this.tableLayoutPanel11.SetColumnSpan(this.expAuraHTick, 2);
-            this.expAuraHTick.Dock = System.Windows.Forms.DockStyle.Top;
-            this.expAuraHTick.Expression = "";
-            this.expAuraHTick.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.Numeric;
-            this.expAuraHTick.Location = new System.Drawing.Point(317, 237);
-            this.expAuraHTick.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.expAuraHTick.Name = "expAuraHTick";
-            this.expAuraHTick.ReadOnly = false;
-            this.expAuraHTick.Size = new System.Drawing.Size(387, 25);
-            this.expAuraHTick.TabIndex = 21;
-            this.expAuraHTick.EnabledChanged += new System.EventHandler(this.expAuraHTick_EnabledChanged);
-            // 
-            // expAuraWTick
-            // 
-            this.expAuraWTick.AutoSize = true;
-            this.tableLayoutPanel11.SetColumnSpan(this.expAuraWTick, 2);
-            this.expAuraWTick.Dock = System.Windows.Forms.DockStyle.Top;
-            this.expAuraWTick.Expression = "";
-            this.expAuraWTick.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.Numeric;
-            this.expAuraWTick.Location = new System.Drawing.Point(317, 208);
-            this.expAuraWTick.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.expAuraWTick.Name = "expAuraWTick";
-            this.expAuraWTick.ReadOnly = false;
-            this.expAuraWTick.Size = new System.Drawing.Size(387, 25);
-            this.expAuraWTick.TabIndex = 19;
-            this.expAuraWTick.EnabledChanged += new System.EventHandler(this.expAuraWTick_EnabledChanged);
-            // 
-            // expAuraYTick
-            // 
-            this.expAuraYTick.AutoSize = true;
-            this.tableLayoutPanel11.SetColumnSpan(this.expAuraYTick, 2);
-            this.expAuraYTick.Dock = System.Windows.Forms.DockStyle.Top;
-            this.expAuraYTick.Expression = "";
-            this.expAuraYTick.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.Numeric;
-            this.expAuraYTick.Location = new System.Drawing.Point(317, 179);
-            this.expAuraYTick.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.expAuraYTick.Name = "expAuraYTick";
-            this.expAuraYTick.ReadOnly = false;
-            this.expAuraYTick.Size = new System.Drawing.Size(387, 25);
-            this.expAuraYTick.TabIndex = 17;
-            this.expAuraYTick.EnabledChanged += new System.EventHandler(this.expAuraYTick_EnabledChanged);
-            // 
-            // expAuraXTick
-            // 
-            this.expAuraXTick.AutoSize = true;
-            this.tableLayoutPanel11.SetColumnSpan(this.expAuraXTick, 2);
-            this.expAuraXTick.Dock = System.Windows.Forms.DockStyle.Top;
-            this.expAuraXTick.Expression = "";
-            this.expAuraXTick.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.Numeric;
-            this.expAuraXTick.Location = new System.Drawing.Point(317, 150);
-            this.expAuraXTick.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.expAuraXTick.Name = "expAuraXTick";
-            this.expAuraXTick.ReadOnly = false;
-            this.expAuraXTick.Size = new System.Drawing.Size(387, 25);
-            this.expAuraXTick.TabIndex = 15;
-            this.expAuraXTick.EnabledChanged += new System.EventHandler(this.expAuraXTick_EnabledChanged);
-            // 
             // lblUpdateTickExp
             // 
             this.lblUpdateTickExp.BackColor = System.Drawing.SystemColors.Info;
@@ -2105,45 +1747,6 @@
             this.lblUpdateTickExp.TabIndex = 41;
             this.lblUpdateTickExp.Text = "Update tick (20 ms) expressions";
             this.lblUpdateTickExp.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // expAuraOIni
-            // 
-            this.expAuraOIni.AutoSize = true;
-            this.expAuraOIni.Dock = System.Windows.Forms.DockStyle.Top;
-            this.expAuraOIni.Expression = "";
-            this.expAuraOIni.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.Numeric;
-            this.expAuraOIni.Location = new System.Drawing.Point(203, 266);
-            this.expAuraOIni.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.expAuraOIni.Name = "expAuraOIni";
-            this.expAuraOIni.ReadOnly = false;
-            this.expAuraOIni.Size = new System.Drawing.Size(106, 25);
-            this.expAuraOIni.TabIndex = 22;
-            // 
-            // expAuraHIni
-            // 
-            this.expAuraHIni.AutoSize = true;
-            this.expAuraHIni.Dock = System.Windows.Forms.DockStyle.Top;
-            this.expAuraHIni.Expression = "";
-            this.expAuraHIni.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.Numeric;
-            this.expAuraHIni.Location = new System.Drawing.Point(203, 237);
-            this.expAuraHIni.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.expAuraHIni.Name = "expAuraHIni";
-            this.expAuraHIni.ReadOnly = false;
-            this.expAuraHIni.Size = new System.Drawing.Size(106, 25);
-            this.expAuraHIni.TabIndex = 20;
-            // 
-            // expAuraWIni
-            // 
-            this.expAuraWIni.AutoSize = true;
-            this.expAuraWIni.Dock = System.Windows.Forms.DockStyle.Top;
-            this.expAuraWIni.Expression = "";
-            this.expAuraWIni.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.Numeric;
-            this.expAuraWIni.Location = new System.Drawing.Point(203, 208);
-            this.expAuraWIni.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.expAuraWIni.Name = "expAuraWIni";
-            this.expAuraWIni.ReadOnly = false;
-            this.expAuraWIni.Size = new System.Drawing.Size(106, 25);
-            this.expAuraWIni.TabIndex = 18;
             // 
             // lblAuraTtl
             // 
@@ -2205,21 +1808,6 @@
             this.btnBrowseAura.UseVisualStyleBackColor = true;
             this.btnBrowseAura.Click += new System.EventHandler(this.button2_Click);
             // 
-            // expAuraImage
-            // 
-            this.expAuraImage.AutoSize = true;
-            this.tableLayoutPanel11.SetColumnSpan(this.expAuraImage, 2);
-            this.expAuraImage.Dock = System.Windows.Forms.DockStyle.Top;
-            this.expAuraImage.Expression = "";
-            this.expAuraImage.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
-            this.expAuraImage.Location = new System.Drawing.Point(203, 65);
-            this.expAuraImage.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.expAuraImage.Name = "expAuraImage";
-            this.expAuraImage.ReadOnly = false;
-            this.expAuraImage.Size = new System.Drawing.Size(372, 25);
-            this.expAuraImage.TabIndex = 11;
-            this.expAuraImage.EnabledChanged += new System.EventHandler(this.expAuraImage_EnabledChanged);
-            // 
             // lblAuraImage
             // 
             this.lblAuraImage.AutoSize = true;
@@ -2231,19 +1819,6 @@
             this.lblAuraImage.TabIndex = 28;
             this.lblAuraImage.Text = "Image to display";
             this.lblAuraImage.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // expAuraYIni
-            // 
-            this.expAuraYIni.AutoSize = true;
-            this.expAuraYIni.Dock = System.Windows.Forms.DockStyle.Top;
-            this.expAuraYIni.Expression = "";
-            this.expAuraYIni.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.Numeric;
-            this.expAuraYIni.Location = new System.Drawing.Point(203, 179);
-            this.expAuraYIni.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.expAuraYIni.Name = "expAuraYIni";
-            this.expAuraYIni.ReadOnly = false;
-            this.expAuraYIni.Size = new System.Drawing.Size(106, 25);
-            this.expAuraYIni.TabIndex = 16;
             // 
             // lblAuraY
             // 
@@ -2257,19 +1832,6 @@
             this.lblAuraY.Text = "Y location expression";
             this.lblAuraY.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // expAuraXIni
-            // 
-            this.expAuraXIni.AutoSize = true;
-            this.expAuraXIni.Dock = System.Windows.Forms.DockStyle.Top;
-            this.expAuraXIni.Expression = "";
-            this.expAuraXIni.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.Numeric;
-            this.expAuraXIni.Location = new System.Drawing.Point(203, 150);
-            this.expAuraXIni.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.expAuraXIni.Name = "expAuraXIni";
-            this.expAuraXIni.ReadOnly = false;
-            this.expAuraXIni.Size = new System.Drawing.Size(106, 25);
-            this.expAuraXIni.TabIndex = 14;
-            // 
             // lblAuraX
             // 
             this.lblAuraX.AutoSize = true;
@@ -2281,21 +1843,6 @@
             this.lblAuraX.TabIndex = 24;
             this.lblAuraX.Text = "X location expression";
             this.lblAuraX.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // expAuraName
-            // 
-            this.expAuraName.AutoSize = true;
-            this.tableLayoutPanel11.SetColumnSpan(this.expAuraName, 2);
-            this.expAuraName.Dock = System.Windows.Forms.DockStyle.Top;
-            this.expAuraName.Expression = "";
-            this.expAuraName.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
-            this.expAuraName.Location = new System.Drawing.Point(203, 29);
-            this.expAuraName.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.expAuraName.Name = "expAuraName";
-            this.expAuraName.ReadOnly = false;
-            this.expAuraName.Size = new System.Drawing.Size(372, 25);
-            this.expAuraName.TabIndex = 10;
-            this.expAuraName.EnabledChanged += new System.EventHandler(this.expAuraName_EnabledChanged);
             // 
             // lblAuraName
             // 
@@ -2476,45 +2023,95 @@
             this.tableLayoutPanel27.ColumnCount = 2;
             this.tableLayoutPanel27.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel27.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel27.Controls.Add(this.expEncounterDamageType, 1, 5);
-            this.tableLayoutPanel27.Controls.Add(this.label9, 0, 5);
-            this.tableLayoutPanel27.Controls.Add(this.expEncounterDamage, 1, 4);
-            this.tableLayoutPanel27.Controls.Add(this.label8, 0, 4);
-            this.tableLayoutPanel27.Controls.Add(this.label7, 0, 3);
-            this.tableLayoutPanel27.Controls.Add(this.expEncounterTargetName, 1, 3);
-            this.tableLayoutPanel27.Controls.Add(this.label6, 0, 2);
-            this.tableLayoutPanel27.Controls.Add(this.expEncounterActorName, 1, 2);
-            this.tableLayoutPanel27.Controls.Add(this.label1, 0, 1);
-            this.tableLayoutPanel27.Controls.Add(this.expEncounterAbilityType, 1, 1);
+            this.tableLayoutPanel27.Controls.Add(this.label10, 0, 1);
+            this.tableLayoutPanel27.Controls.Add(this.cbxEncounterSwingType, 1, 1);
+            this.tableLayoutPanel27.Controls.Add(this.expEncounterDamageType, 1, 6);
+            this.tableLayoutPanel27.Controls.Add(this.label9, 0, 6);
+            this.tableLayoutPanel27.Controls.Add(this.expEncounterDamage, 1, 5);
+            this.tableLayoutPanel27.Controls.Add(this.label8, 0, 5);
+            this.tableLayoutPanel27.Controls.Add(this.label7, 0, 4);
+            this.tableLayoutPanel27.Controls.Add(this.expEncounterTargetName, 1, 4);
+            this.tableLayoutPanel27.Controls.Add(this.label6, 0, 3);
+            this.tableLayoutPanel27.Controls.Add(this.expEncounterActorName, 1, 3);
+            this.tableLayoutPanel27.Controls.Add(this.label1, 0, 2);
+            this.tableLayoutPanel27.Controls.Add(this.expEncounterAbilityType, 1, 2);
             this.tableLayoutPanel27.Controls.Add(this.label5, 0, 0);
             this.tableLayoutPanel27.Controls.Add(this.cbxEncounterOp, 1, 0);
             this.tableLayoutPanel27.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel27.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel27.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.tableLayoutPanel27.Name = "tableLayoutPanel27";
-            this.tableLayoutPanel27.RowCount = 7;
+            this.tableLayoutPanel27.RowCount = 8;
             this.tableLayoutPanel27.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel27.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel27.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel27.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel27.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel27.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel27.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel27.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel27.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel27.Size = new System.Drawing.Size(729, 309);
             this.tableLayoutPanel27.TabIndex = 17;
             // 
-            // expEncounterAbilityType
+            // label9
             // 
-            this.expEncounterAbilityType.AutoSize = true;
-            this.expEncounterAbilityType.Dock = System.Windows.Forms.DockStyle.Top;
-            this.expEncounterAbilityType.Expression = "";
-            this.expEncounterAbilityType.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
-            this.expEncounterAbilityType.Location = new System.Drawing.Point(115, 29);
-            this.expEncounterAbilityType.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.expEncounterAbilityType.Name = "expEncounterAbilityType";
-            this.expEncounterAbilityType.ReadOnly = false;
-            this.expEncounterAbilityType.Size = new System.Drawing.Size(610, 25);
-            this.expEncounterAbilityType.TabIndex = 22;
+            this.label9.AutoSize = true;
+            this.label9.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label9.Location = new System.Drawing.Point(4, 170);
+            this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(103, 29);
+            this.label9.TabIndex = 30;
+            this.label9.Text = "DamageType";
+            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label8.Location = new System.Drawing.Point(4, 141);
+            this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(103, 29);
+            this.label8.TabIndex = 28;
+            this.label8.Text = "Damage";
+            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label7.Location = new System.Drawing.Point(4, 112);
+            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(103, 29);
+            this.label7.TabIndex = 27;
+            this.label7.Text = "Target name";
+            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label6.Location = new System.Drawing.Point(4, 83);
+            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(103, 29);
+            this.label6.TabIndex = 25;
+            this.label6.Text = "Actor name";
+            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label1.Location = new System.Drawing.Point(4, 54);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(103, 29);
+            this.label1.TabIndex = 23;
+            this.label1.Text = "Ability type";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label5
             // 
@@ -2601,19 +2198,6 @@
             this.cbxDiscordTts.Text = "Send as a text-to-speech message";
             this.cbxDiscordTts.UseVisualStyleBackColor = true;
             // 
-            // expDiscordMessage
-            // 
-            this.expDiscordMessage.AutoSize = true;
-            this.expDiscordMessage.Dock = System.Windows.Forms.DockStyle.Top;
-            this.expDiscordMessage.Expression = "";
-            this.expDiscordMessage.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
-            this.expDiscordMessage.Location = new System.Drawing.Point(139, 31);
-            this.expDiscordMessage.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.expDiscordMessage.Name = "expDiscordMessage";
-            this.expDiscordMessage.ReadOnly = false;
-            this.expDiscordMessage.Size = new System.Drawing.Size(586, 25);
-            this.expDiscordMessage.TabIndex = 16;
-            // 
             // lblDiscordMessage
             // 
             this.lblDiscordMessage.AutoSize = true;
@@ -2637,19 +2221,6 @@
             this.lblDiscordUrl.TabIndex = 7;
             this.lblDiscordUrl.Text = "Webhook URL";
             this.lblDiscordUrl.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // expDiscordUrl
-            // 
-            this.expDiscordUrl.AutoSize = true;
-            this.expDiscordUrl.Dock = System.Windows.Forms.DockStyle.Top;
-            this.expDiscordUrl.Expression = "";
-            this.expDiscordUrl.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
-            this.expDiscordUrl.Location = new System.Drawing.Point(139, 2);
-            this.expDiscordUrl.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.expDiscordUrl.Name = "expDiscordUrl";
-            this.expDiscordUrl.ReadOnly = false;
-            this.expDiscordUrl.Size = new System.Drawing.Size(586, 25);
-            this.expDiscordUrl.TabIndex = 14;
             // 
             // tabTextAura
             // 
@@ -2811,96 +2382,6 @@
             this.lblTextAuraAlignment.Text = "Text alignment";
             this.lblTextAuraAlignment.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // expTextAuraTTLTick
-            // 
-            this.expTextAuraTTLTick.AutoSize = true;
-            this.tableLayoutPanel13.SetColumnSpan(this.expTextAuraTTLTick, 2);
-            this.expTextAuraTTLTick.Dock = System.Windows.Forms.DockStyle.Top;
-            this.expTextAuraTTLTick.Expression = "";
-            this.expTextAuraTTLTick.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.Numeric;
-            this.expTextAuraTTLTick.Location = new System.Drawing.Point(320, 352);
-            this.expTextAuraTTLTick.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.expTextAuraTTLTick.Name = "expTextAuraTTLTick";
-            this.expTextAuraTTLTick.ReadOnly = false;
-            this.expTextAuraTTLTick.Size = new System.Drawing.Size(384, 25);
-            this.expTextAuraTTLTick.TabIndex = 24;
-            this.expTextAuraTTLTick.EnabledChanged += new System.EventHandler(this.expTextAuraTTLTick_EnabledChanged);
-            // 
-            // expTextAuraOTick
-            // 
-            this.expTextAuraOTick.AutoSize = true;
-            this.tableLayoutPanel13.SetColumnSpan(this.expTextAuraOTick, 2);
-            this.expTextAuraOTick.Dock = System.Windows.Forms.DockStyle.Top;
-            this.expTextAuraOTick.Expression = "";
-            this.expTextAuraOTick.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.Numeric;
-            this.expTextAuraOTick.Location = new System.Drawing.Point(320, 323);
-            this.expTextAuraOTick.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.expTextAuraOTick.Name = "expTextAuraOTick";
-            this.expTextAuraOTick.ReadOnly = false;
-            this.expTextAuraOTick.Size = new System.Drawing.Size(384, 25);
-            this.expTextAuraOTick.TabIndex = 23;
-            this.expTextAuraOTick.EnabledChanged += new System.EventHandler(this.expTextAuraOTick_EnabledChanged);
-            // 
-            // expTextAuraHTick
-            // 
-            this.expTextAuraHTick.AutoSize = true;
-            this.tableLayoutPanel13.SetColumnSpan(this.expTextAuraHTick, 2);
-            this.expTextAuraHTick.Dock = System.Windows.Forms.DockStyle.Top;
-            this.expTextAuraHTick.Expression = "";
-            this.expTextAuraHTick.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.Numeric;
-            this.expTextAuraHTick.Location = new System.Drawing.Point(320, 294);
-            this.expTextAuraHTick.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.expTextAuraHTick.Name = "expTextAuraHTick";
-            this.expTextAuraHTick.ReadOnly = false;
-            this.expTextAuraHTick.Size = new System.Drawing.Size(384, 25);
-            this.expTextAuraHTick.TabIndex = 21;
-            this.expTextAuraHTick.EnabledChanged += new System.EventHandler(this.expTextAuraHTick_EnabledChanged);
-            // 
-            // expTextAuraWTick
-            // 
-            this.expTextAuraWTick.AutoSize = true;
-            this.tableLayoutPanel13.SetColumnSpan(this.expTextAuraWTick, 2);
-            this.expTextAuraWTick.Dock = System.Windows.Forms.DockStyle.Top;
-            this.expTextAuraWTick.Expression = "";
-            this.expTextAuraWTick.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.Numeric;
-            this.expTextAuraWTick.Location = new System.Drawing.Point(320, 265);
-            this.expTextAuraWTick.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.expTextAuraWTick.Name = "expTextAuraWTick";
-            this.expTextAuraWTick.ReadOnly = false;
-            this.expTextAuraWTick.Size = new System.Drawing.Size(384, 25);
-            this.expTextAuraWTick.TabIndex = 19;
-            this.expTextAuraWTick.EnabledChanged += new System.EventHandler(this.expTextAuraWTick_EnabledChanged);
-            // 
-            // expTextAuraYTick
-            // 
-            this.expTextAuraYTick.AutoSize = true;
-            this.tableLayoutPanel13.SetColumnSpan(this.expTextAuraYTick, 2);
-            this.expTextAuraYTick.Dock = System.Windows.Forms.DockStyle.Top;
-            this.expTextAuraYTick.Expression = "";
-            this.expTextAuraYTick.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.Numeric;
-            this.expTextAuraYTick.Location = new System.Drawing.Point(320, 236);
-            this.expTextAuraYTick.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.expTextAuraYTick.Name = "expTextAuraYTick";
-            this.expTextAuraYTick.ReadOnly = false;
-            this.expTextAuraYTick.Size = new System.Drawing.Size(384, 25);
-            this.expTextAuraYTick.TabIndex = 17;
-            this.expTextAuraYTick.EnabledChanged += new System.EventHandler(this.expTextAuraYTick_EnabledChanged);
-            // 
-            // expTextAuraXTick
-            // 
-            this.expTextAuraXTick.AutoSize = true;
-            this.tableLayoutPanel13.SetColumnSpan(this.expTextAuraXTick, 2);
-            this.expTextAuraXTick.Dock = System.Windows.Forms.DockStyle.Top;
-            this.expTextAuraXTick.Expression = "";
-            this.expTextAuraXTick.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.Numeric;
-            this.expTextAuraXTick.Location = new System.Drawing.Point(320, 207);
-            this.expTextAuraXTick.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.expTextAuraXTick.Name = "expTextAuraXTick";
-            this.expTextAuraXTick.ReadOnly = false;
-            this.expTextAuraXTick.Size = new System.Drawing.Size(384, 25);
-            this.expTextAuraXTick.TabIndex = 15;
-            this.expTextAuraXTick.EnabledChanged += new System.EventHandler(this.expTextAuraXTick_EnabledChanged);
-            // 
             // lblTextAuraUpdValues
             // 
             this.lblTextAuraUpdValues.BackColor = System.Drawing.SystemColors.Info;
@@ -2915,45 +2396,6 @@
             this.lblTextAuraUpdValues.TabIndex = 41;
             this.lblTextAuraUpdValues.Text = "Update tick (20 ms) expressions";
             this.lblTextAuraUpdValues.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // expTextAuraOIni
-            // 
-            this.expTextAuraOIni.AutoSize = true;
-            this.expTextAuraOIni.Dock = System.Windows.Forms.DockStyle.Top;
-            this.expTextAuraOIni.Expression = "";
-            this.expTextAuraOIni.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.Numeric;
-            this.expTextAuraOIni.Location = new System.Drawing.Point(203, 323);
-            this.expTextAuraOIni.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.expTextAuraOIni.Name = "expTextAuraOIni";
-            this.expTextAuraOIni.ReadOnly = false;
-            this.expTextAuraOIni.Size = new System.Drawing.Size(109, 25);
-            this.expTextAuraOIni.TabIndex = 22;
-            // 
-            // expTextAuraHIni
-            // 
-            this.expTextAuraHIni.AutoSize = true;
-            this.expTextAuraHIni.Dock = System.Windows.Forms.DockStyle.Top;
-            this.expTextAuraHIni.Expression = "";
-            this.expTextAuraHIni.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.Numeric;
-            this.expTextAuraHIni.Location = new System.Drawing.Point(203, 294);
-            this.expTextAuraHIni.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.expTextAuraHIni.Name = "expTextAuraHIni";
-            this.expTextAuraHIni.ReadOnly = false;
-            this.expTextAuraHIni.Size = new System.Drawing.Size(109, 25);
-            this.expTextAuraHIni.TabIndex = 20;
-            // 
-            // expTextAuraWIni
-            // 
-            this.expTextAuraWIni.AutoSize = true;
-            this.expTextAuraWIni.Dock = System.Windows.Forms.DockStyle.Top;
-            this.expTextAuraWIni.Expression = "";
-            this.expTextAuraWIni.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.Numeric;
-            this.expTextAuraWIni.Location = new System.Drawing.Point(203, 265);
-            this.expTextAuraWIni.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.expTextAuraWIni.Name = "expTextAuraWIni";
-            this.expTextAuraWIni.ReadOnly = false;
-            this.expTextAuraWIni.Size = new System.Drawing.Size(109, 25);
-            this.expTextAuraWIni.TabIndex = 18;
             // 
             // lblTextAuraTtlExp
             // 
@@ -3003,21 +2445,6 @@
             this.lblTextAuraHeight.Text = "Height expression";
             this.lblTextAuraHeight.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // expTextAuraText
-            // 
-            this.expTextAuraText.AutoSize = true;
-            this.tableLayoutPanel13.SetColumnSpan(this.expTextAuraText, 3);
-            this.expTextAuraText.Dock = System.Windows.Forms.DockStyle.Top;
-            this.expTextAuraText.Expression = "";
-            this.expTextAuraText.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
-            this.expTextAuraText.Location = new System.Drawing.Point(203, 65);
-            this.expTextAuraText.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.expTextAuraText.Name = "expTextAuraText";
-            this.expTextAuraText.ReadOnly = false;
-            this.expTextAuraText.Size = new System.Drawing.Size(501, 25);
-            this.expTextAuraText.TabIndex = 11;
-            this.expTextAuraText.EnabledChanged += new System.EventHandler(this.expTextAuraText_EnabledChanged);
-            // 
             // lblTextAuraText
             // 
             this.lblTextAuraText.AutoSize = true;
@@ -3029,19 +2456,6 @@
             this.lblTextAuraText.TabIndex = 28;
             this.lblTextAuraText.Text = "Text to display";
             this.lblTextAuraText.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // expTextAuraYIni
-            // 
-            this.expTextAuraYIni.AutoSize = true;
-            this.expTextAuraYIni.Dock = System.Windows.Forms.DockStyle.Top;
-            this.expTextAuraYIni.Expression = "";
-            this.expTextAuraYIni.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.Numeric;
-            this.expTextAuraYIni.Location = new System.Drawing.Point(203, 236);
-            this.expTextAuraYIni.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.expTextAuraYIni.Name = "expTextAuraYIni";
-            this.expTextAuraYIni.ReadOnly = false;
-            this.expTextAuraYIni.Size = new System.Drawing.Size(109, 25);
-            this.expTextAuraYIni.TabIndex = 16;
             // 
             // lblTextAuraY
             // 
@@ -3055,19 +2469,6 @@
             this.lblTextAuraY.Text = "Y location expression";
             this.lblTextAuraY.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // expTextAuraXIni
-            // 
-            this.expTextAuraXIni.AutoSize = true;
-            this.expTextAuraXIni.Dock = System.Windows.Forms.DockStyle.Top;
-            this.expTextAuraXIni.Expression = "";
-            this.expTextAuraXIni.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.Numeric;
-            this.expTextAuraXIni.Location = new System.Drawing.Point(203, 207);
-            this.expTextAuraXIni.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.expTextAuraXIni.Name = "expTextAuraXIni";
-            this.expTextAuraXIni.ReadOnly = false;
-            this.expTextAuraXIni.Size = new System.Drawing.Size(109, 25);
-            this.expTextAuraXIni.TabIndex = 14;
-            // 
             // lblTextAuraX
             // 
             this.lblTextAuraX.AutoSize = true;
@@ -3079,21 +2480,6 @@
             this.lblTextAuraX.TabIndex = 24;
             this.lblTextAuraX.Text = "X location expression";
             this.lblTextAuraX.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // expTextAuraName
-            // 
-            this.expTextAuraName.AutoSize = true;
-            this.tableLayoutPanel13.SetColumnSpan(this.expTextAuraName, 2);
-            this.expTextAuraName.Dock = System.Windows.Forms.DockStyle.Top;
-            this.expTextAuraName.Expression = "";
-            this.expTextAuraName.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
-            this.expTextAuraName.Location = new System.Drawing.Point(203, 29);
-            this.expTextAuraName.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.expTextAuraName.Name = "expTextAuraName";
-            this.expTextAuraName.ReadOnly = false;
-            this.expTextAuraName.Size = new System.Drawing.Size(382, 25);
-            this.expTextAuraName.TabIndex = 10;
-            this.expTextAuraName.EnabledChanged += new System.EventHandler(this.expTextAuraName_EnabledChanged);
             // 
             // lblTextAuraName
             // 
@@ -3174,24 +2560,6 @@
             this.txtTextAuraFont.ReadOnly = true;
             this.txtTextAuraFont.Size = new System.Drawing.Size(265, 25);
             this.txtTextAuraFont.TabIndex = 53;
-            // 
-            // colorSelector1
-            // 
-            this.colorSelector1.AutoSize = true;
-            this.colorSelector1.BackgroundColor = System.Drawing.Color.Empty;
-            this.colorSelector1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.colorSelector1.ChangeBackgroundColor = true;
-            this.colorSelector1.ChangeTextColor = true;
-            this.colorSelector1.ChangeTextOutlineColor = true;
-            this.colorSelector1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.colorSelector1.Location = new System.Drawing.Point(204, 94);
-            this.colorSelector1.Margin = new System.Windows.Forms.Padding(5, 2, 5, 2);
-            this.colorSelector1.Name = "colorSelector1";
-            this.colorSelector1.Size = new System.Drawing.Size(107, 32);
-            this.colorSelector1.TabIndex = 54;
-            this.colorSelector1.TextColor = System.Drawing.Color.Empty;
-            this.colorSelector1.TextOutlineColor = System.Drawing.Color.Empty;
-            this.colorSelector1.EnabledChanged += new System.EventHandler(this.colorSelector1_EnabledChanged);
             // 
             // cbxTextAuraOutline
             // 
@@ -3313,19 +2681,6 @@
             this.lblLogMessageText.Text = "Message to log";
             this.lblLogMessageText.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // expLogMessageText
-            // 
-            this.expLogMessageText.AutoSize = true;
-            this.expLogMessageText.Dock = System.Windows.Forms.DockStyle.Top;
-            this.expLogMessageText.Expression = "";
-            this.expLogMessageText.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
-            this.expLogMessageText.Location = new System.Drawing.Point(203, 2);
-            this.expLogMessageText.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.expLogMessageText.Name = "expLogMessageText";
-            this.expLogMessageText.ReadOnly = false;
-            this.expLogMessageText.Size = new System.Drawing.Size(522, 25);
-            this.expLogMessageText.TabIndex = 14;
-            // 
             // tabListVariable
             // 
             this.tabListVariable.Controls.Add(this.tableLayoutPanel17);
@@ -3397,20 +2752,6 @@
             this.lblLvarExpType.Text = "Expression type";
             this.lblLvarExpType.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // expLvarTarget
-            // 
-            this.expLvarTarget.AutoSize = true;
-            this.expLvarTarget.Dock = System.Windows.Forms.DockStyle.Top;
-            this.expLvarTarget.Expression = "";
-            this.expLvarTarget.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
-            this.expLvarTarget.Location = new System.Drawing.Point(179, 143);
-            this.expLvarTarget.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.expLvarTarget.Name = "expLvarTarget";
-            this.expLvarTarget.ReadOnly = false;
-            this.expLvarTarget.Size = new System.Drawing.Size(546, 25);
-            this.expLvarTarget.TabIndex = 27;
-            this.expLvarTarget.EnabledChanged += new System.EventHandler(this.expLvarTarget_EnabledChanged);
-            // 
             // lblLvarTarget
             // 
             this.lblLvarTarget.AutoSize = true;
@@ -3422,20 +2763,6 @@
             this.lblLvarTarget.TabIndex = 26;
             this.lblLvarTarget.Text = "Target variable name";
             this.lblLvarTarget.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // expLvarIndex
-            // 
-            this.expLvarIndex.AutoSize = true;
-            this.expLvarIndex.Dock = System.Windows.Forms.DockStyle.Top;
-            this.expLvarIndex.Expression = "";
-            this.expLvarIndex.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.Numeric;
-            this.expLvarIndex.Location = new System.Drawing.Point(179, 114);
-            this.expLvarIndex.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.expLvarIndex.Name = "expLvarIndex";
-            this.expLvarIndex.ReadOnly = false;
-            this.expLvarIndex.Size = new System.Drawing.Size(546, 25);
-            this.expLvarIndex.TabIndex = 25;
-            this.expLvarIndex.EnabledChanged += new System.EventHandler(this.expLvarIndex_EnabledChanged);
             // 
             // lblLvarIndex
             // 
@@ -3449,20 +2776,6 @@
             this.lblLvarIndex.Text = "List index number";
             this.lblLvarIndex.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // expLvarValue
-            // 
-            this.expLvarValue.AutoSize = true;
-            this.expLvarValue.Dock = System.Windows.Forms.DockStyle.Top;
-            this.expLvarValue.Expression = "";
-            this.expLvarValue.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
-            this.expLvarValue.Location = new System.Drawing.Point(179, 85);
-            this.expLvarValue.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.expLvarValue.Name = "expLvarValue";
-            this.expLvarValue.ReadOnly = false;
-            this.expLvarValue.Size = new System.Drawing.Size(546, 25);
-            this.expLvarValue.TabIndex = 23;
-            this.expLvarValue.EnabledChanged += new System.EventHandler(this.expLvarValue_EnabledChanged);
-            // 
             // lblLvarValue
             // 
             this.lblLvarValue.AutoSize = true;
@@ -3474,20 +2787,6 @@
             this.lblLvarValue.TabIndex = 22;
             this.lblLvarValue.Text = "Expression";
             this.lblLvarValue.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // expLvarName
-            // 
-            this.expLvarName.AutoSize = true;
-            this.expLvarName.Dock = System.Windows.Forms.DockStyle.Top;
-            this.expLvarName.Expression = "";
-            this.expLvarName.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
-            this.expLvarName.Location = new System.Drawing.Point(179, 29);
-            this.expLvarName.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.expLvarName.Name = "expLvarName";
-            this.expLvarName.ReadOnly = false;
-            this.expLvarName.Size = new System.Drawing.Size(546, 25);
-            this.expLvarName.TabIndex = 16;
-            this.expLvarName.EnabledChanged += new System.EventHandler(this.expLvarName_EnabledChanged);
             // 
             // lblLvarName
             // 
@@ -3602,36 +2901,6 @@
             this.lblObsJSONPayload.Text = "JSON payload";
             this.lblObsJSONPayload.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // expObsJSONPayload
-            // 
-            this.expObsJSONPayload.AutoSize = true;
-            this.tableLayoutPanel18.SetColumnSpan(this.expObsJSONPayload, 2);
-            this.expObsJSONPayload.Dock = System.Windows.Forms.DockStyle.Top;
-            this.expObsJSONPayload.Expression = "";
-            this.expObsJSONPayload.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
-            this.expObsJSONPayload.Location = new System.Drawing.Point(131, 87);
-            this.expObsJSONPayload.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.expObsJSONPayload.Name = "expObsJSONPayload";
-            this.expObsJSONPayload.ReadOnly = false;
-            this.expObsJSONPayload.Size = new System.Drawing.Size(594, 25);
-            this.expObsJSONPayload.TabIndex = 25;
-            this.expObsJSONPayload.EnabledChanged += new System.EventHandler(this.expObsJSONPayload_EnabledChanged);
-            // 
-            // expObsSourceName
-            // 
-            this.expObsSourceName.AutoSize = true;
-            this.tableLayoutPanel18.SetColumnSpan(this.expObsSourceName, 2);
-            this.expObsSourceName.Dock = System.Windows.Forms.DockStyle.Top;
-            this.expObsSourceName.Expression = "";
-            this.expObsSourceName.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
-            this.expObsSourceName.Location = new System.Drawing.Point(131, 58);
-            this.expObsSourceName.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.expObsSourceName.Name = "expObsSourceName";
-            this.expObsSourceName.ReadOnly = false;
-            this.expObsSourceName.Size = new System.Drawing.Size(594, 25);
-            this.expObsSourceName.TabIndex = 24;
-            this.expObsSourceName.EnabledChanged += new System.EventHandler(this.expObsSourceName_EnabledChanged);
-            // 
             // lblObsSourceName
             // 
             this.lblObsSourceName.AutoSize = true;
@@ -3707,21 +2976,6 @@
             this.lblObsSceneName.TabIndex = 7;
             this.lblObsSceneName.Text = "Scene name";
             this.lblObsSceneName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // expObsSceneName
-            // 
-            this.expObsSceneName.AutoSize = true;
-            this.tableLayoutPanel18.SetColumnSpan(this.expObsSceneName, 2);
-            this.expObsSceneName.Dock = System.Windows.Forms.DockStyle.Top;
-            this.expObsSceneName.Expression = "";
-            this.expObsSceneName.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
-            this.expObsSceneName.Location = new System.Drawing.Point(131, 29);
-            this.expObsSceneName.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.expObsSceneName.Name = "expObsSceneName";
-            this.expObsSceneName.ReadOnly = false;
-            this.expObsSceneName.Size = new System.Drawing.Size(594, 25);
-            this.expObsSceneName.TabIndex = 14;
-            this.expObsSceneName.EnabledChanged += new System.EventHandler(this.expObsSceneName_EnabledChanged);
             // 
             // lblObsWebsocketInfo
             // 
@@ -3842,19 +3096,6 @@
             this.lblJsonInstructions.TabIndex = 21;
             this.lblJsonInstructions.Text = resources.GetString("lblJsonInstructions.Text");
             // 
-            // expJsonFiring
-            // 
-            this.expJsonFiring.AutoSize = true;
-            this.expJsonFiring.Dock = System.Windows.Forms.DockStyle.Top;
-            this.expJsonFiring.Expression = "";
-            this.expJsonFiring.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
-            this.expJsonFiring.Location = new System.Drawing.Point(227, 87);
-            this.expJsonFiring.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.expJsonFiring.Name = "expJsonFiring";
-            this.expJsonFiring.ReadOnly = false;
-            this.expJsonFiring.Size = new System.Drawing.Size(498, 25);
-            this.expJsonFiring.TabIndex = 20;
-            // 
             // lblJsonFiring
             // 
             this.lblJsonFiring.AutoSize = true;
@@ -3866,19 +3107,6 @@
             this.lblJsonFiring.TabIndex = 19;
             this.lblJsonFiring.Text = "Response firing expression";
             this.lblJsonFiring.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // expJsonPayload
-            // 
-            this.expJsonPayload.AutoSize = true;
-            this.expJsonPayload.Dock = System.Windows.Forms.DockStyle.Top;
-            this.expJsonPayload.Expression = "";
-            this.expJsonPayload.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
-            this.expJsonPayload.Location = new System.Drawing.Point(227, 58);
-            this.expJsonPayload.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.expJsonPayload.Name = "expJsonPayload";
-            this.expJsonPayload.ReadOnly = false;
-            this.expJsonPayload.Size = new System.Drawing.Size(498, 25);
-            this.expJsonPayload.TabIndex = 16;
             // 
             // lblJsonPayload
             // 
@@ -3903,19 +3131,6 @@
             this.lblJsonEndpoint.TabIndex = 7;
             this.lblJsonEndpoint.Text = "Endpoint URL";
             this.lblJsonEndpoint.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // expJsonEndpoint
-            // 
-            this.expJsonEndpoint.AutoSize = true;
-            this.expJsonEndpoint.Dock = System.Windows.Forms.DockStyle.Top;
-            this.expJsonEndpoint.Expression = "";
-            this.expJsonEndpoint.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
-            this.expJsonEndpoint.Location = new System.Drawing.Point(227, 2);
-            this.expJsonEndpoint.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.expJsonEndpoint.Name = "expJsonEndpoint";
-            this.expJsonEndpoint.ReadOnly = false;
-            this.expJsonEndpoint.Size = new System.Drawing.Size(498, 25);
-            this.expJsonEndpoint.TabIndex = 14;
             // 
             // tabWindowMessage
             // 
@@ -3956,20 +3171,6 @@
             this.tableLayoutPanel19.Size = new System.Drawing.Size(729, 116);
             this.tableLayoutPanel19.TabIndex = 3;
             // 
-            // expWmsgLparam
-            // 
-            this.expWmsgLparam.AutoSize = true;
-            this.tableLayoutPanel19.SetColumnSpan(this.expWmsgLparam, 2);
-            this.expWmsgLparam.Dock = System.Windows.Forms.DockStyle.Top;
-            this.expWmsgLparam.Expression = "";
-            this.expWmsgLparam.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.Numeric;
-            this.expWmsgLparam.Location = new System.Drawing.Point(115, 89);
-            this.expWmsgLparam.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.expWmsgLparam.Name = "expWmsgLparam";
-            this.expWmsgLparam.ReadOnly = false;
-            this.expWmsgLparam.Size = new System.Drawing.Size(610, 25);
-            this.expWmsgLparam.TabIndex = 30;
-            // 
             // lblWmsgLparam
             // 
             this.lblWmsgLparam.AutoSize = true;
@@ -3982,20 +3183,6 @@
             this.lblWmsgLparam.Text = "LParam";
             this.lblWmsgLparam.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // expWmsgWparam
-            // 
-            this.expWmsgWparam.AutoSize = true;
-            this.tableLayoutPanel19.SetColumnSpan(this.expWmsgWparam, 2);
-            this.expWmsgWparam.Dock = System.Windows.Forms.DockStyle.Top;
-            this.expWmsgWparam.Expression = "";
-            this.expWmsgWparam.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.Numeric;
-            this.expWmsgWparam.Location = new System.Drawing.Point(115, 60);
-            this.expWmsgWparam.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.expWmsgWparam.Name = "expWmsgWparam";
-            this.expWmsgWparam.ReadOnly = false;
-            this.expWmsgWparam.Size = new System.Drawing.Size(610, 25);
-            this.expWmsgWparam.TabIndex = 28;
-            // 
             // lblWmsgWparam
             // 
             this.lblWmsgWparam.AutoSize = true;
@@ -4007,34 +3194,6 @@
             this.lblWmsgWparam.TabIndex = 27;
             this.lblWmsgWparam.Text = "WParam";
             this.lblWmsgWparam.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // expWmsgCode
-            // 
-            this.expWmsgCode.AutoSize = true;
-            this.tableLayoutPanel19.SetColumnSpan(this.expWmsgCode, 2);
-            this.expWmsgCode.Dock = System.Windows.Forms.DockStyle.Top;
-            this.expWmsgCode.Expression = "";
-            this.expWmsgCode.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.Numeric;
-            this.expWmsgCode.Location = new System.Drawing.Point(115, 31);
-            this.expWmsgCode.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.expWmsgCode.Name = "expWmsgCode";
-            this.expWmsgCode.ReadOnly = false;
-            this.expWmsgCode.Size = new System.Drawing.Size(610, 25);
-            this.expWmsgCode.TabIndex = 26;
-            // 
-            // expWmsgTitle
-            // 
-            this.expWmsgTitle.AutoSize = true;
-            this.tableLayoutPanel19.SetColumnSpan(this.expWmsgTitle, 2);
-            this.expWmsgTitle.Dock = System.Windows.Forms.DockStyle.Top;
-            this.expWmsgTitle.Expression = "";
-            this.expWmsgTitle.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
-            this.expWmsgTitle.Location = new System.Drawing.Point(115, 2);
-            this.expWmsgTitle.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.expWmsgTitle.Name = "expWmsgTitle";
-            this.expWmsgTitle.ReadOnly = false;
-            this.expWmsgTitle.Size = new System.Drawing.Size(610, 25);
-            this.expWmsgTitle.TabIndex = 25;
             // 
             // lblWmsgCode
             // 
@@ -4140,20 +3299,6 @@
             this.cbxFileOpCache.Text = "Cache file on disk";
             this.cbxFileOpCache.UseVisualStyleBackColor = true;
             // 
-            // expFileOpVariable
-            // 
-            this.expFileOpVariable.AutoSize = true;
-            this.tableLayoutPanel20.SetColumnSpan(this.expFileOpVariable, 2);
-            this.expFileOpVariable.Dock = System.Windows.Forms.DockStyle.Top;
-            this.expFileOpVariable.Expression = "";
-            this.expFileOpVariable.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
-            this.expFileOpVariable.Location = new System.Drawing.Point(131, 58);
-            this.expFileOpVariable.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.expFileOpVariable.Name = "expFileOpVariable";
-            this.expFileOpVariable.ReadOnly = false;
-            this.expFileOpVariable.Size = new System.Drawing.Size(594, 25);
-            this.expFileOpVariable.TabIndex = 24;
-            // 
             // lblFileOpVariable
             // 
             this.lblFileOpVariable.AutoSize = true;
@@ -4209,20 +3354,6 @@
             this.lblFileOpName.TabIndex = 7;
             this.lblFileOpName.Text = "File name";
             this.lblFileOpName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // expFileOpName
-            // 
-            this.expFileOpName.AutoSize = true;
-            this.tableLayoutPanel20.SetColumnSpan(this.expFileOpName, 2);
-            this.expFileOpName.Dock = System.Windows.Forms.DockStyle.Top;
-            this.expFileOpName.Expression = "";
-            this.expFileOpName.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
-            this.expFileOpName.Location = new System.Drawing.Point(131, 29);
-            this.expFileOpName.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.expFileOpName.Name = "expFileOpName";
-            this.expFileOpName.ReadOnly = false;
-            this.expFileOpName.Size = new System.Drawing.Size(594, 25);
-            this.expFileOpName.TabIndex = 14;
             // 
             // panel9
             // 
@@ -4298,20 +3429,6 @@
             this.tableLayoutPanel21.Size = new System.Drawing.Size(729, 199);
             this.tableLayoutPanel21.TabIndex = 8;
             // 
-            // expTvarRow
-            // 
-            this.expTvarRow.AutoSize = true;
-            this.expTvarRow.Dock = System.Windows.Forms.DockStyle.Top;
-            this.expTvarRow.Expression = "";
-            this.expTvarRow.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.Numeric;
-            this.expTvarRow.Location = new System.Drawing.Point(179, 143);
-            this.expTvarRow.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.expTvarRow.Name = "expTvarRow";
-            this.expTvarRow.ReadOnly = false;
-            this.expTvarRow.Size = new System.Drawing.Size(546, 25);
-            this.expTvarRow.TabIndex = 31;
-            this.expTvarRow.EnabledChanged += new System.EventHandler(this.expTvarRow_EnabledChanged);
-            // 
             // lblTvarRow
             // 
             this.lblTvarRow.AutoSize = true;
@@ -4352,20 +3469,6 @@
             this.lblTvarExpType.Text = "Expression type";
             this.lblTvarExpType.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // expTvarTarget
-            // 
-            this.expTvarTarget.AutoSize = true;
-            this.expTvarTarget.Dock = System.Windows.Forms.DockStyle.Top;
-            this.expTvarTarget.Expression = "";
-            this.expTvarTarget.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
-            this.expTvarTarget.Location = new System.Drawing.Point(179, 172);
-            this.expTvarTarget.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.expTvarTarget.Name = "expTvarTarget";
-            this.expTvarTarget.ReadOnly = false;
-            this.expTvarTarget.Size = new System.Drawing.Size(546, 25);
-            this.expTvarTarget.TabIndex = 27;
-            this.expTvarTarget.EnabledChanged += new System.EventHandler(this.expTvarTarget_EnabledChanged);
-            // 
             // lblTvarTarget
             // 
             this.lblTvarTarget.AutoSize = true;
@@ -4377,20 +3480,6 @@
             this.lblTvarTarget.TabIndex = 26;
             this.lblTvarTarget.Text = "Target variable name";
             this.lblTvarTarget.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // expTvarColumn
-            // 
-            this.expTvarColumn.AutoSize = true;
-            this.expTvarColumn.Dock = System.Windows.Forms.DockStyle.Top;
-            this.expTvarColumn.Expression = "";
-            this.expTvarColumn.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.Numeric;
-            this.expTvarColumn.Location = new System.Drawing.Point(179, 114);
-            this.expTvarColumn.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.expTvarColumn.Name = "expTvarColumn";
-            this.expTvarColumn.ReadOnly = false;
-            this.expTvarColumn.Size = new System.Drawing.Size(546, 25);
-            this.expTvarColumn.TabIndex = 25;
-            this.expTvarColumn.EnabledChanged += new System.EventHandler(this.expTvarColumn_EnabledChanged);
             // 
             // lblTvarColumn
             // 
@@ -4404,20 +3493,6 @@
             this.lblTvarColumn.Text = "Column definition";
             this.lblTvarColumn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // expTvarValue
-            // 
-            this.expTvarValue.AutoSize = true;
-            this.expTvarValue.Dock = System.Windows.Forms.DockStyle.Top;
-            this.expTvarValue.Expression = "";
-            this.expTvarValue.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
-            this.expTvarValue.Location = new System.Drawing.Point(179, 85);
-            this.expTvarValue.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.expTvarValue.Name = "expTvarValue";
-            this.expTvarValue.ReadOnly = false;
-            this.expTvarValue.Size = new System.Drawing.Size(546, 25);
-            this.expTvarValue.TabIndex = 23;
-            this.expTvarValue.EnabledChanged += new System.EventHandler(this.expTvarValue_EnabledChanged);
-            // 
             // lblTvarValue
             // 
             this.lblTvarValue.AutoSize = true;
@@ -4429,20 +3504,6 @@
             this.lblTvarValue.TabIndex = 22;
             this.lblTvarValue.Text = "Expression";
             this.lblTvarValue.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // expTvarName
-            // 
-            this.expTvarName.AutoSize = true;
-            this.expTvarName.Dock = System.Windows.Forms.DockStyle.Top;
-            this.expTvarName.Expression = "";
-            this.expTvarName.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
-            this.expTvarName.Location = new System.Drawing.Point(179, 29);
-            this.expTvarName.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.expTvarName.Name = "expTvarName";
-            this.expTvarName.ReadOnly = false;
-            this.expTvarName.Size = new System.Drawing.Size(546, 25);
-            this.expTvarName.TabIndex = 16;
-            this.expTvarName.EnabledChanged += new System.EventHandler(this.expTvarName_EnabledChanged);
             // 
             // lblTvarName
             // 
@@ -4519,19 +3580,6 @@
             this.tableLayoutPanel22.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 22F));
             this.tableLayoutPanel22.Size = new System.Drawing.Size(729, 56);
             this.tableLayoutPanel22.TabIndex = 6;
-            // 
-            // expMutexName
-            // 
-            this.expMutexName.AutoSize = true;
-            this.expMutexName.Dock = System.Windows.Forms.DockStyle.Top;
-            this.expMutexName.Expression = "";
-            this.expMutexName.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
-            this.expMutexName.Location = new System.Drawing.Point(131, 29);
-            this.expMutexName.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.expMutexName.Name = "expMutexName";
-            this.expMutexName.ReadOnly = false;
-            this.expMutexName.Size = new System.Drawing.Size(594, 25);
-            this.expMutexName.TabIndex = 16;
             // 
             // label2
             // 
@@ -4628,19 +3676,6 @@
             this.tableLayoutPanel24.Size = new System.Drawing.Size(729, 87);
             this.tableLayoutPanel24.TabIndex = 3;
             // 
-            // expCallbackReturnScalarName
-            // 
-            this.expCallbackReturnScalarName.AutoSize = true;
-            this.expCallbackReturnScalarName.Dock = System.Windows.Forms.DockStyle.Top;
-            this.expCallbackReturnScalarName.Expression = "";
-            this.expCallbackReturnScalarName.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
-            this.expCallbackReturnScalarName.Location = new System.Drawing.Point(235, 60);
-            this.expCallbackReturnScalarName.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.expCallbackReturnScalarName.Name = "expCallbackReturnScalarName";
-            this.expCallbackReturnScalarName.ReadOnly = false;
-            this.expCallbackReturnScalarName.Size = new System.Drawing.Size(490, 25);
-            this.expCallbackReturnScalarName.TabIndex = 19;
-            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -4652,19 +3687,6 @@
             this.label4.TabIndex = 18;
             this.label4.Text = "Return scalar variable name";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // expCallbackParam
-            // 
-            this.expCallbackParam.AutoSize = true;
-            this.expCallbackParam.Dock = System.Windows.Forms.DockStyle.Top;
-            this.expCallbackParam.Expression = "";
-            this.expCallbackParam.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
-            this.expCallbackParam.Location = new System.Drawing.Point(235, 31);
-            this.expCallbackParam.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.expCallbackParam.Name = "expCallbackParam";
-            this.expCallbackParam.ReadOnly = false;
-            this.expCallbackParam.Size = new System.Drawing.Size(490, 25);
-            this.expCallbackParam.TabIndex = 16;
             // 
             // lblCallbackParam
             // 
@@ -4689,19 +3711,6 @@
             this.lblCallbackName.TabIndex = 7;
             this.lblCallbackName.Text = "Callback name";
             this.lblCallbackName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // expCallbackName
-            // 
-            this.expCallbackName.AutoSize = true;
-            this.expCallbackName.Dock = System.Windows.Forms.DockStyle.Top;
-            this.expCallbackName.Expression = "";
-            this.expCallbackName.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
-            this.expCallbackName.Location = new System.Drawing.Point(235, 2);
-            this.expCallbackName.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.expCallbackName.Name = "expCallbackName";
-            this.expCallbackName.ReadOnly = false;
-            this.expCallbackName.Size = new System.Drawing.Size(490, 25);
-            this.expCallbackName.TabIndex = 14;
             // 
             // tabMouse
             // 
@@ -4754,19 +3763,6 @@
             this.cbxMouseCoord.Size = new System.Drawing.Size(570, 23);
             this.cbxMouseCoord.TabIndex = 25;
             // 
-            // expMouseY
-            // 
-            this.expMouseY.AutoSize = true;
-            this.expMouseY.Dock = System.Windows.Forms.DockStyle.Top;
-            this.expMouseY.Expression = "";
-            this.expMouseY.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.Numeric;
-            this.expMouseY.Location = new System.Drawing.Point(155, 85);
-            this.expMouseY.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.expMouseY.Name = "expMouseY";
-            this.expMouseY.ReadOnly = false;
-            this.expMouseY.Size = new System.Drawing.Size(570, 25);
-            this.expMouseY.TabIndex = 24;
-            // 
             // lblMouseY
             // 
             this.lblMouseY.AutoSize = true;
@@ -4790,19 +3786,6 @@
             this.lblMouseX.TabIndex = 22;
             this.lblMouseX.Text = "X coordinate";
             this.lblMouseX.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // expMouseX
-            // 
-            this.expMouseX.AutoSize = true;
-            this.expMouseX.Dock = System.Windows.Forms.DockStyle.Top;
-            this.expMouseX.Expression = "";
-            this.expMouseX.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.Numeric;
-            this.expMouseX.Location = new System.Drawing.Point(155, 56);
-            this.expMouseX.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.expMouseX.Name = "expMouseX";
-            this.expMouseX.ReadOnly = false;
-            this.expMouseX.Size = new System.Drawing.Size(570, 25);
-            this.expMouseX.TabIndex = 16;
             // 
             // lblMouseCoord
             // 
@@ -4875,19 +3858,6 @@
             this.tableLayoutPanel26.Size = new System.Drawing.Size(729, 58);
             this.tableLayoutPanel26.TabIndex = 4;
             // 
-            // expPartyOrder
-            // 
-            this.expPartyOrder.AutoSize = true;
-            this.expPartyOrder.Dock = System.Windows.Forms.DockStyle.Top;
-            this.expPartyOrder.Expression = "";
-            this.expPartyOrder.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.Numeric;
-            this.expPartyOrder.Location = new System.Drawing.Point(107, 31);
-            this.expPartyOrder.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.expPartyOrder.Name = "expPartyOrder";
-            this.expPartyOrder.ReadOnly = false;
-            this.expPartyOrder.Size = new System.Drawing.Size(618, 25);
-            this.expPartyOrder.TabIndex = 16;
-            // 
             // lblPartyOrder
             // 
             this.lblPartyOrder.AutoSize = true;
@@ -4911,19 +3881,6 @@
             this.lblPlayerName.TabIndex = 7;
             this.lblPlayerName.Text = "Player name";
             this.lblPlayerName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // expPlayerName
-            // 
-            this.expPlayerName.AutoSize = true;
-            this.expPlayerName.Dock = System.Windows.Forms.DockStyle.Top;
-            this.expPlayerName.Expression = "";
-            this.expPlayerName.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
-            this.expPlayerName.Location = new System.Drawing.Point(107, 2);
-            this.expPlayerName.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.expPlayerName.Name = "expPlayerName";
-            this.expPlayerName.ReadOnly = false;
-            this.expPlayerName.Size = new System.Drawing.Size(618, 25);
-            this.expPlayerName.TabIndex = 14;
             // 
             // panel2
             // 
@@ -4956,20 +3913,6 @@
             this.panel6.Padding = new System.Windows.Forms.Padding(13, 0, 13, 0);
             this.panel6.Size = new System.Drawing.Size(353, 40);
             this.panel6.TabIndex = 2;
-            // 
-            // btnTest
-            // 
-            this.btnTest.AutoSize = true;
-            this.btnTest.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnTest.Location = new System.Drawing.Point(13, 0);
-            this.btnTest.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.btnTest.Name = "btnTest";
-            this.btnTest.Size = new System.Drawing.Size(327, 40);
-            this.btnTest.TabIndex = 102;
-            this.btnTest.Text = "Test action";
-            this.btnTest.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnTest.UseVisualStyleBackColor = true;
-            this.btnTest.Click += new System.EventHandler(this.btnTest_Click);
             // 
             // btnCancel
             // 
@@ -5080,16 +4023,6 @@
             this.tabActionCondition.Text = "Action condition";
             this.tabActionCondition.UseVisualStyleBackColor = true;
             // 
-            // cndCondition
-            // 
-            this.cndCondition.ConditionToEdit = null;
-            this.cndCondition.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cndCondition.Location = new System.Drawing.Point(4, 2);
-            this.cndCondition.Margin = new System.Windows.Forms.Padding(5, 2, 5, 2);
-            this.cndCondition.Name = "cndCondition";
-            this.cndCondition.Size = new System.Drawing.Size(737, 341);
-            this.cndCondition.TabIndex = 0;
-            // 
             // tabScheduling
             // 
             this.tabScheduling.Controls.Add(this.tableLayoutPanel15);
@@ -5192,19 +4125,6 @@
             this.lblRefireOption1.TabIndex = 2;
             this.lblRefireOption1.Text = "If the trigger fires again while this action is still in queue";
             this.lblRefireOption1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // expExecutionDelay
-            // 
-            this.expExecutionDelay.AutoSize = true;
-            this.expExecutionDelay.Dock = System.Windows.Forms.DockStyle.Top;
-            this.expExecutionDelay.Expression = "";
-            this.expExecutionDelay.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.Numeric;
-            this.expExecutionDelay.Location = new System.Drawing.Point(515, 56);
-            this.expExecutionDelay.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.expExecutionDelay.Name = "expExecutionDelay";
-            this.expExecutionDelay.ReadOnly = false;
-            this.expExecutionDelay.Size = new System.Drawing.Size(208, 25);
-            this.expExecutionDelay.TabIndex = 7;
             // 
             // tabDebugging
             // 
@@ -5361,6 +4281,1203 @@
             // 
             this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
             // 
+            // expBeepLength
+            // 
+            this.expBeepLength.AutoSize = true;
+            this.expBeepLength.Dock = System.Windows.Forms.DockStyle.Top;
+            this.expBeepLength.Expression = "";
+            this.expBeepLength.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.Numeric;
+            this.expBeepLength.Location = new System.Drawing.Point(171, 31);
+            this.expBeepLength.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.expBeepLength.Name = "expBeepLength";
+            this.expBeepLength.ReadOnly = false;
+            this.expBeepLength.Size = new System.Drawing.Size(554, 25);
+            this.expBeepLength.TabIndex = 13;
+            // 
+            // expBeepFrequency
+            // 
+            this.expBeepFrequency.AutoSize = true;
+            this.expBeepFrequency.Dock = System.Windows.Forms.DockStyle.Top;
+            this.expBeepFrequency.Expression = "";
+            this.expBeepFrequency.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.Numeric;
+            this.expBeepFrequency.Location = new System.Drawing.Point(171, 2);
+            this.expBeepFrequency.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.expBeepFrequency.Name = "expBeepFrequency";
+            this.expBeepFrequency.ReadOnly = false;
+            this.expBeepFrequency.Size = new System.Drawing.Size(554, 25);
+            this.expBeepFrequency.TabIndex = 12;
+            // 
+            // expSoundVolume
+            // 
+            this.expSoundVolume.AutoSize = true;
+            this.tableLayoutPanel3.SetColumnSpan(this.expSoundVolume, 2);
+            this.expSoundVolume.Dock = System.Windows.Forms.DockStyle.Top;
+            this.expSoundVolume.Expression = "";
+            this.expSoundVolume.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.Numeric;
+            this.expSoundVolume.Location = new System.Drawing.Point(227, 38);
+            this.expSoundVolume.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.expSoundVolume.Name = "expSoundVolume";
+            this.expSoundVolume.ReadOnly = false;
+            this.expSoundVolume.Size = new System.Drawing.Size(498, 25);
+            this.expSoundVolume.TabIndex = 16;
+            // 
+            // expSoundFile
+            // 
+            this.expSoundFile.AutoSize = true;
+            this.expSoundFile.Dock = System.Windows.Forms.DockStyle.Top;
+            this.expSoundFile.Expression = "";
+            this.expSoundFile.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
+            this.expSoundFile.Location = new System.Drawing.Point(227, 2);
+            this.expSoundFile.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.expSoundFile.Name = "expSoundFile";
+            this.expSoundFile.ReadOnly = false;
+            this.expSoundFile.Size = new System.Drawing.Size(445, 25);
+            this.expSoundFile.TabIndex = 14;
+            // 
+            // expSpeechRate
+            // 
+            this.expSpeechRate.AutoSize = true;
+            this.expSpeechRate.Dock = System.Windows.Forms.DockStyle.Top;
+            this.expSpeechRate.Expression = "";
+            this.expSpeechRate.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.Numeric;
+            this.expSpeechRate.Location = new System.Drawing.Point(267, 60);
+            this.expSpeechRate.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.expSpeechRate.Name = "expSpeechRate";
+            this.expSpeechRate.ReadOnly = false;
+            this.expSpeechRate.Size = new System.Drawing.Size(458, 25);
+            this.expSpeechRate.TabIndex = 16;
+            // 
+            // expSpeechVolume
+            // 
+            this.expSpeechVolume.AutoSize = true;
+            this.expSpeechVolume.Dock = System.Windows.Forms.DockStyle.Top;
+            this.expSpeechVolume.Expression = "";
+            this.expSpeechVolume.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.Numeric;
+            this.expSpeechVolume.Location = new System.Drawing.Point(267, 31);
+            this.expSpeechVolume.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.expSpeechVolume.Name = "expSpeechVolume";
+            this.expSpeechVolume.ReadOnly = false;
+            this.expSpeechVolume.Size = new System.Drawing.Size(458, 25);
+            this.expSpeechVolume.TabIndex = 14;
+            // 
+            // expTextToSay
+            // 
+            this.expTextToSay.AutoSize = true;
+            this.expTextToSay.Dock = System.Windows.Forms.DockStyle.Top;
+            this.expTextToSay.Expression = "";
+            this.expTextToSay.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
+            this.expTextToSay.Location = new System.Drawing.Point(267, 2);
+            this.expTextToSay.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.expTextToSay.Name = "expTextToSay";
+            this.expTextToSay.ReadOnly = false;
+            this.expTextToSay.Size = new System.Drawing.Size(458, 25);
+            this.expTextToSay.TabIndex = 12;
+            // 
+            // expProcessWorkingDir
+            // 
+            this.expProcessWorkingDir.AutoSize = true;
+            this.tableLayoutPanel5.SetColumnSpan(this.expProcessWorkingDir, 2);
+            this.expProcessWorkingDir.Dock = System.Windows.Forms.DockStyle.Top;
+            this.expProcessWorkingDir.Expression = "";
+            this.expProcessWorkingDir.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
+            this.expProcessWorkingDir.Location = new System.Drawing.Point(203, 67);
+            this.expProcessWorkingDir.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.expProcessWorkingDir.Name = "expProcessWorkingDir";
+            this.expProcessWorkingDir.ReadOnly = false;
+            this.expProcessWorkingDir.Size = new System.Drawing.Size(522, 25);
+            this.expProcessWorkingDir.TabIndex = 18;
+            // 
+            // expProcessParameters
+            // 
+            this.expProcessParameters.AutoSize = true;
+            this.tableLayoutPanel5.SetColumnSpan(this.expProcessParameters, 2);
+            this.expProcessParameters.Dock = System.Windows.Forms.DockStyle.Top;
+            this.expProcessParameters.Expression = "";
+            this.expProcessParameters.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
+            this.expProcessParameters.Location = new System.Drawing.Point(203, 38);
+            this.expProcessParameters.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.expProcessParameters.Name = "expProcessParameters";
+            this.expProcessParameters.ReadOnly = false;
+            this.expProcessParameters.Size = new System.Drawing.Size(522, 25);
+            this.expProcessParameters.TabIndex = 16;
+            // 
+            // expProcessName
+            // 
+            this.expProcessName.AutoSize = true;
+            this.expProcessName.Dock = System.Windows.Forms.DockStyle.Top;
+            this.expProcessName.Expression = "";
+            this.expProcessName.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
+            this.expProcessName.Location = new System.Drawing.Point(203, 2);
+            this.expProcessName.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.expProcessName.Name = "expProcessName";
+            this.expProcessName.ReadOnly = false;
+            this.expProcessName.Size = new System.Drawing.Size(469, 25);
+            this.expProcessName.TabIndex = 14;
+            // 
+            // expTriggerZone
+            // 
+            this.expTriggerZone.AutoSize = true;
+            this.expTriggerZone.Dock = System.Windows.Forms.DockStyle.Top;
+            this.expTriggerZone.Expression = "";
+            this.expTriggerZone.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
+            this.expTriggerZone.Location = new System.Drawing.Point(187, 58);
+            this.expTriggerZone.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.expTriggerZone.Name = "expTriggerZone";
+            this.expTriggerZone.ReadOnly = false;
+            this.expTriggerZone.Size = new System.Drawing.Size(538, 25);
+            this.expTriggerZone.TabIndex = 25;
+            this.expTriggerZone.EnabledChanged += new System.EventHandler(this.expTriggerZone_EnabledChanged);
+            // 
+            // expTriggerText
+            // 
+            this.expTriggerText.AutoSize = true;
+            this.expTriggerText.Dock = System.Windows.Forms.DockStyle.Top;
+            this.expTriggerText.Expression = "";
+            this.expTriggerText.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
+            this.expTriggerText.Location = new System.Drawing.Point(187, 29);
+            this.expTriggerText.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.expTriggerText.Name = "expTriggerText";
+            this.expTriggerText.ReadOnly = false;
+            this.expTriggerText.Size = new System.Drawing.Size(538, 25);
+            this.expTriggerText.TabIndex = 16;
+            this.expTriggerText.EnabledChanged += new System.EventHandler(this.expTriggerText_EnabledChanged);
+            // 
+            // expKeypress
+            // 
+            this.expKeypress.AutoSize = true;
+            this.tableLayoutPanel6.SetColumnSpan(this.expKeypress, 2);
+            this.expKeypress.Dock = System.Windows.Forms.DockStyle.Top;
+            this.expKeypress.Expression = "";
+            this.expKeypress.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.Numeric;
+            this.expKeypress.Location = new System.Drawing.Point(179, 177);
+            this.expKeypress.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.expKeypress.Name = "expKeypress";
+            this.expKeypress.ReadOnly = false;
+            this.expKeypress.Size = new System.Drawing.Size(546, 25);
+            this.expKeypress.TabIndex = 26;
+            // 
+            // expWindowTitle
+            // 
+            this.expWindowTitle.AutoSize = true;
+            this.tableLayoutPanel6.SetColumnSpan(this.expWindowTitle, 2);
+            this.expWindowTitle.Dock = System.Windows.Forms.DockStyle.Top;
+            this.expWindowTitle.Expression = "";
+            this.expWindowTitle.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
+            this.expWindowTitle.Location = new System.Drawing.Point(179, 148);
+            this.expWindowTitle.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.expWindowTitle.Name = "expWindowTitle";
+            this.expWindowTitle.ReadOnly = false;
+            this.expWindowTitle.Size = new System.Drawing.Size(546, 25);
+            this.expWindowTitle.TabIndex = 25;
+            // 
+            // expKeypresses
+            // 
+            this.expKeypresses.AutoSize = true;
+            this.tableLayoutPanel6.SetColumnSpan(this.expKeypresses, 2);
+            this.expKeypresses.Dock = System.Windows.Forms.DockStyle.Top;
+            this.expKeypresses.Expression = "";
+            this.expKeypresses.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
+            this.expKeypresses.Location = new System.Drawing.Point(179, 29);
+            this.expKeypresses.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.expKeypresses.Name = "expKeypresses";
+            this.expKeypresses.ReadOnly = false;
+            this.expKeypresses.Size = new System.Drawing.Size(546, 25);
+            this.expKeypresses.TabIndex = 14;
+            // 
+            // expExecScriptAssemblies
+            // 
+            this.expExecScriptAssemblies.AutoSize = true;
+            this.expExecScriptAssemblies.Dock = System.Windows.Forms.DockStyle.Top;
+            this.expExecScriptAssemblies.Expression = "";
+            this.expExecScriptAssemblies.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
+            this.expExecScriptAssemblies.Location = new System.Drawing.Point(267, 58);
+            this.expExecScriptAssemblies.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.expExecScriptAssemblies.Name = "expExecScriptAssemblies";
+            this.expExecScriptAssemblies.ReadOnly = false;
+            this.expExecScriptAssemblies.Size = new System.Drawing.Size(458, 25);
+            this.expExecScriptAssemblies.TabIndex = 23;
+            // 
+            // expExecScriptCode
+            // 
+            this.expExecScriptCode.AutoSize = true;
+            this.expExecScriptCode.Dock = System.Windows.Forms.DockStyle.Top;
+            this.expExecScriptCode.Expression = "";
+            this.expExecScriptCode.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
+            this.expExecScriptCode.Location = new System.Drawing.Point(267, 29);
+            this.expExecScriptCode.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.expExecScriptCode.Name = "expExecScriptCode";
+            this.expExecScriptCode.ReadOnly = false;
+            this.expExecScriptCode.Size = new System.Drawing.Size(458, 25);
+            this.expExecScriptCode.TabIndex = 16;
+            // 
+            // expMessageBoxText
+            // 
+            this.expMessageBoxText.AutoSize = true;
+            this.expMessageBoxText.Dock = System.Windows.Forms.DockStyle.Top;
+            this.expMessageBoxText.Expression = "";
+            this.expMessageBoxText.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
+            this.expMessageBoxText.Location = new System.Drawing.Point(147, 29);
+            this.expMessageBoxText.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.expMessageBoxText.Name = "expMessageBoxText";
+            this.expMessageBoxText.ReadOnly = false;
+            this.expMessageBoxText.Size = new System.Drawing.Size(578, 25);
+            this.expMessageBoxText.TabIndex = 16;
+            // 
+            // expVariableExpression
+            // 
+            this.expVariableExpression.AutoSize = true;
+            this.expVariableExpression.Dock = System.Windows.Forms.DockStyle.Top;
+            this.expVariableExpression.Expression = "";
+            this.expVariableExpression.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
+            this.expVariableExpression.Location = new System.Drawing.Point(179, 58);
+            this.expVariableExpression.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.expVariableExpression.Name = "expVariableExpression";
+            this.expVariableExpression.ReadOnly = false;
+            this.expVariableExpression.Size = new System.Drawing.Size(546, 25);
+            this.expVariableExpression.TabIndex = 23;
+            this.expVariableExpression.EnabledChanged += new System.EventHandler(this.expVariableExpression_EnabledChanged);
+            // 
+            // expVariableName
+            // 
+            this.expVariableName.AutoSize = true;
+            this.expVariableName.Dock = System.Windows.Forms.DockStyle.Top;
+            this.expVariableName.Expression = "";
+            this.expVariableName.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
+            this.expVariableName.Location = new System.Drawing.Point(179, 29);
+            this.expVariableName.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.expVariableName.Name = "expVariableName";
+            this.expVariableName.ReadOnly = false;
+            this.expVariableName.Size = new System.Drawing.Size(546, 25);
+            this.expVariableName.TabIndex = 16;
+            this.expVariableName.EnabledChanged += new System.EventHandler(this.expVariableName_EnabledChanged);
+            // 
+            // expAuraTTLTick
+            // 
+            this.expAuraTTLTick.AutoSize = true;
+            this.tableLayoutPanel11.SetColumnSpan(this.expAuraTTLTick, 2);
+            this.expAuraTTLTick.Dock = System.Windows.Forms.DockStyle.Top;
+            this.expAuraTTLTick.Expression = "";
+            this.expAuraTTLTick.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.Numeric;
+            this.expAuraTTLTick.Location = new System.Drawing.Point(317, 295);
+            this.expAuraTTLTick.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.expAuraTTLTick.Name = "expAuraTTLTick";
+            this.expAuraTTLTick.ReadOnly = false;
+            this.expAuraTTLTick.Size = new System.Drawing.Size(387, 25);
+            this.expAuraTTLTick.TabIndex = 24;
+            this.expAuraTTLTick.EnabledChanged += new System.EventHandler(this.expAuraTTLTick_EnabledChanged);
+            // 
+            // expAuraOTick
+            // 
+            this.expAuraOTick.AutoSize = true;
+            this.tableLayoutPanel11.SetColumnSpan(this.expAuraOTick, 2);
+            this.expAuraOTick.Dock = System.Windows.Forms.DockStyle.Top;
+            this.expAuraOTick.Expression = "";
+            this.expAuraOTick.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.Numeric;
+            this.expAuraOTick.Location = new System.Drawing.Point(317, 266);
+            this.expAuraOTick.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.expAuraOTick.Name = "expAuraOTick";
+            this.expAuraOTick.ReadOnly = false;
+            this.expAuraOTick.Size = new System.Drawing.Size(387, 25);
+            this.expAuraOTick.TabIndex = 23;
+            this.expAuraOTick.EnabledChanged += new System.EventHandler(this.expAuraOTick_EnabledChanged);
+            // 
+            // expAuraHTick
+            // 
+            this.expAuraHTick.AutoSize = true;
+            this.tableLayoutPanel11.SetColumnSpan(this.expAuraHTick, 2);
+            this.expAuraHTick.Dock = System.Windows.Forms.DockStyle.Top;
+            this.expAuraHTick.Expression = "";
+            this.expAuraHTick.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.Numeric;
+            this.expAuraHTick.Location = new System.Drawing.Point(317, 237);
+            this.expAuraHTick.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.expAuraHTick.Name = "expAuraHTick";
+            this.expAuraHTick.ReadOnly = false;
+            this.expAuraHTick.Size = new System.Drawing.Size(387, 25);
+            this.expAuraHTick.TabIndex = 21;
+            this.expAuraHTick.EnabledChanged += new System.EventHandler(this.expAuraHTick_EnabledChanged);
+            // 
+            // expAuraWTick
+            // 
+            this.expAuraWTick.AutoSize = true;
+            this.tableLayoutPanel11.SetColumnSpan(this.expAuraWTick, 2);
+            this.expAuraWTick.Dock = System.Windows.Forms.DockStyle.Top;
+            this.expAuraWTick.Expression = "";
+            this.expAuraWTick.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.Numeric;
+            this.expAuraWTick.Location = new System.Drawing.Point(317, 208);
+            this.expAuraWTick.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.expAuraWTick.Name = "expAuraWTick";
+            this.expAuraWTick.ReadOnly = false;
+            this.expAuraWTick.Size = new System.Drawing.Size(387, 25);
+            this.expAuraWTick.TabIndex = 19;
+            this.expAuraWTick.EnabledChanged += new System.EventHandler(this.expAuraWTick_EnabledChanged);
+            // 
+            // expAuraYTick
+            // 
+            this.expAuraYTick.AutoSize = true;
+            this.tableLayoutPanel11.SetColumnSpan(this.expAuraYTick, 2);
+            this.expAuraYTick.Dock = System.Windows.Forms.DockStyle.Top;
+            this.expAuraYTick.Expression = "";
+            this.expAuraYTick.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.Numeric;
+            this.expAuraYTick.Location = new System.Drawing.Point(317, 179);
+            this.expAuraYTick.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.expAuraYTick.Name = "expAuraYTick";
+            this.expAuraYTick.ReadOnly = false;
+            this.expAuraYTick.Size = new System.Drawing.Size(387, 25);
+            this.expAuraYTick.TabIndex = 17;
+            this.expAuraYTick.EnabledChanged += new System.EventHandler(this.expAuraYTick_EnabledChanged);
+            // 
+            // expAuraXTick
+            // 
+            this.expAuraXTick.AutoSize = true;
+            this.tableLayoutPanel11.SetColumnSpan(this.expAuraXTick, 2);
+            this.expAuraXTick.Dock = System.Windows.Forms.DockStyle.Top;
+            this.expAuraXTick.Expression = "";
+            this.expAuraXTick.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.Numeric;
+            this.expAuraXTick.Location = new System.Drawing.Point(317, 150);
+            this.expAuraXTick.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.expAuraXTick.Name = "expAuraXTick";
+            this.expAuraXTick.ReadOnly = false;
+            this.expAuraXTick.Size = new System.Drawing.Size(387, 25);
+            this.expAuraXTick.TabIndex = 15;
+            this.expAuraXTick.EnabledChanged += new System.EventHandler(this.expAuraXTick_EnabledChanged);
+            // 
+            // expAuraOIni
+            // 
+            this.expAuraOIni.AutoSize = true;
+            this.expAuraOIni.Dock = System.Windows.Forms.DockStyle.Top;
+            this.expAuraOIni.Expression = "";
+            this.expAuraOIni.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.Numeric;
+            this.expAuraOIni.Location = new System.Drawing.Point(203, 266);
+            this.expAuraOIni.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.expAuraOIni.Name = "expAuraOIni";
+            this.expAuraOIni.ReadOnly = false;
+            this.expAuraOIni.Size = new System.Drawing.Size(106, 25);
+            this.expAuraOIni.TabIndex = 22;
+            // 
+            // expAuraHIni
+            // 
+            this.expAuraHIni.AutoSize = true;
+            this.expAuraHIni.Dock = System.Windows.Forms.DockStyle.Top;
+            this.expAuraHIni.Expression = "";
+            this.expAuraHIni.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.Numeric;
+            this.expAuraHIni.Location = new System.Drawing.Point(203, 237);
+            this.expAuraHIni.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.expAuraHIni.Name = "expAuraHIni";
+            this.expAuraHIni.ReadOnly = false;
+            this.expAuraHIni.Size = new System.Drawing.Size(106, 25);
+            this.expAuraHIni.TabIndex = 20;
+            // 
+            // expAuraWIni
+            // 
+            this.expAuraWIni.AutoSize = true;
+            this.expAuraWIni.Dock = System.Windows.Forms.DockStyle.Top;
+            this.expAuraWIni.Expression = "";
+            this.expAuraWIni.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.Numeric;
+            this.expAuraWIni.Location = new System.Drawing.Point(203, 208);
+            this.expAuraWIni.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.expAuraWIni.Name = "expAuraWIni";
+            this.expAuraWIni.ReadOnly = false;
+            this.expAuraWIni.Size = new System.Drawing.Size(106, 25);
+            this.expAuraWIni.TabIndex = 18;
+            // 
+            // expAuraImage
+            // 
+            this.expAuraImage.AutoSize = true;
+            this.tableLayoutPanel11.SetColumnSpan(this.expAuraImage, 2);
+            this.expAuraImage.Dock = System.Windows.Forms.DockStyle.Top;
+            this.expAuraImage.Expression = "";
+            this.expAuraImage.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
+            this.expAuraImage.Location = new System.Drawing.Point(203, 65);
+            this.expAuraImage.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.expAuraImage.Name = "expAuraImage";
+            this.expAuraImage.ReadOnly = false;
+            this.expAuraImage.Size = new System.Drawing.Size(372, 25);
+            this.expAuraImage.TabIndex = 11;
+            this.expAuraImage.EnabledChanged += new System.EventHandler(this.expAuraImage_EnabledChanged);
+            // 
+            // expAuraYIni
+            // 
+            this.expAuraYIni.AutoSize = true;
+            this.expAuraYIni.Dock = System.Windows.Forms.DockStyle.Top;
+            this.expAuraYIni.Expression = "";
+            this.expAuraYIni.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.Numeric;
+            this.expAuraYIni.Location = new System.Drawing.Point(203, 179);
+            this.expAuraYIni.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.expAuraYIni.Name = "expAuraYIni";
+            this.expAuraYIni.ReadOnly = false;
+            this.expAuraYIni.Size = new System.Drawing.Size(106, 25);
+            this.expAuraYIni.TabIndex = 16;
+            // 
+            // expAuraXIni
+            // 
+            this.expAuraXIni.AutoSize = true;
+            this.expAuraXIni.Dock = System.Windows.Forms.DockStyle.Top;
+            this.expAuraXIni.Expression = "";
+            this.expAuraXIni.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.Numeric;
+            this.expAuraXIni.Location = new System.Drawing.Point(203, 150);
+            this.expAuraXIni.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.expAuraXIni.Name = "expAuraXIni";
+            this.expAuraXIni.ReadOnly = false;
+            this.expAuraXIni.Size = new System.Drawing.Size(106, 25);
+            this.expAuraXIni.TabIndex = 14;
+            // 
+            // expAuraName
+            // 
+            this.expAuraName.AutoSize = true;
+            this.tableLayoutPanel11.SetColumnSpan(this.expAuraName, 2);
+            this.expAuraName.Dock = System.Windows.Forms.DockStyle.Top;
+            this.expAuraName.Expression = "";
+            this.expAuraName.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
+            this.expAuraName.Location = new System.Drawing.Point(203, 29);
+            this.expAuraName.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.expAuraName.Name = "expAuraName";
+            this.expAuraName.ReadOnly = false;
+            this.expAuraName.Size = new System.Drawing.Size(372, 25);
+            this.expAuraName.TabIndex = 10;
+            this.expAuraName.EnabledChanged += new System.EventHandler(this.expAuraName_EnabledChanged);
+            // 
+            // expEncounterDamageType
+            // 
+            this.expEncounterDamageType.AutoSize = true;
+            this.expEncounterDamageType.Dock = System.Windows.Forms.DockStyle.Top;
+            this.expEncounterDamageType.Expression = "";
+            this.expEncounterDamageType.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
+            this.expEncounterDamageType.Location = new System.Drawing.Point(115, 172);
+            this.expEncounterDamageType.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.expEncounterDamageType.Name = "expEncounterDamageType";
+            this.expEncounterDamageType.ReadOnly = false;
+            this.expEncounterDamageType.Size = new System.Drawing.Size(610, 25);
+            this.expEncounterDamageType.TabIndex = 31;
+            // 
+            // expEncounterDamage
+            // 
+            this.expEncounterDamage.AutoSize = true;
+            this.expEncounterDamage.Dock = System.Windows.Forms.DockStyle.Top;
+            this.expEncounterDamage.Expression = "";
+            this.expEncounterDamage.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.Numeric;
+            this.expEncounterDamage.Location = new System.Drawing.Point(115, 143);
+            this.expEncounterDamage.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.expEncounterDamage.Name = "expEncounterDamage";
+            this.expEncounterDamage.ReadOnly = false;
+            this.expEncounterDamage.Size = new System.Drawing.Size(610, 25);
+            this.expEncounterDamage.TabIndex = 29;
+            // 
+            // expEncounterTargetName
+            // 
+            this.expEncounterTargetName.AutoSize = true;
+            this.expEncounterTargetName.Dock = System.Windows.Forms.DockStyle.Top;
+            this.expEncounterTargetName.Expression = "";
+            this.expEncounterTargetName.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
+            this.expEncounterTargetName.Location = new System.Drawing.Point(115, 114);
+            this.expEncounterTargetName.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.expEncounterTargetName.Name = "expEncounterTargetName";
+            this.expEncounterTargetName.ReadOnly = false;
+            this.expEncounterTargetName.Size = new System.Drawing.Size(610, 25);
+            this.expEncounterTargetName.TabIndex = 26;
+            // 
+            // expEncounterActorName
+            // 
+            this.expEncounterActorName.AutoSize = true;
+            this.expEncounterActorName.Dock = System.Windows.Forms.DockStyle.Top;
+            this.expEncounterActorName.Expression = "";
+            this.expEncounterActorName.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
+            this.expEncounterActorName.Location = new System.Drawing.Point(115, 85);
+            this.expEncounterActorName.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.expEncounterActorName.Name = "expEncounterActorName";
+            this.expEncounterActorName.ReadOnly = false;
+            this.expEncounterActorName.Size = new System.Drawing.Size(610, 25);
+            this.expEncounterActorName.TabIndex = 24;
+            // 
+            // expEncounterAbilityType
+            // 
+            this.expEncounterAbilityType.AutoSize = true;
+            this.expEncounterAbilityType.Dock = System.Windows.Forms.DockStyle.Top;
+            this.expEncounterAbilityType.Expression = "";
+            this.expEncounterAbilityType.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
+            this.expEncounterAbilityType.Location = new System.Drawing.Point(115, 56);
+            this.expEncounterAbilityType.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.expEncounterAbilityType.Name = "expEncounterAbilityType";
+            this.expEncounterAbilityType.ReadOnly = false;
+            this.expEncounterAbilityType.Size = new System.Drawing.Size(610, 25);
+            this.expEncounterAbilityType.TabIndex = 22;
+            // 
+            // expDiscordMessage
+            // 
+            this.expDiscordMessage.AutoSize = true;
+            this.expDiscordMessage.Dock = System.Windows.Forms.DockStyle.Top;
+            this.expDiscordMessage.Expression = "";
+            this.expDiscordMessage.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
+            this.expDiscordMessage.Location = new System.Drawing.Point(139, 31);
+            this.expDiscordMessage.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.expDiscordMessage.Name = "expDiscordMessage";
+            this.expDiscordMessage.ReadOnly = false;
+            this.expDiscordMessage.Size = new System.Drawing.Size(586, 25);
+            this.expDiscordMessage.TabIndex = 16;
+            // 
+            // expDiscordUrl
+            // 
+            this.expDiscordUrl.AutoSize = true;
+            this.expDiscordUrl.Dock = System.Windows.Forms.DockStyle.Top;
+            this.expDiscordUrl.Expression = "";
+            this.expDiscordUrl.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
+            this.expDiscordUrl.Location = new System.Drawing.Point(139, 2);
+            this.expDiscordUrl.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.expDiscordUrl.Name = "expDiscordUrl";
+            this.expDiscordUrl.ReadOnly = false;
+            this.expDiscordUrl.Size = new System.Drawing.Size(586, 25);
+            this.expDiscordUrl.TabIndex = 14;
+            // 
+            // expTextAuraTTLTick
+            // 
+            this.expTextAuraTTLTick.AutoSize = true;
+            this.tableLayoutPanel13.SetColumnSpan(this.expTextAuraTTLTick, 2);
+            this.expTextAuraTTLTick.Dock = System.Windows.Forms.DockStyle.Top;
+            this.expTextAuraTTLTick.Expression = "";
+            this.expTextAuraTTLTick.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.Numeric;
+            this.expTextAuraTTLTick.Location = new System.Drawing.Point(320, 352);
+            this.expTextAuraTTLTick.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.expTextAuraTTLTick.Name = "expTextAuraTTLTick";
+            this.expTextAuraTTLTick.ReadOnly = false;
+            this.expTextAuraTTLTick.Size = new System.Drawing.Size(384, 25);
+            this.expTextAuraTTLTick.TabIndex = 24;
+            this.expTextAuraTTLTick.EnabledChanged += new System.EventHandler(this.expTextAuraTTLTick_EnabledChanged);
+            // 
+            // expTextAuraOTick
+            // 
+            this.expTextAuraOTick.AutoSize = true;
+            this.tableLayoutPanel13.SetColumnSpan(this.expTextAuraOTick, 2);
+            this.expTextAuraOTick.Dock = System.Windows.Forms.DockStyle.Top;
+            this.expTextAuraOTick.Expression = "";
+            this.expTextAuraOTick.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.Numeric;
+            this.expTextAuraOTick.Location = new System.Drawing.Point(320, 323);
+            this.expTextAuraOTick.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.expTextAuraOTick.Name = "expTextAuraOTick";
+            this.expTextAuraOTick.ReadOnly = false;
+            this.expTextAuraOTick.Size = new System.Drawing.Size(384, 25);
+            this.expTextAuraOTick.TabIndex = 23;
+            this.expTextAuraOTick.EnabledChanged += new System.EventHandler(this.expTextAuraOTick_EnabledChanged);
+            // 
+            // expTextAuraHTick
+            // 
+            this.expTextAuraHTick.AutoSize = true;
+            this.tableLayoutPanel13.SetColumnSpan(this.expTextAuraHTick, 2);
+            this.expTextAuraHTick.Dock = System.Windows.Forms.DockStyle.Top;
+            this.expTextAuraHTick.Expression = "";
+            this.expTextAuraHTick.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.Numeric;
+            this.expTextAuraHTick.Location = new System.Drawing.Point(320, 294);
+            this.expTextAuraHTick.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.expTextAuraHTick.Name = "expTextAuraHTick";
+            this.expTextAuraHTick.ReadOnly = false;
+            this.expTextAuraHTick.Size = new System.Drawing.Size(384, 25);
+            this.expTextAuraHTick.TabIndex = 21;
+            this.expTextAuraHTick.EnabledChanged += new System.EventHandler(this.expTextAuraHTick_EnabledChanged);
+            // 
+            // expTextAuraWTick
+            // 
+            this.expTextAuraWTick.AutoSize = true;
+            this.tableLayoutPanel13.SetColumnSpan(this.expTextAuraWTick, 2);
+            this.expTextAuraWTick.Dock = System.Windows.Forms.DockStyle.Top;
+            this.expTextAuraWTick.Expression = "";
+            this.expTextAuraWTick.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.Numeric;
+            this.expTextAuraWTick.Location = new System.Drawing.Point(320, 265);
+            this.expTextAuraWTick.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.expTextAuraWTick.Name = "expTextAuraWTick";
+            this.expTextAuraWTick.ReadOnly = false;
+            this.expTextAuraWTick.Size = new System.Drawing.Size(384, 25);
+            this.expTextAuraWTick.TabIndex = 19;
+            this.expTextAuraWTick.EnabledChanged += new System.EventHandler(this.expTextAuraWTick_EnabledChanged);
+            // 
+            // expTextAuraYTick
+            // 
+            this.expTextAuraYTick.AutoSize = true;
+            this.tableLayoutPanel13.SetColumnSpan(this.expTextAuraYTick, 2);
+            this.expTextAuraYTick.Dock = System.Windows.Forms.DockStyle.Top;
+            this.expTextAuraYTick.Expression = "";
+            this.expTextAuraYTick.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.Numeric;
+            this.expTextAuraYTick.Location = new System.Drawing.Point(320, 236);
+            this.expTextAuraYTick.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.expTextAuraYTick.Name = "expTextAuraYTick";
+            this.expTextAuraYTick.ReadOnly = false;
+            this.expTextAuraYTick.Size = new System.Drawing.Size(384, 25);
+            this.expTextAuraYTick.TabIndex = 17;
+            this.expTextAuraYTick.EnabledChanged += new System.EventHandler(this.expTextAuraYTick_EnabledChanged);
+            // 
+            // expTextAuraXTick
+            // 
+            this.expTextAuraXTick.AutoSize = true;
+            this.tableLayoutPanel13.SetColumnSpan(this.expTextAuraXTick, 2);
+            this.expTextAuraXTick.Dock = System.Windows.Forms.DockStyle.Top;
+            this.expTextAuraXTick.Expression = "";
+            this.expTextAuraXTick.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.Numeric;
+            this.expTextAuraXTick.Location = new System.Drawing.Point(320, 207);
+            this.expTextAuraXTick.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.expTextAuraXTick.Name = "expTextAuraXTick";
+            this.expTextAuraXTick.ReadOnly = false;
+            this.expTextAuraXTick.Size = new System.Drawing.Size(384, 25);
+            this.expTextAuraXTick.TabIndex = 15;
+            this.expTextAuraXTick.EnabledChanged += new System.EventHandler(this.expTextAuraXTick_EnabledChanged);
+            // 
+            // expTextAuraOIni
+            // 
+            this.expTextAuraOIni.AutoSize = true;
+            this.expTextAuraOIni.Dock = System.Windows.Forms.DockStyle.Top;
+            this.expTextAuraOIni.Expression = "";
+            this.expTextAuraOIni.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.Numeric;
+            this.expTextAuraOIni.Location = new System.Drawing.Point(203, 323);
+            this.expTextAuraOIni.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.expTextAuraOIni.Name = "expTextAuraOIni";
+            this.expTextAuraOIni.ReadOnly = false;
+            this.expTextAuraOIni.Size = new System.Drawing.Size(109, 25);
+            this.expTextAuraOIni.TabIndex = 22;
+            // 
+            // expTextAuraHIni
+            // 
+            this.expTextAuraHIni.AutoSize = true;
+            this.expTextAuraHIni.Dock = System.Windows.Forms.DockStyle.Top;
+            this.expTextAuraHIni.Expression = "";
+            this.expTextAuraHIni.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.Numeric;
+            this.expTextAuraHIni.Location = new System.Drawing.Point(203, 294);
+            this.expTextAuraHIni.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.expTextAuraHIni.Name = "expTextAuraHIni";
+            this.expTextAuraHIni.ReadOnly = false;
+            this.expTextAuraHIni.Size = new System.Drawing.Size(109, 25);
+            this.expTextAuraHIni.TabIndex = 20;
+            // 
+            // expTextAuraWIni
+            // 
+            this.expTextAuraWIni.AutoSize = true;
+            this.expTextAuraWIni.Dock = System.Windows.Forms.DockStyle.Top;
+            this.expTextAuraWIni.Expression = "";
+            this.expTextAuraWIni.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.Numeric;
+            this.expTextAuraWIni.Location = new System.Drawing.Point(203, 265);
+            this.expTextAuraWIni.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.expTextAuraWIni.Name = "expTextAuraWIni";
+            this.expTextAuraWIni.ReadOnly = false;
+            this.expTextAuraWIni.Size = new System.Drawing.Size(109, 25);
+            this.expTextAuraWIni.TabIndex = 18;
+            // 
+            // expTextAuraText
+            // 
+            this.expTextAuraText.AutoSize = true;
+            this.tableLayoutPanel13.SetColumnSpan(this.expTextAuraText, 3);
+            this.expTextAuraText.Dock = System.Windows.Forms.DockStyle.Top;
+            this.expTextAuraText.Expression = "";
+            this.expTextAuraText.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
+            this.expTextAuraText.Location = new System.Drawing.Point(203, 65);
+            this.expTextAuraText.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.expTextAuraText.Name = "expTextAuraText";
+            this.expTextAuraText.ReadOnly = false;
+            this.expTextAuraText.Size = new System.Drawing.Size(501, 25);
+            this.expTextAuraText.TabIndex = 11;
+            this.expTextAuraText.EnabledChanged += new System.EventHandler(this.expTextAuraText_EnabledChanged);
+            // 
+            // expTextAuraYIni
+            // 
+            this.expTextAuraYIni.AutoSize = true;
+            this.expTextAuraYIni.Dock = System.Windows.Forms.DockStyle.Top;
+            this.expTextAuraYIni.Expression = "";
+            this.expTextAuraYIni.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.Numeric;
+            this.expTextAuraYIni.Location = new System.Drawing.Point(203, 236);
+            this.expTextAuraYIni.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.expTextAuraYIni.Name = "expTextAuraYIni";
+            this.expTextAuraYIni.ReadOnly = false;
+            this.expTextAuraYIni.Size = new System.Drawing.Size(109, 25);
+            this.expTextAuraYIni.TabIndex = 16;
+            // 
+            // expTextAuraXIni
+            // 
+            this.expTextAuraXIni.AutoSize = true;
+            this.expTextAuraXIni.Dock = System.Windows.Forms.DockStyle.Top;
+            this.expTextAuraXIni.Expression = "";
+            this.expTextAuraXIni.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.Numeric;
+            this.expTextAuraXIni.Location = new System.Drawing.Point(203, 207);
+            this.expTextAuraXIni.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.expTextAuraXIni.Name = "expTextAuraXIni";
+            this.expTextAuraXIni.ReadOnly = false;
+            this.expTextAuraXIni.Size = new System.Drawing.Size(109, 25);
+            this.expTextAuraXIni.TabIndex = 14;
+            // 
+            // expTextAuraName
+            // 
+            this.expTextAuraName.AutoSize = true;
+            this.tableLayoutPanel13.SetColumnSpan(this.expTextAuraName, 2);
+            this.expTextAuraName.Dock = System.Windows.Forms.DockStyle.Top;
+            this.expTextAuraName.Expression = "";
+            this.expTextAuraName.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
+            this.expTextAuraName.Location = new System.Drawing.Point(203, 29);
+            this.expTextAuraName.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.expTextAuraName.Name = "expTextAuraName";
+            this.expTextAuraName.ReadOnly = false;
+            this.expTextAuraName.Size = new System.Drawing.Size(382, 25);
+            this.expTextAuraName.TabIndex = 10;
+            this.expTextAuraName.EnabledChanged += new System.EventHandler(this.expTextAuraName_EnabledChanged);
+            // 
+            // colorSelector1
+            // 
+            this.colorSelector1.AutoSize = true;
+            this.colorSelector1.BackgroundColor = System.Drawing.Color.Empty;
+            this.colorSelector1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.colorSelector1.ChangeBackgroundColor = true;
+            this.colorSelector1.ChangeTextColor = true;
+            this.colorSelector1.ChangeTextOutlineColor = true;
+            this.colorSelector1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.colorSelector1.Location = new System.Drawing.Point(204, 94);
+            this.colorSelector1.Margin = new System.Windows.Forms.Padding(5, 2, 5, 2);
+            this.colorSelector1.Name = "colorSelector1";
+            this.colorSelector1.Size = new System.Drawing.Size(107, 32);
+            this.colorSelector1.TabIndex = 54;
+            this.colorSelector1.TextColor = System.Drawing.Color.Empty;
+            this.colorSelector1.TextOutlineColor = System.Drawing.Color.Empty;
+            this.colorSelector1.EnabledChanged += new System.EventHandler(this.colorSelector1_EnabledChanged);
+            // 
+            // expLogMessageText
+            // 
+            this.expLogMessageText.AutoSize = true;
+            this.expLogMessageText.Dock = System.Windows.Forms.DockStyle.Top;
+            this.expLogMessageText.Expression = "";
+            this.expLogMessageText.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
+            this.expLogMessageText.Location = new System.Drawing.Point(203, 2);
+            this.expLogMessageText.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.expLogMessageText.Name = "expLogMessageText";
+            this.expLogMessageText.ReadOnly = false;
+            this.expLogMessageText.Size = new System.Drawing.Size(522, 25);
+            this.expLogMessageText.TabIndex = 14;
+            // 
+            // expLvarTarget
+            // 
+            this.expLvarTarget.AutoSize = true;
+            this.expLvarTarget.Dock = System.Windows.Forms.DockStyle.Top;
+            this.expLvarTarget.Expression = "";
+            this.expLvarTarget.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
+            this.expLvarTarget.Location = new System.Drawing.Point(179, 143);
+            this.expLvarTarget.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.expLvarTarget.Name = "expLvarTarget";
+            this.expLvarTarget.ReadOnly = false;
+            this.expLvarTarget.Size = new System.Drawing.Size(546, 25);
+            this.expLvarTarget.TabIndex = 27;
+            this.expLvarTarget.EnabledChanged += new System.EventHandler(this.expLvarTarget_EnabledChanged);
+            // 
+            // expLvarIndex
+            // 
+            this.expLvarIndex.AutoSize = true;
+            this.expLvarIndex.Dock = System.Windows.Forms.DockStyle.Top;
+            this.expLvarIndex.Expression = "";
+            this.expLvarIndex.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.Numeric;
+            this.expLvarIndex.Location = new System.Drawing.Point(179, 114);
+            this.expLvarIndex.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.expLvarIndex.Name = "expLvarIndex";
+            this.expLvarIndex.ReadOnly = false;
+            this.expLvarIndex.Size = new System.Drawing.Size(546, 25);
+            this.expLvarIndex.TabIndex = 25;
+            this.expLvarIndex.EnabledChanged += new System.EventHandler(this.expLvarIndex_EnabledChanged);
+            // 
+            // expLvarValue
+            // 
+            this.expLvarValue.AutoSize = true;
+            this.expLvarValue.Dock = System.Windows.Forms.DockStyle.Top;
+            this.expLvarValue.Expression = "";
+            this.expLvarValue.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
+            this.expLvarValue.Location = new System.Drawing.Point(179, 85);
+            this.expLvarValue.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.expLvarValue.Name = "expLvarValue";
+            this.expLvarValue.ReadOnly = false;
+            this.expLvarValue.Size = new System.Drawing.Size(546, 25);
+            this.expLvarValue.TabIndex = 23;
+            this.expLvarValue.EnabledChanged += new System.EventHandler(this.expLvarValue_EnabledChanged);
+            // 
+            // expLvarName
+            // 
+            this.expLvarName.AutoSize = true;
+            this.expLvarName.Dock = System.Windows.Forms.DockStyle.Top;
+            this.expLvarName.Expression = "";
+            this.expLvarName.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
+            this.expLvarName.Location = new System.Drawing.Point(179, 29);
+            this.expLvarName.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.expLvarName.Name = "expLvarName";
+            this.expLvarName.ReadOnly = false;
+            this.expLvarName.Size = new System.Drawing.Size(546, 25);
+            this.expLvarName.TabIndex = 16;
+            this.expLvarName.EnabledChanged += new System.EventHandler(this.expLvarName_EnabledChanged);
+            // 
+            // expObsJSONPayload
+            // 
+            this.expObsJSONPayload.AutoSize = true;
+            this.tableLayoutPanel18.SetColumnSpan(this.expObsJSONPayload, 2);
+            this.expObsJSONPayload.Dock = System.Windows.Forms.DockStyle.Top;
+            this.expObsJSONPayload.Expression = "";
+            this.expObsJSONPayload.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
+            this.expObsJSONPayload.Location = new System.Drawing.Point(131, 87);
+            this.expObsJSONPayload.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.expObsJSONPayload.Name = "expObsJSONPayload";
+            this.expObsJSONPayload.ReadOnly = false;
+            this.expObsJSONPayload.Size = new System.Drawing.Size(594, 25);
+            this.expObsJSONPayload.TabIndex = 25;
+            this.expObsJSONPayload.EnabledChanged += new System.EventHandler(this.expObsJSONPayload_EnabledChanged);
+            // 
+            // expObsSourceName
+            // 
+            this.expObsSourceName.AutoSize = true;
+            this.tableLayoutPanel18.SetColumnSpan(this.expObsSourceName, 2);
+            this.expObsSourceName.Dock = System.Windows.Forms.DockStyle.Top;
+            this.expObsSourceName.Expression = "";
+            this.expObsSourceName.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
+            this.expObsSourceName.Location = new System.Drawing.Point(131, 58);
+            this.expObsSourceName.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.expObsSourceName.Name = "expObsSourceName";
+            this.expObsSourceName.ReadOnly = false;
+            this.expObsSourceName.Size = new System.Drawing.Size(594, 25);
+            this.expObsSourceName.TabIndex = 24;
+            this.expObsSourceName.EnabledChanged += new System.EventHandler(this.expObsSourceName_EnabledChanged);
+            // 
+            // expObsSceneName
+            // 
+            this.expObsSceneName.AutoSize = true;
+            this.tableLayoutPanel18.SetColumnSpan(this.expObsSceneName, 2);
+            this.expObsSceneName.Dock = System.Windows.Forms.DockStyle.Top;
+            this.expObsSceneName.Expression = "";
+            this.expObsSceneName.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
+            this.expObsSceneName.Location = new System.Drawing.Point(131, 29);
+            this.expObsSceneName.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.expObsSceneName.Name = "expObsSceneName";
+            this.expObsSceneName.ReadOnly = false;
+            this.expObsSceneName.Size = new System.Drawing.Size(594, 25);
+            this.expObsSceneName.TabIndex = 14;
+            this.expObsSceneName.EnabledChanged += new System.EventHandler(this.expObsSceneName_EnabledChanged);
+            // 
+            // expJsonFiring
+            // 
+            this.expJsonFiring.AutoSize = true;
+            this.expJsonFiring.Dock = System.Windows.Forms.DockStyle.Top;
+            this.expJsonFiring.Expression = "";
+            this.expJsonFiring.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
+            this.expJsonFiring.Location = new System.Drawing.Point(227, 87);
+            this.expJsonFiring.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.expJsonFiring.Name = "expJsonFiring";
+            this.expJsonFiring.ReadOnly = false;
+            this.expJsonFiring.Size = new System.Drawing.Size(498, 25);
+            this.expJsonFiring.TabIndex = 20;
+            // 
+            // expJsonPayload
+            // 
+            this.expJsonPayload.AutoSize = true;
+            this.expJsonPayload.Dock = System.Windows.Forms.DockStyle.Top;
+            this.expJsonPayload.Expression = "";
+            this.expJsonPayload.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
+            this.expJsonPayload.Location = new System.Drawing.Point(227, 58);
+            this.expJsonPayload.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.expJsonPayload.Name = "expJsonPayload";
+            this.expJsonPayload.ReadOnly = false;
+            this.expJsonPayload.Size = new System.Drawing.Size(498, 25);
+            this.expJsonPayload.TabIndex = 16;
+            // 
+            // expJsonEndpoint
+            // 
+            this.expJsonEndpoint.AutoSize = true;
+            this.expJsonEndpoint.Dock = System.Windows.Forms.DockStyle.Top;
+            this.expJsonEndpoint.Expression = "";
+            this.expJsonEndpoint.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
+            this.expJsonEndpoint.Location = new System.Drawing.Point(227, 2);
+            this.expJsonEndpoint.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.expJsonEndpoint.Name = "expJsonEndpoint";
+            this.expJsonEndpoint.ReadOnly = false;
+            this.expJsonEndpoint.Size = new System.Drawing.Size(498, 25);
+            this.expJsonEndpoint.TabIndex = 14;
+            // 
+            // expWmsgLparam
+            // 
+            this.expWmsgLparam.AutoSize = true;
+            this.tableLayoutPanel19.SetColumnSpan(this.expWmsgLparam, 2);
+            this.expWmsgLparam.Dock = System.Windows.Forms.DockStyle.Top;
+            this.expWmsgLparam.Expression = "";
+            this.expWmsgLparam.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.Numeric;
+            this.expWmsgLparam.Location = new System.Drawing.Point(115, 89);
+            this.expWmsgLparam.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.expWmsgLparam.Name = "expWmsgLparam";
+            this.expWmsgLparam.ReadOnly = false;
+            this.expWmsgLparam.Size = new System.Drawing.Size(610, 25);
+            this.expWmsgLparam.TabIndex = 30;
+            // 
+            // expWmsgWparam
+            // 
+            this.expWmsgWparam.AutoSize = true;
+            this.tableLayoutPanel19.SetColumnSpan(this.expWmsgWparam, 2);
+            this.expWmsgWparam.Dock = System.Windows.Forms.DockStyle.Top;
+            this.expWmsgWparam.Expression = "";
+            this.expWmsgWparam.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.Numeric;
+            this.expWmsgWparam.Location = new System.Drawing.Point(115, 60);
+            this.expWmsgWparam.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.expWmsgWparam.Name = "expWmsgWparam";
+            this.expWmsgWparam.ReadOnly = false;
+            this.expWmsgWparam.Size = new System.Drawing.Size(610, 25);
+            this.expWmsgWparam.TabIndex = 28;
+            // 
+            // expWmsgCode
+            // 
+            this.expWmsgCode.AutoSize = true;
+            this.tableLayoutPanel19.SetColumnSpan(this.expWmsgCode, 2);
+            this.expWmsgCode.Dock = System.Windows.Forms.DockStyle.Top;
+            this.expWmsgCode.Expression = "";
+            this.expWmsgCode.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.Numeric;
+            this.expWmsgCode.Location = new System.Drawing.Point(115, 31);
+            this.expWmsgCode.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.expWmsgCode.Name = "expWmsgCode";
+            this.expWmsgCode.ReadOnly = false;
+            this.expWmsgCode.Size = new System.Drawing.Size(610, 25);
+            this.expWmsgCode.TabIndex = 26;
+            // 
+            // expWmsgTitle
+            // 
+            this.expWmsgTitle.AutoSize = true;
+            this.tableLayoutPanel19.SetColumnSpan(this.expWmsgTitle, 2);
+            this.expWmsgTitle.Dock = System.Windows.Forms.DockStyle.Top;
+            this.expWmsgTitle.Expression = "";
+            this.expWmsgTitle.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
+            this.expWmsgTitle.Location = new System.Drawing.Point(115, 2);
+            this.expWmsgTitle.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.expWmsgTitle.Name = "expWmsgTitle";
+            this.expWmsgTitle.ReadOnly = false;
+            this.expWmsgTitle.Size = new System.Drawing.Size(610, 25);
+            this.expWmsgTitle.TabIndex = 25;
+            // 
+            // expFileOpVariable
+            // 
+            this.expFileOpVariable.AutoSize = true;
+            this.tableLayoutPanel20.SetColumnSpan(this.expFileOpVariable, 2);
+            this.expFileOpVariable.Dock = System.Windows.Forms.DockStyle.Top;
+            this.expFileOpVariable.Expression = "";
+            this.expFileOpVariable.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
+            this.expFileOpVariable.Location = new System.Drawing.Point(131, 58);
+            this.expFileOpVariable.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.expFileOpVariable.Name = "expFileOpVariable";
+            this.expFileOpVariable.ReadOnly = false;
+            this.expFileOpVariable.Size = new System.Drawing.Size(594, 25);
+            this.expFileOpVariable.TabIndex = 24;
+            // 
+            // expFileOpName
+            // 
+            this.expFileOpName.AutoSize = true;
+            this.tableLayoutPanel20.SetColumnSpan(this.expFileOpName, 2);
+            this.expFileOpName.Dock = System.Windows.Forms.DockStyle.Top;
+            this.expFileOpName.Expression = "";
+            this.expFileOpName.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
+            this.expFileOpName.Location = new System.Drawing.Point(131, 29);
+            this.expFileOpName.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.expFileOpName.Name = "expFileOpName";
+            this.expFileOpName.ReadOnly = false;
+            this.expFileOpName.Size = new System.Drawing.Size(594, 25);
+            this.expFileOpName.TabIndex = 14;
+            // 
+            // expTvarRow
+            // 
+            this.expTvarRow.AutoSize = true;
+            this.expTvarRow.Dock = System.Windows.Forms.DockStyle.Top;
+            this.expTvarRow.Expression = "";
+            this.expTvarRow.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.Numeric;
+            this.expTvarRow.Location = new System.Drawing.Point(179, 143);
+            this.expTvarRow.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.expTvarRow.Name = "expTvarRow";
+            this.expTvarRow.ReadOnly = false;
+            this.expTvarRow.Size = new System.Drawing.Size(546, 25);
+            this.expTvarRow.TabIndex = 31;
+            this.expTvarRow.EnabledChanged += new System.EventHandler(this.expTvarRow_EnabledChanged);
+            // 
+            // expTvarTarget
+            // 
+            this.expTvarTarget.AutoSize = true;
+            this.expTvarTarget.Dock = System.Windows.Forms.DockStyle.Top;
+            this.expTvarTarget.Expression = "";
+            this.expTvarTarget.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
+            this.expTvarTarget.Location = new System.Drawing.Point(179, 172);
+            this.expTvarTarget.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.expTvarTarget.Name = "expTvarTarget";
+            this.expTvarTarget.ReadOnly = false;
+            this.expTvarTarget.Size = new System.Drawing.Size(546, 25);
+            this.expTvarTarget.TabIndex = 27;
+            this.expTvarTarget.EnabledChanged += new System.EventHandler(this.expTvarTarget_EnabledChanged);
+            // 
+            // expTvarColumn
+            // 
+            this.expTvarColumn.AutoSize = true;
+            this.expTvarColumn.Dock = System.Windows.Forms.DockStyle.Top;
+            this.expTvarColumn.Expression = "";
+            this.expTvarColumn.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.Numeric;
+            this.expTvarColumn.Location = new System.Drawing.Point(179, 114);
+            this.expTvarColumn.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.expTvarColumn.Name = "expTvarColumn";
+            this.expTvarColumn.ReadOnly = false;
+            this.expTvarColumn.Size = new System.Drawing.Size(546, 25);
+            this.expTvarColumn.TabIndex = 25;
+            this.expTvarColumn.EnabledChanged += new System.EventHandler(this.expTvarColumn_EnabledChanged);
+            // 
+            // expTvarValue
+            // 
+            this.expTvarValue.AutoSize = true;
+            this.expTvarValue.Dock = System.Windows.Forms.DockStyle.Top;
+            this.expTvarValue.Expression = "";
+            this.expTvarValue.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
+            this.expTvarValue.Location = new System.Drawing.Point(179, 85);
+            this.expTvarValue.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.expTvarValue.Name = "expTvarValue";
+            this.expTvarValue.ReadOnly = false;
+            this.expTvarValue.Size = new System.Drawing.Size(546, 25);
+            this.expTvarValue.TabIndex = 23;
+            this.expTvarValue.EnabledChanged += new System.EventHandler(this.expTvarValue_EnabledChanged);
+            // 
+            // expTvarName
+            // 
+            this.expTvarName.AutoSize = true;
+            this.expTvarName.Dock = System.Windows.Forms.DockStyle.Top;
+            this.expTvarName.Expression = "";
+            this.expTvarName.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
+            this.expTvarName.Location = new System.Drawing.Point(179, 29);
+            this.expTvarName.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.expTvarName.Name = "expTvarName";
+            this.expTvarName.ReadOnly = false;
+            this.expTvarName.Size = new System.Drawing.Size(546, 25);
+            this.expTvarName.TabIndex = 16;
+            this.expTvarName.EnabledChanged += new System.EventHandler(this.expTvarName_EnabledChanged);
+            // 
+            // expMutexName
+            // 
+            this.expMutexName.AutoSize = true;
+            this.expMutexName.Dock = System.Windows.Forms.DockStyle.Top;
+            this.expMutexName.Expression = "";
+            this.expMutexName.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
+            this.expMutexName.Location = new System.Drawing.Point(131, 29);
+            this.expMutexName.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.expMutexName.Name = "expMutexName";
+            this.expMutexName.ReadOnly = false;
+            this.expMutexName.Size = new System.Drawing.Size(594, 25);
+            this.expMutexName.TabIndex = 16;
+            // 
+            // expCallbackReturnScalarName
+            // 
+            this.expCallbackReturnScalarName.AutoSize = true;
+            this.expCallbackReturnScalarName.Dock = System.Windows.Forms.DockStyle.Top;
+            this.expCallbackReturnScalarName.Expression = "";
+            this.expCallbackReturnScalarName.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
+            this.expCallbackReturnScalarName.Location = new System.Drawing.Point(235, 60);
+            this.expCallbackReturnScalarName.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.expCallbackReturnScalarName.Name = "expCallbackReturnScalarName";
+            this.expCallbackReturnScalarName.ReadOnly = false;
+            this.expCallbackReturnScalarName.Size = new System.Drawing.Size(490, 25);
+            this.expCallbackReturnScalarName.TabIndex = 19;
+            // 
+            // expCallbackParam
+            // 
+            this.expCallbackParam.AutoSize = true;
+            this.expCallbackParam.Dock = System.Windows.Forms.DockStyle.Top;
+            this.expCallbackParam.Expression = "";
+            this.expCallbackParam.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
+            this.expCallbackParam.Location = new System.Drawing.Point(235, 31);
+            this.expCallbackParam.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.expCallbackParam.Name = "expCallbackParam";
+            this.expCallbackParam.ReadOnly = false;
+            this.expCallbackParam.Size = new System.Drawing.Size(490, 25);
+            this.expCallbackParam.TabIndex = 16;
+            // 
+            // expCallbackName
+            // 
+            this.expCallbackName.AutoSize = true;
+            this.expCallbackName.Dock = System.Windows.Forms.DockStyle.Top;
+            this.expCallbackName.Expression = "";
+            this.expCallbackName.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
+            this.expCallbackName.Location = new System.Drawing.Point(235, 2);
+            this.expCallbackName.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.expCallbackName.Name = "expCallbackName";
+            this.expCallbackName.ReadOnly = false;
+            this.expCallbackName.Size = new System.Drawing.Size(490, 25);
+            this.expCallbackName.TabIndex = 14;
+            // 
+            // expMouseY
+            // 
+            this.expMouseY.AutoSize = true;
+            this.expMouseY.Dock = System.Windows.Forms.DockStyle.Top;
+            this.expMouseY.Expression = "";
+            this.expMouseY.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.Numeric;
+            this.expMouseY.Location = new System.Drawing.Point(155, 85);
+            this.expMouseY.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.expMouseY.Name = "expMouseY";
+            this.expMouseY.ReadOnly = false;
+            this.expMouseY.Size = new System.Drawing.Size(570, 25);
+            this.expMouseY.TabIndex = 24;
+            // 
+            // expMouseX
+            // 
+            this.expMouseX.AutoSize = true;
+            this.expMouseX.Dock = System.Windows.Forms.DockStyle.Top;
+            this.expMouseX.Expression = "";
+            this.expMouseX.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.Numeric;
+            this.expMouseX.Location = new System.Drawing.Point(155, 56);
+            this.expMouseX.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.expMouseX.Name = "expMouseX";
+            this.expMouseX.ReadOnly = false;
+            this.expMouseX.Size = new System.Drawing.Size(570, 25);
+            this.expMouseX.TabIndex = 16;
+            // 
+            // expPartyOrder
+            // 
+            this.expPartyOrder.AutoSize = true;
+            this.expPartyOrder.Dock = System.Windows.Forms.DockStyle.Top;
+            this.expPartyOrder.Expression = "";
+            this.expPartyOrder.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.Numeric;
+            this.expPartyOrder.Location = new System.Drawing.Point(107, 31);
+            this.expPartyOrder.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.expPartyOrder.Name = "expPartyOrder";
+            this.expPartyOrder.ReadOnly = false;
+            this.expPartyOrder.Size = new System.Drawing.Size(618, 25);
+            this.expPartyOrder.TabIndex = 16;
+            // 
+            // expPlayerName
+            // 
+            this.expPlayerName.AutoSize = true;
+            this.expPlayerName.Dock = System.Windows.Forms.DockStyle.Top;
+            this.expPlayerName.Expression = "";
+            this.expPlayerName.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
+            this.expPlayerName.Location = new System.Drawing.Point(107, 2);
+            this.expPlayerName.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.expPlayerName.Name = "expPlayerName";
+            this.expPlayerName.ReadOnly = false;
+            this.expPlayerName.Size = new System.Drawing.Size(618, 25);
+            this.expPlayerName.TabIndex = 14;
+            // 
+            // cndCondition
+            // 
+            this.cndCondition.ConditionToEdit = null;
+            this.cndCondition.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cndCondition.Location = new System.Drawing.Point(4, 2);
+            this.cndCondition.Margin = new System.Windows.Forms.Padding(5, 2, 5, 2);
+            this.cndCondition.Name = "cndCondition";
+            this.cndCondition.Size = new System.Drawing.Size(737, 341);
+            this.cndCondition.TabIndex = 0;
+            // 
+            // expExecutionDelay
+            // 
+            this.expExecutionDelay.AutoSize = true;
+            this.expExecutionDelay.Dock = System.Windows.Forms.DockStyle.Top;
+            this.expExecutionDelay.Expression = "";
+            this.expExecutionDelay.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.Numeric;
+            this.expExecutionDelay.Location = new System.Drawing.Point(515, 56);
+            this.expExecutionDelay.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.expExecutionDelay.Name = "expExecutionDelay";
+            this.expExecutionDelay.ReadOnly = false;
+            this.expExecutionDelay.Size = new System.Drawing.Size(208, 25);
+            this.expExecutionDelay.TabIndex = 7;
+            // 
+            // btnTest
+            // 
+            this.btnTest.AutoSize = true;
+            this.btnTest.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnTest.Location = new System.Drawing.Point(13, 0);
+            this.btnTest.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.btnTest.Name = "btnTest";
+            this.btnTest.Size = new System.Drawing.Size(327, 40);
+            this.btnTest.TabIndex = 102;
+            this.btnTest.Text = "Test action";
+            this.btnTest.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnTest.UseVisualStyleBackColor = true;
+            this.btnTest.Click += new System.EventHandler(this.btnTest_Click);
+            // 
             // expressionTextBox1
             // 
             this.expressionTextBox1.AutoSize = true;
@@ -5385,117 +5502,43 @@
             this.expressionTextBox2.Size = new System.Drawing.Size(474, 20);
             this.expressionTextBox2.TabIndex = 14;
             // 
-            // label1
+            // cbxEncounterSwingType
             // 
-            this.label1.AutoSize = true;
-            this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label1.Location = new System.Drawing.Point(4, 27);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(103, 29);
-            this.label1.TabIndex = 23;
-            this.label1.Text = "Ability type";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.cbxEncounterSwingType.Dock = System.Windows.Forms.DockStyle.Top;
+            this.cbxEncounterSwingType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbxEncounterSwingType.FormattingEnabled = true;
+            this.cbxEncounterSwingType.Items.AddRange(new object[] {
+            "None",
+            "Autoattack",
+            "Ability",
+            "Healing",
+            "HoT",
+            "Dispel",
+            "DoT",
+            "Buff",
+            "Debuff",
+            "PowerDrain",
+            "PowerHealing",
+            "TPDrain",
+            "TPHeal",
+            "Threat"});
+            this.cbxEncounterSwingType.Location = new System.Drawing.Point(115, 29);
+            this.cbxEncounterSwingType.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.cbxEncounterSwingType.Name = "cbxEncounterSwingType";
+            this.cbxEncounterSwingType.Size = new System.Drawing.Size(610, 23);
+            this.cbxEncounterSwingType.TabIndex = 32;
             // 
-            // expEncounterActorName
+            // label10
             // 
-            this.expEncounterActorName.AutoSize = true;
-            this.expEncounterActorName.Dock = System.Windows.Forms.DockStyle.Top;
-            this.expEncounterActorName.Expression = "";
-            this.expEncounterActorName.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
-            this.expEncounterActorName.Location = new System.Drawing.Point(115, 58);
-            this.expEncounterActorName.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.expEncounterActorName.Name = "expEncounterActorName";
-            this.expEncounterActorName.ReadOnly = false;
-            this.expEncounterActorName.Size = new System.Drawing.Size(610, 25);
-            this.expEncounterActorName.TabIndex = 24;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label6.Location = new System.Drawing.Point(4, 56);
-            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(103, 29);
-            this.label6.TabIndex = 25;
-            this.label6.Text = "Actor name";
-            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // expEncounterTargetName
-            // 
-            this.expEncounterTargetName.AutoSize = true;
-            this.expEncounterTargetName.Dock = System.Windows.Forms.DockStyle.Top;
-            this.expEncounterTargetName.Expression = "";
-            this.expEncounterTargetName.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
-            this.expEncounterTargetName.Location = new System.Drawing.Point(115, 87);
-            this.expEncounterTargetName.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.expEncounterTargetName.Name = "expEncounterTargetName";
-            this.expEncounterTargetName.ReadOnly = false;
-            this.expEncounterTargetName.Size = new System.Drawing.Size(610, 25);
-            this.expEncounterTargetName.TabIndex = 26;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label7.Location = new System.Drawing.Point(4, 85);
-            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(103, 29);
-            this.label7.TabIndex = 27;
-            this.label7.Text = "Target name";
-            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label8.Location = new System.Drawing.Point(4, 114);
-            this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(103, 29);
-            this.label8.TabIndex = 28;
-            this.label8.Text = "Damage";
-            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // expEncounterDamage
-            // 
-            this.expEncounterDamage.AutoSize = true;
-            this.expEncounterDamage.Dock = System.Windows.Forms.DockStyle.Top;
-            this.expEncounterDamage.Expression = "";
-            this.expEncounterDamage.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.Numeric;
-            this.expEncounterDamage.Location = new System.Drawing.Point(115, 116);
-            this.expEncounterDamage.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.expEncounterDamage.Name = "expEncounterDamage";
-            this.expEncounterDamage.ReadOnly = false;
-            this.expEncounterDamage.Size = new System.Drawing.Size(610, 25);
-            this.expEncounterDamage.TabIndex = 29;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label9.Location = new System.Drawing.Point(4, 143);
-            this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(103, 29);
-            this.label9.TabIndex = 30;
-            this.label9.Text = "DamageType";
-            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // expEncounterDamageType
-            // 
-            this.expEncounterDamageType.AutoSize = true;
-            this.expEncounterDamageType.Dock = System.Windows.Forms.DockStyle.Top;
-            this.expEncounterDamageType.Expression = "";
-            this.expEncounterDamageType.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
-            this.expEncounterDamageType.Location = new System.Drawing.Point(115, 145);
-            this.expEncounterDamageType.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.expEncounterDamageType.Name = "expEncounterDamageType";
-            this.expEncounterDamageType.ReadOnly = false;
-            this.expEncounterDamageType.Size = new System.Drawing.Size(610, 25);
-            this.expEncounterDamageType.TabIndex = 31;
+            this.label10.AutoSize = true;
+            this.label10.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label10.Location = new System.Drawing.Point(4, 27);
+            this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(103, 27);
+            this.label10.TabIndex = 33;
+            this.label10.Text = "Swing type";
+            this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // ActionForm
             // 
@@ -6006,5 +6049,7 @@
         private System.Windows.Forms.Label label9;
         private CustomControls.ExpressionTextBox expEncounterDamage;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.ComboBox cbxEncounterSwingType;
     }
 }

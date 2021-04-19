@@ -279,7 +279,7 @@ namespace TriggernometryProxy
         {
             ActGlobals.oFormActMain.EndCombat(false);
         }
-        public void StartCombat(string ability, string actor, string target, int damage,string damageType)
+        public void StartCombat(string encounterSwingType,string ability, string actor, string target, int damage,string damageType)
         {
             bool engaging = false;
             if (ActGlobals.oFormActMain.InCombat)
@@ -288,15 +288,16 @@ namespace TriggernometryProxy
             }
             if (engaging == false)
             {
-                if (ActGlobals.oFormActMain.SetEncounter(DateTime.Now, "YOU", "trEncTarget"))
+                if (ActGlobals.oFormActMain.SetEncounter(DateTime.Now, "YOU", target))
                 {
                     engaging = true;
                 }
             }
             if (engaging == true) {
-                MasterSwing action = new MasterSwing(2, false, new Dnum(damage), DateTime.Now, ActGlobals.oFormActMain.GlobalTimeSorter, ability, actor, damageType, target);
+                MasterSwing action = new MasterSwing((int)Enum.Parse(typeof(SwingTypeEnum), encounterSwingType), false, new Dnum(damage), DateTime.Now, ActGlobals.oFormActMain.GlobalTimeSorter, ability, actor, damageType, target);
                 //action.Tags.Add("potency", new decimal(100));
                 //action.Tags.Add("Job", "AST");
+                
                 ActGlobals.oFormActMain.AddCombatAction(action);
                 ActGlobals.oFormActMain.GlobalTimeSorter++;
             }
@@ -457,7 +458,22 @@ namespace TriggernometryProxy
             }
             return new Triggernometry.RealPlugin.PluginWrapper() { pluginObj = null, state = 0 };
         }
-
     }
-
+    public enum SwingTypeEnum
+    {
+        None = 0,
+        Autoattack = 1,
+        Ability = 2,
+        Healing = 10,
+        HoT = 11,
+        Dispel = 15,
+        DoT = 20,
+        Buff = 0x15,
+        Debuff = 0x16,
+        PowerDrain = 30,
+        PowerHealing = 0x1f,
+        TPDrain = 40,
+        TPHeal = 0x29,
+        Threat = 50
+    }
 }
