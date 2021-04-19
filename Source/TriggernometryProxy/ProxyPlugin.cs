@@ -129,6 +129,7 @@ namespace TriggernometryProxy
             }
             FailsafeRegisterHook("InCombatHook", "InCombat");
             FailsafeRegisterHook("EndCombatHook", "EndCombat");
+            FailsafeRegisterHook("StartCombatHook", "StartCombat");
             FailsafeRegisterHook("CurrentZoneHook", "GetCurrentZone");
             FailsafeRegisterHook("ActiveEncounterHook", "ExportActiveEncounter");
             FailsafeRegisterHook("LastEncounterHook", "ExportLastEncounter");
@@ -278,7 +279,28 @@ namespace TriggernometryProxy
         {
             ActGlobals.oFormActMain.EndCombat(false);
         }
-
+        public void StartCombat(string ability, string actor, string target, int damage,string damageType)
+        {
+            bool engaging = false;
+            if (ActGlobals.oFormActMain.InCombat)
+            {
+                engaging = true;
+            }
+            if (engaging == false)
+            {
+                if (ActGlobals.oFormActMain.SetEncounter(DateTime.Now, "YOU", "trEncTarget"))
+                {
+                    engaging = true;
+                }
+            }
+            if (engaging == true) {
+                MasterSwing action = new MasterSwing(2, false, new Dnum(damage), DateTime.Now, ActGlobals.oFormActMain.GlobalTimeSorter, ability, actor, damageType, target);
+                //action.Tags.Add("potency", new decimal(100));
+                //action.Tags.Add("Job", "AST");
+                ActGlobals.oFormActMain.AddCombatAction(action);
+                ActGlobals.oFormActMain.GlobalTimeSorter++;
+            }
+        }
         public string GetCurrentZone()
         {
             return ActGlobals.oFormActMain.CurrentZone;

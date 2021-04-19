@@ -251,6 +251,12 @@ namespace Triggernometry.Forms
                 expAuraOTick.Expression = "";
                 expAuraTTLTick.Expression = "";
                 cbxFolderOp.SelectedIndex = 0;
+                cbxEncounterOp.SelectedIndex = 0;
+                expEncounterAbilityType.Expression = "";
+                expEncounterActorName.Expression = "";
+                expEncounterDamage.Expression = "";
+                expEncounterDamageType.Expression = "";
+                expEncounterTargetName.Expression = "";
                 expDiscordMessage.Expression = "";
                 expDiscordUrl.Expression = "";
                 cbxDiscordTts.Checked = false;
@@ -411,6 +417,12 @@ namespace Triggernometry.Forms
                     trvFolder.Update();
                 }
                 cbxFolderOp.SelectedIndex = (int)a._FolderOp;
+                cbxEncounterOp.SelectedIndex = (int)a._EncounterOp;
+                expEncounterAbilityType.Expression = a._EncounterAbilityType;
+                expEncounterActorName.Expression = a._EncounterActorName;
+                expEncounterDamage.Expression = a._EncounterDamage;
+                expEncounterDamageType.Expression = a.EncounterDamageType;
+                expEncounterTargetName.Expression = a.EncounterTargetName;
                 expTriggerZone.Expression = a._TriggerZone;
                 expTriggerText.Expression = a._TriggerText;
                 cbxAuraOp.SelectedIndex = (int)a._AuraOp;
@@ -627,6 +639,12 @@ namespace Triggernometry.Forms
                 a._FolderId = Guid.Empty;
             }
             a._FolderOp = (Action.FolderOpEnum)cbxFolderOp.SelectedIndex;
+            a._EncounterOp = (Action.EncounterOpEnum)cbxEncounterOp.SelectedIndex;
+            a._EncounterAbilityType = expEncounterAbilityType.Expression;
+            a._EncounterActorName = expEncounterActorName.Expression;
+            a._EncounterDamage = expEncounterDamage.Expression;
+            a._EncounterDamageType = expEncounterDamageType.Expression;
+            a._EncounterTargetName = expEncounterTargetName.Expression;
             Action.TriggerForceTypeEnum newval = Action.TriggerForceTypeEnum.NoSkip;
             if (cbxFiringOptions.CheckedIndices.Contains(0) == true)
             {

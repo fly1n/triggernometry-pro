@@ -100,7 +100,11 @@ namespace Triggernometry
             EnableFolder,
             DisableFolder
         }
-
+        public enum EncounterOpEnum
+        {
+            EndEncounter,
+            StartEncounter
+        }
         public enum AuraOpEnum
         {
             ActivateAura,
@@ -498,7 +502,7 @@ namespace Triggernometry
                 _FolderOp = (FolderOpEnum)Enum.Parse(typeof(FolderOpEnum), value);
             }
         }
-
+ 
         internal Guid _FolderId { get; set; } = Guid.Empty;
         [XmlAttribute]
         public string FolderId
@@ -520,6 +524,114 @@ namespace Triggernometry
             }
         }
 
+        #endregion
+        #region Action specific properties - Encounter operation
+
+        internal EncounterOpEnum _EncounterOp { get; set; } = EncounterOpEnum.EndEncounter;
+        [XmlAttribute]
+        public string EncounterOp
+        {
+            get
+            {
+                if (_EncounterOp != EncounterOpEnum.EndEncounter)
+                {
+                    return _EncounterOp.ToString();
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                _EncounterOp = (EncounterOpEnum)Enum.Parse(typeof(EncounterOpEnum), value);
+            }
+        }
+        internal string _EncounterAbilityType = "";
+        [XmlAttribute]
+        public string EncounterAbilityType
+        {
+            get
+            {
+                if (_EncounterAbilityType == "")
+                {
+                    return null;
+                }
+                return _EncounterAbilityType;
+            }
+            set
+            {
+                _EncounterAbilityType = value;
+            }
+        }
+        internal string _EncounterActorName = "";
+        [XmlAttribute]
+        public string EncounterActorName
+        {
+            get
+            {
+                if (_EncounterActorName == "")
+                {
+                    return null;
+                }
+                return _EncounterActorName;
+            }
+            set
+            {
+                _EncounterActorName = value;
+            }
+        }
+        internal string _EncounterTargetName = "";
+        [XmlAttribute]
+        public string EncounterTargetName
+        {
+            get
+            {
+                if (_EncounterTargetName == "")
+                {
+                    return null;
+                }
+                return _EncounterTargetName;
+            }
+            set
+            {
+                _EncounterTargetName = value;
+            }
+        }
+        internal string _EncounterDamage = "";
+        [XmlAttribute]
+        public string EncounterDamage
+        {
+            get
+            {
+                if (_EncounterDamage == "")
+                {
+                    return null;
+                }
+                return _EncounterDamage;
+            }
+            set
+            {
+                _EncounterDamage = value;
+            }
+        }
+        internal string _EncounterDamageType = "";
+        [XmlAttribute]
+        public string EncounterDamageType
+        {
+            get
+            {
+                if (_EncounterDamageType == "")
+                {
+                    return null;
+                }
+                return _EncounterDamageType;
+            }
+            set
+            {
+                _EncounterDamageType = value;
+            }
+        }
         #endregion
         #region Action specific properties - Image aura
 

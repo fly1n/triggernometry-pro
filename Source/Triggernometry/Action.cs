@@ -830,7 +830,15 @@ namespace Triggernometry
                     break;
                 case ActionTypeEnum.EndEncounter:
                     {
-                        temp += I18n.Translate("internal/Action/descendencounter", "end encounter");
+                        switch (_EncounterOp)
+                        {
+                            case EncounterOpEnum.EndEncounter:
+                                temp += I18n.Translate("internal/Action/descendencounter", "end encounter");
+                                break;
+                            case EncounterOpEnum.StartEncounter:
+                                temp += I18n.Translate("internal/Action/descstartencounter", "start encounter");
+                                break;
+                        }
                     }
                     break;
                 case ActionTypeEnum.LogMessage:
@@ -1309,10 +1317,24 @@ namespace Triggernometry
                         }
                         break;
                     #endregion
-                    #region Implementation - End encounter
+                    #region Implementation - Encounter
                     case ActionTypeEnum.EndEncounter:
                         {
-                            ctx.plug.EndCombatHook();
+                            switch (_EncounterOp)
+                            {
+                                case EncounterOpEnum.EndEncounter:
+                                    ctx.plug.EndCombatHook();
+                                    break;
+                                case EncounterOpEnum.StartEncounter:
+
+                                    string ability = ctx.EvaluateStringExpression(ActionContextLogger, ctx, _EncounterAbilityType);
+                                    string actor = ctx.EvaluateStringExpression(ActionContextLogger, ctx, _EncounterActorName);
+                                    string target = ctx.EvaluateStringExpression(ActionContextLogger, ctx, _EncounterTargetName);
+                                    int damage = (int)ctx.EvaluateNumericExpression(ActionContextLogger, ctx, _EncounterDamage);
+                                    string damageType = ctx.EvaluateStringExpression(ActionContextLogger, ctx, _EncounterDamageType);
+                                    ctx.plug.StartCombatHook(ability, actor, target, damage, damageType);
+                                    break;
+                            }
                         }
                         break;
                     #endregion
@@ -2621,6 +2643,12 @@ namespace Triggernometry
             a._AuraTTLTickExpression = _AuraTTLTickExpression;
             a._FolderOp = _FolderOp;
             a._FolderId = _FolderId;
+            a._EncounterOp = _EncounterOp;
+            a._EncounterAbilityType = _EncounterAbilityType;
+            a._EncounterActorName = _EncounterActorName;
+            a._EncounterDamage = _EncounterDamage;
+            a._EncounterDamageType = _EncounterDamageType;
+            a._EncounterTargetName = _EncounterTargetName;
             a._DiscordWebhookMessage = _DiscordWebhookMessage;
             a._DiscordWebhookURL = _DiscordWebhookURL;
             a._TextAuraOp = _TextAuraOp;

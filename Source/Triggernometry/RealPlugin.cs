@@ -449,6 +449,7 @@ namespace Triggernometry
         public delegate void TabPageDelegate(TabPage tp);
         public delegate void TtsDelegate(string text);
         public delegate void SoundDelegate(string filename, int volume);
+        public delegate void EncounterDelegate(string ability, string actor, string target, int damage, string damageType);
         public delegate List<CustomTriggerCategoryProxy> CustomTriggerDelegate();
         public delegate PluginWrapper InstanceDelegate(string ActPluginName, string ActPluginType);
 
@@ -498,6 +499,7 @@ namespace Triggernometry
         public SimpleBoolDelegate InCombatHook { get; set; }
         public SimpleBoolDelegate CustomTriggerCheckHook { get; set; }
         public SimpleVoidDelegate EndCombatHook { get; set; }
+        public EncounterDelegate StartCombatHook { get; set; }
         public SimpleStringDelegate CurrentZoneHook { get; set; }
         public SimpleStringDelegate ActiveEncounterHook { get; set; }
         public SimpleStringDelegate LastEncounterHook { get; set; }
@@ -3133,6 +3135,7 @@ namespace Triggernometry
             var pluginSubscription = plug.DataSubscription;
             var mySub = (FFXIV_ACT_Plugin.Common.IDataSubscription)pluginSubscription;
             mySub.NetworkReceived += (string connection, long epoch, byte[] message) => OnMessageReceived(connection, epoch, message);
+            mySub.NetworkSent += (string connection, long epoch, byte[] message) => OnMessageReceived(connection, epoch, message,true);
         }
         private void NetworkReceivedDelegateEndInvoke(dynamic plug)
         {
@@ -3140,7 +3143,7 @@ namespace Triggernometry
             var mySub = (FFXIV_ACT_Plugin.Common.IDataSubscription)pluginSubscription;
             mySub.NetworkReceived -= (string connection, long epoch, byte[] message) => OnMessageReceived(connection, epoch, message);
         }
-        public void OnMessageReceived(string connection, long epoch, byte[] message)
+        public void OnMessageReceived(string connection, long epoch, byte[] message,bool isSent=false)
         {
             if (this.ActiveOriginalTextTriggers.Count > 0)
             {
@@ -3151,7 +3154,15 @@ namespace Triggernometry
 
                 }
                 DateTime now = DateTime.Now;
-                var str = "Trlog:" + builder.ToString();
+                string str;
+                if (isSent)
+                {
+                    str = "Trsent:" + builder.ToString();
+                }
+                else
+                {
+                    str = "Trlog:" + builder.ToString();
+                }
                 LogLineQueuer(str, currentZone, LogEvent.SourceEnum.OriginalLog);
             }
 
