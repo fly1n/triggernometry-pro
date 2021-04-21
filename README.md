@@ -125,7 +125,7 @@ job(MacroPos): Usually occupied position as a suggestion in some in-game macro (
 ```
 job(description method) = convert the input string to specified description method of a job listed above. The input string can be a jobid or jobnames in different description method. for example, ${func:job(CN2):gunbreaker} = "枪";  ${func:job(RoleEN1):绝枪战士} = "T"
 trimname = Try to get name string from the name-server mixed string. for example, ${func:trimname:魔界花萌芽池} = "魔界花"; ${func:trimname:Pipira PiraAsura} = "Pipira Pira". It will first match the names in the partylist, if it fails, it will try to perform direct string trimming without character name verification. 
-trimserver = Try to get server string from a name-server mixed string. for example, ${func:trimname:魔界花萌芽池} = "萌芽池"; ${func:trimname:Pipira PiraAsura} = "Asura"
+trimserver = Try to get server string from a name-server mixed string. for example, ${func:trimserver:魔界花萌芽池} = "萌芽池"; ${func:trimserver:Pipira PiraAsura} = "Asura"
 ```
 
 ## More Special variables
