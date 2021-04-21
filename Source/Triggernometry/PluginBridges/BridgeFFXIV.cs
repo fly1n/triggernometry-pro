@@ -590,7 +590,38 @@ namespace Triggernometry.PluginBridges
                 ro++;
             }
         }*/
+        public static void SplitNameServer(string name_server, out string out_name, out string out_server) {
+            out_name = name_server;
+            out_server = "";
+            //try to match player in partylist
+            for (int pid = 1; pid < PluginBridges.BridgeFFXIV.NumPartyMembers + 1; pid++)
+            {
+                VariableDictionary p = PluginBridges.BridgeFFXIV.GetPartyMember(pid);
+                var pname = p.GetValue("Name").ToString();
+                if (name_server.Contains(pname))
+                {
+                    var sname = name_server.Replace(pname, "");
+                    if (serverlist.Contains(sname))
+                    {
+                        out_name = pname;
+                        out_server = sname;
+                        break;
+                    }
+                }
+            }
+            //if not matched, trim the first server name found.
+            foreach (var sname in PluginBridges.BridgeFFXIV.serverlist)
+            {
+                if (name_server.EndsWith(sname))
+                {
+                    out_name = name_server.Substring(0, name_server.Length - sname.Length);
+                    out_server = sname;
+                    break;
+                }
+            }
 
+
+        }
         public static int SortPlayersSelf(VariableDictionary a, VariableDictionary b)
         {
             if (a == Myself && b != Myself)
@@ -952,6 +983,14 @@ namespace Triggernometry.PluginBridges
                 {"38",  "舞者",   "舞者",   "舞者",   "舞",      "dancer",   "DNC",  "踊り子",  "踊り",   "踊",    "DPS",  "D",    "远敏",   "Ranged",   "D3"},
                 {"39",  "贤者",   "賢者",   "贤者",   "贤",      "sage", "SAG",  "賢者",   "賢者",   "賢",    "Healer",   "H",    "治疗",   "Healer",   "H2"},
          };
+        public static List<string> serverlist = new List<string>() {
+
+            "晨曦王座","沃仙曦染","宇宙和音","红玉海","萌芽池","神意之地","幻影群岛","拉诺西亚","拂晓之间","龙巢神殿","旅人栈桥","白金幻象","白银乡","神拳痕","潮风亭","琥珀原","柔风海湾","海猫茶屋","延夏","静语庄园","摩杜纳","紫水栈桥",
+            "Asura","Belias","Chaos","Hecatoncheir","Moomba","Pandaemonium","Shinryu","Unicorn","Yojimbo","Zeromus","Twintania","Brynhildr","Famfrit","Lich","Mateus","Shemhazai","Omega","Jenova","Zalera","Zodiark",
+            "Alexander","Anima","Carbuncle","Fenrir","Hades","Ixion","Kujata","Typhon","Ultima","Valefor","Exodus","Faerie","Lamia","Phoenix","Siren","Garuda","Ifrit","Ramuh","Titan","Diabolos","Gilgamesh","Leviathan","Midgardsormr","Odin","Shiva",
+            "Atomos","Bahamut","Chocobo","Moogle","Tonberry","Adamantoise","Coeurl","Malboro","Tiamat","Ultros","Behemoth","Cactuar","Cerberus","Goblin","Mandragora","Louisoix","Syldra","Spriggan","Aegis","Balmung","Durandal","Excalibur","Gungnir","Hyperion","Masamune","Ragnarok","Ridill","Sargatanas"
+
+        };
     }
 
 }

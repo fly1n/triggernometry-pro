@@ -1033,6 +1033,22 @@ namespace Triggernometry
                                             {
 
                                             }break;
+                                        case "trimname":
+                                            {
+                                                string name = "";
+                                                string server = "";
+                                                PluginBridges.BridgeFFXIV.SplitNameServer(funcval, out name, out server);
+                                                val = name;
+                                            }
+                                            break;
+                                        case "trimserver":
+                                            {
+                                                string name = "";
+                                                string server = "";
+                                                PluginBridges.BridgeFFXIV.SplitNameServer(funcval, out name, out server);
+                                                val = server;
+                                            }
+                                            break;
                                     }
                                 }
                             }

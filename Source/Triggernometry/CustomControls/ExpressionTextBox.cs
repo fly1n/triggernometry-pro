@@ -288,7 +288,7 @@ namespace Triggernometry.CustomControls
             }
             else
             {
-                char[] seperators = new char[] { '(', ')', '{', '}', ',',':','+','*','-','/','%' };
+                char[] seperators = new char[] { '(', ')', '{', '}', ',','+','*','-','/','%' };
                 string[] splits = txt.Split(seperators);
                 return (splits.LastOrDefault() ?? "").Trim();
             }
@@ -304,7 +304,7 @@ namespace Triggernometry.CustomControls
 
             "_ffxivparty","_ffxiventity","_ffxivplayer","_ffxivtime","_ffxivpartyorder",
             "_ffxivprocid","_ffxivprocname","_ffxivmemory[address, offset, length]",
-
+            "_mousex","_mousey",
             "_textaura[id]","_imageaura[id]",
 
             "pi","pi2","pi05","pi025","pi0125",
@@ -337,7 +337,7 @@ namespace Triggernometry.CustomControls
         };
         string[] autoCompletePartyAttributes = new string[] {
             "id","name","targetid","inparty","order","x","y","z","heading",
-            "worldid","worldname","currentworldid","casttargetid","distance","job","role",
+            "worldid","worldname","currentworldid","casttargetid","distance","job","job(CN2)","job(CN1)","job(RoleEN1)","job(RoleCN)","job(MacroPos)","role",
             "jobid","currenthp","currentmp","currentcp","currentgp",
             "maxhp","maxmp","maxcp","maxgp","level",
             "ownerid","type","iscasting","castbuffid","castdurationcurrent","castdurationmax",
@@ -353,8 +353,10 @@ namespace Triggernometry.CustomControls
             "trimleft:",
             "trimleft(character code, character code, ...):",
             "trimright:",
+            "trimname:","trimserver:",
             "trimright(character code, character code, ...):",
             "format(type, format string):",
+            "job(EN3):","job(CN2):","job(CN1):",
         };
         string[] autocompleteRegexs = new string[] {
             "(?<id>[0-9A-F]{8})","(?<actorID>[0-9A-F]{8})","(?<targetID>[0-9A-F]{8})",
