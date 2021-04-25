@@ -16,20 +16,27 @@ Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
+		国服Debug|Any CPU = 国服Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{CA86FD05-FB30-4923-BB27-638CA9CBAFCD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{CA86FD05-FB30-4923-BB27-638CA9CBAFCD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CA86FD05-FB30-4923-BB27-638CA9CBAFCD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CA86FD05-FB30-4923-BB27-638CA9CBAFCD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CA86FD05-FB30-4923-BB27-638CA9CBAFCD}.国服Debug|Any CPU.ActiveCfg = 国服Debug|Any CPU
+		{CA86FD05-FB30-4923-BB27-638CA9CBAFCD}.国服Debug|Any CPU.Build.0 = 国服Debug|Any CPU
 		{AA747357-8F4A-4633-A631-B421CA05BC26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{AA747357-8F4A-4633-A631-B421CA05BC26}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AA747357-8F4A-4633-A631-B421CA05BC26}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AA747357-8F4A-4633-A631-B421CA05BC26}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AA747357-8F4A-4633-A631-B421CA05BC26}.国服Debug|Any CPU.ActiveCfg = 国服Debug|Any CPU
+		{AA747357-8F4A-4633-A631-B421CA05BC26}.国服Debug|Any CPU.Build.0 = 国服Debug|Any CPU
 		{B4E8E3D9-EA23-4EFC-BA65-D291431C8685}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B4E8E3D9-EA23-4EFC-BA65-D291431C8685}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B4E8E3D9-EA23-4EFC-BA65-D291431C8685}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B4E8E3D9-EA23-4EFC-BA65-D291431C8685}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B4E8E3D9-EA23-4EFC-BA65-D291431C8685}.国服Debug|Any CPU.ActiveCfg = 国服Debug|Any CPU
+		{B4E8E3D9-EA23-4EFC-BA65-D291431C8685}.国服Debug|Any CPU.Build.0 = 国服Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -207,7 +207,7 @@
         <TranslationEntry Key="ActionForm/lblAuraOp" Translation="操作" />
         <TranslationEntry Key="ActionForm/lblAuraOpacity" Translation="不透明度" />
         <TranslationEntry Key="ActionForm/lblAuraTtl" Translation="实时" />
-        <TranslationEntry Key="ActionForm/lblAuraWidth" Translation="款" />
+        <TranslationEntry Key="ActionForm/lblAuraWidth" Translation="宽" />
         <TranslationEntry Key="ActionForm/lblAuraX" Translation="X 坐标" />
         <TranslationEntry Key="ActionForm/lblAuraY" Translation="Y 坐标" />
         <TranslationEntry Key="ActionForm/lblBeepFrequency" Translation="系统音效频率 (赫兹)" />
@@ -457,7 +457,7 @@
         <TranslationEntry Key="ConfigurationForm/lstFfxivJobOrder[Summoner]" Translation="召唤师" />
         <TranslationEntry Key="ConfigurationForm/lstFfxivJobOrder[Thaumaturge]" Translation="咒术师" />
         <TranslationEntry Key="ConfigurationForm/lstFfxivJobOrder[Warrior]" Translation="战士" />
-        <TranslationEntry Key="ConfigurationForm/lstFfxivJobOrder[White Mage]" Translation="白魔导师" />
+        <TranslationEntry Key="ConfigurationForm/lstFfxivJobOrder[White Mage]" Translation="白魔法师" />
         <TranslationEntry Key="ConfigurationForm/nudCacheFileExpiry" Translation="518400" />
         <TranslationEntry Key="ConfigurationForm/nudCacheImageExpiry" Translation="518400" />
         <TranslationEntry Key="ConfigurationForm/nudCacheJsonExpiry" Translation="10800" />
@@ -534,7 +534,7 @@
         <TranslationEntry Key="FolderForm/chkFfxivClassFilter[Job: Scholar]" Translation="特职：学者" />
         <TranslationEntry Key="FolderForm/chkFfxivClassFilter[Job: Summoner]" Translation="特职：召唤师" />
         <TranslationEntry Key="FolderForm/chkFfxivClassFilter[Job: Warrior]" Translation="特职：战士" />
-        <TranslationEntry Key="FolderForm/chkFfxivClassFilter[Job: White Mage]" Translation="特职：白魔导师" />
+        <TranslationEntry Key="FolderForm/chkFfxivClassFilter[Job: White Mage]" Translation="特职：白魔法师" />
         <TranslationEntry Key="FolderForm/chkFfxivClassFilterEnabled" Translation="限制该分组触发器在以下职业工作" />
         <TranslationEntry Key="FolderForm/chkZoneFilter" Translation="限制该分组触发器在以下区域工作" />
         <TranslationEntry Key="FolderForm/grpFfxivClassFilter" Translation=" 职业列表 " />

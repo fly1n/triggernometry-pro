@@ -597,7 +597,7 @@ namespace Triggernometry.PluginBridges
             for (int pid = 1; pid < PluginBridges.BridgeFFXIV.NumPartyMembers + 1; pid++)
             {
                 VariableDictionary p = PluginBridges.BridgeFFXIV.GetPartyMember(pid);
-                var pname = p.GetValue("Name").ToString();
+                var pname = p.GetValue("name").ToString();
                 if (name_server.Contains(pname))
                 {
                     var sname = name_server.Replace(pname, "");

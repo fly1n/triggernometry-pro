@@ -38,6 +38,11 @@
     <StartAction>Program</StartAction>
     <StartProgram>C:\Program Files (x86)\Advanced Combat Tracker\Advanced Combat Tracker.exe</StartProgram>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == '国服Debug|AnyCPU'">
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Advanced Combat Tracker">
       <HintPath>..\..\..\..\Games\FFXIV\ACT_v3.3\Advanced Combat Tracker.exe</HintPath>
@@ -56,11 +61,11 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
-    <Reference Include="TriggernometryPlugin" Condition="'$(Configuration)' == 'Debug'">
-      <HintPath>..\Triggernometry\bin\Debug\TriggernometryPlugin.dll</HintPath>
-    </Reference>
     <Reference Include="TriggernometryPlugin" Condition="'$(Configuration)' == 'Release'">
       <HintPath>..\Triggernometry\bin\Release\TriggernometryPlugin.dll</HintPath>
+    </Reference>
+    <Reference Include="TriggernometryPlugin">
+      <HintPath>..\Triggernometry\bin\Debug\TriggernometryPlugin.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
