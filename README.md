@@ -105,25 +105,27 @@ bnpcid
 pointer = Hexadecimal pointer address of character data in memory.
 job(description method) = Current job in specified description method.
 The method here can be one of the following type:
-"ID": return jobid. (37)  
-"EN": jobname in English. (gunbreaker)
-"EN3": jobname in English as a three letter acronym (GNB)
-"JP": jobname in Japanese. (ガンブレイカー)
-"JP2": jobname in Japanese in short. (ガンブレイ)
-"JP1": jobname in Japanese as a one char acronym. (ガ)
-"CN": jobname in simplified Chinese. (绝枪战士)
-"TCN": jobname in traditional Chinese. (絕槍戰士)
-"CN2": jobname in simplified chinese as a 2 chars acronym (枪刃)
-"CN1": jobname in simplified chinese as a 1 char acronym (枪)
-"RoleEN": Role of the actor in English. (Tank, Healer, DPS)
-"RoleEN1": Role of the actor in English as one letter acronym (T, H, D)
-"RoleCN": Role of the actor in simplified chinese. (坦克, 治疗, 近战, 远敏)
-"SubRoleEN": Sub-role of the actor in English. (Tank, Healer, Melee, Ranged)
-"MacroPos": Usually occupied position as a suggestion in some in-game macro (MT, ST, H1, H2, D1, D2, D3, D4), although it does not mean that they will be assigned to that location every time.
+job(ID): return jobid. (37)  
+job(EN): jobname in English. (gunbreaker)
+job(EN3): jobname in English as a three letter acronym (GNB)
+job(JP): jobname in Japanese. (ガンブレイカー)
+job(JP2): jobname in Japanese in short. (ガンブレイ)
+job(JP1): jobname in Japanese as a one char acronym. (ガ)
+job(CN): jobname in simplified Chinese. (绝枪战士)
+job(TCN): jobname in traditional Chinese. (絕槍戰士)
+job(CN2): jobname in simplified chinese as a 2 chars acronym (枪刃)
+job(CN1): jobname in simplified chinese as a 1 char acronym (枪)
+job(RoleEN): Role of the actor in English. (Tank, Healer, DPS)
+job(RoleEN1): Role of the actor in English as one letter acronym (T, H, D)
+job(RoleCN): Role of the actor in simplified chinese. (坦克, 治疗, 近战, 远敏)
+job(SubRoleEN): Sub-role of the actor in English. (Tank, Healer, Melee, Ranged)
+job(MacroPos): Usually occupied position as a suggestion in some in-game macro (MT, ST, H1, H2, D1, D2, D3, D4), although it does not mean that they will be assigned to that location every time.
 ```
 ## More String Function
 ```
-"job(description method)": convert the input string to specified description method of a job listed above. The input string can be a jobid or jobnames in different description method.
+job(description method) = convert the input string to specified description method of a job listed above. The input string can be a jobid or jobnames in different description method. for example, ${func:job(CN2):gunbreaker} = "枪";  ${func:job(RoleEN1):绝枪战士} = "T"
+trimname = Try to get name string from the name-server mixed string. for example, ${func:trimname:魔界花萌芽池} = "魔界花"; ${func:trimname:Pipira PiraAsura} = "Pipira Pira". It will first match the names in the partylist, if it fails, it will try to perform direct string trimming without character name verification. 
+trimserver = Try to get server string from a name-server mixed string. for example, ${func:trimserver:魔界花萌芽池} = "萌芽池"; ${func:trimserver:Pipira PiraAsura} = "Asura"
 ```
 
 ## More Special variables
