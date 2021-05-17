@@ -2843,11 +2843,11 @@ namespace Triggernometry
             lock (EventQueue)
             {
                 EventQueue.Enqueue(le);
-                if(QueueWakeupEvent!=null) QueueWakeupEvent.Set();
+                QueueWakeupEvent.Set();
             }            
         }
 
-        internal void LogLineQueuerMass(IEnumerable<string> text, string zone, LogEvent.SourceEnum src)
+        internal void LogLineQueuerMass(IEnumerable<string> text, string zone, LogEvent.SourceEnum src, bool testMode)
         {
             int max = text.Count();
             int i = 0;
@@ -2859,6 +2859,7 @@ namespace Triggernometry
                 lex[i].Zone = zone;
                 lex[i].Source = src;
                 lex[i].Timestamp = DateTime.Now;
+                lex[i].TestMode = testMode;
                 i++;
             }
             if (lex.Count() > 0)
@@ -3017,7 +3018,7 @@ namespace Triggernometry
                     {
                         foreach (Trigger t in ActiveTextTriggers)
                         {
-                            if (t.ZoneBlocked == true)
+                            if (t.ZoneBlocked == true && le.TestMode == false)
                             {
                                 continue;
                             }
@@ -3030,7 +3031,7 @@ namespace Triggernometry
                     {
                         foreach (Trigger t in ActiveFFXIVNetworkTriggers)
                         {
-                            if (t.ZoneBlocked == true)
+                            if (t.ZoneBlocked == true && le.TestMode == false)
                             {
                                 continue;
                             }
