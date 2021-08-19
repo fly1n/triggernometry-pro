@@ -53,14 +53,14 @@
   <ItemGroup>
     <Reference Include="Advanced Combat Tracker, Version=3.5.0.273, Culture=neutral, PublicKeyToken=a946b61e93d97868, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\Games\FFXIV\ACT_v3.3\Advanced Combat Tracker.exe</HintPath>
+      <HintPath>..\..\..\..\..\..\..\Portables\ACTv3\Advanced Combat Tracker.exe</HintPath>
     </Reference>
     <Reference Include="CsvHelper, Version=12.0.0.0, Culture=neutral, PublicKeyToken=8c4959082be5c823, processorArchitecture=MSIL">
       <HintPath>..\packages\CsvHelper.12.2.1\lib\net45\CsvHelper.dll</HintPath>
     </Reference>
     <Reference Include="FFXIV_ACT_Plugin.Common, Version=2.0.4.10, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\Games\FFXIV\ACT_v3.3\FFXIV_ACT_Plugin_SDK_2.0.8.6\SDK\FFXIV_ACT_Plugin.Common.dll</HintPath>
+      <HintPath>..\..\..\..\..\Dev\FFXIV_ACT_Plugin_SDK_2.2.0.9\SDK\FFXIV_ACT_Plugin.Common.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />

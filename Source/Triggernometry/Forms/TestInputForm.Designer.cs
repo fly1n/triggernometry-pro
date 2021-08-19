@@ -183,6 +183,7 @@
             this.txtEvent.TabIndex = 9;
             this.txtEvent.WordWrap = false;
             this.txtEvent.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtEvent_KeyDown);
+            this.txtEvent.MaxLength = 0;
             // 
             // lblEvent
             // 
