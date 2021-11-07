@@ -41,6 +41,7 @@ namespace Triggernometry
             NamedCallback,
             Mouse,
             PartyOrder,
+            DeveloperAction,
         }
 
         public enum VariableOpEnum
@@ -168,6 +169,8 @@ namespace Triggernometry
             SortFfxivPartyAsc,
             SortFfxivPartyDesc,
             Copy,
+            Filter,
+            ReverseFilter,
             InsertList,
             Join,
             Split,
@@ -2866,6 +2869,38 @@ namespace Triggernometry
             set
             {
                 _PartyOrderPartyOrder = value;
+            }
+        }
+        #endregion
+        #region Action specific properties - DeveloperAction
+
+        internal string _DevActionKey = "";
+        [XmlAttribute]
+        public string DevActionKey
+        {
+            get
+            {
+
+                return _DevActionKey;
+            }
+            set
+            {
+                _DevActionKey = value;
+            }
+        }
+
+        internal string _DevActionValue = "";
+        [XmlAttribute]
+        public string DevActionValue
+        {
+            get
+            {
+
+                return _DevActionValue;
+            }
+            set
+            {
+                _DevActionValue = value;
             }
         }
         #endregion 

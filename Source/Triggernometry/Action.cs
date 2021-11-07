@@ -15,6 +15,7 @@ using System.Text.RegularExpressions;
 using Triggernometry.Variables;
 using CsvHelper;
 using Advanced_Combat_Tracker;
+using System.Reflection;
 
 namespace Triggernometry
 {
@@ -624,6 +625,12 @@ namespace Triggernometry
                         case ListVariableOpEnum.SortAlphaDesc:
                             temp += I18n.Translate("internal/Action/desclistsortdesc", "sort list variable ({0}) in an alphabetically descending order", _ListVariableName);
                             break;
+                        case ListVariableOpEnum.SortNumericAsc:
+                            temp += I18n.Translate("internal/Action/desclistsortasc", "sort list variable ({0}) in an numeric ascending order", _ListVariableName);
+                            break;
+                        case ListVariableOpEnum.SortNumericDesc:
+                            temp += I18n.Translate("internal/Action/desclistsortdesc", "sort list variable ({0}) in an numeric descending order", _ListVariableName);
+                            break;
                         case ListVariableOpEnum.SortFfxivPartyAsc:
                             temp += I18n.Translate("internal/Action/desclistsortffxivasc", "sort list variable ({0}) in ascending order according to FFXIV party job order", _ListVariableName);
                             break;
@@ -632,6 +639,12 @@ namespace Triggernometry
                             break;
                         case ListVariableOpEnum.Copy:
                             temp += I18n.Translate("internal/Action/desclistcopy", "copy list variable ({0}) to list variable ({1})", _ListVariableName, _ListVariableTarget);
+                            break;
+                        case ListVariableOpEnum.Filter:
+                            temp += I18n.Translate("internal/Action/desclistfilter", "use list variable ({0}) as a filter to list variable ({1})", _ListVariableName, _ListVariableTarget);
+                            break;
+                        case ListVariableOpEnum.ReverseFilter:
+                            temp += I18n.Translate("internal/Action/desclistreversefilter", "use list variable ({0}) as a reverse filter to list variable ({1})", _ListVariableName, _ListVariableTarget);
                             break;
                         case ListVariableOpEnum.InsertList:
                             temp += I18n.Translate("internal/Action/desclistinsertlist", "insert list variable ({0}) into list variable ({1}) at index ({2})", _ListVariableName, _ListVariableTarget, _ListVariableIndex);
@@ -948,6 +961,9 @@ namespace Triggernometry
                     break;
                 case ActionTypeEnum.PartyOrder:
                     temp += I18n.Translate("internal/Action/overridepartyorder", "Override party order for player {0} to {1}",_PartyOrderPlayerName ,_PartyOrderPartyOrder );
+                    break;
+                case ActionTypeEnum.DeveloperAction:
+                    temp += I18n.Translate("internal/Action/developeraction", "Do developer action key: {0} value: {1}", _DevActionKey, _DevActionValue);
                     break;
                 default:
                     temp += I18n.Translate("internal/Action/descunknown", "unknown action type");
@@ -1824,6 +1840,74 @@ namespace Triggernometry
                                         AddToLog(ctx, RealPlugin.DebugLevelEnum.Verbose, I18n.Translate("internal/Action/listcopy", "List variable ({0}) copied to list variable ({1})", sourcename, targetname));
                                     }
                                     break;
+                                case ListVariableOpEnum.Filter:
+                                    {
+                                        string targetname = ctx.EvaluateStringExpression(ActionContextLogger, ctx, _ListVariableTarget);
+                                        VariableList vl = null;
+                                        VariableList v2 = null;
+                                        VariableStore vs = (_ListSourcePersist == false) ? ctx.plug.sessionvars : ctx.plug.cfg.PersistentVariables;
+                                        lock (vs.List)
+                                        {
+                                            vl = GetListVariable(vs, sourcename, false);
+                                        }
+                                        vs = (_ListTargetPersist == false) ? ctx.plug.sessionvars : ctx.plug.cfg.PersistentVariables;
+                                        lock (vs.List)
+                                        {
+                                            if (!vs.List.ContainsKey(targetname))
+                                            {
+                                                VariableList newvl = new VariableList();
+                                                foreach (Variable x in vl.Values)
+                                                {
+                                                    newvl.Push(x.Duplicate(), changer);
+                                                }
+                                                vs.List[targetname] = newvl;
+                                            }
+                                            else
+                                            {
+                                                v2 = GetListVariable(vs, targetname, false);
+                                                int i = 0;
+                                                while (i<v2.Size())
+                                                {
+
+                                                    if (vl.IndexOf(v2.Values[i]) <= 0)
+                                                    {
+                                                        v2.Remove(i+1, changer);
+                                                        i--;
+                                                    }
+
+                                                    i++;
+                                                }
+                                            }
+                                        }
+                                        AddToLog(ctx, RealPlugin.DebugLevelEnum.Verbose, I18n.Translate("internal/Action/listcopy", "List variable ({0}) used as a filter to list variable ({1})", sourcename, targetname));
+                                    }
+                                    break;
+                                case ListVariableOpEnum.ReverseFilter:
+                                    {
+                                        string targetname = ctx.EvaluateStringExpression(ActionContextLogger, ctx, _ListVariableTarget);
+                                        VariableList vl = null;
+                                        VariableList v2 = null;
+                                        VariableStore vs = (_ListSourcePersist == false) ? ctx.plug.sessionvars : ctx.plug.cfg.PersistentVariables;
+                                        lock (vs.List)
+                                        {
+                                            vl = GetListVariable(vs, sourcename, false);
+                                        }
+                                        vs = (_ListTargetPersist == false) ? ctx.plug.sessionvars : ctx.plug.cfg.PersistentVariables;
+                                        lock (vs.List)
+                                        {
+                                            v2 = GetListVariable(vs, targetname, false);
+                                            foreach (Variable x in vl.Values)
+                                            {
+                                                if (v2.IndexOf(x) > 0)
+                                                {
+                                                    v2.Remove(v2.IndexOf(x), changer);
+                                                }
+
+                                            }
+                                        }
+                                        AddToLog(ctx, RealPlugin.DebugLevelEnum.Verbose, I18n.Translate("internal/Action/listcopy", "List variable ({0}) used as a reverse filter to list variable ({1})", sourcename, targetname));
+                                    }
+                                    break;
                                 case ListVariableOpEnum.InsertList:
                                     {
                                         string targetname = ctx.EvaluateStringExpression(ActionContextLogger, ctx, _ListVariableTarget);
@@ -1879,22 +1963,24 @@ namespace Triggernometry
                                         string separator = GetListExpressionValue(ctx, _ListVariableExpressionType, _ListVariableExpression);
                                         string newname = ctx.EvaluateStringExpression(ActionContextLogger, ctx, _ListVariableTarget);
                                         string splitval = "";
-                                        lock (ctx.plug.sessionvars.Scalar) // verified
+                                        VariableStore vs = (_ListSourcePersist == false) ? ctx.plug.sessionvars : ctx.plug.cfg.PersistentVariables;
+                                        lock (vs.Scalar) // verified
                                         {
-                                            if (ctx.plug.sessionvars.Scalar.ContainsKey(sourcename) == true)
+                                            if (vs.Scalar.ContainsKey(sourcename) == true)
                                             {
-                                                splitval = ctx.plug.sessionvars.Scalar[sourcename].Value;
+                                                splitval = vs.Scalar[sourcename].Value;
                                             }
                                         }
                                         string[] vals = splitval.Split(new string[] { separator }, StringSplitOptions.None);
-                                        lock (ctx.plug.sessionvars.List)
+                                        vs = (_ListTargetPersist == false) ? ctx.plug.sessionvars : ctx.plug.cfg.PersistentVariables;
+                                        lock (vs.List)
                                         {
                                             VariableList newvl = new VariableList();
                                             foreach (string x in vals)
                                             {
                                                 newvl.Push(new VariableScalar() { Value = x }, changer);
                                             }
-                                            ctx.plug.sessionvars.List[newname] = newvl;
+                                            vs.List[newname] = newvl;
                                         }
                                         AddToLog(ctx, RealPlugin.DebugLevelEnum.Verbose, I18n.Translate("internal/Action/scalarlistsplit", "Scalar variable ({0}) split into list variable ({1}) with separator ({2})", sourcename, newname, separator));
                                     }
@@ -2533,17 +2619,49 @@ namespace Triggernometry
                         {
                             string playername = ctx.EvaluateStringExpression(ActionContextLogger, ctx, _PartyOrderPlayerName);
                             int partyorder = (int)ctx.EvaluateNumericExpression(ActionContextLogger, ctx, _PartyOrderPartyOrder);
-                            
+
                             if (partyorder > 0 && partyorder <= 8)
                             {
                                 AddToLog(ctx, RealPlugin.DebugLevelEnum.Verbose, I18n.Translate("internal/Action/partyorder", "Override party order for player ({0}) to index ({1})", playername, partyorder.ToString()));
-                                PluginBridges.BridgeFFXIV.OverridePartyOrder[partyorder-1] = playername;
+                                var oldID = PluginBridges.BridgeFFXIV.OverridePartyOrder.IndexOf(playername);
+                                if (oldID != partyorder - 1)
+                                {
+                                    if (oldID >= 0)
+                                    {
+                                        PluginBridges.BridgeFFXIV.OverridePartyOrder[oldID] = "";
+                                    }
+                                    PluginBridges.BridgeFFXIV.OverridePartyOrder[partyorder - 1] = playername;
+
+                                }
+
                             }
+                            else if ((partyorder == 0) && (playername == ""))
+                            {
+                                for (int i = 0; i < PluginBridges.BridgeFFXIV.OverridePartyOrder.Count; i++)
+                                {
+                                    PluginBridges.BridgeFFXIV.OverridePartyOrder[i] = "";
+                                }
+                            }
+                            PluginBridges.BridgeFFXIV.UpdateState();
 
 
                         }
                         break;
-                    #endregion
+                    #endregion                   
+                    #region Implementation - Party order
+                    case ActionTypeEnum.DeveloperAction:
+                        {
+                            string devactionkey = ctx.EvaluateStringExpression(ActionContextLogger, ctx, _DevActionKey);
+                            string devactionvalue = ctx.EvaluateStringExpression(ActionContextLogger, ctx, _DevActionValue);
+
+                            uint offset=Convert.ToUInt32(devactionvalue, 16);
+                            PluginBridges.BridgeFFXIV.SetFFXIVSignature(devactionkey, offset);
+                            PluginBridges.BridgeFFXIV.UpdateState();
+
+
+                        }
+                        break;
+                        #endregion
                 }
             }
 			catch (Exception ex)
@@ -2795,6 +2913,8 @@ namespace Triggernometry
             a._VariablePersist = _VariablePersist;
             a._PartyOrderPartyOrder = _PartyOrderPartyOrder;
             a._PartyOrderPlayerName = _PartyOrderPlayerName;
+            a._DevActionKey = _DevActionKey;
+            a._DevActionValue = _DevActionValue;
         }
 
         private string SendJson(Context ctx, Action.HTTPMethodEnum method, string url, string json, IEnumerable<string> headers, bool expectNoContent)

@@ -293,6 +293,8 @@ namespace Triggernometry.Forms
                 expWmsgLparam.Expression = "";
                 expPlayerName.Expression = "";
                 expPartyOrder.Expression = "";
+                expDevActionKey.Expression = "";
+                expDevActionValue.Expression = "";
                 FontInfoContainer fic = new FontInfoContainer();
                 fic.Name = Font.Name;
                 fic.Size = Font.SizeInPoints;
@@ -387,6 +389,8 @@ namespace Triggernometry.Forms
                 cbxLvarOperation.SelectedIndex = (int)a._ListVariableOp;
                 expPlayerName.Expression = a._PartyOrderPlayerName;
                 expPartyOrder.Expression = a._PartyOrderPartyOrder;
+                expDevActionKey.Expression = a._DevActionKey;
+                expDevActionValue.Expression = a._DevActionValue;
                 
                 if ((a._TriggerForceType & Action.TriggerForceTypeEnum.SkipRegexp) != 0)
                 {
@@ -634,6 +638,8 @@ namespace Triggernometry.Forms
             a._ListVariableTarget = expLvarTarget.Expression;
             a._PartyOrderPartyOrder = expPartyOrder.Expression;
             a._PartyOrderPlayerName = expPlayerName.Expression;
+            a._DevActionKey = expDevActionKey.Expression;
+            a._DevActionValue = expDevActionValue.Expression;
             TreeNode tn = trvTrigger.SelectedNode;
             if (tn != null)
             {
@@ -1530,7 +1536,23 @@ namespace Triggernometry.Forms
                     expLvarTarget.Enabled = true;
                     expLvarIndex.Enabled = false;
                     break;
-                case 14: // Insert list variable into another list variable
+                case 14: // Filter whole list variable to another list variable
+                    expLvarName.Enabled = true;
+                    expLvarName.ExpressionType = CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
+                    expLvarValue.Enabled = false;
+                    cbxLvarExpType.Enabled = false;
+                    expLvarTarget.Enabled = true;
+                    expLvarIndex.Enabled = false;
+                    break;
+                case 15: // Reverse Filter whole list variable to another list variable
+                    expLvarName.Enabled = true;
+                    expLvarName.ExpressionType = CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
+                    expLvarValue.Enabled = false;
+                    cbxLvarExpType.Enabled = false;
+                    expLvarTarget.Enabled = true;
+                    expLvarIndex.Enabled = false;
+                    break;
+                case 16: // Insert list variable into another list variable
                     expLvarName.Enabled = true;
                     expLvarName.ExpressionType = CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
                     expLvarValue.Enabled = false;
@@ -1538,7 +1560,7 @@ namespace Triggernometry.Forms
                     expLvarTarget.Enabled = true;
                     expLvarIndex.Enabled = true;
                     break;
-                case 15: // Join all values in the list variable into a single string (separator in expression)
+                case 17: // Join all values in the list variable into a single string (separator in expression)
                     expLvarName.Enabled = true;
                     expLvarName.ExpressionType = CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
                     expLvarValue.Enabled = true;
@@ -1546,7 +1568,7 @@ namespace Triggernometry.Forms
                     expLvarTarget.Enabled = true;
                     expLvarIndex.Enabled = false;
                     break;
-                case 16: // Split a scalar variable into a list variable (separator in expression)
+                case 18: // Split a scalar variable into a list variable (separator in expression)
                     expLvarName.Enabled = true;
                     expLvarName.ExpressionType = CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
                     expLvarValue.Enabled = true;
@@ -1554,7 +1576,7 @@ namespace Triggernometry.Forms
                     expLvarTarget.Enabled = true;
                     expLvarIndex.Enabled = false;
                     break;
-                case 17: // Unset all list variables
+                case 19: // Unset all list variables
                     expLvarName.Enabled = false;
                     expLvarName.ExpressionType = CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
                     expLvarValue.Enabled = false;
@@ -1562,7 +1584,7 @@ namespace Triggernometry.Forms
                     expLvarTarget.Enabled = false;
                     expLvarIndex.Enabled = false;
                     break;
-                case 18: // Unset by regex
+                case 20: // Unset by regex
                     expLvarName.Enabled = true;
                     expLvarName.ExpressionType = CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.Regex;
                     expLvarValue.Enabled = false;

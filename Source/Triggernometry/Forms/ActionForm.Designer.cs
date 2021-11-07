@@ -260,6 +260,10 @@
             this.tableLayoutPanel26 = new System.Windows.Forms.TableLayoutPanel();
             this.lblPartyOrder = new System.Windows.Forms.Label();
             this.lblPlayerName = new System.Windows.Forms.Label();
+            this.tabDeveloperAction = new System.Windows.Forms.TabPage();
+            this.tableLayoutPanel28 = new System.Windows.Forms.TableLayoutPanel();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel6 = new System.Windows.Forms.Panel();
@@ -384,6 +388,8 @@
             this.expMouseX = new Triggernometry.CustomControls.ExpressionTextBox();
             this.expPartyOrder = new Triggernometry.CustomControls.ExpressionTextBox();
             this.expPlayerName = new Triggernometry.CustomControls.ExpressionTextBox();
+            this.expDevActionValue = new Triggernometry.CustomControls.ExpressionTextBox();
+            this.expDevActionKey = new Triggernometry.CustomControls.ExpressionTextBox();
             this.cndCondition = new Triggernometry.CustomControls.ConditionViewer();
             this.expExecutionDelay = new Triggernometry.CustomControls.ExpressionTextBox();
             this.btnTest = new Triggernometry.CustomControls.SplitButton();
@@ -447,6 +453,8 @@
             this.tableLayoutPanel25.SuspendLayout();
             this.tabPartyOrder.SuspendLayout();
             this.tableLayoutPanel26.SuspendLayout();
+            this.tabDeveloperAction.SuspendLayout();
+            this.tableLayoutPanel28.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel6.SuspendLayout();
             this.tbcAction.SuspendLayout();
@@ -528,7 +536,8 @@
             "Placeholder",
             "Named callback operation",
             "Mouse operation",
-            "Override party order"});
+            "Override party order",
+            "Developer action"});
             this.cbxActionType.Location = new System.Drawing.Point(107, 2);
             this.cbxActionType.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.cbxActionType.Name = "cbxActionType";
@@ -588,6 +597,7 @@
             this.tbcActionSettings.Controls.Add(this.tabNamedCallback);
             this.tbcActionSettings.Controls.Add(this.tabMouse);
             this.tbcActionSettings.Controls.Add(this.tabPartyOrder);
+            this.tbcActionSettings.Controls.Add(this.tabDeveloperAction);
             this.tbcActionSettings.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tbcActionSettings.Location = new System.Drawing.Point(4, 2);
             this.tbcActionSettings.Margin = new System.Windows.Forms.Padding(0);
@@ -2885,6 +2895,8 @@
             "Sort list in an ascending order based on FFXIV party job order",
             "Sort list in a descending order based on FFXIV party job order",
             "Copy whole list variable to another list variable",
+            "Use list variable as filter to another list variable",
+            "Use list variable as reverse filter to another list variable",
             "Insert list variable into another list variable at the given index",
             "Join all values in the list variable into a scalar variable (separator in express" +
                 "ion)",
@@ -3956,6 +3968,61 @@
             this.lblPlayerName.Text = "Player name";
             this.lblPlayerName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // tabDeveloperAction
+            // 
+            this.tabDeveloperAction.Controls.Add(this.tableLayoutPanel28);
+            this.tabDeveloperAction.Location = new System.Drawing.Point(4, 28);
+            this.tabDeveloperAction.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.tabDeveloperAction.Name = "tabDeveloperAction";
+            this.tabDeveloperAction.Size = new System.Drawing.Size(729, 309);
+            this.tabDeveloperAction.TabIndex = 26;
+            this.tabDeveloperAction.Text = "DeveloperAction";
+            this.tabDeveloperAction.UseVisualStyleBackColor = true;
+            // 
+            // tableLayoutPanel28
+            // 
+            this.tableLayoutPanel28.AutoSize = true;
+            this.tableLayoutPanel28.ColumnCount = 2;
+            this.tableLayoutPanel28.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel28.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel28.Controls.Add(this.expDevActionValue, 1, 1);
+            this.tableLayoutPanel28.Controls.Add(this.label11, 0, 1);
+            this.tableLayoutPanel28.Controls.Add(this.label12, 0, 0);
+            this.tableLayoutPanel28.Controls.Add(this.expDevActionKey, 1, 0);
+            this.tableLayoutPanel28.Dock = System.Windows.Forms.DockStyle.Top;
+            this.tableLayoutPanel28.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel28.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.tableLayoutPanel28.Name = "tableLayoutPanel28";
+            this.tableLayoutPanel28.RowCount = 2;
+            this.tableLayoutPanel28.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel28.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel28.Size = new System.Drawing.Size(729, 58);
+            this.tableLayoutPanel28.TabIndex = 5;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label11.Location = new System.Drawing.Point(4, 29);
+            this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(47, 29);
+            this.label11.TabIndex = 15;
+            this.label11.Text = "Value";
+            this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label12.Location = new System.Drawing.Point(4, 0);
+            this.label12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(47, 29);
+            this.label12.TabIndex = 7;
+            this.label12.Text = "Key";
+            this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // panel2
             // 
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -4082,7 +4149,7 @@
             // 
             this.tlsMouseLocation.Image = ((System.Drawing.Image)(resources.GetObject("tlsMouseLocation.Image")));
             this.tlsMouseLocation.Name = "tlsMouseLocation";
-            this.tlsMouseLocation.Size = new System.Drawing.Size(135, 20);
+            this.tlsMouseLocation.Size = new System.Drawing.Size(135, 19);
             this.tlsMouseLocation.Text = "X: 123, Y: 1234";
             // 
             // tabActionCondition
@@ -5617,6 +5684,32 @@
             this.expPlayerName.Size = new System.Drawing.Size(618, 25);
             this.expPlayerName.TabIndex = 14;
             // 
+            // expDevActionValue
+            // 
+            this.expDevActionValue.AutoSize = true;
+            this.expDevActionValue.Dock = System.Windows.Forms.DockStyle.Top;
+            this.expDevActionValue.Expression = "";
+            this.expDevActionValue.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
+            this.expDevActionValue.Location = new System.Drawing.Point(59, 31);
+            this.expDevActionValue.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.expDevActionValue.Name = "expDevActionValue";
+            this.expDevActionValue.ReadOnly = false;
+            this.expDevActionValue.Size = new System.Drawing.Size(666, 25);
+            this.expDevActionValue.TabIndex = 16;
+            // 
+            // expDevActionKey
+            // 
+            this.expDevActionKey.AutoSize = true;
+            this.expDevActionKey.Dock = System.Windows.Forms.DockStyle.Top;
+            this.expDevActionKey.Expression = "";
+            this.expDevActionKey.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
+            this.expDevActionKey.Location = new System.Drawing.Point(59, 2);
+            this.expDevActionKey.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.expDevActionKey.Name = "expDevActionKey";
+            this.expDevActionKey.ReadOnly = false;
+            this.expDevActionKey.Size = new System.Drawing.Size(666, 25);
+            this.expDevActionKey.TabIndex = 14;
+            // 
             // cndCondition
             // 
             this.cndCondition.ConditionToEdit = null;
@@ -5809,6 +5902,10 @@
             this.tabPartyOrder.PerformLayout();
             this.tableLayoutPanel26.ResumeLayout(false);
             this.tableLayoutPanel26.PerformLayout();
+            this.tabDeveloperAction.ResumeLayout(false);
+            this.tabDeveloperAction.PerformLayout();
+            this.tableLayoutPanel28.ResumeLayout(false);
+            this.tableLayoutPanel28.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.panel6.ResumeLayout(false);
             this.panel6.PerformLayout();
@@ -6197,5 +6294,11 @@
         private CustomControls.PersistenceSwitch prsTableSource;
         private System.Windows.Forms.Label lblJsonHeaders;
         private CustomControls.ExpressionTextBox expJsonHeaders;
+        private System.Windows.Forms.TabPage tabDeveloperAction;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel28;
+        private CustomControls.ExpressionTextBox expDevActionValue;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label12;
+        private CustomControls.ExpressionTextBox expDevActionKey;
     }
 }

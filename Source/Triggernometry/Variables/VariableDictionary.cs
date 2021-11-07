@@ -72,7 +72,16 @@ namespace Triggernometry.Variables
             v.LastChanged = LastChanged;
             return v;
         }
-
+        public void CopyFrom(VariableDictionary source)
+        {
+            PluginBridges.BridgeFFXIV.ClearCombatant(this);
+            foreach (KeyValuePair<string, Variable> kp in source.Values)
+            {
+                Values[kp.Key] = kp.Value.Duplicate();
+            }
+            LastChanger = source.LastChanger;
+            LastChanged = source.LastChanged;
+        }
         public Variable GetValue(string id)
         {
             if (Values.ContainsKey(id) == true)
