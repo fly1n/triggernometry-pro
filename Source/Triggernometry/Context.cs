@@ -379,6 +379,16 @@ namespace Triggernometry
                                 found = true;
                             }
                         }
+                        else if (x.IndexOf("_isfileexist") == 0)
+                        {
+                            mx = rexlidx.Match(x);
+                            if (mx.Success == true)
+                            {
+                                string dir = mx.Groups["index"].Value;
+                                val = System.IO.File.Exists(dir)?"1":"0";
+                                found = true;
+                            }
+                        }
                         else if (x.IndexOf("_jsonresponse") == 0)
                         {
                             mx = rexlidx.Match(x);
