@@ -130,6 +130,7 @@
             this.dgvActions.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.dgvActions.Name = "dgvActions";
             this.dgvActions.RowHeadersVisible = false;
+            this.dgvActions.RowHeadersWidth = 51;
             this.dgvActions.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvActions.ShowCellErrors = false;
             this.dgvActions.ShowEditingIcon = false;
@@ -149,6 +150,7 @@
             // 
             this.Column1.Frozen = true;
             this.Column1.HeaderText = " ";
+            this.Column1.MinimumWidth = 6;
             this.Column1.Name = "Column1";
             this.Column1.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.Column1.Width = 30;
@@ -157,6 +159,7 @@
             // 
             this.colDescription.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.colDescription.HeaderText = "Description";
+            this.colDescription.MinimumWidth = 6;
             this.colDescription.Name = "colDescription";
             this.colDescription.ReadOnly = true;
             this.colDescription.Resizable = System.Windows.Forms.DataGridViewTriState.False;

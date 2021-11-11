@@ -16,6 +16,7 @@ using Triggernometry.Variables;
 using CsvHelper;
 using Advanced_Combat_Tracker;
 using System.Reflection;
+using Newtonsoft.Json;
 
 namespace Triggernometry
 {
@@ -64,13 +65,14 @@ namespace Triggernometry
         {
             get
             {
-                if (_ExecutionDelayExpression != "0" && _ExecutionDelayExpression != "")
+                if ( _ExecutionDelayExpression != "0" && _ExecutionDelayExpression != "")
                 {
-                    return _ExecutionDelayExpression;
+                    if (_DontExecute) return "0";
+                    else return _ExecutionDelayExpression;
                 }
                 else
                 {
-                    return null;
+                    return "0";
                 }
             }
             set
@@ -196,7 +198,7 @@ namespace Triggernometry
         public ConditionGroup Condition { get; set; }
 
         #endregion
-
+ 
         #region Old condition to new condition converter
         private EventList<Condition> _Conditions;
         public EventList<Condition> Conditions
@@ -396,9 +398,9 @@ namespace Triggernometry
             {
                 return _Description;
             }
-            if (_ExecutionDelayExpression.Length > 0 && _ExecutionDelayExpression != "0")
+            if (ExecutionDelayExpression.Length > 0 && ExecutionDelayExpression != "0")
             {
-                temp += I18n.Translate("internal/Action/descafterdelay", "after ({0}) ms", _ExecutionDelayExpression);
+                temp += I18n.Translate("internal/Action/descafterdelay", "after ({0}) ms", ExecutionDelayExpression);
                 temp += ", ";
             }
             if (Condition != null && Condition.Enabled == true)
@@ -470,6 +472,9 @@ namespace Triggernometry
                                     break;
                                 case TriggerOpEnum.EnableTrigger:
                                     temp += I18n.Translate("internal/Action/desctrigenable", "enable trigger ({0})", t.Name);
+                                    break;
+                                case TriggerOpEnum.CopyTrigger:
+                                    temp += I18n.Translate("internal/Action/desctrigcopy", "copy trigger ({0}) into new trigger with name: ({1}) and regular expression: ({2})", t.Name, _TriggerText, _TriggerZone);
                                     break;
                             }
                         }
@@ -1071,6 +1076,61 @@ namespace Triggernometry
 		{
 			try
 			{
+
+                if (_DontExecute == true)
+                {
+                    if (_SchedulingActionOp != SchedulingActionOpEnum.Nothing)
+                    {
+                        Trigger t = ctx.plug.GetTriggerByName(ctx.EvaluateStringExpression(ActionContextLogger, ctx, _SchedulingTriggerName), ctx.trig != null ? ctx.trig.Repo : null);
+
+                        switch (_SchedulingActionOp)
+                        {
+
+                            case SchedulingActionOpEnum.Clear:
+                                {
+                                    t.Actions.Clear();
+                                }; break;
+                            case SchedulingActionOpEnum.Insert:
+                            case SchedulingActionOpEnum.Override:
+                            case SchedulingActionOpEnum.Push:
+                                {
+                                    Action newAction = new Action();
+                                    this.InheritSettingsTo(newAction, ctx);
+                                    newAction._SchedulingActionOp = SchedulingActionOpEnum.Nothing;
+                                    newAction._DontExecute = false;
+                                    newAction.SchedulingTriggerName = "";
+                                    newAction._SchedulingActionIndex = "";
+                                    int index = (int)ctx.EvaluateNumericExpression(ActionContextLogger, ctx, _SchedulingActionIndex);
+                                    switch (_SchedulingActionOp)
+                                    {
+                                        case SchedulingActionOpEnum.Insert:
+                                            {
+                                                if (index >= t.Actions.Count)
+                                                    t.Actions.Add(newAction);
+                                                else
+                                                    t.Actions.Insert(index, newAction);
+                                            }
+                                            break;
+                                        case SchedulingActionOpEnum.Override:
+                                            {
+                                                if (index >= t.Actions.Count)
+                                                    t.Actions.Add(newAction);
+                                                else
+                                                    t.Actions[index] = newAction;
+                                            }
+                                            break;
+                                        case SchedulingActionOpEnum.Push: t.Actions.Add(newAction); break;
+                                        default: break;
+                                    }
+                                }; break;
+                            default: break;
+
+                        }
+                    }
+                    AddToLog(ctx, RealPlugin.DebugLevelEnum.Verbose, I18n.Translate("internal/Action/actionnotfired", "Action #{0} on trigger '{1}' not fired, it dont need to execute", OrderNumber, (ctx.trig != null ? ctx.trig.LogName : "(null)")));
+                    ctx.PushActionResult(0);
+                    goto ContinueChain;
+                }
                 if ((ctx.force & Action.TriggerForceTypeEnum.SkipConditions) == 0 && ctx.testmode == false)
                 {
                     if (Condition != null && Condition.Enabled == true)
@@ -1083,6 +1143,8 @@ namespace Triggernometry
                         }
                     }
                 }
+
+
                 ctx.PushActionResult(1);
                 AddToLog(ctx, RealPlugin.DebugLevelEnum.Verbose, I18n.Translate("internal/Action/executingaction", "Executing action '{0}' in thread {1}", GetDescription(ctx), System.Threading.Thread.CurrentThread.ManagedThreadId));
 				switch (ActionType)
@@ -2523,6 +2585,34 @@ namespace Triggernometry
                                             }
                                         }
                                         break;
+                                    case TriggerOpEnum.CopyTrigger:
+                                        {
+                                            TriggernometryExport exp = new TriggernometryExport() { ExportedTrigger = t };
+                                            exp = TriggernometryExport.Unserialize(exp.Serialize());
+                                            exp.ExportedTrigger.Name = ctx.EvaluateStringExpression(ActionContextLogger, ctx, _TriggerText);
+                                            exp.ExportedTrigger.RegularExpression = ctx.EvaluateStringExpression(ActionContextLogger, ctx, _TriggerZone);
+                                            TreeNode tn;
+                                            if (ctx.trig == null || ctx.trig.Repo == null)
+                                            {
+                                                tn = ctx.plug.LocateNodeHostingFolder(ctx.plug.ui.treeView1.Nodes[0], t.Parent);
+                                            }
+                                            else
+                                            {
+                                                tn = ctx.plug.LocateNodeHostingFolder(ctx.plug.ui.treeView1.Nodes[1], t.Parent);
+                                            }
+                                            if (tn != null)
+                                            {
+                                                using (Forms.ImportForm ifo = new Forms.ImportForm(ctx.plug))
+                                                {
+                                                    TreeNode parent = ctx.plug.LocateNodeHostingFolder(ctx.plug.ui.treeView1.TopNode, t.Parent);
+                                                    ifo.BuildTreeFromExport(exp, null, null, false);
+                                                    var trigger_new = (Trigger)ifo.treeView1.Nodes[0].Tag;
+                                                    ctx.plug.ui.ImportResultsFromForm(ifo,tn);
+                                                }
+                                            }
+                                            
+                                        }
+                                        break;
                                 }
                             }
                             else
@@ -2651,12 +2741,18 @@ namespace Triggernometry
                     #region Implementation - Party order
                     case ActionTypeEnum.DeveloperAction:
                         {
+
                             string devactionkey = ctx.EvaluateStringExpression(ActionContextLogger, ctx, _DevActionKey);
                             string devactionvalue = ctx.EvaluateStringExpression(ActionContextLogger, ctx, _DevActionValue);
+                            object param = JsonConvert.DeserializeObject(devactionvalue);
+                            
+                            object property = PluginBridges.BridgeFFXIV.ReflectPlugin(devactionkey, devactionvalue);
 
-                            uint offset=Convert.ToUInt32(devactionvalue, 16);
-                            PluginBridges.BridgeFFXIV.SetFFXIVSignature(devactionkey, offset);
-                            PluginBridges.BridgeFFXIV.UpdateState();
+                            //val = jsonSerializer.Serialize(obj);
+
+                            //uint offset =Convert.ToUInt32(devactionvalue, 16);
+                            //PluginBridges.BridgeFFXIV.SetFFXIVSignature(devactionkey, offset);
+                            //PluginBridges.BridgeFFXIV.UpdateState();
 
 
                         }
@@ -2671,7 +2767,7 @@ namespace Triggernometry
             ContinueChain:
             if (NextAction != null)
             {
-                DateTime dt = DateTime.Now.AddMilliseconds(ctx.EvaluateNumericExpression(ActionContextLogger, ctx, NextAction._ExecutionDelayExpression));
+                DateTime dt = DateTime.Now.AddMilliseconds(this._DontExecute ? 0:ctx.EvaluateNumericExpression(ActionContextLogger, ctx,  NextAction.ExecutionDelayExpression));
                 ctx.plug.QueueAction(ctx, ctx.trig, qa != null ? qa.mutex : null, NextAction, dt);
             }
 		}
@@ -2767,7 +2863,38 @@ namespace Triggernometry
                 }
             }
         }
-
+        internal string GetInheritString(string src,Context ctx)
+        {
+            string val = ctx.EvaluateStringExpression(ActionContextLogger, ctx, src);
+            return val.Replace("\\$", "$").Replace("\\{", "{").Replace("\\}", "}");
+        }
+        internal void InheritSettingsTo(Action a,Context ctx)
+        {
+            CopySettingsTo(a);
+            Type t = this.GetType();
+            PropertyInfo[] pArray = t.GetProperties(BindingFlags.GetProperty | BindingFlags.Public | BindingFlags.Instance);
+             Type ta = a.GetType();
+            Array.ForEach<PropertyInfo>(pArray, p =>
+            {
+                try
+                {
+                    PropertyInfo pa = ta.GetProperty(p.Name, BindingFlags.GetProperty | BindingFlags.Public | BindingFlags.Instance);
+                    if (pa.PropertyType == typeof(string))
+                    {
+                        if (p.GetValue(this) != null)
+                        {
+                            string val = GetInheritString((string)p.GetValue(this),ctx);
+                            pa.SetValue(a, val);
+                        }
+                    }
+                }
+                catch(Exception e)
+                {
+                    string str = e.Message;
+                }
+            });
+            a._ExecutionDelayExpression = GetInheritString(_ExecutionDelayExpression, ctx);
+        }
         internal void CopySettingsTo(Action a)
         {
             a.Id = Id;
@@ -2915,6 +3042,11 @@ namespace Triggernometry
             a._PartyOrderPlayerName = _PartyOrderPlayerName;
             a._DevActionKey = _DevActionKey;
             a._DevActionValue = _DevActionValue;
+
+            a._SchedulingTriggerName = _SchedulingTriggerName;
+            a._SchedulingActionIndex = _SchedulingActionIndex;
+            a._SchedulingActionOp = _SchedulingActionOp;
+            a._DontExecute = _DontExecute;
         }
 
         private string SendJson(Context ctx, Action.HTTPMethodEnum method, string url, string json, IEnumerable<string> headers, bool expectNoContent)

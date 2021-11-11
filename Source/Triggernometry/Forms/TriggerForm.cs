@@ -62,7 +62,6 @@ namespace Triggernometry.Forms
                 CloseTree(tc);
             }
         }
-
         private void btnAddAction_Click(object sender, EventArgs e)
         {
             using (ActionForm af = new ActionForm())

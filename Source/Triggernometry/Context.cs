@@ -11,6 +11,7 @@ using System.ComponentModel;
 using System.Web.Script.Serialization;
 using Triggernometry.Variables;
 using System.Runtime.InteropServices;
+using Newtonsoft.Json;
 
 namespace Triggernometry
 {
@@ -486,7 +487,7 @@ namespace Triggernometry
                                     {
 
                                         int.TryParse(mx.Groups["index3"].Value, System.Globalization.NumberStyles.Integer, CultureInfo.InvariantCulture, out len);
-                                        val = PluginBridges.BridgeFFXIV.GetFFXIVSignature16(sig,(IntPtr)baseAddress,len);
+                                        //val = PluginBridges.BridgeFFXIV.GetFFXIVSignature16(sig,(IntPtr)baseAddress,len);
                                     }
                                 }
                             }
@@ -636,7 +637,15 @@ namespace Triggernometry
 
                             }
                         }
-                        // check if scalar variable exists
+                        else if (x.IndexOf("_ref") == 0)
+                        {
+
+                            object obj = PluginBridges.BridgeFFXIV.ReflectPlugin(x);
+                            JavaScriptSerializer jsonSerializer = new JavaScriptSerializer();
+                            val = JsonConvert.SerializeObject(obj);
+                            //val = jsonSerializer.Serialize(obj);
+
+                        }                        // check if scalar variable exists
                         else if ((x.IndexOf("evar:") == 0) || (x.IndexOf("epvar:") == 0))
                         {
                             Variables.VariableStore store;
@@ -1163,6 +1172,16 @@ namespace Triggernometry
                                             else
                                             {
                                                 val = "" + funcval.IndexOf(args[0]);
+                                            }
+                                            break;
+                                        case "replace": // indexof(stringtosearch)
+                                            if (argc != 2)
+                                            {
+                                                throw new ArgumentException(I18n.Translate("internal/Context/replaceargerror", "Replace function requires two argument, {0} were given", argc));
+                                            }
+                                            else
+                                            {
+                                                val = "" + funcval.Replace(args[0],args[1]);
                                             }
                                             break;
                                         case "compare": // compare(stringtocompare) or compare(stringtocompare, ignorecase)

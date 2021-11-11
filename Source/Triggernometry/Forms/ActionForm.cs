@@ -391,6 +391,12 @@ namespace Triggernometry.Forms
                 expPartyOrder.Expression = a._PartyOrderPartyOrder;
                 expDevActionKey.Expression = a._DevActionKey;
                 expDevActionValue.Expression = a._DevActionValue;
+
+                expSchedulingTriggerName.Expression = a._SchedulingTriggerName;
+                expSchedulingActionIndex.Expression = a._SchedulingActionIndex;
+                cbxSchedulingActionOption.SelectedIndex = (int)a._SchedulingActionOp;
+                chkDontExcute.Checked = a._DontExecute;
+                
                 
                 if ((a._TriggerForceType & Action.TriggerForceTypeEnum.SkipRegexp) != 0)
                 {
@@ -640,6 +646,12 @@ namespace Triggernometry.Forms
             a._PartyOrderPlayerName = expPlayerName.Expression;
             a._DevActionKey = expDevActionKey.Expression;
             a._DevActionValue = expDevActionValue.Expression;
+
+            a._SchedulingTriggerName = expSchedulingTriggerName.Expression;
+            a._SchedulingActionIndex = expSchedulingActionIndex.Expression;
+            a._SchedulingActionOp=(Action.SchedulingActionOpEnum)cbxSchedulingActionOption.SelectedIndex;
+            a._DontExecute = chkDontExcute.Checked ;
+
             TreeNode tn = trvTrigger.SelectedNode;
             if (tn != null)
             {
@@ -866,10 +878,24 @@ namespace Triggernometry.Forms
 
         private void cbxTriggerOp_SelectedIndexChanged(object sender, EventArgs e)
         {
-            expTriggerText.Enabled = (cbxTriggerOp.SelectedIndex == 0 && cbxFiringOptions.CheckedIndices.Contains(0) == false);
-            expTriggerZone.Enabled = (cbxTriggerOp.SelectedIndex == 0 && cbxFiringOptions.CheckedIndices.Contains(0) == false);
-            cbxFiringOptions.Enabled = (cbxTriggerOp.SelectedIndex == 0);
+
             trvTrigger.Enabled = (cbxTriggerOp.SelectedIndex != 4);
+            cbxFiringOptions.Enabled = (cbxTriggerOp.SelectedIndex == 0);
+            if (cbxTriggerOp.SelectedIndex == 5)
+            {
+                lblTriggerText.Text = "New trigger name";
+                lblTriggerZone.Text = "New Regular expression";
+                expTriggerZone.Enabled = true;
+                expTriggerText.Enabled = true;
+            }
+            else
+            {
+                expTriggerText.Enabled = (cbxTriggerOp.SelectedIndex == 0 && cbxFiringOptions.CheckedIndices.Contains(0) == false);
+                expTriggerZone.Enabled = (cbxTriggerOp.SelectedIndex == 0 && cbxFiringOptions.CheckedIndices.Contains(0) == false);
+                
+                lblTriggerText.Text = "Event text for firing";
+                lblTriggerZone.Text = "Zone name for firing";
+            }
         }
 
         private void cbxFiringOptions_ItemCheck(object sender, ItemCheckEventArgs e)

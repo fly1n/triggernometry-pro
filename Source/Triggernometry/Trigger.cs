@@ -644,7 +644,7 @@ namespace Triggernometry
                 {
                     if (a._Enabled == true)
                     {
-                        curtime = curtime.AddMilliseconds(ctx.EvaluateNumericExpression(TriggerContextLogger, p, a._ExecutionDelayExpression));
+                        curtime = curtime.AddMilliseconds(ctx.EvaluateNumericExpression(TriggerContextLogger, p, a.ExecutionDelayExpression));
                         p.QueueAction(ctx, this, mtx, a, curtime);
                     }
                 }
@@ -669,7 +669,7 @@ namespace Triggernometry
                     else
                     {
                         first = a;
-                        curtime = curtime.AddMilliseconds(ctx.EvaluateNumericExpression(TriggerContextLogger, p, a._ExecutionDelayExpression));
+                        curtime = curtime.AddMilliseconds(ctx.EvaluateNumericExpression(TriggerContextLogger, p, a.ExecutionDelayExpression));
                     }
                     prev = a;
                 }

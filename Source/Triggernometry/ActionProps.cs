@@ -93,9 +93,17 @@ namespace Triggernometry
             CancelTrigger,
             EnableTrigger,
             DisableTrigger,
-            CancelAllTrigger
+            CancelAllTrigger,
+            CopyTrigger,
         }
-
+        public enum SchedulingActionOpEnum
+        {
+            Nothing,
+            Clear,
+            Push,
+            Override,
+            Insert,
+        }
         public enum FolderOpEnum
         {
             EnableFolder,
@@ -266,7 +274,79 @@ namespace Triggernometry
         }
 
         #endregion
-
+        #region Scheduling properties
+        internal bool _DontExecute { get; set; } = false;
+        [XmlAttribute]
+        public string DontExecute
+        {
+            get
+            {
+                if (_DontExecute == false)
+                {
+                    return null;
+                }
+                return _DontExecute.ToString();
+            }
+            set
+            {
+                _DontExecute = Boolean.Parse(value);
+            }
+        }
+        internal string _SchedulingTriggerName { get; set; } = "";
+        [XmlAttribute]
+        public string SchedulingTriggerName
+        {
+            get
+            {
+                if (_SchedulingTriggerName == "")
+                {
+                    return null;
+                }
+                return _SchedulingTriggerName;
+            }
+            set
+            {
+                _SchedulingTriggerName = value;
+            }
+        }
+        internal SchedulingActionOpEnum _SchedulingActionOp { get; set; } = SchedulingActionOpEnum.Nothing;
+        [XmlAttribute]
+        public string SchedulingActionOp
+        {
+            get
+            {
+                if (_SchedulingActionOp != SchedulingActionOpEnum.Nothing)
+                {
+                    return _SchedulingActionOp.ToString();
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                _SchedulingActionOp = (SchedulingActionOpEnum)Enum.Parse(typeof(SchedulingActionOpEnum), value);
+            }
+        }
+        internal string _SchedulingActionIndex = "";
+        [XmlAttribute]
+        public string SchedulingActionIndex
+        {
+            get
+            {
+                if (_SchedulingActionIndex == "")
+                {
+                    return null;
+                }
+                return _SchedulingActionIndex;
+            }
+            set
+            {
+                _SchedulingActionIndex = value;
+            }
+        }
+        #endregion
         #region Action specific properties - Beep
 
         internal string _SystemBeepFreqExpression = "1000";

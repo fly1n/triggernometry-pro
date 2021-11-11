@@ -142,6 +142,7 @@ namespace TriggernometryProxy
             FailsafeRegisterHook("CornerHideHook", "HideCornerNotification");
             FailsafeRegisterHook("TabLocateHook", "LocateTab");
             FailsafeRegisterHook("InstanceHook", "GetInstance");
+            FailsafeRegisterHook("PluginObjectHook", "GetPluginObject");
             GetPluginNameAndPath();
             ActGlobals.oFormActMain.OnLogLineRead += OFormActMain_OnLogLineRead;
             //ActGlobals.oFormActMain.BeforeLogLineRead += OFormActMain_BeforeLogLineRead;
@@ -414,7 +415,19 @@ namespace TriggernometryProxy
             }
             return alltrigs;
         }
-
+        public Triggernometry.RealPlugin.PluginWrapper GetPluginObject(string ActPluginName, string ActPluginStatus)
+        {
+            foreach (ActPluginData p in ActGlobals.oFormActMain.ActPlugins)
+            {
+                string tn = p.pluginObj != null ? p.pluginObj.GetType().Name : "(null)";
+                if ((String.Compare(p.pluginFile.Name, ActPluginName, true) == 0) &&
+                    (p.lblPluginStatus.Text.Contains(ActPluginStatus)))
+                {
+                    return new Triggernometry.RealPlugin.PluginWrapper() { pluginObj = p.pluginObj };
+                }
+            }
+            return new Triggernometry.RealPlugin.PluginWrapper() { pluginObj = null };
+        }
         public Triggernometry.RealPlugin.PluginWrapper GetInstance(string ActPluginName, string ActPluginType)
         {
             foreach (ActPluginData p in ActGlobals.oFormActMain.ActPlugins)
@@ -459,6 +472,7 @@ namespace TriggernometryProxy
             }
             return new Triggernometry.RealPlugin.PluginWrapper() { pluginObj = null, state = 0 };
         }
+        
     }
     public enum SwingTypeEnum
     {

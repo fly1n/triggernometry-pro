@@ -59,8 +59,23 @@ namespace Triggernometry.CustomControls
                 Expression = value;
             }
         }
-
+        private bool _ShowHint;
+        public bool ShowHint
+        { 
+            get
+            {
+                return _ShowHint;
+            }
+            set
+            {
+                if (value != _ShowHint)
+                {
+                    _ShowHint = value;
+}
+            }
+        }
         private SupportedExpressionTypeEnum _ExpressionType;
+
         public SupportedExpressionTypeEnum ExpressionType
         { 
             get
@@ -195,7 +210,7 @@ namespace Triggernometry.CustomControls
                 try
                 {
 
-                    showAutoCompleteList();
+                        showAutoCompleteList();
 
                 }
                 
@@ -373,10 +388,13 @@ namespace Triggernometry.CustomControls
         }
         private void showAutoCompleteList()
         {
-            
-            //this.autoListBox.Left = this.textBox1.Left;
-            //this.autoListBox.Top = this.textBox1.Top + this.textBox1.Height + 2;
-            this.autoListBox.Items.Clear();
+            if (_ShowHint == false)
+            {
+                return;
+            }
+                //this.autoListBox.Left = this.textBox1.Left;
+                //this.autoListBox.Top = this.textBox1.Top + this.textBox1.Height + 2;
+                this.autoListBox.Items.Clear();
             string lastWord;
             lastWord = GetLastWord(this.textBox1);
             if (isRegexTextBox())

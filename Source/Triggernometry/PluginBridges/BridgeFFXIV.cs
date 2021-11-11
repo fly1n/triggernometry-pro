@@ -6,6 +6,9 @@ using System.Diagnostics;
 using Triggernometry.Variables;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Globalization;
+using System.Text.RegularExpressions;
+using Advanced_Combat_Tracker;
 
 namespace Triggernometry.PluginBridges
 {
@@ -17,6 +20,7 @@ namespace Triggernometry.PluginBridges
         private static string ActPluginType = "FFXIV_ACT_Plugin";
         public static uint ActPluginVersion;
         private static IntPtr hProcessFFXIV;
+        public static Dictionary<string, object> ActPlugins = new Dictionary<string, object>();
 
         private static VariableDictionary NullCombatant = new VariableDictionary();
 
@@ -383,7 +387,20 @@ namespace Triggernometry.PluginBridges
             else
                 vc.SetValue("pointer", cmx.Address.ToString("X12"));
         }
-
+        public static object GetPluginObject(string ActPluginName, string ActPluginStatus)
+        {
+            if (!ActPlugins.ContainsKey(ActPluginName))
+            {
+                RealPlugin.PluginWrapper wrap= RealPlugin.PluginObjectHook(ActPluginName, ActPluginStatus);
+                Object obj = wrap.pluginObj;
+                ActPlugins.Add(ActPluginName, obj);
+                return obj;
+            }
+            else
+            {
+                return ActPlugins[ActPluginName];
+            }
+        }
         public static object GetInstance()
         {            
             RealPlugin.PluginWrapper wrap = RealPlugin.InstanceHook(ActPluginName, ActPluginType);
@@ -1027,17 +1044,76 @@ namespace Triggernometry.PluginBridges
             }
             return outstr;
         }
-        public static string GetFFXIVSignature16(UInt16 sig,IntPtr baseAddress, int len)
+        public static string GetFFXIVSignature(string sigstr, string sigtype, string addresstype)
         {
+            byte[] sig_buffer = null;
+            try
+            {
+                switch (sigtype)
+                {
+                    case "byte":
+                        {
+                            byte sig=byte.Parse(sigstr, NumberStyles.HexNumber, CultureInfo.InvariantCulture);
+                            sig_buffer = new byte[1] { sig };
+                        }
+                        break;
+                    case "uint16":
+                        {
+                            UInt16 sig = UInt16.Parse(sigstr, NumberStyles.HexNumber, CultureInfo.InvariantCulture);
+                            sig_buffer = BitConverter.GetBytes(sig);
+                        }
+                        break;
+                    case "uint32":
+                        {
+                            UInt32 sig=UInt32.Parse(sigstr, NumberStyles.HexNumber, CultureInfo.InvariantCulture);
+                            sig_buffer = BitConverter.GetBytes(sig);
+                        }
+                        break;
+                    case "uint64":
+                        {
+                            UInt64 sig=UInt64.Parse(sigstr, NumberStyles.HexNumber, CultureInfo.InvariantCulture);
+                            sig_buffer = BitConverter.GetBytes(sig);
+                        }
+                        break;
+                    case "array":
+                        {
+                            sig_buffer = new byte[sigstr.Length / 2];
+                            for (int i = 0; i < sigstr.Length; i += 2)
+                            {
+                                sig_buffer[i / 2]=byte.Parse(sigstr.Substring(i, 2), NumberStyles.HexNumber, CultureInfo.InvariantCulture);
+                            }
+                        }
+                        break;
+                    default: break;
+                }
+            }catch(Exception ex)
+            {
+                LogMessage(RealPlugin.DebugLevelEnum.Error, I18n.Translate("internal/ffxiv/findsignatureexception", "Invalid FFXIV signature: {0}", ex.Message));
+                return "";
+            }
+            if (sig_buffer == null) return "";
+
+
             string outstr = "";
             Process p = GetProcess();
             //try
             //{
-                var buffer = new byte[len];
-                ReadFFXIVMemory(baseAddress, buffer, len);
-                for (int i = 0; i + 4 < len; i++)
-                    if (BitConverter.ToUInt16(buffer, i) == sig)
-                        outstr += (baseAddress + i).ToString("X16") + "(" + (i).ToString("X8") + ")" + " ";
+            byte[] buffer;
+            IntPtr baseAddress=IntPtr.Zero;
+            UInt64 len=0;
+            switch (addresstype)
+            {
+                case "2": { baseAddress = IntPtr.Zero; len = (UInt64) p.MainModule.BaseAddress + (UInt64)p.MainModule.ModuleMemorySize; } break;
+                case "1": { baseAddress = IntPtr.Zero; len = (UInt64) p.MainModule.BaseAddress; }break;
+                case "0": { baseAddress = p.MainModule.BaseAddress; len = (UInt64) p.MainModule.ModuleMemorySize; } break;
+                default:break;
+
+            }
+            buffer = new byte[len];
+            //ReadFFXIVMemory(baseAddress, buffer, len);
+            //for (int i = 0; i + 4 < len; i++)
+            //    if (BitConverter.ToUInt16(buffer, i) == sig)
+            //        outstr += (baseAddress + i).ToString("X16") + "(" + (i).ToString("X8") + ")" + " ";
             //}
             //catch (Exception e)
             //{
@@ -1080,6 +1156,159 @@ namespace Triggernometry.PluginBridges
             //    return "";
             //}
             return outstr;
+        }
+        private static dynamic setPropertyWithJson(dynamic prop, dynamic obj,string json)
+        {
+            dynamic value = prop.GetValue(obj);
+            Type type;
+            try
+            {
+                type = prop.PropertyType;
+            }
+            catch (Exception e)
+            {
+                type = prop.FieldType;
+            }
+
+            try
+            {
+                dynamic new_value2 = Newtonsoft.Json.JsonConvert.DeserializeObject(json, type);
+                prop.SetValue(obj, new_value2);
+            }
+            catch (Exception e)
+            {
+                if (type.Name == "Server_MessageType")
+                {
+                    MethodInfo mi = obj.GetMethod("op_Implicit", new Type[] { typeof(UInt16) });
+                    object obj2 = type.Assembly.CreateInstance(type.FullName);
+
+                    ushort num2 = ushort.Parse(json);
+                    dynamic newMessageType = mi.Invoke(obj2, new object[] { num2 });
+                    prop.SetValue(obj2, newMessageType);
+                    //value.InternalValue = UInt16.Parse(json);
+                    //PropertyInfo pi =value.GetType().GetProperty("InternalValue", BindingFlags.GetProperty | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static);
+                    //pi.SetValue(value, UInt16.Parse(json));
+                    //prop.SetValue(obj, value);
+                }
+            }
+            return 0;
+        }
+        public static object ReflectPlugin(string command,string new_value="")
+        {
+            Regex rex1= new Regex(@"(?<method>[^\[]+)\[(?<name>.+?)\](?<others>.*)");
+            Regex rex2= new Regex(@"\.(?<method>[^\[]+)\[(?<name>.+?)\](?<others>.*)");
+
+            var mx = rex1.Match(command);
+            if (mx.Success == false) return null;
+            //string reflectMethod = mx.Groups["method"].Value;
+            string reflectMethod = mx.Groups["method"].Value;
+            string pluginName = mx.Groups["name"].Value;
+            string pluginStatus = pluginName.Split(',')[1];
+            pluginName = pluginName.Split(',')[0];
+            object currentObj = GetPluginObject(pluginName, pluginStatus);
+            if (currentObj == null) return null;
+
+            string others = mx.Groups["others"].Value;
+            Match my = rex2.Match(others);
+
+            dynamic currentValue = null;
+            string currentMethod = "f";
+            while (my.Success == true)
+            {
+                currentMethod = my.Groups["method"].Value;
+                var sp=my.Groups["name"].Value.Split(',');
+                string name;
+                string type="";
+                if (sp.Length > 1)
+                {
+                    name = sp[1];
+                    type = sp[0];
+                }
+                else {
+                    name = sp[0];
+                }
+
+                others = my.Groups["others"].Value;
+                bool isValue = false;
+                bool isSet = false;
+                if (currentMethod.EndsWith("v"))
+                {
+                    isValue = true;
+                    currentMethod=currentMethod.TrimEnd('v');
+                }else if (currentMethod.EndsWith("s"))
+                {
+                    isSet = true;
+                    currentMethod = currentMethod.TrimEnd('s');
+                }
+                switch (currentMethod)
+                {
+                    case "af":
+                        {
+                            Assembly ass = currentObj.GetType().Assembly;
+                            FieldInfo fi = ass.GetType(type).GetField(name, BindingFlags.GetField | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static);
+                            currentValue = isValue? fi.GetValue(ass.GetType(type)) : fi;
+                            if (isSet)setPropertyWithJson(fi, ass.GetType(type) , new_value);
+                        }
+                        break;
+                    case "ap":
+                        {
+                            Assembly ass = currentObj.GetType().Assembly;
+                            PropertyInfo pi = ass.GetType(type).GetProperty(name, BindingFlags.GetProperty | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static);
+                            currentValue = isValue ? pi.GetValue(ass.GetType(type)) : pi;
+                            if (isSet) setPropertyWithJson(pi, ass.GetType(type), new_value);
+                        }
+                        break;
+                    case "am":
+                        {
+                            Assembly ass = currentObj.GetType().Assembly;
+                            MethodInfo mi = ass.GetType(type).GetMethod(name, BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static);
+                            currentValue = mi;
+                            mi.Invoke(currentObj, new object[0]);
+                        }
+                        break;
+                    case "ac":
+                        {
+                            Assembly ass = currentObj.GetType().Assembly;
+                            ConstructorInfo ci= ass.GetType(type).GetConstructors(BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static)[0];
+                            ci.Invoke(ass.GetType(type),new object[0]);
+                        }
+                        break;
+                    case "f":
+                        {
+                            FieldInfo fi = currentObj.GetType().GetField(name, BindingFlags.GetField | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static);
+                            currentValue = isValue ? fi.GetValue(currentObj): fi;
+                            if (isSet) setPropertyWithJson(fi, currentObj, new_value);
+                        }
+                        break;
+                    case "p":
+                        {
+                            PropertyInfo pi = currentObj.GetType().GetProperty(name, BindingFlags.GetProperty | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static);
+                            currentValue = isValue ? pi.GetValue(currentObj): pi;
+                            if (isSet) setPropertyWithJson(pi, currentObj, new_value);
+                        }
+                        break;
+                    case "m":
+                        {
+                            MethodInfo mi = currentObj.GetType().GetMethod(name, BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static);
+                            currentValue = mi;
+                            mi.Invoke(currentObj,new object[0]);
+                        }
+                        break;
+                    case "e":
+                        {
+                            EventInfo ei = currentObj.GetType().GetEvent(name, BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static);
+                            currentValue = ei;
+                        }
+                        break;
+                    default:break;
+                }
+                if (currentValue == null) break;
+                my = rex2.Match(others);
+                currentObj = currentValue;
+            }
+
+            return currentObj;
+
         }
         public static void SetFFXIVSignature(string typeName,uint offset)
         {
