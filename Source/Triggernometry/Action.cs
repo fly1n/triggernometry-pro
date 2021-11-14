@@ -17,6 +17,7 @@ using CsvHelper;
 using Advanced_Combat_Tracker;
 using System.Reflection;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Triggernometry
 {
@@ -585,10 +586,10 @@ namespace Triggernometry
                         case ListVariableOpEnum.Push:
                             switch (_ListVariableExpressionType)
                             {
-                                case ListVariableExpTypeEnum.Numeric:
+                                case ExpressionTypeEnum.Numeric:
                                     temp += I18n.Translate("internal/Action/desclistpushnumeric", "push the value from numeric expression ({0}) to the end of list variable ({1})", _ListVariableExpression, _ListVariableName);
                                     break;
-                                case ListVariableExpTypeEnum.String:
+                                case ExpressionTypeEnum.String:
                                     temp += I18n.Translate("internal/Action/desclistpushstring", "push the value from string expression ({0}) to the end of list variable ({1})", _ListVariableExpression, _ListVariableName);
                                     break;
                             }
@@ -596,10 +597,10 @@ namespace Triggernometry
                         case ListVariableOpEnum.Insert:
                             switch (_ListVariableExpressionType)
                             {
-                                case ListVariableExpTypeEnum.Numeric:
+                                case ExpressionTypeEnum.Numeric:
                                     temp += I18n.Translate("internal/Action/desclistinsertnumeric", "insert the value from numeric expression ({0}) to index ({1}) on list variable ({2})", _ListVariableExpression, _ListVariableIndex, _ListVariableName);
                                     break;
-                                case ListVariableExpTypeEnum.String:
+                                case ExpressionTypeEnum.String:
                                     temp += I18n.Translate("internal/Action/desclistinsertstring", "insert the value from string expression ({0}) to index ({1}) on list variable ({2})", _ListVariableExpression, _ListVariableIndex, _ListVariableName);
                                     break;
                             }
@@ -607,10 +608,10 @@ namespace Triggernometry
                         case ListVariableOpEnum.Set:
                             switch (_ListVariableExpressionType)
                             {
-                                case ListVariableExpTypeEnum.Numeric:
+                                case ExpressionTypeEnum.Numeric:
                                     temp += I18n.Translate("internal/Action/desclistsetnumeric", "set the value from numeric expression ({0}) to index ({1}) on list variable ({2})", _ListVariableExpression, _ListVariableIndex, _ListVariableName);
                                     break;
-                                case ListVariableExpTypeEnum.String:
+                                case ExpressionTypeEnum.String:
                                     temp += I18n.Translate("internal/Action/desclistsetstring", "set the value from string expression ({0}) to index ({1}) on list variable ({2})", _ListVariableExpression, _ListVariableIndex, _ListVariableName);
                                     break;
                             }
@@ -973,6 +974,54 @@ namespace Triggernometry
                 default:
                     temp += I18n.Translate("internal/Action/descunknown", "unknown action type");
                     break;
+                case ActionTypeEnum.JsonVariable:
+                    switch (_JvarOp)
+                    {
+                        case JvarOpEnum.Set:
+                            if (_JvarExpressionType == ExpressionTypeEnum.Numeric)
+                            {
+                                temp += I18n.Translate("internal/Action/descjvarnumeric", "set element ({0}) value with numeric expression ({1})", _JvarSource, _JvarExpression);
+                            }
+                            else
+                            {
+                                temp += I18n.Translate("internal/Action/descjvarstring", "set element ({0}) value with string expression ({1})", _JvarSource, _JvarExpression);
+                            }
+                            break;
+                        case JvarOpEnum.Remove:
+                            temp += I18n.Translate("internal/Action/descjvarremove", "remove element ({0})", _JvarSource);
+                            break;
+                        case JvarOpEnum.Push:
+                            if (_JvarExpressionType == ExpressionTypeEnum.Numeric)
+                            {
+                                temp += I18n.Translate("internal/Action/descpushjvarnumeric", "push into element ({0}) value with numeric expression ({1})", _JvarSource, _JvarExpression);
+                            }
+                            else
+                            {
+                                temp += I18n.Translate("internal/Action/descpushjvarstring", "push into element ({0}) value with string expression ({1})", _JvarSource, _JvarExpression);
+                            }
+                            break;
+                        case JvarOpEnum.Insert:
+                            if (_JvarExpressionType == ExpressionTypeEnum.Numeric)
+                            {
+                                temp += I18n.Translate("internal/Action/descinsertjvarnumeric", "Insert into element ({0}) at index {1} with numeric expression ({2})", _JvarSource,_JvarListIndex, _JvarExpression);
+                            }
+                            else
+                            {
+                                temp += I18n.Translate("internal/Action/descinsertjvarstring", "Insert into element ({0})at index {1} with string expression ({2})", _JvarSource, _JvarListIndex, _JvarExpression);
+                            }
+                            break;
+                        case JvarOpEnum.Sort:
+                            if (_JvarExpressionType == ExpressionTypeEnum.Numeric)
+                            {
+                                temp += I18n.Translate("internal/Action/descjvarsortnumeric", "sort jarray ({0}) use method ({1}) with numeric expression ({2})", _JvarSource, _JvarSortMethod.ToString(), _JvarExpression);
+                            }
+                            else
+                            {
+                                temp += I18n.Translate("internal/Action/descjvarsortstring", "sort jarray ({0}) use method ({1}) with string expression ({2})", _JvarSource, _JvarSortMethod.ToString(), _JvarExpression);
+                            }
+                            break;
+                    }
+                    break;
             }
             return Capitalize(temp);
         }
@@ -1060,13 +1109,13 @@ namespace Triggernometry
             return vt;
         }
 
-        private string GetListExpressionValue(Context ctx, ListVariableExpTypeEnum typ, string expr)
+        private string GetExpressionValue(Context ctx, ExpressionTypeEnum typ, string expr)
         {
             switch (typ)
             {
-                case ListVariableExpTypeEnum.Numeric:
+                case ExpressionTypeEnum.Numeric:
                     return I18n.ThingToString(ctx.EvaluateNumericExpression(ActionContextLogger, ctx, expr));
-                case ListVariableExpTypeEnum.String:
+                case ExpressionTypeEnum.String:
                     return ctx.EvaluateStringExpression(ActionContextLogger, ctx, expr);
             }
             return "";
@@ -1716,7 +1765,7 @@ namespace Triggernometry
                                     break;
                                 case ListVariableOpEnum.Push:
                                     {
-                                        string value = GetListExpressionValue(ctx, _ListVariableExpressionType, _ListVariableExpression);
+                                        string value = GetExpressionValue(ctx, _ListVariableExpressionType, _ListVariableExpression);
                                         VariableStore vs = (_ListSourcePersist == false) ? ctx.plug.sessionvars : ctx.plug.cfg.PersistentVariables;
                                         lock (vs.List)
                                         {
@@ -1728,7 +1777,7 @@ namespace Triggernometry
                                     break;
                                 case ListVariableOpEnum.Insert:
                                     {
-                                        string value = GetListExpressionValue(ctx, _ListVariableExpressionType, _ListVariableExpression);
+                                        string value = GetExpressionValue(ctx, _ListVariableExpressionType, _ListVariableExpression);
                                         int index = (int)ctx.EvaluateNumericExpression(ActionContextLogger, ctx, _ListVariableIndex);
                                         VariableStore vs = (_ListSourcePersist == false) ? ctx.plug.sessionvars : ctx.plug.cfg.PersistentVariables;
                                         lock (vs.List)
@@ -1741,7 +1790,7 @@ namespace Triggernometry
                                     break;
                                 case ListVariableOpEnum.Set:
                                     {
-                                        string value = GetListExpressionValue(ctx, _ListVariableExpressionType, _ListVariableExpression);
+                                        string value = GetExpressionValue(ctx, _ListVariableExpressionType, _ListVariableExpression);
                                         int index = (int)ctx.EvaluateNumericExpression(ActionContextLogger, ctx, _ListVariableIndex);
                                         VariableStore vs = (_ListSourcePersist == false) ? ctx.plug.sessionvars : ctx.plug.cfg.PersistentVariables;
                                         lock (vs.List)
@@ -1996,7 +2045,7 @@ namespace Triggernometry
                                     break;
                                 case ListVariableOpEnum.Join:
                                     {
-                                        string separator = GetListExpressionValue(ctx, _ListVariableExpressionType, _ListVariableExpression);
+                                        string separator = GetExpressionValue(ctx, _ListVariableExpressionType, _ListVariableExpression);
                                         string targetname = ctx.EvaluateStringExpression(ActionContextLogger, ctx, _ListVariableTarget);
                                         string newval = "";
                                         VariableStore vs = (_ListSourcePersist == false) ? ctx.plug.sessionvars : ctx.plug.cfg.PersistentVariables;
@@ -2022,7 +2071,7 @@ namespace Triggernometry
                                     break;
                                 case ListVariableOpEnum.Split: // todo
                                     {
-                                        string separator = GetListExpressionValue(ctx, _ListVariableExpressionType, _ListVariableExpression);
+                                        string separator = GetExpressionValue(ctx, _ListVariableExpressionType, _ListVariableExpression);
                                         string newname = ctx.EvaluateStringExpression(ActionContextLogger, ctx, _ListVariableTarget);
                                         string splitval = "";
                                         VariableStore vs = (_ListSourcePersist == false) ? ctx.plug.sessionvars : ctx.plug.cfg.PersistentVariables;
@@ -2607,6 +2656,9 @@ namespace Triggernometry
                                                     TreeNode parent = ctx.plug.LocateNodeHostingFolder(ctx.plug.ui.treeView1.TopNode, t.Parent);
                                                     ifo.BuildTreeFromExport(exp, null, null, false);
                                                     var trigger_new = (Trigger)ifo.treeView1.Nodes[0].Tag;
+                                                    
+                                                    
+
                                                     ctx.plug.ui.ImportResultsFromForm(ifo,tn);
                                                 }
                                             }
@@ -2738,7 +2790,7 @@ namespace Triggernometry
                         }
                         break;
                     #endregion                   
-                    #region Implementation - Party order
+                    #region Implementation - Developer action
                     case ActionTypeEnum.DeveloperAction:
                         {
 
@@ -2755,6 +2807,182 @@ namespace Triggernometry
                             //PluginBridges.BridgeFFXIV.UpdateState();
 
 
+                        }
+                        break;
+                    #endregion
+                    #region Implementation - Json variable
+                    case ActionTypeEnum.JsonVariable:
+                        {
+                            string sourcename = ctx.EvaluateStringExpression(ActionContextLogger, ctx, _JvarSource);
+                            string changer;
+                            if (ctx.trig != null)
+                            {
+                                changer = I18n.Translate("internal/Action/changetagtrigaction", "Trigger '{0}' action '{1}'", ctx.trig.LogName, GetDescription(ctx));
+                            }
+                            else
+                            {
+                                changer = I18n.Translate("internal/Action/changetagtestmode", "Action '{0}' test mode", GetDescription(ctx));
+                            }
+                            switch (_JvarOp)
+                            {
+                                case JvarOpEnum.Remove:
+                                    {
+                                        VariableStore vs = (_JvarSourcePersist == false) ? ctx.plug.sessionvars : ctx.plug.cfg.PersistentVariables;
+                                        lock (vs.Json)
+                                        {
+                                            var token = vs.Json.Value.SelectToken(sourcename);
+                                            while (token!=null)
+                                            {
+                                                AddToLog(ctx, RealPlugin.DebugLevelEnum.Verbose, I18n.Translate("internal/Action/jvarremove", "Remove jvar element ({0})", token.Path));
+                                                token.Remove();
+                                                token = vs.Json.Value.SelectToken(sourcename);
+                                            }
+                                        }
+                                    }
+                                    break;
+                                case JvarOpEnum.Push:
+                                    {
+                                        VariableStore vs = (_JvarSourcePersist == false) ? ctx.plug.sessionvars : ctx.plug.cfg.PersistentVariables;
+                                        string value = GetExpressionValue(ctx, _JvarExpressionType, _JvarExpression);
+                                        lock (vs.Json)
+                                        {
+                                            var tokens = vs.Json.Value.SelectTokens(sourcename);
+                                            if (tokens.Count() <= 0)
+                                            {
+                                                if (vs.Json.CreateTokens(sourcename)) {
+                                                    tokens = vs.Json.Value.SelectTokens(sourcename);
+                                                }
+                                            }
+                                            foreach (var token in tokens)
+                                            {
+                                                if (token.Type == JTokenType.Array)
+                                                {
+                                                    JArray arr = token as JArray;
+                                                    object item = JsonConvert.DeserializeObject(value);
+                                                    if (item.GetType() == typeof(JArray))
+                                                    {
+                                                        foreach(var child in item as JArray)
+                                                        {
+                                                            arr.Add(child);
+                                                        }
+                                                    }
+                                                    else
+                                                    {
+                                                        arr.Add(item);
+                                                    }
+
+                                                }
+                                                else 
+                                                {
+                                                    VariableJson.PushValueInto(token, value, _JvarAppendAsDict);
+                                                }
+                                                AddToLog(ctx, RealPlugin.DebugLevelEnum.Verbose, I18n.Translate("internal/Action/jvarpush", "Push ({0}) into jvar element ({1})", value, token.Path));
+                                            }
+                                        }
+                                    }
+                                    break;
+                                case JvarOpEnum.Insert:
+                                    {
+                                        VariableStore vs = (_JvarSourcePersist == false) ? ctx.plug.sessionvars : ctx.plug.cfg.PersistentVariables;
+                                        string value = GetExpressionValue(ctx, _JvarExpressionType, _JvarExpression);
+                                        int index = (int)ctx.EvaluateNumericExpression(ActionContextLogger, ctx, _JvarListIndex);
+                                        lock (vs.Json)
+                                        {
+                                            var tokens = vs.Json.Value.SelectTokens(sourcename);
+                                            if (tokens.Count() <= 0)
+                                            {
+                                                if (vs.Json.CreateTokens(sourcename))
+                                                {
+                                                    tokens = vs.Json.Value.SelectTokens(sourcename);
+                                                }
+                                            }
+                                            foreach (var token in tokens)
+                                            {
+                                                if (token.Type == JTokenType.Array)
+                                                {
+                                                    JArray arr = token as JArray;
+                                                    object item = JsonConvert.DeserializeObject(value);
+                                                    if (item.GetType() == typeof(JArray))
+                                                    {
+                                                        foreach (var child in item as JArray)
+                                                        {
+                                                            arr.Insert(index, child);
+                                                        }
+                                                    }
+                                                    else
+                                                    {
+                                                        arr.Insert(index,(JToken)item);
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    VariableJson.PushValueInto(token, value, _JvarAppendAsDict);
+                                                }
+
+
+                                                AddToLog(ctx, RealPlugin.DebugLevelEnum.Verbose, I18n.Translate("internal/Action/jvarpush", "Push ({0}) into jvar element ({1})", value, token.Path));
+                                            }
+                                        }
+                                    }
+                                    break;
+                                case JvarOpEnum.Set:
+                                    {
+                                        VariableStore vs = (_JvarSourcePersist == false) ? ctx.plug.sessionvars : ctx.plug.cfg.PersistentVariables;
+                                        string value = GetExpressionValue(ctx, _JvarExpressionType, _JvarExpression);
+                                        int index = (int)ctx.EvaluateNumericExpression(ActionContextLogger, ctx, _JvarListIndex);
+                                        lock (vs.Json)
+                                        {
+                                            var tokens = vs.Json.Value.SelectTokens(sourcename);
+                                            if (tokens.Count() <= 0)
+                                            {
+                                                if (vs.Json.CreateTokens(sourcename))
+                                                {
+                                                    tokens = vs.Json.Value.SelectTokens(sourcename);
+                                                }
+                                            }
+                                            //var token = vs.Json.Value.SelectToken(sourcename);
+                                            foreach (var token in tokens)
+                                            {
+                                                AddToLog(ctx, RealPlugin.DebugLevelEnum.Verbose, I18n.Translate("internal/Action/jvarset", "Set jvar element ({0}) to ({1})", token.Path, value));
+                                                object item = JsonConvert.DeserializeObject(value);
+                                                JToken newtoken=JToken.FromObject(value);
+                                                if (token.Root == token)
+                                                {
+                                                    vs.Json.Value = (JObject)item;
+                                                    break;
+                                                }
+                                                else
+                                                {
+                                                    token.Replace(newtoken);
+                                                }
+                                            }
+                                        }
+                                    }
+                                    break;
+                                case JvarOpEnum.Sort:
+                                    {
+                                        VariableStore vs = (_JvarSourcePersist == false) ? ctx.plug.sessionvars : ctx.plug.cfg.PersistentVariables;
+                                        string value = GetExpressionValue(ctx, _JvarExpressionType, _JvarExpression);
+                                        JvarSortMethodEnum sortMethod = _JvarSortMethod;
+                                        lock (vs.Json)
+                                        {
+                                            //var token = vs.Json.Value.SelectToken(sourcename);
+                                            foreach (var token in vs.Json.Value.SelectTokens(sourcename))
+                                            {
+                                                if (token.Type != JTokenType.Array)
+                                                {
+                                                    continue;
+                                                }
+                                                List<JToken> list=token.Children().ToList();
+                                                VariableJson.Sort(list, sortMethod, value);
+                                                JToken newtoken = JToken.FromObject(list);
+                                                token.Replace(newtoken);
+                                                AddToLog(ctx, RealPlugin.DebugLevelEnum.Verbose, I18n.Translate("internal/Action/jvarset", "Sort jarray ({0}) to ({1})", token.Path, newtoken.ToString()));
+                                            }
+                                        }
+                                    }
+                                    break;
+                            }
                         }
                         break;
                         #endregion
@@ -3047,6 +3275,17 @@ namespace Triggernometry
             a._SchedulingActionIndex = _SchedulingActionIndex;
             a._SchedulingActionOp = _SchedulingActionOp;
             a._DontExecute = _DontExecute;
+
+            a._JvarExpression = _JvarExpression;
+            a._JvarExpressionType = _JvarExpressionType;
+            a._JvarListIndex = _JvarListIndex;
+            a._JvarOp = _JvarOp;
+            a._JvarSortMethod = _JvarSortMethod;
+            a._JvarSource = _JvarSource;
+            a._JvarSourcePersist = _JvarSourcePersist;
+            a._JvarTarget = _JvarTarget;
+            a._JvarTargetPersist = _JvarTargetPersist;
+            a._JvarAppendAsDict = _JvarAppendAsDict;
         }
 
         private string SendJson(Context ctx, Action.HTTPMethodEnum method, string url, string json, IEnumerable<string> headers, bool expectNoContent)

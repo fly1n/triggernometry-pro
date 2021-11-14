@@ -42,6 +42,7 @@ namespace Triggernometry
             Mouse,
             PartyOrder,
             DeveloperAction,
+            JsonVariable,
         }
 
         public enum VariableOpEnum
@@ -185,13 +186,28 @@ namespace Triggernometry
             UnsetAll,
             UnsetRegex
         }
-
-        public enum ListVariableExpTypeEnum
+        public enum JvarOpEnum
+        {
+            Remove,
+            Push,
+            Set,
+            Insert,
+            Sort,
+        }
+        public enum JvarSortMethodEnum
+        {
+            SortAlphaAsc,
+            SortAlphaDesc,
+            SortNumericAsc,
+            SortNumericDesc,
+            SortFfxivPartyAsc,
+            SortFfxivPartyDesc,
+        }
+        public enum ExpressionTypeEnum
         {
             String,
             Numeric
         }
-
         public enum ObsControlTypeEnum
         {
             StartStreaming,
@@ -1337,13 +1353,13 @@ namespace Triggernometry
             }
         }
 
-        internal ListVariableExpTypeEnum _ListVariableExpressionType { get; set; } = ListVariableExpTypeEnum.String;
+        internal ExpressionTypeEnum _ListVariableExpressionType { get; set; } = ExpressionTypeEnum.String;
         [XmlAttribute]
         public string ListVariableExpressionType
         {
             get
             {
-                if (_ListVariableExpressionType != ListVariableExpTypeEnum.String)
+                if (_ListVariableExpressionType != ExpressionTypeEnum.String)
                 {
                     return _ListVariableExpressionType.ToString();
                 }
@@ -1354,7 +1370,7 @@ namespace Triggernometry
             }
             set
             {
-                _ListVariableExpressionType = (ListVariableExpTypeEnum)Enum.Parse(typeof(ListVariableExpTypeEnum), value);
+                _ListVariableExpressionType = (ExpressionTypeEnum)Enum.Parse(typeof(ExpressionTypeEnum), value);
             }
         }
 
@@ -2981,6 +2997,176 @@ namespace Triggernometry
             set
             {
                 _DevActionValue = value;
+            }
+        }
+        #endregion
+        #region Action specific properties - Json variable operation
+
+        internal JvarOpEnum _JvarOp { get; set; } = JvarOpEnum.Remove;
+        [XmlAttribute]
+        public string JvarOp
+        {
+            get
+            {
+                if (_JvarOp != JvarOpEnum.Remove)
+                {
+                    return _JvarOp.ToString();
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                _JvarOp = (JvarOpEnum)Enum.Parse(typeof(JvarOpEnum), value);
+            }
+        }
+        internal JvarSortMethodEnum _JvarSortMethod { get; set; } = JvarSortMethodEnum.SortAlphaAsc;
+        [XmlAttribute]
+        public string JvarSortMethod
+        {
+            get
+            {
+                if (_JvarSortMethod != JvarSortMethodEnum.SortAlphaAsc)
+                {
+                    return _JvarSortMethod.ToString();
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                _JvarSortMethod = (JvarSortMethodEnum)Enum.Parse(typeof(JvarSortMethodEnum), value);
+            }
+        }
+        internal ExpressionTypeEnum _JvarExpressionType { get; set; } = ExpressionTypeEnum.String;
+        [XmlAttribute]
+        public string JvarExpressionType
+        {
+            get
+            {
+                if (_JvarExpressionType != ExpressionTypeEnum.String)
+                {
+                    return _JvarExpressionType.ToString();
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                _JvarExpressionType = (ExpressionTypeEnum)Enum.Parse(typeof(ExpressionTypeEnum), value);
+            }
+        }
+        internal string _JvarSource = "";
+        [XmlAttribute]
+        public string JvarSource
+        {
+            get
+            {
+
+                return _JvarSource;
+            }
+            set
+            {
+                _JvarSource = value;
+            }
+        }
+        internal bool _JvarSourcePersist { get; set; } = false;
+        [XmlAttribute]
+        public string JvarSourcePersist
+        {
+            get
+            {
+                if (_JvarSourcePersist == false)
+                {
+                    return null;
+                }
+                return _JvarSourcePersist.ToString();
+            }
+            set
+            {
+                _JvarSourcePersist = Boolean.Parse(value);
+            }
+        }
+        internal bool _JvarTargetPersist { get; set; } = false;
+        [XmlAttribute]
+        public string JvarTargetPersist
+        {
+            get
+            {
+                if (_JvarTargetPersist == false)
+                {
+                    return null;
+                }
+                return _JvarTargetPersist.ToString();
+            }
+            set
+            {
+                _JvarTargetPersist = Boolean.Parse(value);
+            }
+        }
+        internal string _JvarTarget = "";
+        [XmlAttribute]
+        public string JvarTarget
+        {
+            get
+            {
+
+                return _JvarTarget;
+            }
+            set
+            {
+                _JvarTarget= value;
+            }
+        }
+        internal string _JvarExpression = "";
+        [XmlAttribute]
+        public string JvarExpression
+        {
+            get
+            {
+
+                return _JvarExpression;
+            }
+            set
+            {
+                _JvarExpression = value;
+            }
+        }
+        internal string _JvarListIndex = "";
+        [XmlAttribute]
+        public string JvarListIndex
+        {
+            get
+            {
+
+                return _JvarListIndex;
+            }
+            set
+            {
+                _JvarListIndex = value;
+            }
+        }
+        internal bool _JvarAppendAsDict { get; set; } = false;
+        [XmlAttribute]
+        public string JvarAppendAsDict
+        {
+            get
+            {
+                if (_JvarAppendAsDict == false)
+                {
+                    return null;
+                }
+                return _JvarAppendAsDict.ToString();
+            }
+            set
+            {
+                _JvarAppendAsDict = Boolean.Parse(value);
             }
         }
         #endregion 

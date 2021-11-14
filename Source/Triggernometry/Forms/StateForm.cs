@@ -43,15 +43,19 @@ namespace Triggernometry.Forms
                     RefreshTableVariables(plug.sessionvars, dgvTableVariables);
                     break;
                 case 3:
-                    RefreshMutexes();
+                    tbcJson.SelectedIndex = 0;
+                    RefreshJsonVariables(plug.sessionvars, dgvJsonVariables);
                     break;
                 case 4:
-                    RefreshImageAuras();
+                    RefreshMutexes();
                     break;
                 case 5:
-                    RefreshTextAuras();
+                    RefreshImageAuras();
                     break;
                 case 6:
+                    RefreshTextAuras();
+                    break;
+                case 7:
                     RefreshNamedCallbacks();
                     break;
             }
@@ -115,7 +119,22 @@ namespace Triggernometry.Forms
             }
             return null;
         }
-
+        private VariableJson OpenJsonVariableEditor(VariableJson v, bool isNew)
+        {
+            using (JsonVariableEditorForm vef = new JsonVariableEditorForm())
+            {
+                vef.VariableToEdit = (VariableJson)v.Duplicate();
+                vef.VariableName = "";
+                vef.IsNew = isNew;
+                if (vef.ShowDialog() == DialogResult.OK)
+                {
+                    vef.VariableToEdit.LastChanged = DateTime.Now;
+                    vef.VariableToEdit.LastChanger = I18n.Translate("internal/VariableForm/variableeditortag", "Variable editor");
+                    return vef.VariableToEdit;
+                }
+            }
+            return null;
+        }
         #endregion
 
         #region Scalar variables
@@ -221,7 +240,14 @@ namespace Triggernometry.Forms
             }
             Refresh();
         }
-
+        private void RefreshJsonVariables(VariableStore vs, DataGridView dgv)
+        {
+            lock (vs.Json)
+            {
+                dgv.RowCount = 1;
+            }
+            Refresh();
+        }
         private void AddScalarVariable(VariableStore vs, DataGridView dgv)
         {
             VariableScalar v = new VariableScalar();
@@ -272,6 +298,19 @@ namespace Triggernometry.Forms
                     vs.Scalar[varname2] = v;
                 }
                 RefreshScalarVariables(vs, dgv);
+            }
+        }
+        private void EditJsonVariable(VariableStore vs, DataGridView dgv)
+        {
+            
+            var v = (VariableJson)OpenJsonVariableEditor(vs.Json, false);
+            if (v != null)
+            {
+                lock (vs.Json)
+                {
+                    vs.Json.Value = v.Value;
+                }
+                RefreshJsonVariables(vs, dgv);
             }
         }
 
@@ -735,7 +774,6 @@ namespace Triggernometry.Forms
             }
             Refresh();
         }
-
         private void AddTableVariable(VariableStore vs, DataGridView dgv)
         {
             VariableTable v = new VariableTable();
@@ -843,7 +881,10 @@ namespace Triggernometry.Forms
         {
             EditTableVariable(plug.sessionvars, dgvTableVariables);
         }
-
+        private void btnJsonEdit_Click(object sender, EventArgs e)
+        {
+            EditJsonVariable(plug.sessionvars, dgvTableVariables);
+        }
         private void btnTableRemove_Click(object sender, EventArgs e)
         {
             RemoveTableVariable(plug.sessionvars, dgvTableVariables);
@@ -1229,6 +1270,10 @@ namespace Triggernometry.Forms
         }
         #endregion
 
+        private void btnPeJsonEdit_Click(object sender, EventArgs e)
+        {
+            EditJsonVariable(plug.cfg.PersistentVariables, dgvPeJsonVariables);
+        }
     }
 
 }

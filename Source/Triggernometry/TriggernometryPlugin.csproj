@@ -263,6 +263,12 @@
     <Compile Include="Forms\SubstitutionForm.Designer.cs">
       <DependentUpon>SubstitutionForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\JsonVariableEditorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\JsonVariableEditorForm.Designer.cs">
+      <DependentUpon>JsonVariableEditorForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\VariableEditorForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -356,6 +362,7 @@
       <DependentUpon>UserInterface.cs</DependentUpon>
     </Compile>
     <Compile Include="Variables\Variable.cs" />
+    <Compile Include="Variables\VariableJson.cs" />
     <Compile Include="Variables\VariableScalar.cs" />
     <Compile Include="Variables\VariableDictionary.cs" />
     <Compile Include="Forms\StateForm.cs">
@@ -508,6 +515,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SubstitutionForm.resx">
       <DependentUpon>SubstitutionForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\JsonVariableEditorForm.resx">
+      <DependentUpon>JsonVariableEditorForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\VariableEditorForm.resx">
       <DependentUpon>VariableEditorForm.cs</DependentUpon>

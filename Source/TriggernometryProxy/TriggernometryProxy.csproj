@@ -61,10 +61,11 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
-    <Reference Include="TriggernometryPlugin" Condition="'$(Configuration)' == 'Release'">
-      <HintPath>..\Triggernometry\bin\Release\TriggernometryPlugin.dll</HintPath>
-    </Reference>
     <Reference Include="TriggernometryPlugin">
+      <HintPath>..\Triggernometry\bin\Debug\TriggernometryPlugin.dll</HintPath>
+    </Reference>
+    <Reference Include="TriggernometryPlugin, Version=1.1.4.7, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Triggernometry\bin\Debug\TriggernometryPlugin.dll</HintPath>
     </Reference>
   </ItemGroup>

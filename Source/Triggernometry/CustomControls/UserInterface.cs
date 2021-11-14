@@ -52,7 +52,7 @@ namespace Triggernometry.CustomControls
         private delegate void ProgressDelegate(int progress, string state);
         internal delegate void VoidDelegate(object sender, EventArgs e);
         internal delegate bool BoolDelegate(object sender, EventArgs e);
-        internal delegate void ImportResultFromFormDelegate(Forms.ImportForm imf,TreeNode tn);
+        internal delegate void ImportResultFromFormDelegate(Forms.ImportForm imf,TreeNode tn,bool nameUnique);
 
         public static ImageIndices GetImageIndexForClosedFolder(Folder f)
         {
@@ -930,11 +930,11 @@ namespace Triggernometry.CustomControls
             }
         }
 
-        internal void ImportResultsFromForm(Forms.ImportForm imf,TreeNode tn = null)
+        internal void ImportResultsFromForm(Forms.ImportForm imf,TreeNode tn = null,bool nameUnique=false)
         {
             if (this.InvokeRequired == true)
             {
-                this.Invoke(new ImportResultFromFormDelegate(ImportResultsFromForm), imf,tn);
+                this.Invoke(new ImportResultFromFormDelegate(ImportResultsFromForm), imf,tn, nameUnique);
                 return;
             }
             if (tn == null)

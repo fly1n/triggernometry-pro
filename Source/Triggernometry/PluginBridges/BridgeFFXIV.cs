@@ -9,6 +9,8 @@ using System.Text;
 using System.Globalization;
 using System.Text.RegularExpressions;
 using Advanced_Combat_Tracker;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
 
 namespace Triggernometry.PluginBridges
 {
@@ -20,6 +22,59 @@ namespace Triggernometry.PluginBridges
         private static string ActPluginType = "FFXIV_ACT_Plugin";
         public static uint ActPluginVersion;
         private static IntPtr hProcessFFXIV;
+        private static Int64 JCombatantLastCheck = 0;
+        private static JArray _JCombatants;
+        public static JArray JCombatants
+        {
+            get
+            {
+                if (_JCombatants == null)
+                {
+                    UpdateState(true);
+
+                }
+                else {
+                    Int64 old = Interlocked.Read(ref JCombatantLastCheck);
+                    Int64 now = DateTime.Now.Ticks;
+                    if (((now - old) / TimeSpan.TicksPerMillisecond) < 100)
+                    {
+                        return _JCombatants;
+                    }
+                    else {
+                        UpdateState(true);
+                        return _JCombatants;
+                    }
+                }
+                return _JCombatants;
+            }
+        }
+        private static JArray _JPartyMembers;
+        public static JArray JPartyMembers
+        {
+            get
+            {
+                if (_JPartyMembers == null)
+                {
+                    UpdateState(true);
+
+                }
+                else
+                {
+                    Int64 old = Interlocked.Read(ref JCombatantLastCheck);
+                    Int64 now = DateTime.Now.Ticks;
+                    if (((now - old) / TimeSpan.TicksPerMillisecond) < 100)
+                    {
+                        return _JPartyMembers;
+                    }
+                    else
+                    {
+                        UpdateState(true);
+                        return _JPartyMembers;
+                    }
+                }
+                return _JPartyMembers;
+            }
+        }
         public static Dictionary<string, object> ActPlugins = new Dictionary<string, object>();
 
         private static VariableDictionary NullCombatant = new VariableDictionary();
@@ -495,8 +550,9 @@ namespace Triggernometry.PluginBridges
             }
         }
 
-        public static void UpdateState()
+        public static void UpdateState(bool JCombatantUpdate=false)
         {
+
             int phase = 0;
             try
             {
@@ -522,10 +578,13 @@ namespace Triggernometry.PluginBridges
                 lock (cd.Lock)
                 {
                     int ex = 0;
-                    List<VariableDictionary> newCombatants = new List<VariableDictionary>();
+                    List<VariableDictionary> newPartyMembers = new List<VariableDictionary>();
+                    List<VariableDictionary> allCombatants = new List<VariableDictionary>();
                     foreach (dynamic cmx in cd.Combatants)
                     {
+
                         int nump;
+                        
                         try
                         {
                             nump = (int)cmx.PartyType;
@@ -540,7 +599,6 @@ namespace Triggernometry.PluginBridges
                             int override_index = OverridePartyOrder.IndexOf(cmx.Name);
                             if (override_index >= 0)
                             {
-
                                 PopulateClumpFromCombatant(OverridePartyMembers[override_index], cmx, 1, nump == 2 ? 1 : 0, override_index + 1);
                                 continue;
                             }
@@ -558,19 +616,19 @@ namespace Triggernometry.PluginBridges
 
                             phase = 5;
                             VariableDictionary vd = new VariableDictionary();
-                            PopulateClumpFromCombatant(vd, cmx, 1, nump == 2 ? 1 : 0, newCombatants.Count+1);
-                            newCombatants.Add(vd);
+                            PopulateClumpFromCombatant(vd, cmx, 1, nump == 2 ? 1 : 0, newPartyMembers.Count+1);
+                            newPartyMembers.Add(vd);
                             if (cmx.ID == PlayerId)
                             {
                                 if (Myself == null) Myself = new VariableDictionary();
                                 Myself.CopyFrom(vd);
                             }
                             phase = 6;
-                            for (int i = 0; i < newCombatants.Count-1; i++)
+                            for (int i = 0; i < newPartyMembers.Count-1; i++)
                             {
                                 phase = 16;
                                 phase = 17;
-                                if (newCombatants[newCombatants.Count-1].CompareTo(newCombatants[i]) == 0)
+                                if (newPartyMembers[newPartyMembers.Count-1].CompareTo(newPartyMembers[i]) == 0)
                                 {
                                     phase = 18;
                                     //newCombatants.RemoveAt(newCombatants.Count - 1);
@@ -579,12 +637,25 @@ namespace Triggernometry.PluginBridges
                                 }
                             }
                             phase = 20;
-                            if (newCombatants.Count >= PartyMembers.Count)
+                            if (newPartyMembers.Count >= PartyMembers.Count)
                             {
                                 // full party found
                                 break;
                             }
-                        }   
+                        }
+                        else
+                        {
+                            if (JCombatantUpdate && (cmx != null))
+                            {
+                                VariableDictionary vd = new VariableDictionary();
+                                PopulateClumpFromCombatant(vd, cmx, 1, nump == 2 ? 1 : 0, -1);
+                                if (!vd.isEmpty())
+                                {
+                                    allCombatants.Add(vd);
+                                }
+
+                            }
+                        }  
                     }
                     //fill empty party members
                     /*
@@ -595,7 +666,7 @@ namespace Triggernometry.PluginBridges
                     }
                     */
                     phase = 7;
-                    NumPartyMembers = newCombatants.Count;
+                    NumPartyMembers = newPartyMembers.Count;
                     /*
                     if (PrevNumPartyMembers > NumPartyMembers)
                     {
@@ -610,24 +681,23 @@ namespace Triggernometry.PluginBridges
 
                     if (cfg.FfxivPartyOrdering == Configuration.FfxivPartyOrderingEnum.CustomSelfFirst)
                     {
-                        newCombatants.Sort(SortPlayersSelf);
+                        newPartyMembers.Sort(SortPlayersSelf);
                     }
                     else if (cfg.FfxivPartyOrdering == Configuration.FfxivPartyOrderingEnum.CustomFull)
                     {
-                        newCombatants.Sort(SortPlayers);
+                        newPartyMembers.Sort(SortPlayers);
                     }
-                    for (
-                        int i = 0; i < PartyMembers.Count; i++)
+                    for (int i = 0; i < PartyMembers.Count; i++)
                     {
-                        if (newCombatants.Count <= i)
+                        if (newPartyMembers.Count <= i)
                         {
-                            newCombatants.Add(new VariableDictionary());
+                            newPartyMembers.Add(new VariableDictionary());
                         }
                         if (OverridePartyOrder[i] != "")
                         {
-                            newCombatants.Insert(i, OverridePartyMembers[i]);
+                            newPartyMembers.Insert(i, OverridePartyMembers[i]);
                         }
-                        PartyMembers[i].CopyFrom(newCombatants[i]);
+                        PartyMembers[i].CopyFrom(newPartyMembers[i]);
                         
                     }
                     NumPartyMembers = 8;
@@ -636,6 +706,28 @@ namespace Triggernometry.PluginBridges
                     {
                         vc.SetValue("order", "" + ro);
                         ro++;
+                    }
+                    if (JCombatantUpdate == true)
+                    {
+                        //var k = newPartyMembers[0].
+                        JArray jparty = new JArray();
+                        JArray jentity = new JArray();
+                        var templist = newPartyMembers.GetRange(0, 8);
+                        foreach (var jc in templist)
+                        {
+                            if (jc.isEmpty()) continue;
+                            jparty.Add(jc.ToJToken());
+                        }
+                        _JPartyMembers = jparty;
+
+                        templist.AddRange(allCombatants);
+                        foreach (var jc in templist)
+                        {
+                            if (jc.isEmpty()) continue;
+                            jentity.Add(jc.ToJToken());
+                        }
+
+                        _JCombatants = jentity;
                     }
                 }
             }

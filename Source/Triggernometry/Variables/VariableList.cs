@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Xml.Serialization;
 
@@ -18,7 +19,16 @@ namespace Triggernometry.Variables
         {
             return String.Join(",", Values);
         }
-
+        public override JToken ToJToken()
+        {
+            var arr = new JArray();
+            foreach(var value in Values)
+            {
+                arr.Add(value.ToJToken());
+            }
+            var obj = JToken.FromObject(arr);
+            return obj;
+        }
         public override int CompareTo(object o)
         {
             if ((o is Variable) == false)

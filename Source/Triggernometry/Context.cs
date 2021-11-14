@@ -12,6 +12,7 @@ using System.Web.Script.Serialization;
 using Triggernometry.Variables;
 using System.Runtime.InteropServices;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Triggernometry
 {
@@ -28,6 +29,7 @@ namespace Triggernometry
         internal RealPlugin.ActionExecutionHook ttshook;
 
         internal static Regex rex = new Regex(@"\$\{(?<id>[^\}\{\$]*)\}");
+        internal static Regex rex2 = new Regex(@"\$\<(?<id>[^\>\<\$]*)\>");
         internal static Regex rexnum = new Regex(@"\$(?<id>[0-9]+)");
         internal static Regex rexnump = new Regex(@"\[(?<index>.+?)\]\.(?<prop>[a-zA-Z]+)");
         internal static Regex rexnumprp3 = new Regex(@"\[(?<index>.+?)\]\.(?<prop>[a-zA-Z]+)(\((?<arg1>[^,]+),(?<arg2>[^,]+),(?<arg3>[^\)]+)\))");
@@ -41,6 +43,7 @@ namespace Triggernometry
         internal static Regex rexlprp = new Regex(@"(?<name>[^\.]+)\.(?<prop>[a-zA-Z]+)(\((?<arg>[^\)]+)\)){0,1}");
         internal static Regex rexlprp3 = new Regex(@"(?<name>[^\.]+)\.(?<prop>[a-zA-Z]+)(\((?<arg1>[^,]+),(?<arg2>[^,]+),(?<arg3>[^\)]+)\))");
         internal static Regex rexfunc = new Regex(@"(?<name>[^\(]{1,})(\((?<arg>[^\)]+)\)){0,1}");
+        internal static Regex jvarfunc = new Regex(@"(?<name>[a-zA-Z]+)\((?<arg>.*)\)");
         internal Dictionary<string, string> namedgroups;
 		internal List<string> numgroups;
         internal DateTime triggered;
@@ -204,6 +207,7 @@ namespace Triggernometry
             while (true)
             {
                 m = rex.Match(newexpr);
+                if (m.Success == false) m = rex2.Match(newexpr);
                 if (m.Success == false)
                 {
                     m = rexnum.Match(newexpr);
@@ -278,6 +282,16 @@ namespace Triggernometry
                         else if (x == "_systemtimems")
                         {
                             val = ((long)(DateTime.Now - new DateTime(1970, 1, 1, 0, 0, 0)).TotalMilliseconds).ToString();
+                            found = true;
+                        }
+                        else if (x == "_folder")
+                        {
+                            val = this.trig.Parent.FullPath;
+                            found = true;
+                        }
+                        else if (x == "_fullpath")
+                        {
+                            val = this.trig.FullPath;
                             found = true;
                         }
                         else if (x == "_ffxivplayer")
@@ -673,6 +687,34 @@ namespace Triggernometry
                                 found = true;
                             }
                         }
+                        else if ((x.IndexOf("ejvar:") == 0) || (x.IndexOf("epjvar:") == 0))
+                        {
+                            Variables.VariableStore store;
+                            string varname;
+                            if (x.IndexOf("ejvar:") == 0)
+                            {
+                                store = plug.sessionvars;
+                                varname = x.Substring(6);
+                            }
+                            else
+                            {
+                                store = plug.cfg.PersistentVariables;
+                                varname = x.Substring(7);
+                            }
+                            lock (store.Scalar) // verified
+                            {
+                                var token = store.Json.Value.SelectToken(varname);
+                                if(token!=null)
+                                {
+                                    val = "1";
+                                }
+                                else
+                                {
+                                    val = "0";
+                                }
+                                found = true;
+                            }
+                        }
                         // check if list variable exists
                         else if ((x.IndexOf("elvar:") == 0) || (x.IndexOf("eplvar:") == 0))
                         {
@@ -750,6 +792,143 @@ namespace Triggernometry
                                 val = vs.Value;
                                 found = true;
                             }
+                        }
+                        else if ((x.IndexOf("jvar:") == 0) || (x.IndexOf("pjvar:") == 0) || (x.IndexOf("_jparty:") == 0) || (x.IndexOf("_jentity:") == 0))
+                        {
+                            Variables.VariableStore store = plug.sessionvars;
+                            JObject root=null;
+                            string varname;
+                            if (x.IndexOf("jvar:") == 0)
+                            {
+                                store = plug.sessionvars;
+                                root = store.Json.Value;
+                                varname = x.Substring(5);
+                            }
+                            else if (x.IndexOf("pjvar:") == 0)
+                            {
+                                store = plug.cfg.PersistentVariables;
+                                root = store.Json.Value;
+                                varname = x.Substring(6);
+                            }
+                            else if (x.IndexOf("_jparty:") == 0)
+                            {
+                                store = plug.sessionvars;
+                                root = store.Json.Value;
+                                varname = x.Substring(8);
+                                root["_ffxivparty"] = PluginBridges.BridgeFFXIV.JPartyMembers;
+                                
+                            }
+                            else if (x.IndexOf("_jentity:") == 0)
+                            {
+                                store = plug.sessionvars;
+                                root = store.Json.Value;
+                                varname = x.Substring(9);
+                                root["_ffxiventity"] = PluginBridges.BridgeFFXIV.JCombatants;
+                                
+                            }
+                            else {
+                                store = plug.sessionvars;
+                                root = store.Json.Value;
+                                varname = x.Substring(5);
+                            }
+                            string tokenname;
+                            string method = "";
+                            mx = jvarfunc.Match(varname);
+                            if (mx.Success == true)
+                            {
+                                tokenname = mx.Groups["arg"].Value;
+                                method = mx.Groups["name"].Value;
+                                
+                            }
+                            else {
+                                tokenname = varname;
+                            }
+
+                            lock (store.Json) // verified
+                            {
+                                var tokens = root.SelectTokens(tokenname);
+                                val = "";
+                                if (tokens.Count() >= 1)
+                                {
+                                    var count = 0;
+                                    foreach (var token in tokens)
+                                    {
+                                        switch (method)
+                                        {
+                                            case "size":
+                                                {
+                                                    if (token.Type == JTokenType.Array)
+                                                    {
+                                                        val +=(token as JArray).Count;
+                                                    }
+                                                    else if (token.Type == JTokenType.Object)
+                                                    {
+                                                        val += (token as JObject).Count;
+                                                    }
+                                                    else
+                                                    {
+                                                        val += token.Children().Count();
+                                                    }
+                                                }
+                                                break;
+                                            case "typeof":
+                                                {
+                                                    val += token.Type.ToString();
+                                                }
+                                                break;
+                                            case "pathof":
+                                                {
+                                                    val += token.Path;
+                                                }
+                                                break;
+                                            case "indexof":
+                                                {
+                                                    if (token.Parent != null)
+                                                    {
+                                                        if (token.Parent.Type == JTokenType.Array)
+                                                        {
+                                                            val += (token.Parent as JArray).IndexOf(token);
+                                                        }
+                                                        else if (token.Parent.Type == JTokenType.Object)
+                                                        {
+                                                            val += (token.Parent as JObject).PropertyValues().ToList().IndexOf(token);
+                                                        }
+                                                        else if (token.Parent.Type == JTokenType.Property)
+                                                        {
+                                                            val += (token.Parent.Parent as JObject).PropertyValues().ToList().IndexOf(token.Parent);
+                                                        }
+                                                        else
+                                                        {
+                                                            val += "0";
+                                                        }
+                                                    }
+                                                    else
+                                                    { 
+                                                        val += "0";
+                                                    }
+                                                }
+                                                break;
+                                            case "print":
+                                                {
+                                                    Regex r = new Regex(@"[\s\t]*?[\[\{\]\},]+");
+
+                                                    val += r.Replace(token.ToString().Replace("\"","").Replace(":","\t:"),"");
+                                                }
+                                                break;
+                                            default:
+                                                val += JsonConvert.SerializeObject(token);
+                                                break;
+                                        }
+                                        count++;
+                                        if (count < tokens.Count())
+                                        {
+                                            val += ",";
+                                        }
+                                    }
+                                }
+                                found = true;
+                            }
+
                         }
                         // retrieve list variable value
                         else if ((x.IndexOf("lvar:") == 0) || (x.IndexOf("plvar:") == 0))

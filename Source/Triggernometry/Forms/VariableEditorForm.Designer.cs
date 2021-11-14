@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(VariableEditorForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.btnCancel = new System.Windows.Forms.Button();
@@ -63,9 +63,10 @@
             // panel3
             // 
             this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel3.Location = new System.Drawing.Point(10, 406);
+            this.panel3.Location = new System.Drawing.Point(13, 468);
+            this.panel3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(664, 10);
+            this.panel3.Size = new System.Drawing.Size(886, 12);
             this.panel3.TabIndex = 16;
             // 
             // panel4
@@ -73,18 +74,20 @@
             this.panel4.Controls.Add(this.btnCancel);
             this.panel4.Controls.Add(this.btnOk);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel4.Location = new System.Drawing.Point(10, 416);
+            this.panel4.Location = new System.Drawing.Point(13, 480);
+            this.panel4.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(664, 35);
+            this.panel4.Size = new System.Drawing.Size(886, 40);
             this.panel4.TabIndex = 17;
             // 
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnCancel.Location = new System.Drawing.Point(514, 0);
+            this.btnCancel.Location = new System.Drawing.Point(686, 0);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(150, 35);
+            this.btnCancel.Size = new System.Drawing.Size(200, 40);
             this.btnCancel.TabIndex = 1;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
@@ -94,8 +97,9 @@
             this.btnOk.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btnOk.Dock = System.Windows.Forms.DockStyle.Left;
             this.btnOk.Location = new System.Drawing.Point(0, 0);
+            this.btnOk.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnOk.Name = "btnOk";
-            this.btnOk.Size = new System.Drawing.Size(150, 35);
+            this.btnOk.Size = new System.Drawing.Size(200, 40);
             this.btnOk.TabIndex = 0;
             this.btnOk.Text = "OK";
             this.btnOk.UseVisualStyleBackColor = true;
@@ -103,13 +107,14 @@
             // tlsOptionsList
             // 
             this.tlsOptionsList.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.tlsOptionsList.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.tlsOptionsList.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnItemAdd,
             this.btnItemInsert,
             this.btnItemRemove});
-            this.tlsOptionsList.Location = new System.Drawing.Point(10, 104);
+            this.tlsOptionsList.Location = new System.Drawing.Point(13, 124);
             this.tlsOptionsList.Name = "tlsOptionsList";
-            this.tlsOptionsList.Size = new System.Drawing.Size(664, 25);
+            this.tlsOptionsList.Size = new System.Drawing.Size(886, 27);
             this.tlsOptionsList.TabIndex = 18;
             // 
             // btnItemAdd
@@ -117,7 +122,7 @@
             this.btnItemAdd.Image = ((System.Drawing.Image)(resources.GetObject("btnItemAdd.Image")));
             this.btnItemAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnItemAdd.Name = "btnItemAdd";
-            this.btnItemAdd.Size = new System.Drawing.Size(76, 22);
+            this.btnItemAdd.Size = new System.Drawing.Size(101, 24);
             this.btnItemAdd.Text = "Add item";
             this.btnItemAdd.Click += new System.EventHandler(this.btnItemAdd_Click);
             // 
@@ -126,7 +131,7 @@
             this.btnItemInsert.Image = ((System.Drawing.Image)(resources.GetObject("btnItemInsert.Image")));
             this.btnItemInsert.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnItemInsert.Name = "btnItemInsert";
-            this.btnItemInsert.Size = new System.Drawing.Size(83, 22);
+            this.btnItemInsert.Size = new System.Drawing.Size(111, 24);
             this.btnItemInsert.Text = "Insert item";
             this.btnItemInsert.Click += new System.EventHandler(this.btnItemInsert_Click);
             // 
@@ -135,7 +140,7 @@
             this.btnItemRemove.Image = ((System.Drawing.Image)(resources.GetObject("btnItemRemove.Image")));
             this.btnItemRemove.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnItemRemove.Name = "btnItemRemove";
-            this.btnItemRemove.Size = new System.Drawing.Size(97, 22);
+            this.btnItemRemove.Size = new System.Drawing.Size(130, 24);
             this.btnItemRemove.Text = "Remove item";
             this.btnItemRemove.Click += new System.EventHandler(this.btnItemRemove_Click);
             // 
@@ -144,19 +149,21 @@
             this.dgvVariableData.AllowUserToAddRows = false;
             this.dgvVariableData.AllowUserToDeleteRows = false;
             this.dgvVariableData.AllowUserToResizeRows = false;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.dgvVariableData.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.dgvVariableData.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvVariableData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvVariableData.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvVariableData.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
-            this.dgvVariableData.Location = new System.Drawing.Point(10, 129);
+            this.dgvVariableData.Location = new System.Drawing.Point(13, 151);
+            this.dgvVariableData.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.dgvVariableData.MultiSelect = false;
             this.dgvVariableData.Name = "dgvVariableData";
+            this.dgvVariableData.RowHeadersWidth = 51;
             this.dgvVariableData.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.dgvVariableData.ShowCellErrors = false;
             this.dgvVariableData.ShowEditingIcon = false;
             this.dgvVariableData.ShowRowErrors = false;
-            this.dgvVariableData.Size = new System.Drawing.Size(664, 277);
+            this.dgvVariableData.Size = new System.Drawing.Size(886, 317);
             this.dgvVariableData.TabIndex = 19;
             this.dgvVariableData.VirtualMode = true;
             this.dgvVariableData.CellValueNeeded += new System.Windows.Forms.DataGridViewCellValueEventHandler(this.dgvVariableData_CellValueNeeded);
@@ -168,10 +175,11 @@
             this.grpGeneral.AutoSize = true;
             this.grpGeneral.Controls.Add(this.tableLayoutPanel1);
             this.grpGeneral.Dock = System.Windows.Forms.DockStyle.Top;
-            this.grpGeneral.Location = new System.Drawing.Point(10, 10);
+            this.grpGeneral.Location = new System.Drawing.Point(13, 12);
+            this.grpGeneral.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.grpGeneral.Name = "grpGeneral";
-            this.grpGeneral.Padding = new System.Windows.Forms.Padding(10);
-            this.grpGeneral.Size = new System.Drawing.Size(664, 59);
+            this.grpGeneral.Padding = new System.Windows.Forms.Padding(13, 12, 13, 12);
+            this.grpGeneral.Size = new System.Drawing.Size(886, 73);
             this.grpGeneral.TabIndex = 20;
             this.grpGeneral.TabStop = false;
             this.grpGeneral.Text = " General settings ";
@@ -185,15 +193,16 @@
             this.tableLayoutPanel1.Controls.Add(this.lblVariableName, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.txtVariableName, 1, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(10, 23);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(13, 30);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(644, 26);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 31F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 31F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 31F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 31F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(860, 31);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // lblVariableName
@@ -201,9 +210,10 @@
             this.lblVariableName.AutoEllipsis = true;
             this.lblVariableName.AutoSize = true;
             this.lblVariableName.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblVariableName.Location = new System.Drawing.Point(3, 0);
+            this.lblVariableName.Location = new System.Drawing.Point(4, 0);
+            this.lblVariableName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblVariableName.Name = "lblVariableName";
-            this.lblVariableName.Size = new System.Drawing.Size(74, 26);
+            this.lblVariableName.Size = new System.Drawing.Size(111, 31);
             this.lblVariableName.TabIndex = 0;
             this.lblVariableName.Text = "Variable name";
             this.lblVariableName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -211,22 +221,25 @@
             // txtVariableName
             // 
             this.txtVariableName.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtVariableName.Location = new System.Drawing.Point(83, 3);
+            this.txtVariableName.Location = new System.Drawing.Point(123, 3);
+            this.txtVariableName.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.txtVariableName.Name = "txtVariableName";
-            this.txtVariableName.Size = new System.Drawing.Size(558, 20);
+            this.txtVariableName.Size = new System.Drawing.Size(733, 25);
             this.txtVariableName.TabIndex = 1;
             // 
             // panel10
             // 
             this.panel10.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel10.Location = new System.Drawing.Point(10, 69);
+            this.panel10.Location = new System.Drawing.Point(13, 85);
+            this.panel10.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.panel10.Name = "panel10";
-            this.panel10.Size = new System.Drawing.Size(664, 10);
+            this.panel10.Size = new System.Drawing.Size(886, 12);
             this.panel10.TabIndex = 27;
             // 
             // tlsOptionsTable
             // 
             this.tlsOptionsTable.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.tlsOptionsTable.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.tlsOptionsTable.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnColumnAdd,
             this.btnColumnInsert,
@@ -235,9 +248,9 @@
             this.btnRowAdd,
             this.btnRowInsert,
             this.btnRowRemove});
-            this.tlsOptionsTable.Location = new System.Drawing.Point(10, 79);
+            this.tlsOptionsTable.Location = new System.Drawing.Point(13, 97);
             this.tlsOptionsTable.Name = "tlsOptionsTable";
-            this.tlsOptionsTable.Size = new System.Drawing.Size(664, 25);
+            this.tlsOptionsTable.Size = new System.Drawing.Size(886, 27);
             this.tlsOptionsTable.TabIndex = 28;
             // 
             // btnColumnAdd
@@ -245,7 +258,7 @@
             this.btnColumnAdd.Image = ((System.Drawing.Image)(resources.GetObject("btnColumnAdd.Image")));
             this.btnColumnAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnColumnAdd.Name = "btnColumnAdd";
-            this.btnColumnAdd.Size = new System.Drawing.Size(93, 22);
+            this.btnColumnAdd.Size = new System.Drawing.Size(122, 24);
             this.btnColumnAdd.Text = "Add column";
             this.btnColumnAdd.Click += new System.EventHandler(this.btnColumnAdd_Click);
             // 
@@ -254,7 +267,7 @@
             this.btnColumnInsert.Image = ((System.Drawing.Image)(resources.GetObject("btnColumnInsert.Image")));
             this.btnColumnInsert.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnColumnInsert.Name = "btnColumnInsert";
-            this.btnColumnInsert.Size = new System.Drawing.Size(100, 22);
+            this.btnColumnInsert.Size = new System.Drawing.Size(132, 24);
             this.btnColumnInsert.Text = "Insert column";
             this.btnColumnInsert.Click += new System.EventHandler(this.btnColumnInsert_Click);
             // 
@@ -263,21 +276,21 @@
             this.btnColumnRemove.Image = ((System.Drawing.Image)(resources.GetObject("btnColumnRemove.Image")));
             this.btnColumnRemove.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnColumnRemove.Name = "btnColumnRemove";
-            this.btnColumnRemove.Size = new System.Drawing.Size(114, 22);
+            this.btnColumnRemove.Size = new System.Drawing.Size(151, 24);
             this.btnColumnRemove.Text = "Remove column";
             this.btnColumnRemove.Click += new System.EventHandler(this.btnColumnRemove_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 27);
             // 
             // btnRowAdd
             // 
             this.btnRowAdd.Image = ((System.Drawing.Image)(resources.GetObject("btnRowAdd.Image")));
             this.btnRowAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnRowAdd.Name = "btnRowAdd";
-            this.btnRowAdd.Size = new System.Drawing.Size(72, 22);
+            this.btnRowAdd.Size = new System.Drawing.Size(96, 24);
             this.btnRowAdd.Text = "Add row";
             this.btnRowAdd.Click += new System.EventHandler(this.btnRowAdd_Click);
             // 
@@ -286,7 +299,7 @@
             this.btnRowInsert.Image = ((System.Drawing.Image)(resources.GetObject("btnRowInsert.Image")));
             this.btnRowInsert.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnRowInsert.Name = "btnRowInsert";
-            this.btnRowInsert.Size = new System.Drawing.Size(79, 22);
+            this.btnRowInsert.Size = new System.Drawing.Size(106, 24);
             this.btnRowInsert.Text = "Insert row";
             this.btnRowInsert.Click += new System.EventHandler(this.btnRowInsert_Click);
             // 
@@ -295,17 +308,17 @@
             this.btnRowRemove.Image = ((System.Drawing.Image)(resources.GetObject("btnRowRemove.Image")));
             this.btnRowRemove.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnRowRemove.Name = "btnRowRemove";
-            this.btnRowRemove.Size = new System.Drawing.Size(93, 22);
+            this.btnRowRemove.Size = new System.Drawing.Size(125, 24);
             this.btnRowRemove.Text = "Remove row";
             this.btnRowRemove.Click += new System.EventHandler(this.btnRowRemove_Click);
             // 
             // VariableEditorForm
             // 
             this.AcceptButton = this.btnOk;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(684, 461);
+            this.ClientSize = new System.Drawing.Size(912, 532);
             this.Controls.Add(this.dgvVariableData);
             this.Controls.Add(this.tlsOptionsList);
             this.Controls.Add(this.panel3);
@@ -314,9 +327,10 @@
             this.Controls.Add(this.panel10);
             this.Controls.Add(this.grpGeneral);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
-            this.MinimumSize = new System.Drawing.Size(500, 400);
+            this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.MinimumSize = new System.Drawing.Size(661, 454);
             this.Name = "VariableEditorForm";
-            this.Padding = new System.Windows.Forms.Padding(10);
+            this.Padding = new System.Windows.Forms.Padding(13, 12, 13, 12);
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Variable editor";

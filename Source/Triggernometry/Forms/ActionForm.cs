@@ -295,6 +295,16 @@ namespace Triggernometry.Forms
                 expPartyOrder.Expression = "";
                 expDevActionKey.Expression = "";
                 expDevActionValue.Expression = "";
+                cbxJvarOp.SelectedIndex = 0;
+                cbxJvarExpressionType.SelectedIndex = 0;
+                cbxJvarSortMethod.SelectedIndex = 0;
+                expJvarSource.Expression = "";
+                expJvarTarget.Expression = "";
+                expJvarListIndex.Expression = "";
+                expJvarExpression.Expression = "";
+                prsJvarSource.IsPersistent = false;
+                prsJvarTarget.IsPersistent = false;
+
                 FontInfoContainer fic = new FontInfoContainer();
                 fic.Name = Font.Name;
                 fic.Size = Font.SizeInPoints;
@@ -396,8 +406,18 @@ namespace Triggernometry.Forms
                 expSchedulingActionIndex.Expression = a._SchedulingActionIndex;
                 cbxSchedulingActionOption.SelectedIndex = (int)a._SchedulingActionOp;
                 chkDontExcute.Checked = a._DontExecute;
-                
-                
+
+                cbxJvarOp.SelectedIndex = (int)a._JvarOp;
+                cbxJvarExpressionType.SelectedIndex = (int)a._JvarExpressionType;
+                cbxJvarSortMethod.SelectedIndex = (int)a._JvarSortMethod;
+                expJvarSource.Expression = a._JvarSource;
+                expJvarTarget.Expression = a._JvarTarget;
+                expJvarListIndex.Expression = a._JvarListIndex;
+                expJvarExpression.Expression = a._JvarExpression;
+                prsJvarSource.IsPersistent = a._JvarSourcePersist;
+                prsJvarTarget.IsPersistent = a._JvarTargetPersist;
+                chkJvarAppendAsDict.Checked = a._JvarAppendAsDict;
+
                 if ((a._TriggerForceType & Action.TriggerForceTypeEnum.SkipRegexp) != 0)
                 {
                     cbxFiringOptions.SetItemChecked(0, true);
@@ -637,7 +657,7 @@ namespace Triggernometry.Forms
             a._VariableName = expVariableName.Expression;
             a._VariableOp = (Action.VariableOpEnum)cbxVariableOp.SelectedIndex;
             a._ListVariableExpression = expLvarValue.Expression;
-            a._ListVariableExpressionType = (Action.ListVariableExpTypeEnum)cbxLvarExpType.SelectedIndex;
+            a._ListVariableExpressionType = (Action.ExpressionTypeEnum)cbxLvarExpType.SelectedIndex;
             a._ListVariableIndex = expLvarIndex.Expression;
             a._ListVariableName = expLvarName.Expression;
             a._ListVariableOp = (Action.ListVariableOpEnum)cbxLvarOperation.SelectedIndex;
@@ -651,6 +671,17 @@ namespace Triggernometry.Forms
             a._SchedulingActionIndex = expSchedulingActionIndex.Expression;
             a._SchedulingActionOp=(Action.SchedulingActionOpEnum)cbxSchedulingActionOption.SelectedIndex;
             a._DontExecute = chkDontExcute.Checked ;
+
+            a._JvarExpressionType = (Action.ExpressionTypeEnum)cbxJvarExpressionType.SelectedIndex;
+            a._JvarExpression = expJvarExpression.Expression;
+            a._JvarOp = (Action.JvarOpEnum)cbxJvarOp.SelectedIndex;
+            a._JvarSortMethod = (Action.JvarSortMethodEnum)cbxJvarSortMethod.SelectedIndex;
+            a._JvarListIndex = expJvarListIndex.Expression;
+            a._JvarSource = expJvarSource.Expression;
+            a._JvarTarget = expJvarTarget.Expression;
+            a._JvarSourcePersist = prsJvarSource.IsPersistent;
+            a._JvarTargetPersist = prsJvarTarget.IsPersistent;
+            a._JvarAppendAsDict = chkJvarAppendAsDict.Checked;
 
             TreeNode tn = trvTrigger.SelectedNode;
             if (tn != null)
@@ -1965,6 +1996,61 @@ namespace Triggernometry.Forms
             {
                 btnOk_Click(sender, e);
             }
+        }
+
+        private void cbxJvarOp_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (cbxJvarOp.SelectedIndex)
+            {
+                case 0://remove
+                    {
+                        expJvarSource.Enabled = true;
+                        expJvarTarget.Enabled = false;
+                        expJvarExpression.Enabled = false;
+                        expJvarListIndex.Enabled = false;
+                        cbxJvarSortMethod.Enabled = false;
+                    }
+                    break;
+                case 1://push
+                    {
+                        expJvarSource.Enabled = true;
+                        expJvarTarget.Enabled = false;
+                        expJvarExpression.Enabled = true;
+                        expJvarListIndex.Enabled = false;
+                        cbxJvarSortMethod.Enabled = false;
+                    }
+                    break;
+                case 2://set
+                    {
+                        expJvarSource.Enabled = true;
+                        expJvarTarget.Enabled = false;
+                        expJvarExpression.Enabled = true;
+                        expJvarListIndex.Enabled = false;
+                        cbxJvarSortMethod.Enabled = false;
+                    }
+                    break;
+                case 3://insert
+                    {
+                        expJvarSource.Enabled = true;
+                        expJvarTarget.Enabled = false;
+                        expJvarExpression.Enabled = true;
+                        expJvarListIndex.Enabled = true;
+                        cbxJvarSortMethod.Enabled = false;
+                    }
+                    break;
+                case 4://sort
+                    {
+                        expJvarSource.Enabled = true;
+                        expJvarTarget.Enabled = false;
+                        expJvarExpression.Enabled = true;
+                        expJvarListIndex.Enabled = true;
+                        cbxJvarSortMethod.Enabled = true;
+                    }
+                    break;
+            }
+            cbxJvarExpressionType.Enabled = expJvarExpression.Enabled;
+            prsJvarSource.Enabled = expJvarSource.Enabled;
+            prsJvarTarget.Enabled = expJvarTarget.Enabled;
         }
     }
 

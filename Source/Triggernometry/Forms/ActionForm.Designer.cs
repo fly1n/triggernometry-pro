@@ -357,6 +357,24 @@
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.expDevActionKey = new Triggernometry.CustomControls.ExpressionTextBox();
+            this.tabJsonVariable = new System.Windows.Forms.TabPage();
+            this.tableLayoutPanel29 = new System.Windows.Forms.TableLayoutPanel();
+            this.label22 = new System.Windows.Forms.Label();
+            this.cbxJvarSortMethod = new System.Windows.Forms.ComboBox();
+            this.prsJvarTarget = new Triggernometry.CustomControls.PersistenceSwitch();
+            this.prsJvarSource = new Triggernometry.CustomControls.PersistenceSwitch();
+            this.cbxJvarExpressionType = new System.Windows.Forms.ComboBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.expJvarTarget = new Triggernometry.CustomControls.ExpressionTextBox();
+            this.label17 = new System.Windows.Forms.Label();
+            this.expJvarListIndex = new Triggernometry.CustomControls.ExpressionTextBox();
+            this.label18 = new System.Windows.Forms.Label();
+            this.expJvarExpression = new Triggernometry.CustomControls.ExpressionTextBox();
+            this.label19 = new System.Windows.Forms.Label();
+            this.expJvarSource = new Triggernometry.CustomControls.ExpressionTextBox();
+            this.label20 = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
+            this.cbxJvarOp = new System.Windows.Forms.ComboBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel6 = new System.Windows.Forms.Panel();
@@ -402,6 +420,7 @@
             this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.expressionTextBox1 = new Triggernometry.CustomControls.ExpressionTextBox();
             this.expressionTextBox2 = new Triggernometry.CustomControls.ExpressionTextBox();
+            this.chkJvarAppendAsDict = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.grpGeneralSettings.SuspendLayout();
             this.tbcActionSettings.SuspendLayout();
@@ -462,6 +481,8 @@
             this.tableLayoutPanel26.SuspendLayout();
             this.tabDeveloperAction.SuspendLayout();
             this.tableLayoutPanel28.SuspendLayout();
+            this.tabJsonVariable.SuspendLayout();
+            this.tableLayoutPanel29.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel6.SuspendLayout();
             this.tbcAction.SuspendLayout();
@@ -544,7 +565,8 @@
             "Named callback operation",
             "Mouse operation",
             "Override party order",
-            "Developer action"});
+            "Developer action",
+            "Json variable operation"});
             this.cbxActionType.Location = new System.Drawing.Point(107, 2);
             this.cbxActionType.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.cbxActionType.Name = "cbxActionType";
@@ -605,6 +627,7 @@
             this.tbcActionSettings.Controls.Add(this.tabMouse);
             this.tbcActionSettings.Controls.Add(this.tabPartyOrder);
             this.tbcActionSettings.Controls.Add(this.tabDeveloperAction);
+            this.tbcActionSettings.Controls.Add(this.tabJsonVariable);
             this.tbcActionSettings.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tbcActionSettings.Location = new System.Drawing.Point(4, 2);
             this.tbcActionSettings.Margin = new System.Windows.Forms.Padding(0);
@@ -5330,7 +5353,7 @@
             this.tabDeveloperAction.Name = "tabDeveloperAction";
             this.tabDeveloperAction.Size = new System.Drawing.Size(729, 309);
             this.tabDeveloperAction.TabIndex = 26;
-            this.tabDeveloperAction.Text = "DeveloperAction";
+            this.tabDeveloperAction.Text = "Developer action";
             this.tabDeveloperAction.UseVisualStyleBackColor = true;
             // 
             // tableLayoutPanel28
@@ -5404,6 +5427,279 @@
             this.expDevActionKey.ShowHint = false;
             this.expDevActionKey.Size = new System.Drawing.Size(666, 25);
             this.expDevActionKey.TabIndex = 14;
+            // 
+            // tabJsonVariable
+            // 
+            this.tabJsonVariable.Controls.Add(this.tableLayoutPanel29);
+            this.tabJsonVariable.Location = new System.Drawing.Point(4, 28);
+            this.tabJsonVariable.Name = "tabJsonVariable";
+            this.tabJsonVariable.Size = new System.Drawing.Size(729, 309);
+            this.tabJsonVariable.TabIndex = 27;
+            this.tabJsonVariable.Text = "JsonVariable";
+            this.tabJsonVariable.UseVisualStyleBackColor = true;
+            // 
+            // tableLayoutPanel29
+            // 
+            this.tableLayoutPanel29.AutoSize = true;
+            this.tableLayoutPanel29.ColumnCount = 3;
+            this.tableLayoutPanel29.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel29.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel29.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.tableLayoutPanel29.Controls.Add(this.chkJvarAppendAsDict, 0, 7);
+            this.tableLayoutPanel29.Controls.Add(this.label22, 0, 6);
+            this.tableLayoutPanel29.Controls.Add(this.cbxJvarSortMethod, 1, 6);
+            this.tableLayoutPanel29.Controls.Add(this.prsJvarTarget, 2, 5);
+            this.tableLayoutPanel29.Controls.Add(this.prsJvarSource, 2, 1);
+            this.tableLayoutPanel29.Controls.Add(this.cbxJvarExpressionType, 1, 2);
+            this.tableLayoutPanel29.Controls.Add(this.label16, 0, 2);
+            this.tableLayoutPanel29.Controls.Add(this.expJvarTarget, 1, 5);
+            this.tableLayoutPanel29.Controls.Add(this.label17, 0, 5);
+            this.tableLayoutPanel29.Controls.Add(this.expJvarListIndex, 1, 4);
+            this.tableLayoutPanel29.Controls.Add(this.label18, 0, 4);
+            this.tableLayoutPanel29.Controls.Add(this.expJvarExpression, 1, 3);
+            this.tableLayoutPanel29.Controls.Add(this.label19, 0, 3);
+            this.tableLayoutPanel29.Controls.Add(this.expJvarSource, 1, 1);
+            this.tableLayoutPanel29.Controls.Add(this.label20, 0, 1);
+            this.tableLayoutPanel29.Controls.Add(this.label21, 0, 0);
+            this.tableLayoutPanel29.Controls.Add(this.cbxJvarOp, 1, 0);
+            this.tableLayoutPanel29.Dock = System.Windows.Forms.DockStyle.Top;
+            this.tableLayoutPanel29.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel29.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.tableLayoutPanel29.Name = "tableLayoutPanel29";
+            this.tableLayoutPanel29.RowCount = 8;
+            this.tableLayoutPanel29.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel29.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel29.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel29.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel29.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel29.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel29.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel29.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel29.Size = new System.Drawing.Size(729, 220);
+            this.tableLayoutPanel29.TabIndex = 8;
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label22.Location = new System.Drawing.Point(4, 170);
+            this.label22.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(159, 27);
+            this.label22.TabIndex = 33;
+            this.label22.Text = "Sort Method";
+            this.label22.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // cbxJvarSortMethod
+            // 
+            this.tableLayoutPanel29.SetColumnSpan(this.cbxJvarSortMethod, 2);
+            this.cbxJvarSortMethod.Dock = System.Windows.Forms.DockStyle.Top;
+            this.cbxJvarSortMethod.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbxJvarSortMethod.FormattingEnabled = true;
+            this.cbxJvarSortMethod.Items.AddRange(new object[] {
+            "alphabetically ascending of expression",
+            "alphabetically descending of expression",
+            "numeric ascending of expression",
+            "numeric descending of expression",
+            "FFXIV party job ascending of expression",
+            "FFXIV party job descending of expression"});
+            this.cbxJvarSortMethod.Location = new System.Drawing.Point(171, 172);
+            this.cbxJvarSortMethod.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.cbxJvarSortMethod.Name = "cbxJvarSortMethod";
+            this.cbxJvarSortMethod.Size = new System.Drawing.Size(554, 23);
+            this.cbxJvarSortMethod.TabIndex = 32;
+            // 
+            // prsJvarTarget
+            // 
+            this.prsJvarTarget.AutoSize = true;
+            this.prsJvarTarget.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("prsJvarTarget.BackgroundImage")));
+            this.prsJvarTarget.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.prsJvarTarget.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.prsJvarTarget.IsPersistent = false;
+            this.prsJvarTarget.Location = new System.Drawing.Point(703, 144);
+            this.prsJvarTarget.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.prsJvarTarget.Name = "prsJvarTarget";
+            this.prsJvarTarget.Size = new System.Drawing.Size(22, 23);
+            this.prsJvarTarget.TabIndex = 31;
+            this.prsJvarTarget.Tag = ((object)(resources.GetObject("prsJvarTarget.Tag")));
+            // 
+            // prsJvarSource
+            // 
+            this.prsJvarSource.AutoSize = true;
+            this.prsJvarSource.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("prsJvarSource.BackgroundImage")));
+            this.prsJvarSource.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.prsJvarSource.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.prsJvarSource.IsPersistent = false;
+            this.prsJvarSource.Location = new System.Drawing.Point(703, 30);
+            this.prsJvarSource.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.prsJvarSource.Name = "prsJvarSource";
+            this.prsJvarSource.Size = new System.Drawing.Size(22, 23);
+            this.prsJvarSource.TabIndex = 30;
+            this.prsJvarSource.Tag = ((object)(resources.GetObject("prsJvarSource.Tag")));
+            // 
+            // cbxJvarExpressionType
+            // 
+            this.tableLayoutPanel29.SetColumnSpan(this.cbxJvarExpressionType, 2);
+            this.cbxJvarExpressionType.Dock = System.Windows.Forms.DockStyle.Top;
+            this.cbxJvarExpressionType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbxJvarExpressionType.FormattingEnabled = true;
+            this.cbxJvarExpressionType.Items.AddRange(new object[] {
+            "String",
+            "Numeric"});
+            this.cbxJvarExpressionType.Location = new System.Drawing.Point(171, 58);
+            this.cbxJvarExpressionType.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.cbxJvarExpressionType.Name = "cbxJvarExpressionType";
+            this.cbxJvarExpressionType.Size = new System.Drawing.Size(554, 23);
+            this.cbxJvarExpressionType.TabIndex = 29;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label16.Location = new System.Drawing.Point(4, 56);
+            this.label16.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(159, 27);
+            this.label16.TabIndex = 28;
+            this.label16.Text = "Expression type";
+            this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // expJvarTarget
+            // 
+            this.expJvarTarget.AutoSize = true;
+            this.expJvarTarget.Dock = System.Windows.Forms.DockStyle.Top;
+            this.expJvarTarget.Expression = "";
+            this.expJvarTarget.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
+            this.expJvarTarget.Location = new System.Drawing.Point(171, 143);
+            this.expJvarTarget.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.expJvarTarget.Name = "expJvarTarget";
+            this.expJvarTarget.ReadOnly = false;
+            this.expJvarTarget.ShowHint = false;
+            this.expJvarTarget.Size = new System.Drawing.Size(524, 25);
+            this.expJvarTarget.TabIndex = 27;
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label17.Location = new System.Drawing.Point(4, 141);
+            this.label17.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(159, 29);
+            this.label17.TabIndex = 26;
+            this.label17.Text = "Target element name";
+            this.label17.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // expJvarListIndex
+            // 
+            this.expJvarListIndex.AutoSize = true;
+            this.tableLayoutPanel29.SetColumnSpan(this.expJvarListIndex, 2);
+            this.expJvarListIndex.Dock = System.Windows.Forms.DockStyle.Top;
+            this.expJvarListIndex.Expression = "";
+            this.expJvarListIndex.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.Numeric;
+            this.expJvarListIndex.Location = new System.Drawing.Point(171, 114);
+            this.expJvarListIndex.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.expJvarListIndex.Name = "expJvarListIndex";
+            this.expJvarListIndex.ReadOnly = false;
+            this.expJvarListIndex.ShowHint = false;
+            this.expJvarListIndex.Size = new System.Drawing.Size(554, 25);
+            this.expJvarListIndex.TabIndex = 25;
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label18.Location = new System.Drawing.Point(4, 112);
+            this.label18.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(159, 29);
+            this.label18.TabIndex = 24;
+            this.label18.Text = "List index number";
+            this.label18.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // expJvarExpression
+            // 
+            this.expJvarExpression.AutoSize = true;
+            this.tableLayoutPanel29.SetColumnSpan(this.expJvarExpression, 2);
+            this.expJvarExpression.Dock = System.Windows.Forms.DockStyle.Top;
+            this.expJvarExpression.Expression = "";
+            this.expJvarExpression.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
+            this.expJvarExpression.Location = new System.Drawing.Point(171, 85);
+            this.expJvarExpression.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.expJvarExpression.Name = "expJvarExpression";
+            this.expJvarExpression.ReadOnly = false;
+            this.expJvarExpression.ShowHint = false;
+            this.expJvarExpression.Size = new System.Drawing.Size(554, 25);
+            this.expJvarExpression.TabIndex = 23;
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label19.Location = new System.Drawing.Point(4, 83);
+            this.label19.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(159, 29);
+            this.label19.TabIndex = 22;
+            this.label19.Text = "Expression";
+            this.label19.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // expJvarSource
+            // 
+            this.expJvarSource.AutoSize = true;
+            this.expJvarSource.Dock = System.Windows.Forms.DockStyle.Top;
+            this.expJvarSource.Expression = "";
+            this.expJvarSource.ExpressionType = Triggernometry.CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
+            this.expJvarSource.Location = new System.Drawing.Point(171, 29);
+            this.expJvarSource.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.expJvarSource.Name = "expJvarSource";
+            this.expJvarSource.ReadOnly = false;
+            this.expJvarSource.ShowHint = false;
+            this.expJvarSource.Size = new System.Drawing.Size(524, 25);
+            this.expJvarSource.TabIndex = 16;
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label20.Location = new System.Drawing.Point(4, 27);
+            this.label20.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(159, 29);
+            this.label20.TabIndex = 15;
+            this.label20.Text = "Source element name";
+            this.label20.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label21.Location = new System.Drawing.Point(4, 0);
+            this.label21.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(159, 27);
+            this.label21.TabIndex = 7;
+            this.label21.Text = "Operation type";
+            this.label21.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // cbxJvarOp
+            // 
+            this.tableLayoutPanel29.SetColumnSpan(this.cbxJvarOp, 2);
+            this.cbxJvarOp.Dock = System.Windows.Forms.DockStyle.Top;
+            this.cbxJvarOp.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbxJvarOp.FormattingEnabled = true;
+            this.cbxJvarOp.Items.AddRange(new object[] {
+            "Remove the given element",
+            "Push value into the given element",
+            "Set value of the given element",
+            "Insert value to the given index of the given element",
+            "Sort json list in an given order"});
+            this.cbxJvarOp.Location = new System.Drawing.Point(171, 2);
+            this.cbxJvarOp.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.cbxJvarOp.Name = "cbxJvarOp";
+            this.cbxJvarOp.Size = new System.Drawing.Size(554, 23);
+            this.cbxJvarOp.TabIndex = 21;
+            this.cbxJvarOp.SelectedIndexChanged += new System.EventHandler(this.cbxJvarOp_SelectedIndexChanged);
             // 
             // panel2
             // 
@@ -5974,6 +6270,21 @@
             this.expressionTextBox2.Size = new System.Drawing.Size(474, 20);
             this.expressionTextBox2.TabIndex = 14;
             // 
+            // chkJvarAppendAsDict
+            // 
+            this.chkJvarAppendAsDict.AutoSize = true;
+            this.chkJvarAppendAsDict.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.tableLayoutPanel29.SetColumnSpan(this.chkJvarAppendAsDict, 3);
+            this.chkJvarAppendAsDict.Dock = System.Windows.Forms.DockStyle.Top;
+            this.chkJvarAppendAsDict.Location = new System.Drawing.Point(0, 197);
+            this.chkJvarAppendAsDict.Margin = new System.Windows.Forms.Padding(0);
+            this.chkJvarAppendAsDict.Name = "chkJvarAppendAsDict";
+            this.chkJvarAppendAsDict.Padding = new System.Windows.Forms.Padding(0, 2, 0, 2);
+            this.chkJvarAppendAsDict.Size = new System.Drawing.Size(729, 23);
+            this.chkJvarAppendAsDict.TabIndex = 34;
+            this.chkJvarAppendAsDict.Text = "Append as a dictionary";
+            this.chkJvarAppendAsDict.UseVisualStyleBackColor = true;
+            // 
             // ActionForm
             // 
             this.AcceptButton = this.btnOk;
@@ -6109,6 +6420,10 @@
             this.tabDeveloperAction.PerformLayout();
             this.tableLayoutPanel28.ResumeLayout(false);
             this.tableLayoutPanel28.PerformLayout();
+            this.tabJsonVariable.ResumeLayout(false);
+            this.tabJsonVariable.PerformLayout();
+            this.tableLayoutPanel29.ResumeLayout(false);
+            this.tableLayoutPanel29.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.panel6.ResumeLayout(false);
             this.panel6.PerformLayout();
@@ -6510,5 +6825,24 @@
         private System.Windows.Forms.Label label14;
         private CustomControls.ExpressionTextBox expSchedulingActionIndex;
         private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.TabPage tabJsonVariable;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel29;
+        private CustomControls.PersistenceSwitch prsJvarTarget;
+        private CustomControls.PersistenceSwitch prsJvarSource;
+        private System.Windows.Forms.ComboBox cbxJvarExpressionType;
+        private System.Windows.Forms.Label label16;
+        private CustomControls.ExpressionTextBox expJvarTarget;
+        private System.Windows.Forms.Label label17;
+        private CustomControls.ExpressionTextBox expJvarListIndex;
+        private System.Windows.Forms.Label label18;
+        private CustomControls.ExpressionTextBox expJvarExpression;
+        private System.Windows.Forms.Label label19;
+        private CustomControls.ExpressionTextBox expJvarSource;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.ComboBox cbxJvarOp;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.ComboBox cbxJvarSortMethod;
+        private System.Windows.Forms.CheckBox chkJvarAppendAsDict;
     }
 }
