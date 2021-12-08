@@ -293,6 +293,18 @@ namespace Triggernometry.Forms
                 expWmsgLparam.Expression = "";
                 expPlayerName.Expression = "";
                 expPartyOrder.Expression = "";
+                expDevActionKey.Expression = "";
+                expDevActionValue.Expression = "";
+                cbxJvarOp.SelectedIndex = 0;
+                cbxJvarExpressionType.SelectedIndex = 0;
+                cbxJvarSortMethod.SelectedIndex = 0;
+                expJvarSource.Expression = "";
+                expJvarTarget.Expression = "";
+                expJvarListIndex.Expression = "";
+                expJvarExpression.Expression = "";
+                prsJvarSource.IsPersistent = false;
+                prsJvarTarget.IsPersistent = false;
+
                 FontInfoContainer fic = new FontInfoContainer();
                 fic.Name = Font.Name;
                 fic.Size = Font.SizeInPoints;
@@ -387,7 +399,25 @@ namespace Triggernometry.Forms
                 cbxLvarOperation.SelectedIndex = (int)a._ListVariableOp;
                 expPlayerName.Expression = a._PartyOrderPlayerName;
                 expPartyOrder.Expression = a._PartyOrderPartyOrder;
-                
+                expDevActionKey.Expression = a._DevActionKey;
+                expDevActionValue.Expression = a._DevActionValue;
+
+                expSchedulingTriggerName.Expression = a._SchedulingTriggerName;
+                expSchedulingActionIndex.Expression = a._SchedulingActionIndex;
+                cbxSchedulingActionOption.SelectedIndex = (int)a._SchedulingActionOp;
+                chkDontExcute.Checked = a._DontExecute;
+
+                cbxJvarOp.SelectedIndex = (int)a._JvarOp;
+                cbxJvarExpressionType.SelectedIndex = (int)a._JvarExpressionType;
+                cbxJvarSortMethod.SelectedIndex = (int)a._JvarSortMethod;
+                expJvarSource.Expression = a._JvarSource;
+                expJvarTarget.Expression = a._JvarTarget;
+                expJvarListIndex.Expression = a._JvarListIndex;
+                expJvarExpression.Expression = a._JvarExpression;
+                prsJvarSource.IsPersistent = a._JvarSourcePersist;
+                prsJvarTarget.IsPersistent = a._JvarTargetPersist;
+                chkJvarAppendAsDict.Checked = a._JvarAppendAsDict;
+
                 if ((a._TriggerForceType & Action.TriggerForceTypeEnum.SkipRegexp) != 0)
                 {
                     cbxFiringOptions.SetItemChecked(0, true);
@@ -627,13 +657,32 @@ namespace Triggernometry.Forms
             a._VariableName = expVariableName.Expression;
             a._VariableOp = (Action.VariableOpEnum)cbxVariableOp.SelectedIndex;
             a._ListVariableExpression = expLvarValue.Expression;
-            a._ListVariableExpressionType = (Action.ListVariableExpTypeEnum)cbxLvarExpType.SelectedIndex;
+            a._ListVariableExpressionType = (Action.ExpressionTypeEnum)cbxLvarExpType.SelectedIndex;
             a._ListVariableIndex = expLvarIndex.Expression;
             a._ListVariableName = expLvarName.Expression;
             a._ListVariableOp = (Action.ListVariableOpEnum)cbxLvarOperation.SelectedIndex;
             a._ListVariableTarget = expLvarTarget.Expression;
             a._PartyOrderPartyOrder = expPartyOrder.Expression;
             a._PartyOrderPlayerName = expPlayerName.Expression;
+            a._DevActionKey = expDevActionKey.Expression;
+            a._DevActionValue = expDevActionValue.Expression;
+
+            a._SchedulingTriggerName = expSchedulingTriggerName.Expression;
+            a._SchedulingActionIndex = expSchedulingActionIndex.Expression;
+            a._SchedulingActionOp=(Action.SchedulingActionOpEnum)cbxSchedulingActionOption.SelectedIndex;
+            a._DontExecute = chkDontExcute.Checked ;
+
+            a._JvarExpressionType = (Action.ExpressionTypeEnum)cbxJvarExpressionType.SelectedIndex;
+            a._JvarExpression = expJvarExpression.Expression;
+            a._JvarOp = (Action.JvarOpEnum)cbxJvarOp.SelectedIndex;
+            a._JvarSortMethod = (Action.JvarSortMethodEnum)cbxJvarSortMethod.SelectedIndex;
+            a._JvarListIndex = expJvarListIndex.Expression;
+            a._JvarSource = expJvarSource.Expression;
+            a._JvarTarget = expJvarTarget.Expression;
+            a._JvarSourcePersist = prsJvarSource.IsPersistent;
+            a._JvarTargetPersist = prsJvarTarget.IsPersistent;
+            a._JvarAppendAsDict = chkJvarAppendAsDict.Checked;
+
             TreeNode tn = trvTrigger.SelectedNode;
             if (tn != null)
             {
@@ -860,10 +909,24 @@ namespace Triggernometry.Forms
 
         private void cbxTriggerOp_SelectedIndexChanged(object sender, EventArgs e)
         {
-            expTriggerText.Enabled = (cbxTriggerOp.SelectedIndex == 0 && cbxFiringOptions.CheckedIndices.Contains(0) == false);
-            expTriggerZone.Enabled = (cbxTriggerOp.SelectedIndex == 0 && cbxFiringOptions.CheckedIndices.Contains(0) == false);
-            cbxFiringOptions.Enabled = (cbxTriggerOp.SelectedIndex == 0);
+
             trvTrigger.Enabled = (cbxTriggerOp.SelectedIndex != 4);
+            cbxFiringOptions.Enabled = (cbxTriggerOp.SelectedIndex == 0);
+            if (cbxTriggerOp.SelectedIndex == 5)
+            {
+                lblTriggerText.Text = "New trigger name";
+                lblTriggerZone.Text = "New Regular expression";
+                expTriggerZone.Enabled = true;
+                expTriggerText.Enabled = true;
+            }
+            else
+            {
+                expTriggerText.Enabled = (cbxTriggerOp.SelectedIndex == 0 && cbxFiringOptions.CheckedIndices.Contains(0) == false);
+                expTriggerZone.Enabled = (cbxTriggerOp.SelectedIndex == 0 && cbxFiringOptions.CheckedIndices.Contains(0) == false);
+                
+                lblTriggerText.Text = "Event text for firing";
+                lblTriggerZone.Text = "Zone name for firing";
+            }
         }
 
         private void cbxFiringOptions_ItemCheck(object sender, ItemCheckEventArgs e)
@@ -1530,7 +1593,23 @@ namespace Triggernometry.Forms
                     expLvarTarget.Enabled = true;
                     expLvarIndex.Enabled = false;
                     break;
-                case 14: // Insert list variable into another list variable
+                case 14: // Filter whole list variable to another list variable
+                    expLvarName.Enabled = true;
+                    expLvarName.ExpressionType = CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
+                    expLvarValue.Enabled = false;
+                    cbxLvarExpType.Enabled = false;
+                    expLvarTarget.Enabled = true;
+                    expLvarIndex.Enabled = false;
+                    break;
+                case 15: // Reverse Filter whole list variable to another list variable
+                    expLvarName.Enabled = true;
+                    expLvarName.ExpressionType = CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
+                    expLvarValue.Enabled = false;
+                    cbxLvarExpType.Enabled = false;
+                    expLvarTarget.Enabled = true;
+                    expLvarIndex.Enabled = false;
+                    break;
+                case 16: // Insert list variable into another list variable
                     expLvarName.Enabled = true;
                     expLvarName.ExpressionType = CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
                     expLvarValue.Enabled = false;
@@ -1538,7 +1617,7 @@ namespace Triggernometry.Forms
                     expLvarTarget.Enabled = true;
                     expLvarIndex.Enabled = true;
                     break;
-                case 15: // Join all values in the list variable into a single string (separator in expression)
+                case 17: // Join all values in the list variable into a single string (separator in expression)
                     expLvarName.Enabled = true;
                     expLvarName.ExpressionType = CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
                     expLvarValue.Enabled = true;
@@ -1546,7 +1625,7 @@ namespace Triggernometry.Forms
                     expLvarTarget.Enabled = true;
                     expLvarIndex.Enabled = false;
                     break;
-                case 16: // Split a scalar variable into a list variable (separator in expression)
+                case 18: // Split a scalar variable into a list variable (separator in expression)
                     expLvarName.Enabled = true;
                     expLvarName.ExpressionType = CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
                     expLvarValue.Enabled = true;
@@ -1554,7 +1633,7 @@ namespace Triggernometry.Forms
                     expLvarTarget.Enabled = true;
                     expLvarIndex.Enabled = false;
                     break;
-                case 17: // Unset all list variables
+                case 19: // Unset all list variables
                     expLvarName.Enabled = false;
                     expLvarName.ExpressionType = CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.String;
                     expLvarValue.Enabled = false;
@@ -1562,7 +1641,7 @@ namespace Triggernometry.Forms
                     expLvarTarget.Enabled = false;
                     expLvarIndex.Enabled = false;
                     break;
-                case 18: // Unset by regex
+                case 20: // Unset by regex
                     expLvarName.Enabled = true;
                     expLvarName.ExpressionType = CustomControls.ExpressionTextBox.SupportedExpressionTypeEnum.Regex;
                     expLvarValue.Enabled = false;
@@ -1917,6 +1996,61 @@ namespace Triggernometry.Forms
             {
                 btnOk_Click(sender, e);
             }
+        }
+
+        private void cbxJvarOp_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (cbxJvarOp.SelectedIndex)
+            {
+                case 0://remove
+                    {
+                        expJvarSource.Enabled = true;
+                        expJvarTarget.Enabled = false;
+                        expJvarExpression.Enabled = false;
+                        expJvarListIndex.Enabled = false;
+                        cbxJvarSortMethod.Enabled = false;
+                    }
+                    break;
+                case 1://push
+                    {
+                        expJvarSource.Enabled = true;
+                        expJvarTarget.Enabled = false;
+                        expJvarExpression.Enabled = true;
+                        expJvarListIndex.Enabled = false;
+                        cbxJvarSortMethod.Enabled = false;
+                    }
+                    break;
+                case 2://set
+                    {
+                        expJvarSource.Enabled = true;
+                        expJvarTarget.Enabled = false;
+                        expJvarExpression.Enabled = true;
+                        expJvarListIndex.Enabled = false;
+                        cbxJvarSortMethod.Enabled = false;
+                    }
+                    break;
+                case 3://insert
+                    {
+                        expJvarSource.Enabled = true;
+                        expJvarTarget.Enabled = false;
+                        expJvarExpression.Enabled = true;
+                        expJvarListIndex.Enabled = true;
+                        cbxJvarSortMethod.Enabled = false;
+                    }
+                    break;
+                case 4://sort
+                    {
+                        expJvarSource.Enabled = true;
+                        expJvarTarget.Enabled = false;
+                        expJvarExpression.Enabled = true;
+                        expJvarListIndex.Enabled = true;
+                        cbxJvarSortMethod.Enabled = true;
+                    }
+                    break;
+            }
+            cbxJvarExpressionType.Enabled = expJvarExpression.Enabled;
+            prsJvarSource.Enabled = expJvarSource.Enabled;
+            prsJvarTarget.Enabled = expJvarTarget.Enabled;
         }
     }
 

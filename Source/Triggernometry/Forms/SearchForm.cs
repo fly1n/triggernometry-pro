@@ -199,7 +199,7 @@ namespace Triggernometry.Forms
                     }
                     if ((filter & SearchFilterEnum.ActionDetails) != 0)
                     {
-                        if (RegexMatches(rex, a._ExecutionDelayExpression) == true) results.Add(new SearchResult(t) { MatchType = I18n.Translate("internal/SearchForm/hitexecdelay", "Action #{0} execution delay", i), Match = tn });
+                        if (RegexMatches(rex, a.ExecutionDelayExpression) == true) results.Add(new SearchResult(t) { MatchType = I18n.Translate("internal/SearchForm/hitexecdelay", "Action #{0} execution delay", i), Match = tn });
                         if (a.ActionType == Action.ActionTypeEnum.Aura)
                         {
                             if (RegexMatches(rex, a._AuraImage) == true) results.Add(new SearchResult(t) { MatchType = I18n.Translate("internal/SearchForm/hitimgaurasrc", "Action #{0} image aura source", i), Match = tn });

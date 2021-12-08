@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -54,7 +55,22 @@ namespace Triggernometry.Variables
             }
             return sb.ToString();
         }
-
+        public override JToken ToJToken()
+        {
+            JArray arr = new JArray();
+            JArray arr2;
+            for (int y = 0; y < Height; y++)
+            {
+                arr2 = new JArray();
+                for (int x = 0; x < Width; x++)
+                {
+                    arr2.Add(Peek(x, y).ToJToken());
+                }
+                arr.Add(arr2);
+            }
+            var obj = JToken.FromObject(arr);
+            return obj;
+        }
         public override int CompareTo(object o)
         {
             if ((o is Variable) == false)

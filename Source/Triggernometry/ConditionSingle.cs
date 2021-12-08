@@ -347,6 +347,16 @@ namespace Triggernometry
                                     }
                                 }
                             }
+                            lock (ctx.plug.cfg.PersistentVariables.List)
+                            {
+                                if (ctx.plug.cfg.PersistentVariables.List.ContainsKey(lval) == true)
+                                {
+                                    if (ctx.plug.cfg.PersistentVariables.List[lval].IndexOf(rval) > 0)
+                                    {
+                                        return true;
+                                    }
+                                }
+                            }
                             return false;
                         }
                     case CndTypeEnum.ListDoesNotContain:
@@ -356,6 +366,16 @@ namespace Triggernometry
                                 if (ctx.plug.sessionvars.List.ContainsKey(lval) == true)
                                 {
                                     if (ctx.plug.sessionvars.List[lval].IndexOf(rval) > 0)
+                                    {
+                                        return false;
+                                    }
+                                }
+                            }
+                            lock (ctx.plug.cfg.PersistentVariables.List)
+                            {
+                                if (ctx.plug.cfg.PersistentVariables.List.ContainsKey(lval) == true)
+                                {
+                                    if (ctx.plug.cfg.PersistentVariables.List[lval].IndexOf(rval) > 0)
                                     {
                                         return false;
                                     }

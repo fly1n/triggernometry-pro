@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Xml.Serialization;
 
 namespace Triggernometry.Variables
@@ -38,6 +39,23 @@ namespace Triggernometry.Variables
             return v;
         }
 
+        public override JToken ToJToken()
+        {
+            JToken obj;
+            if (Int64.TryParse(Value, out var res))
+            {
+                obj = JToken.FromObject(res);
+            }
+            else if (Double.TryParse(Value,out var res2))
+            {
+                obj = JToken.FromObject(res2);
+            }
+            else
+            {
+                obj = JToken.FromObject(Value);
+            }
+            return obj;
+        }
     }
 
 }

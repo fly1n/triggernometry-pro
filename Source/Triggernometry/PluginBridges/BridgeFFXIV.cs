@@ -6,6 +6,11 @@ using System.Diagnostics;
 using Triggernometry.Variables;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Globalization;
+using System.Text.RegularExpressions;
+using Advanced_Combat_Tracker;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
 
 namespace Triggernometry.PluginBridges
 {
@@ -15,7 +20,62 @@ namespace Triggernometry.PluginBridges
 
         private static string ActPluginName = "FFXIV_ACT_Plugin.dll";
         private static string ActPluginType = "FFXIV_ACT_Plugin";
+        public static uint ActPluginVersion;
         private static IntPtr hProcessFFXIV;
+        private static Int64 JCombatantLastCheck = 0;
+        private static JArray _JCombatants;
+        public static JArray JCombatants
+        {
+            get
+            {
+                if (_JCombatants == null)
+                {
+                    UpdateState(true);
+
+                }
+                else {
+                    Int64 old = Interlocked.Read(ref JCombatantLastCheck);
+                    Int64 now = DateTime.Now.Ticks;
+                    if (((now - old) / TimeSpan.TicksPerMillisecond) < 100)
+                    {
+                        return _JCombatants;
+                    }
+                    else {
+                        UpdateState(true);
+                        return _JCombatants;
+                    }
+                }
+                return _JCombatants;
+            }
+        }
+        private static JArray _JPartyMembers;
+        public static JArray JPartyMembers
+        {
+            get
+            {
+                if (_JPartyMembers == null)
+                {
+                    UpdateState(true);
+
+                }
+                else
+                {
+                    Int64 old = Interlocked.Read(ref JCombatantLastCheck);
+                    Int64 now = DateTime.Now.Ticks;
+                    if (((now - old) / TimeSpan.TicksPerMillisecond) < 100)
+                    {
+                        return _JPartyMembers;
+                    }
+                    else
+                    {
+                        UpdateState(true);
+                        return _JPartyMembers;
+                    }
+                }
+                return _JPartyMembers;
+            }
+        }
+        public static Dictionary<string, object> ActPlugins = new Dictionary<string, object>();
 
         private static VariableDictionary NullCombatant = new VariableDictionary();
 
@@ -39,6 +99,10 @@ namespace Triggernometry.PluginBridges
         public static VariableDictionary Myself;
         public static List<string> OverridePartyOrder = new List<string>(new String[8]{
             "","","","","","","",""
+        });
+        public static List<VariableDictionary> OverridePartyMembers = new List<VariableDictionary>(new VariableDictionary[8] {
+            new VariableDictionary(), new VariableDictionary(), new VariableDictionary(), new VariableDictionary(),
+            new VariableDictionary(), new VariableDictionary(), new VariableDictionary(), new VariableDictionary()
         });
 
         internal static bool ckw = false;
@@ -373,12 +437,29 @@ namespace Triggernometry.PluginBridges
             vc.SetValue("inalliance", inAlliance);
             vc.SetValue("order", orderNum);
             vc.SetValue("distance", cmx.EffectiveDistance);
-            vc.SetValue("pointer", cmx.Pointer.ToString("X12"));
+            if(BridgeFFXIV.ActPluginVersion<2604)
+                vc.SetValue("pointer", cmx.Pointer.ToString("X12"));
+            else
+                vc.SetValue("pointer", cmx.Address.ToString("X12"));
         }
-
+        public static object GetPluginObject(string ActPluginName, string ActPluginStatus)
+        {
+            if (!ActPlugins.ContainsKey(ActPluginName))
+            {
+                RealPlugin.PluginWrapper wrap= RealPlugin.PluginObjectHook(ActPluginName, ActPluginStatus);
+                Object obj = wrap.pluginObj;
+                ActPlugins.Add(ActPluginName, obj);
+                return obj;
+            }
+            else
+            {
+                return ActPlugins[ActPluginName];
+            }
+        }
         public static object GetInstance()
         {            
             RealPlugin.PluginWrapper wrap = RealPlugin.InstanceHook(ActPluginName, ActPluginType);
+            uint.TryParse(wrap.fileversion.Replace(".",""),out ActPluginVersion);
             switch (wrap.state)
             {
                 case 0:
@@ -469,8 +550,9 @@ namespace Triggernometry.PluginBridges
             }
         }
 
-        public static void UpdateState()
+        public static void UpdateState(bool JCombatantUpdate=false)
         {
+
             int phase = 0;
             try
             {
@@ -496,9 +578,13 @@ namespace Triggernometry.PluginBridges
                 lock (cd.Lock)
                 {
                     int ex = 0;
+                    List<VariableDictionary> newPartyMembers = new List<VariableDictionary>();
+                    List<VariableDictionary> allCombatants = new List<VariableDictionary>();
                     foreach (dynamic cmx in cd.Combatants)
                     {
+
                         int nump;
+                        
                         try
                         {
                             nump = (int)cmx.PartyType;
@@ -507,38 +593,81 @@ namespace Triggernometry.PluginBridges
                         {
                             nump = 0;
                         }
+                        //override party list
+                        if (cmx.Name != "")
+                        {
+                            int override_index = OverridePartyOrder.IndexOf(cmx.Name);
+                            if (override_index >= 0)
+                            {
+                                PopulateClumpFromCombatant(OverridePartyMembers[override_index], cmx, 1, nump == 2 ? 1 : 0, override_index + 1);
+                                continue;
+                            }
+                        }
+
                         if (cmx.ID == PlayerId || nump == 1)
                         {
+                            /*
                             if (ex >= PartyMembers.Count)
                             {
                                 throw new InvalidOperationException(I18n.Translate("internal/ffxiv/partytoobig", "Party structure has more than {0} members", PartyMembers.Count));
                             }
+                            */
                             phase = 4;
+
+                            phase = 5;
+                            VariableDictionary vd = new VariableDictionary();
+                            PopulateClumpFromCombatant(vd, cmx, 1, nump == 2 ? 1 : 0, newPartyMembers.Count+1);
+                            newPartyMembers.Add(vd);
                             if (cmx.ID == PlayerId)
                             {
-                                Myself = PartyMembers[ex];
+                                if (Myself == null) Myself = new VariableDictionary();
+                                Myself.CopyFrom(vd);
                             }
-                            phase = 5;
-                            PopulateClumpFromCombatant(PartyMembers[ex], cmx, 1, nump == 2 ? 1 : 0, ex + 1);
                             phase = 6;
-                            for (int i = 0; i < ex; i++)
+                            for (int i = 0; i < newPartyMembers.Count-1; i++)
                             {
-                                if (PartyMembers[ex].CompareTo(PartyMembers[i]) == 0)
+                                phase = 16;
+                                phase = 17;
+                                if (newPartyMembers[newPartyMembers.Count-1].CompareTo(newPartyMembers[i]) == 0)
                                 {
-                                    ex--;
+                                    phase = 18;
+                                    //newCombatants.RemoveAt(newCombatants.Count - 1);
+                                    phase = 19;
                                     break;
                                 }
                             }
-                            ex++;
-                            if (ex >= PartyMembers.Count)
+                            phase = 20;
+                            if (newPartyMembers.Count >= PartyMembers.Count)
                             {
                                 // full party found
                                 break;
                             }
-                        }   
+                        }
+                        else
+                        {
+                            if (JCombatantUpdate && (cmx != null))
+                            {
+                                VariableDictionary vd = new VariableDictionary();
+                                PopulateClumpFromCombatant(vd, cmx, 1, nump == 2 ? 1 : 0, -1);
+                                if (!vd.isEmpty())
+                                {
+                                    allCombatants.Add(vd);
+                                }
+
+                            }
+                        }  
                     }
+                    //fill empty party members
+                    /*
+                    while (ex < PartyMembers.Count)
+                    {
+                        if (OverridePartyOrder[ex] =="") BridgeFFXIV.ClearCombatant(PartyMembers[ex]);
+                        ex++;
+                    }
+                    */
                     phase = 7;
-                    NumPartyMembers = ex;
+                    NumPartyMembers = newPartyMembers.Count;
+                    /*
                     if (PrevNumPartyMembers > NumPartyMembers)
                     {
                         for (int i = NumPartyMembers; i < PrevNumPartyMembers; i++)
@@ -546,32 +675,59 @@ namespace Triggernometry.PluginBridges
                             ClearCombatant(PartyMembers[i]);
                         }
                     }
-                    PrevNumPartyMembers = NumPartyMembers;
+                    */
+                    
                     phase = 8;
 
                     if (cfg.FfxivPartyOrdering == Configuration.FfxivPartyOrderingEnum.CustomSelfFirst)
                     {
-                        //DebugPlayerSorting("a1", PartyMembers);
-                        PartyMembers.Sort(SortPlayersSelf);
-                        int ro = 1;
-                        foreach (VariableDictionary vc in PartyMembers)
-                        {
-                            vc.SetValue("order", "" + ro);
-                            ro++;
-                        }
-                        //DebugPlayerSorting("a2", PartyMembers);
+                        newPartyMembers.Sort(SortPlayersSelf);
                     }
                     else if (cfg.FfxivPartyOrdering == Configuration.FfxivPartyOrderingEnum.CustomFull)
                     {
-                        //DebugPlayerSorting("b1", PartyMembers);
-                        PartyMembers.Sort(SortPlayers);
-                        int ro = 1;
-                        foreach (VariableDictionary vc in PartyMembers)
+                        newPartyMembers.Sort(SortPlayers);
+                    }
+                    for (int i = 0; i < PartyMembers.Count; i++)
+                    {
+                        if (newPartyMembers.Count <= i)
                         {
-                            vc.SetValue("order", "" + ro);
-                            ro++;
+                            newPartyMembers.Add(new VariableDictionary());
                         }
-                        //DebugPlayerSorting("b2", PartyMembers);
+                        if (OverridePartyOrder[i] != "")
+                        {
+                            newPartyMembers.Insert(i, OverridePartyMembers[i]);
+                        }
+                        PartyMembers[i].CopyFrom(newPartyMembers[i]);
+                        
+                    }
+                    NumPartyMembers = 8;
+                    int ro = 1;
+                    foreach (VariableDictionary vc in PartyMembers)
+                    {
+                        vc.SetValue("order", "" + ro);
+                        ro++;
+                    }
+                    if (JCombatantUpdate == true)
+                    {
+                        //var k = newPartyMembers[0].
+                        JArray jparty = new JArray();
+                        JArray jentity = new JArray();
+                        var templist = newPartyMembers.GetRange(0, 8);
+                        foreach (var jc in templist)
+                        {
+                            if (jc.isEmpty()) continue;
+                            jparty.Add(jc.ToJToken());
+                        }
+                        _JPartyMembers = jparty;
+
+                        templist.AddRange(allCombatants);
+                        foreach (var jc in templist)
+                        {
+                            if (jc.isEmpty()) continue;
+                            jentity.Add(jc.ToJToken());
+                        }
+
+                        _JCombatants = jentity;
                     }
                 }
             }
@@ -598,6 +754,7 @@ namespace Triggernometry.PluginBridges
             {
                 VariableDictionary p = PluginBridges.BridgeFFXIV.GetPartyMember(pid);
                 var pname = p.GetValue("name").ToString();
+                if (pname == "") continue;
                 if (name_server.Contains(pname))
                 {
                     var sname = name_server.Replace(pname, "");
@@ -698,8 +855,9 @@ namespace Triggernometry.PluginBridges
                 lock (cd.Lock)
                 {
                     foreach (dynamic cmx in cd.Combatants)
-                    {                        
-                        if (cmx.Name == name)
+                    {
+                        if (cmx.Name == null) continue;
+                        if (cmx.Name.ToLower() == name.ToLower())
                         {
                             int nump = 0;
                             try
@@ -787,7 +945,7 @@ namespace Triggernometry.PluginBridges
             UpdateState();
             foreach (VariableDictionary vc in PartyMembers)
             {
-                if (vc.GetValue("name").ToString() == name)
+                if (vc.GetValue("name").ToString().ToLower() == name.ToLower())
                 {
                     return vc;
                 }
@@ -933,6 +1091,19 @@ namespace Triggernometry.PluginBridges
             }
 
         }
+        public static string GetFFXIVBaseAddress(int id)
+        {
+            Process p = GetProcess();
+            try {
+                string baseAddress = p.Modules[id].BaseAddress.ToString("X16") ;
+                return baseAddress;
+            }
+            catch (Exception e)
+            {
+                return "";
+            }
+            return "";
+        }
         public static void CloseHandleFFXIV()
         {
             if (hProcessFFXIV != IntPtr.Zero)
@@ -940,7 +1111,330 @@ namespace Triggernometry.PluginBridges
                 CloseHandle(hProcessFFXIV);
             }
         }
+        public static string GetFFXIVSignature64(IntPtr addr)
+        {
+            string outstr = "";
+            Process p = GetProcess();
+            try
+            {
+                IntPtr baseAddress = p.Modules[0].BaseAddress;
+                Int64 addr_offset = ((Int64)addr) - ((Int64)baseAddress);
+                var len = p.Modules[0].ModuleMemorySize;
+                var buffer = new byte[len];
+                ReadFFXIVMemory(baseAddress, buffer, len);
+                for (int i = 0; i+3< len; i++)
+                {
+                    if(i + BitConverter.ToUInt32(buffer,i) +4 == addr_offset)
+                    {
+                        outstr += (baseAddress+i).ToString("X16")+"("+ (i).ToString("X8") + ")" +" ";
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                return "";
+            }
+            return outstr;
+        }
+        public static string GetFFXIVSignature(string sigstr, string sigtype, string addresstype)
+        {
+            byte[] sig_buffer = null;
+            try
+            {
+                switch (sigtype)
+                {
+                    case "byte":
+                        {
+                            byte sig=byte.Parse(sigstr, NumberStyles.HexNumber, CultureInfo.InvariantCulture);
+                            sig_buffer = new byte[1] { sig };
+                        }
+                        break;
+                    case "uint16":
+                        {
+                            UInt16 sig = UInt16.Parse(sigstr, NumberStyles.HexNumber, CultureInfo.InvariantCulture);
+                            sig_buffer = BitConverter.GetBytes(sig);
+                        }
+                        break;
+                    case "uint32":
+                        {
+                            UInt32 sig=UInt32.Parse(sigstr, NumberStyles.HexNumber, CultureInfo.InvariantCulture);
+                            sig_buffer = BitConverter.GetBytes(sig);
+                        }
+                        break;
+                    case "uint64":
+                        {
+                            UInt64 sig=UInt64.Parse(sigstr, NumberStyles.HexNumber, CultureInfo.InvariantCulture);
+                            sig_buffer = BitConverter.GetBytes(sig);
+                        }
+                        break;
+                    case "array":
+                        {
+                            sig_buffer = new byte[sigstr.Length / 2];
+                            for (int i = 0; i < sigstr.Length; i += 2)
+                            {
+                                sig_buffer[i / 2]=byte.Parse(sigstr.Substring(i, 2), NumberStyles.HexNumber, CultureInfo.InvariantCulture);
+                            }
+                        }
+                        break;
+                    default: break;
+                }
+            }catch(Exception ex)
+            {
+                LogMessage(RealPlugin.DebugLevelEnum.Error, I18n.Translate("internal/ffxiv/findsignatureexception", "Invalid FFXIV signature: {0}", ex.Message));
+                return "";
+            }
+            if (sig_buffer == null) return "";
 
+
+            string outstr = "";
+            Process p = GetProcess();
+            //try
+            //{
+            byte[] buffer;
+            IntPtr baseAddress=IntPtr.Zero;
+            UInt64 len=0;
+            switch (addresstype)
+            {
+                case "2": { baseAddress = IntPtr.Zero; len = (UInt64) p.MainModule.BaseAddress + (UInt64)p.MainModule.ModuleMemorySize; } break;
+                case "1": { baseAddress = IntPtr.Zero; len = (UInt64) p.MainModule.BaseAddress; }break;
+                case "0": { baseAddress = p.MainModule.BaseAddress; len = (UInt64) p.MainModule.ModuleMemorySize; } break;
+                default:break;
+
+            }
+            buffer = new byte[len];
+            //ReadFFXIVMemory(baseAddress, buffer, len);
+            //for (int i = 0; i + 4 < len; i++)
+            //    if (BitConverter.ToUInt16(buffer, i) == sig)
+            //        outstr += (baseAddress + i).ToString("X16") + "(" + (i).ToString("X8") + ")" + " ";
+            //}
+            //catch (Exception e)
+            //{
+            //    return "";
+            //}
+            return outstr;
+        }
+        public static string GetFFXIVSignature32(UInt32 sig, IntPtr baseAddress, int len)
+        {
+            string outstr = "";
+            Process p = GetProcess();
+            //try
+            //{
+                var buffer = new byte[len];
+                ReadFFXIVMemory(baseAddress, buffer, len);
+                for (int i = 0; i+8  < len; i++)
+                    if (BitConverter.ToUInt32(buffer, i) == sig)
+                        outstr += (baseAddress + i).ToString("X16") + "(" + (i).ToString("X8") + ")" + " ";
+            //}
+            //catch (Exception e)
+            //{
+            //    return "";
+            //}
+            return outstr;
+        }
+        public static string GetFFXIVSignature64(UInt64 sig, IntPtr baseAddress, int len)
+        {
+            string outstr = "";
+            Process p = GetProcess();
+            //try
+            //{
+                var buffer = new byte[len];
+                ReadFFXIVMemory(baseAddress, buffer, len);
+                for (int i = 0; i + 16 < len; i++)
+                    if (BitConverter.ToUInt64(buffer, i) == sig)
+                        outstr += (baseAddress + i).ToString("X16") + "(" + (i).ToString("X8") + ")" + " ";
+            //}
+            //catch (Exception e)
+            //{
+            //    return "";
+            //}
+            return outstr;
+        }
+        private static dynamic setPropertyWithJson(dynamic prop, dynamic obj,string json)
+        {
+            dynamic value = prop.GetValue(obj);
+            Type type;
+            try
+            {
+                type = prop.PropertyType;
+            }
+            catch (Exception e)
+            {
+                type = prop.FieldType;
+            }
+
+            try
+            {
+                dynamic new_value2 = Newtonsoft.Json.JsonConvert.DeserializeObject(json, type);
+                prop.SetValue(obj, new_value2);
+            }
+            catch (Exception e)
+            {
+                if (type.Name == "Server_MessageType")
+                {
+                    MethodInfo mi = obj.GetMethod("op_Implicit", new Type[] { typeof(UInt16) });
+                    object obj2 = type.Assembly.CreateInstance(type.FullName);
+
+                    ushort num2 = ushort.Parse(json);
+                    dynamic newMessageType = mi.Invoke(obj2, new object[] { num2 });
+                    prop.SetValue(obj2, newMessageType);
+                    //value.InternalValue = UInt16.Parse(json);
+                    //PropertyInfo pi =value.GetType().GetProperty("InternalValue", BindingFlags.GetProperty | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static);
+                    //pi.SetValue(value, UInt16.Parse(json));
+                    //prop.SetValue(obj, value);
+                }
+            }
+            return 0;
+        }
+        public static object ReflectPlugin(string command,string new_value="")
+        {
+            Regex rex1= new Regex(@"(?<method>[^\[]+)\[(?<name>.+?)\](?<others>.*)");
+            Regex rex2= new Regex(@"\.(?<method>[^\[]+)\[(?<name>.+?)\](?<others>.*)");
+
+            var mx = rex1.Match(command);
+            if (mx.Success == false) return null;
+            //string reflectMethod = mx.Groups["method"].Value;
+            string reflectMethod = mx.Groups["method"].Value;
+            string pluginName = mx.Groups["name"].Value;
+            string pluginStatus = pluginName.Split(',')[1];
+            pluginName = pluginName.Split(',')[0];
+            object currentObj = GetPluginObject(pluginName, pluginStatus);
+            if (currentObj == null) return null;
+
+            string others = mx.Groups["others"].Value;
+            Match my = rex2.Match(others);
+
+            dynamic currentValue = null;
+            string currentMethod = "f";
+            while (my.Success == true)
+            {
+                currentMethod = my.Groups["method"].Value;
+                var sp=my.Groups["name"].Value.Split(',');
+                string name;
+                string type="";
+                if (sp.Length > 1)
+                {
+                    name = sp[1];
+                    type = sp[0];
+                }
+                else {
+                    name = sp[0];
+                }
+
+                others = my.Groups["others"].Value;
+                bool isValue = false;
+                bool isSet = false;
+                if (currentMethod.EndsWith("v"))
+                {
+                    isValue = true;
+                    currentMethod=currentMethod.TrimEnd('v');
+                }else if (currentMethod.EndsWith("s"))
+                {
+                    isSet = true;
+                    currentMethod = currentMethod.TrimEnd('s');
+                }
+                switch (currentMethod)
+                {
+                    case "af":
+                        {
+                            Assembly ass = currentObj.GetType().Assembly;
+                            FieldInfo fi = ass.GetType(type).GetField(name, BindingFlags.GetField | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static);
+                            currentValue = isValue? fi.GetValue(ass.GetType(type)) : fi;
+                            if (isSet)setPropertyWithJson(fi, ass.GetType(type) , new_value);
+                        }
+                        break;
+                    case "ap":
+                        {
+                            Assembly ass = currentObj.GetType().Assembly;
+                            PropertyInfo pi = ass.GetType(type).GetProperty(name, BindingFlags.GetProperty | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static);
+                            currentValue = isValue ? pi.GetValue(ass.GetType(type)) : pi;
+                            if (isSet) setPropertyWithJson(pi, ass.GetType(type), new_value);
+                        }
+                        break;
+                    case "am":
+                        {
+                            Assembly ass = currentObj.GetType().Assembly;
+                            MethodInfo mi = ass.GetType(type).GetMethod(name, BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static);
+                            currentValue = mi;
+                            mi.Invoke(currentObj, new object[0]);
+                        }
+                        break;
+                    case "ac":
+                        {
+                            Assembly ass = currentObj.GetType().Assembly;
+                            ConstructorInfo ci= ass.GetType(type).GetConstructors(BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static)[0];
+                            ci.Invoke(ass.GetType(type),new object[0]);
+                        }
+                        break;
+                    case "f":
+                        {
+                            FieldInfo fi = currentObj.GetType().GetField(name, BindingFlags.GetField | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static);
+                            currentValue = isValue ? fi.GetValue(currentObj): fi;
+                            if (isSet) setPropertyWithJson(fi, currentObj, new_value);
+                        }
+                        break;
+                    case "p":
+                        {
+                            PropertyInfo pi = currentObj.GetType().GetProperty(name, BindingFlags.GetProperty | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static);
+                            currentValue = isValue ? pi.GetValue(currentObj): pi;
+                            if (isSet) setPropertyWithJson(pi, currentObj, new_value);
+                        }
+                        break;
+                    case "m":
+                        {
+                            MethodInfo mi = currentObj.GetType().GetMethod(name, BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static);
+                            currentValue = mi;
+                            mi.Invoke(currentObj,new object[0]);
+                        }
+                        break;
+                    case "e":
+                        {
+                            EventInfo ei = currentObj.GetType().GetEvent(name, BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static);
+                            currentValue = ei;
+                        }
+                        break;
+                    default:break;
+                }
+                if (currentValue == null) break;
+                my = rex2.Match(others);
+                currentObj = currentValue;
+            }
+
+            return currentObj;
+
+        }
+        public static void SetFFXIVSignature(string typeName,uint offset)
+        {
+            FFXIV_ACT_Plugin.Memory.SignatureType sigType = (FFXIV_ACT_Plugin.Memory.SignatureType)Enum.Parse(typeof(FFXIV_ACT_Plugin.Memory.SignatureType), typeName);
+            var plug = PluginBridges.BridgeFFXIV.GetInstance();
+            FieldInfo fi = plug.GetType().GetField("_dataCollection", BindingFlags.GetField | BindingFlags.NonPublic | BindingFlags.Instance);
+            dynamic dataCollection = fi.GetValue(plug);
+            fi = dataCollection.GetType().GetField("_monitor", BindingFlags.GetField | BindingFlags.NonPublic | BindingFlags.Instance);
+            dynamic signatureManager;
+            if (fi == null)
+            {
+                fi = plug.GetType().GetField("_actUIMods", BindingFlags.GetField | BindingFlags.NonPublic | BindingFlags.Instance);
+                dynamic actUIMods = fi.GetValue(plug);
+                fi = actUIMods.GetType().GetField("_settingsPropertyPage", BindingFlags.GetField | BindingFlags.NonPublic | BindingFlags.Instance);
+                dynamic settingsPropertyPage = fi.GetValue(actUIMods);
+                fi = settingsPropertyPage.GetType().GetField("_signatureManager", BindingFlags.GetField | BindingFlags.NonPublic | BindingFlags.Instance);
+                signatureManager = fi.GetValue(settingsPropertyPage);
+            }
+            else
+            {
+                dynamic monitor = fi.GetValue(dataCollection);
+                fi = monitor.GetType().GetField("_diagnosisHelper", BindingFlags.GetField | BindingFlags.NonPublic | BindingFlags.Instance);
+                dynamic diagnosisHelper = fi.GetValue(monitor);
+                fi = diagnosisHelper.GetType().GetField("_signatureManager", BindingFlags.GetField | BindingFlags.NonPublic | BindingFlags.Instance);
+                signatureManager = fi.GetValue(diagnosisHelper);
+            }            fi = signatureManager.GetType().GetField("_signatures", BindingFlags.GetField | BindingFlags.NonPublic | BindingFlags.Instance);
+            //var signatures = (Dictionary<FFXIV_ACT_Plugin.Memory.SignatureType, uint>)fi.GetValue(signatureManager);
+            dynamic signatures = fi.GetValue(signatureManager);
+            //var signatures_parsed = (Dictionary<SignatureType, uint>)signatures;
+            //Type t = signatures.GetType();
+            signatures[sigType] = offset;
+            //signatures = (t)signatures_parsed;
+            fi.SetValue(signatureManager, signatures);
+        }
         public static string[,] joblist = new string[,] {
                 {"0",   "冒险者",  "冒險者",  "冒险",   "冒",    "adventurer",   "ADV",  "すっぴん士",    "冒",    "冒",    "None", "N",    "冒险",   "adventurer",   "None"},
                 {"1",   "剑术师",  "劍術師",  "剑术",   "剑",    "gladiator",    "GLA",  "剣術士",  "剣",    "剣",    "Tank", "T",    "坦克",   "Tank", "ST"},
@@ -982,6 +1476,7 @@ namespace Triggernometry.PluginBridges
                 {"37",  "绝枪战士", "絕槍戰士", "枪刃",   "枪",  "gunbreaker",   "GNB",  "ガンブレイカー",  "ガンブレイ",    "ガ",    "Tank", "T",    "坦克",   "Tank", "ST"},
                 {"38",  "舞者",   "舞者",   "舞者",   "舞",      "dancer",   "DNC",  "踊り子",  "踊り",   "踊",    "DPS",  "D",    "远敏",   "Ranged",   "D3"},
                 {"39",  "贤者",   "賢者",   "贤者",   "贤",      "sage", "SAG",  "賢者",   "賢者",   "賢",    "Healer",   "H",    "治疗",   "Healer",   "H2"},
+                {"40",  "钐镰师",   "釤鐮師",   "钐镰",   "镰",  "reaper", "RPR",  "釤鐮",   "釤鐮",   "鐮",    "DPS",   "D",    "近战",   "Melee",   "D1"},
          };
         public static List<string> serverlist = new List<string>() {
 
@@ -991,6 +1486,16 @@ namespace Triggernometry.PluginBridges
             "Atomos","Bahamut","Chocobo","Moogle","Tonberry","Adamantoise","Coeurl","Malboro","Tiamat","Ultros","Behemoth","Cactuar","Cerberus","Goblin","Mandragora","Louisoix","Syldra","Spriggan","Aegis","Balmung","Durandal","Excalibur","Gungnir","Hyperion","Masamune","Ragnarok","Ridill","Sargatanas"
 
         };
+        public enum SignatureType
+        {
+            ChatLog = 16,
+            MobArray = 32,
+            ZoneID = 48,
+            ServerTime = 64,
+            PartyList = 80,
+            Player = 96,
+            MapID = 112
+        }
     }
 
 }

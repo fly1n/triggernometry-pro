@@ -52,6 +52,7 @@ namespace Triggernometry.CustomControls
         private delegate void ProgressDelegate(int progress, string state);
         internal delegate void VoidDelegate(object sender, EventArgs e);
         internal delegate bool BoolDelegate(object sender, EventArgs e);
+        internal delegate void ImportResultFromFormDelegate(Forms.ImportForm imf,TreeNode tn,bool nameUnique);
 
         public static ImageIndices GetImageIndexForClosedFolder(Folder f)
         {
@@ -929,9 +930,17 @@ namespace Triggernometry.CustomControls
             }
         }
 
-        internal void ImportResultsFromForm(Forms.ImportForm imf)
+        internal void ImportResultsFromForm(Forms.ImportForm imf,TreeNode tn = null,bool nameUnique=false)
         {
-            TreeNode tn = treeView1.SelectedNode;
+            if (this.InvokeRequired == true)
+            {
+                this.Invoke(new ImportResultFromFormDelegate(ImportResultsFromForm), imf,tn, nameUnique);
+                return;
+            }
+            if (tn == null)
+            {
+                tn = treeView1.SelectedNode;
+            }
             Folder df;
             if (tn.Tag is Folder)
             {
@@ -973,7 +982,14 @@ namespace Triggernometry.CustomControls
             TreeNode tnx = (TreeNode)imf.treeView1.Nodes[0].Clone();
             ResetBackgrounds(tnx);
             TreeNode tmp = treeView1.SelectedNode;
-            treeView1.SelectedNode.Nodes.Add(tnx);
+            if ((tn != null)&& tn.Tag is Folder)
+            {
+                tn.Nodes.Add(tnx);
+            }
+            else
+            {
+                treeView1.SelectedNode.Nodes.Add(tnx);
+            }
             treeView1.Sort();
             RecolorStartingFromNode(tmp, tmp.Checked, false);
             treeView1.SelectedNode = tnx;

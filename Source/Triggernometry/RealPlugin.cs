@@ -452,6 +452,7 @@ namespace Triggernometry
         public delegate void EncounterDelegate(string swingType,string ability, string actor, string target, int damage, string damageType);
         public delegate List<CustomTriggerCategoryProxy> CustomTriggerDelegate();
         public delegate PluginWrapper InstanceDelegate(string ActPluginName, string ActPluginType);
+        public delegate PluginWrapper PluginObjectDelegate(string ActPluginName, string ActPluginStatus);
 
         internal Scarborough.Scarborough sc;
         private Queue<LogEvent> EventQueue;
@@ -508,6 +509,7 @@ namespace Triggernometry
         public SoundDelegate SoundPlaybackHook { get; set; }
         public CustomTriggerDelegate CustomTriggerHook { get; set; }
         public static InstanceDelegate InstanceHook { get; set; }
+        public static PluginObjectDelegate PluginObjectHook { get; set; }
         public SimpleVoidDelegate CornerShowHook { get; set; }
         public SimpleVoidDelegate CornerHideHook { get; set; }
         public TabPageDelegate TabLocateHook { get; set; }
@@ -1414,7 +1416,16 @@ namespace Triggernometry
                 return ix.FirstOrDefault();
             }
         }
-
+        internal Trigger GetTriggerByName(string name, Repository repo)
+        {
+            lock (Triggers)
+            {
+                var ix = from ax in Triggers
+                         where ax.Name == name && ax.Repo == repo
+                         select ax;
+                return ix.FirstOrDefault();
+            }
+        }
         internal Folder GetFolderById(Guid id, Repository repo)
         {
             if (repo != null)

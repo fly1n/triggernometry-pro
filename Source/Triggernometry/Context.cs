@@ -11,6 +11,8 @@ using System.ComponentModel;
 using System.Web.Script.Serialization;
 using Triggernometry.Variables;
 using System.Runtime.InteropServices;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Triggernometry
 {
@@ -27,17 +29,21 @@ namespace Triggernometry
         internal RealPlugin.ActionExecutionHook ttshook;
 
         internal static Regex rex = new Regex(@"\$\{(?<id>[^\}\{\$]*)\}");
+        internal static Regex rex2 = new Regex(@"\$\<(?<id>[^\>\<\$]*)\>");
         internal static Regex rexnum = new Regex(@"\$(?<id>[0-9]+)");
         internal static Regex rexnump = new Regex(@"\[(?<index>.+?)\]\.(?<prop>[a-zA-Z]+)");
         internal static Regex rexnumprp3 = new Regex(@"\[(?<index>.+?)\]\.(?<prop>[a-zA-Z]+)(\((?<arg1>[^,]+),(?<arg2>[^,]+),(?<arg3>[^\)]+)\))");
         internal static Regex rexnumpnumnum = new Regex(@"\[(?<index>.+?)\]\.(?<prop>[a-zA-Z]+)\[(?<arg1>[0-9]+?),(?<arg2>[0-9]+?)\]");
         internal static Regex rexnumparg = new Regex(@"\[(?<index>.+?)\]\.(?<prop>[a-zA-Z]+)\((?<arg>[^\)]+)\)");
         internal static Regex rexlidx = new Regex(@"(?<name>[^\[]+)\[(?<index>.+?)\]");
+        internal static Regex rexposstart = new Regex(@"pos\[(?<arg>.+?)\](?<others>.*)");
+        internal static Regex rexpos = new Regex(@"\.(?<name>[^\[]+)\[(?<arg>.*?)\](?<others>.*)");
         internal static Regex rexlidx3 = new Regex(@"(?<name>[^\[]+)\[(?<index1>.+?),(?<index2>.+?),(?<index3>.+?)\]");
         internal static Regex rextidx = new Regex(@"(?<name>[^\[]+)\[(?<column>.+?)\]\[(?<row>.+?)\]");
         internal static Regex rexlprp = new Regex(@"(?<name>[^\.]+)\.(?<prop>[a-zA-Z]+)(\((?<arg>[^\)]+)\)){0,1}");
         internal static Regex rexlprp3 = new Regex(@"(?<name>[^\.]+)\.(?<prop>[a-zA-Z]+)(\((?<arg1>[^,]+),(?<arg2>[^,]+),(?<arg3>[^\)]+)\))");
         internal static Regex rexfunc = new Regex(@"(?<name>[^\(]{1,})(\((?<arg>[^\)]+)\)){0,1}");
+        internal static Regex jvarfunc = new Regex(@"(?<name>[a-zA-Z]+)\((?<arg>.*)\)");
         internal Dictionary<string, string> namedgroups;
 		internal List<string> numgroups;
         internal DateTime triggered;
@@ -201,6 +207,7 @@ namespace Triggernometry
             while (true)
             {
                 m = rex.Match(newexpr);
+                if (m.Success == false) m = rex2.Match(newexpr);
                 if (m.Success == false)
                 {
                     m = rexnum.Match(newexpr);
@@ -277,6 +284,16 @@ namespace Triggernometry
                             val = ((long)(DateTime.Now - new DateTime(1970, 1, 1, 0, 0, 0)).TotalMilliseconds).ToString();
                             found = true;
                         }
+                        else if (x == "_folder")
+                        {
+                            val = this.trig.Parent.FullPath;
+                            found = true;
+                        }
+                        else if (x == "_fullpath")
+                        {
+                            val = this.trig.FullPath;
+                            found = true;
+                        }
                         else if (x == "_ffxivplayer")
                         {
                             VariableDictionary vc = PluginBridges.BridgeFFXIV.GetMyself();
@@ -304,6 +321,11 @@ namespace Triggernometry
                         else if (x == "_ffxivprocname")
                         {
                             val = PluginBridges.BridgeFFXIV.GetProcessName();
+                            found = true;
+                        }
+                        else if (x == "_ffxivbaseaddress")
+                        {
+                            val = PluginBridges.BridgeFFXIV.GetFFXIVBaseAddress(0);
                             found = true;
                         }
                         else if (x == "_incombat")
@@ -372,6 +394,16 @@ namespace Triggernometry
                                 found = true;
                             }
                         }
+                        else if (x.IndexOf("_isfileexist") == 0)
+                        {
+                            mx = rexlidx.Match(x);
+                            if (mx.Success == true)
+                            {
+                                string dir = mx.Groups["index"].Value;
+                                val = System.IO.File.Exists(dir)?"1":"0";
+                                found = true;
+                            }
+                        }
                         else if (x.IndexOf("_jsonresponse") == 0)
                         {
                             mx = rexlidx.Match(x);
@@ -401,19 +433,39 @@ namespace Triggernometry
                             {
                                 Int64 pointer;
                                 Int64 offset;
-                                int length;
+                                int length = 0;
                                 if (Int64.TryParse(mx.Groups["index1"].Value, System.Globalization.NumberStyles.HexNumber, CultureInfo.InvariantCulture, out pointer) == true)
                                 {
                                     if (Int64.TryParse(mx.Groups["index2"].Value, System.Globalization.NumberStyles.Integer, CultureInfo.InvariantCulture, out offset) == true)
                                     {
+
                                         int.TryParse(mx.Groups["index3"].Value, out length);
-                                        byte[] buffer = new byte[length];
-                                        IntPtr ptr = (IntPtr)(pointer+offset);
-                                        PluginBridges.BridgeFFXIV.ReadFFXIVMemory((IntPtr)ptr, buffer, length);
+                                        byte[] buffer = new byte[length < 8 ? 8 : length];
+                                        IntPtr ptr = (IntPtr)(pointer + offset);
+
                                         val = "";
-                                        for (int iptr = 0; iptr < length; iptr += 4)
+                                        if (mx.Groups["index3"].Value == "X8")
                                         {
-                                            val += BitConverter.ToUInt32(buffer, iptr).ToString("X8") + " ";
+                                            PluginBridges.BridgeFFXIV.ReadFFXIVMemory((IntPtr)ptr, buffer, 4);
+                                            val += BitConverter.ToUInt32(buffer, 0).ToString("X8");
+                                        }
+                                        else if (mx.Groups["index3"].Value == "X16")
+                                        {
+                                            PluginBridges.BridgeFFXIV.ReadFFXIVMemory((IntPtr)ptr, buffer, 8);
+                                            val += BitConverter.ToUInt64(buffer, 0).ToString("X16");
+                                        }
+                                        else if (mx.Groups["index3"].Value == "X4")
+                                        {
+                                            PluginBridges.BridgeFFXIV.ReadFFXIVMemory((IntPtr)ptr, buffer, 2);
+                                            val += BitConverter.ToUInt16(buffer, 0).ToString("X4");
+                                        }
+                                        else
+                                        {
+                                            PluginBridges.BridgeFFXIV.ReadFFXIVMemory((IntPtr)ptr, buffer, length);
+                                            for (int iptr = 0; iptr < length; iptr += 4)
+                                            {
+                                                val += BitConverter.ToUInt32(buffer, iptr).ToString("X8") + " ";
+                                            }
                                         }
                                         found = true;
                                     }
@@ -421,7 +473,193 @@ namespace Triggernometry
 
                             }
                         }
-                        // check if scalar variable exists
+                        else if (x.IndexOf("_ffxivsignature") == 0)
+                        {
+                            mx = rexlidx.Match(x);
+                            if (mx.Success == true)
+                            {
+                                Int64 pointer;
+                                if (Int64.TryParse(mx.Groups["index"].Value, System.Globalization.NumberStyles.HexNumber, CultureInfo.InvariantCulture, out pointer) == true)
+                                {
+                                    val = PluginBridges.BridgeFFXIV.GetFFXIVSignature64((IntPtr)pointer);
+                                    found = true;
+                                }
+
+                            }
+                        }
+                        else if (x.IndexOf("_signatureshort") == 0)
+                        {
+                            mx = rexlidx3.Match(x);
+                            if (mx.Success == true)
+                            {
+                                Int64 baseAddress;
+                                UInt16 sig;
+                                int len = 0;
+                                if (UInt16.TryParse(mx.Groups["index1"].Value, System.Globalization.NumberStyles.HexNumber, CultureInfo.InvariantCulture, out sig) == true)
+                                {
+                                    if (Int64.TryParse(mx.Groups["index2"].Value, System.Globalization.NumberStyles.Integer, CultureInfo.InvariantCulture, out baseAddress) == true)
+                                    {
+
+                                        int.TryParse(mx.Groups["index3"].Value, System.Globalization.NumberStyles.Integer, CultureInfo.InvariantCulture, out len);
+                                        //val = PluginBridges.BridgeFFXIV.GetFFXIVSignature16(sig,(IntPtr)baseAddress,len);
+                                    }
+                                }
+                            }
+                        }
+                        else if (x.IndexOf("_signatureint") == 0)
+                        {
+                            mx = rexlidx3.Match(x);
+                            if (mx.Success == true)
+                            {
+                                Int64 baseAddress;
+                                UInt32 sig;
+                                int len = 0;
+                                if (UInt32.TryParse(mx.Groups["index1"].Value, System.Globalization.NumberStyles.HexNumber, CultureInfo.InvariantCulture, out sig) == true)
+                                {
+                                    if (Int64.TryParse(mx.Groups["index2"].Value, System.Globalization.NumberStyles.Integer, CultureInfo.InvariantCulture, out baseAddress) == true)
+                                    {
+
+                                        int.TryParse(mx.Groups["index3"].Value, System.Globalization.NumberStyles.Integer, CultureInfo.InvariantCulture, out len);
+                                        val = PluginBridges.BridgeFFXIV.GetFFXIVSignature32(sig, (IntPtr)baseAddress, len);
+                                    }
+                                }
+                            }
+                        }
+                        else if (x.IndexOf("_signaturelong") == 0)
+                        {
+                            mx = rexlidx3.Match(x);
+                            if (mx.Success == true)
+                            {
+                                Int64 baseAddress;
+                                UInt64 sig;
+                                int len = 0;
+                                if (UInt64.TryParse(mx.Groups["index1"].Value, System.Globalization.NumberStyles.HexNumber, CultureInfo.InvariantCulture, out sig) == true)
+                                {
+                                    if (Int64.TryParse(mx.Groups["index2"].Value, System.Globalization.NumberStyles.Integer, CultureInfo.InvariantCulture, out baseAddress) == true)
+                                    {
+
+                                        int.TryParse(mx.Groups["index3"].Value, System.Globalization.NumberStyles.Integer, CultureInfo.InvariantCulture, out len);
+                                        val = PluginBridges.BridgeFFXIV.GetFFXIVSignature64(sig, (IntPtr)baseAddress, len);
+                                    }
+                                }
+                            }
+                        }
+                        else if (x.IndexOf("_pos") == 0)
+                        {
+                            mx = rexposstart.Match(x);
+                            if (mx.Success == true)
+                            {
+                                double pos_x = 0;
+                                double pos_y = 0;
+                                double x0 = 0;
+                                double y0 = 0;
+                                string arg = mx.Groups["arg"].Value.TrimStart('(').TrimEnd(')').Replace(" ", "");
+                                string name = "";
+                                double.TryParse(arg.Split(',')[0], out pos_x);
+                                double.TryParse(arg.Split(',')[1], out pos_y);
+                                val = pos_x.ToString("0.000") + "," + pos_y.ToString("0.000");
+                                string others = mx.Groups["others"].Value;
+                                Match my = rexpos.Match(others);
+                                while (my.Success == true)
+                                {
+                                    name = my.Groups["name"].Value.TrimStart('(').TrimEnd(')').Replace(" ", ""); ;
+                                    arg = my.Groups["arg"].Value;
+                                    others = my.Groups["others"].Value;
+                                    //00  南逆时针为正
+                                    //01   xy相反其余不变
+                                    switch (name)
+                                    {
+                                        case "moveDir":
+                                            {
+                                                double dir; double.TryParse(arg.Split(',')[0], out dir);
+                                                dir = dir * Math.PI / 180;
+                                                double dis; double.TryParse(arg.Split(',')[1], out dis);
+                                                pos_x = pos_x + Math.Sin(dir) * dis;
+                                                pos_y = pos_y + Math.Cos(dir) * dis;
+                                            };
+                                            break;
+                                        case "moveTo":
+                                            {
+                                                double target_x; double.TryParse(arg.Split(',')[0], out target_x);
+
+                                                double target_y; double.TryParse(arg.Split(',')[1], out target_y);
+                                                double dir = Math.Atan2(target_x - pos_x, target_y - pos_y);
+                                                double dis; double.TryParse(arg.Split(',')[2], out dis);
+                                                pos_x = pos_x + Math.Sin(dir) * dis;
+                                                pos_y = pos_y + Math.Cos(dir) * dis;
+                                            };
+                                            break;
+                                        case "moveXY":
+                                            {
+                                                double dx; double.TryParse(arg.Split(',')[0], out dx);
+                                                double dy; double.TryParse(arg.Split(',')[1], out dy);
+                                                pos_x = pos_x + dx;
+                                                pos_y = pos_y + dy;
+                                            }; break;
+                                        case "flipX":
+                                            {
+                                                pos_x = -(pos_x - x0) + x0;
+                                            }; break;
+                                        case "flipY":
+                                            {
+                                                pos_y = -(pos_y - y0) + y0;
+                                            }; break;
+                                        case "rotate":
+                                            {
+                                                double dir; double.TryParse(arg, out dir);
+                                                dir = dir * Math.PI / 180;
+                                                var dis = Math.Sqrt((pos_x - x0) * (pos_x - x0) + (pos_y - y0) * (pos_y - y0));
+                                                double dir0 = Math.Atan2(pos_x - x0, pos_y - y0);
+                                                pos_x = x0 + Math.Sin(dir + dir0) * dis;
+                                                pos_y = y0 + Math.Cos(dir + dir0) * dis;
+                                            }; break;
+                                        case "scaleX":
+                                            {
+                                                double scale; double.TryParse(arg, out scale);
+                                                pos_x = x0 + (pos_x - x0) * scale;
+                                            }; break;
+                                        case "scaleY":
+                                            {
+                                                double scale; double.TryParse(arg, out scale);
+                                                pos_y = y0 + (pos_y - y0) * scale;
+                                            }; break;
+                                        case "setCenter":
+                                            {
+                                                double dx; double.TryParse(arg.Split(',')[0], out x0);
+                                                double dy; double.TryParse(arg.Split(',')[1], out y0);
+                                            }; break;
+                                        default: break;
+
+
+                                    }
+
+                                    my = rexpos.Match(others);
+                                }
+                                if (others == ".getX")
+                                {
+                                    val = pos_x.ToString("0.000");
+                                }
+                                else if (others == ".getY")
+                                {
+                                    val = pos_y.ToString("0.000");
+                                }
+                                else
+                                {
+                                    val = pos_x.ToString("0.000") + "," + pos_y.ToString("0.000");
+                                }
+                                found = true;
+
+                            }
+                        }
+                        else if (x.IndexOf("_ref") == 0)
+                        {
+
+                            object obj = PluginBridges.BridgeFFXIV.ReflectPlugin(x);
+                            JavaScriptSerializer jsonSerializer = new JavaScriptSerializer();
+                            val = JsonConvert.SerializeObject(obj);
+                            //val = jsonSerializer.Serialize(obj);
+
+                        }                        // check if scalar variable exists
                         else if ((x.IndexOf("evar:") == 0) || (x.IndexOf("epvar:") == 0))
                         {
                             Variables.VariableStore store;
@@ -435,10 +673,38 @@ namespace Triggernometry
                             {
                                 store = plug.cfg.PersistentVariables;
                                 varname = x.Substring(6);
-                            }                            
+                            }
                             lock (store.Scalar) // verified
                             {
                                 if (store.Scalar.ContainsKey(varname) == true)
+                                {
+                                    val = "1";
+                                }
+                                else
+                                {
+                                    val = "0";
+                                }
+                                found = true;
+                            }
+                        }
+                        else if ((x.IndexOf("ejvar:") == 0) || (x.IndexOf("epjvar:") == 0))
+                        {
+                            Variables.VariableStore store;
+                            string varname;
+                            if (x.IndexOf("ejvar:") == 0)
+                            {
+                                store = plug.sessionvars;
+                                varname = x.Substring(6);
+                            }
+                            else
+                            {
+                                store = plug.cfg.PersistentVariables;
+                                varname = x.Substring(7);
+                            }
+                            lock (store.Scalar) // verified
+                            {
+                                var token = store.Json.Value.SelectToken(varname);
+                                if(token!=null)
                                 {
                                     val = "1";
                                 }
@@ -463,7 +729,7 @@ namespace Triggernometry
                             {
                                 store = plug.cfg.PersistentVariables;
                                 varname = x.Substring(7);
-                            }                            
+                            }
                             lock (store.List) // verified
                             {
                                 if (store.List.ContainsKey(varname) == true)
@@ -526,6 +792,143 @@ namespace Triggernometry
                                 val = vs.Value;
                                 found = true;
                             }
+                        }
+                        else if ((x.IndexOf("jvar:") == 0) || (x.IndexOf("pjvar:") == 0) || (x.IndexOf("_jparty:") == 0) || (x.IndexOf("_jentity:") == 0))
+                        {
+                            Variables.VariableStore store = plug.sessionvars;
+                            JObject root=null;
+                            string varname;
+                            if (x.IndexOf("jvar:") == 0)
+                            {
+                                store = plug.sessionvars;
+                                root = store.Json.Value;
+                                varname = x.Substring(5);
+                            }
+                            else if (x.IndexOf("pjvar:") == 0)
+                            {
+                                store = plug.cfg.PersistentVariables;
+                                root = store.Json.Value;
+                                varname = x.Substring(6);
+                            }
+                            else if (x.IndexOf("_jparty:") == 0)
+                            {
+                                store = plug.sessionvars;
+                                root = store.Json.Value;
+                                varname = x.Substring(8);
+                                root["_ffxivparty"] = PluginBridges.BridgeFFXIV.JPartyMembers;
+                                
+                            }
+                            else if (x.IndexOf("_jentity:") == 0)
+                            {
+                                store = plug.sessionvars;
+                                root = store.Json.Value;
+                                varname = x.Substring(9);
+                                root["_ffxiventity"] = PluginBridges.BridgeFFXIV.JCombatants;
+                                
+                            }
+                            else {
+                                store = plug.sessionvars;
+                                root = store.Json.Value;
+                                varname = x.Substring(5);
+                            }
+                            string tokenname;
+                            string method = "";
+                            mx = jvarfunc.Match(varname);
+                            if (mx.Success == true)
+                            {
+                                tokenname = mx.Groups["arg"].Value;
+                                method = mx.Groups["name"].Value;
+                                
+                            }
+                            else {
+                                tokenname = varname;
+                            }
+
+                            lock (store.Json) // verified
+                            {
+                                var tokens = root.SelectTokens(tokenname);
+                                val = "";
+                                if (tokens.Count() >= 1)
+                                {
+                                    var count = 0;
+                                    foreach (var token in tokens)
+                                    {
+                                        switch (method)
+                                        {
+                                            case "size":
+                                                {
+                                                    if (token.Type == JTokenType.Array)
+                                                    {
+                                                        val +=(token as JArray).Count;
+                                                    }
+                                                    else if (token.Type == JTokenType.Object)
+                                                    {
+                                                        val += (token as JObject).Count;
+                                                    }
+                                                    else
+                                                    {
+                                                        val += token.Children().Count();
+                                                    }
+                                                }
+                                                break;
+                                            case "typeof":
+                                                {
+                                                    val += token.Type.ToString();
+                                                }
+                                                break;
+                                            case "pathof":
+                                                {
+                                                    val += token.Path;
+                                                }
+                                                break;
+                                            case "indexof":
+                                                {
+                                                    if (token.Parent != null)
+                                                    {
+                                                        if (token.Parent.Type == JTokenType.Array)
+                                                        {
+                                                            val += (token.Parent as JArray).IndexOf(token);
+                                                        }
+                                                        else if (token.Parent.Type == JTokenType.Object)
+                                                        {
+                                                            val += (token.Parent as JObject).PropertyValues().ToList().IndexOf(token);
+                                                        }
+                                                        else if (token.Parent.Type == JTokenType.Property)
+                                                        {
+                                                            val += (token.Parent.Parent as JObject).PropertyValues().ToList().IndexOf(token.Parent);
+                                                        }
+                                                        else
+                                                        {
+                                                            val += "0";
+                                                        }
+                                                    }
+                                                    else
+                                                    { 
+                                                        val += "0";
+                                                    }
+                                                }
+                                                break;
+                                            case "print":
+                                                {
+                                                    Regex r = new Regex(@"[\s\t]*?[\[\{\]\},]+");
+
+                                                    val += r.Replace(token.ToString().Replace("\"","").Replace(":","\t:"),"");
+                                                }
+                                                break;
+                                            default:
+                                                val += JsonConvert.SerializeObject(token);
+                                                break;
+                                        }
+                                        count++;
+                                        if (count < tokens.Count())
+                                        {
+                                            val += ",";
+                                        }
+                                    }
+                                }
+                                found = true;
+                            }
+
                         }
                         // retrieve list variable value
                         else if ((x.IndexOf("lvar:") == 0) || (x.IndexOf("plvar:") == 0))
@@ -715,7 +1118,7 @@ namespace Triggernometry
                                             lock (store.Table)
                                             {
                                                 VariableTable vt = GetTableVariable(store, gname, false);
-                                                val = (vt.Width > 0 ? vt.Width - 1 :0).ToString();
+                                                val = (vt.Width > 0 ? vt.Width - 1 : 0).ToString();
                                                 found = true;
                                             }
                                         }
@@ -876,6 +1279,13 @@ namespace Triggernometry
                                         case "tolower": // tolower()
                                             val = funcval.ToLower();
                                             break;
+                                        case "totitle":
+                                            {
+                                                TextInfo tInfo = Thread.CurrentThread.CurrentCulture.TextInfo;
+                                                funcval = tInfo.ToTitleCase(funcval);
+                                                val = funcval.ToString();
+                                                break;
+                                            }
                                         case "length": // length()
                                             val = funcval.Length.ToString();
                                             break;
@@ -943,6 +1353,16 @@ namespace Triggernometry
                                                 val = "" + funcval.IndexOf(args[0]);
                                             }
                                             break;
+                                        case "replace": // indexof(stringtosearch)
+                                            if (argc != 2)
+                                            {
+                                                throw new ArgumentException(I18n.Translate("internal/Context/replaceargerror", "Replace function requires two argument, {0} were given", argc));
+                                            }
+                                            else
+                                            {
+                                                val = "" + funcval.Replace(args[0],args[1]);
+                                            }
+                                            break;
                                         case "compare": // compare(stringtocompare) or compare(stringtocompare, ignorecase)
                                             if (argc != 1 && argc != 2)
                                             {
@@ -959,7 +1379,7 @@ namespace Triggernometry
                                                         bool ignoreCase = bool.Parse(args[1]);
                                                         val = "" + String.Compare(funcval, args[0], ignoreCase);
                                                         break;
-                                                }                                                                                                
+                                                }
                                             }
                                             break;
                                         case "lastindexof": // lastindexof(stringtosearch)
@@ -1032,7 +1452,8 @@ namespace Triggernometry
                                         case "hex2str":
                                             {
 
-                                            }break;
+                                            }
+                                            break;
                                         case "trimname":
                                             {
                                                 string name = "";
@@ -1055,7 +1476,7 @@ namespace Triggernometry
                         }
                         else if (x.IndexOf("_ffxivparty") == 0)
                         {
-                                
+
                             mx = rexnump.Match(x);
                             var mx2 = rexnumparg.Match(x);
                             if (mx.Success == true)
@@ -1097,6 +1518,14 @@ namespace Triggernometry
                                             val = vc.GetValue(gprop).ToString();
                                         }
                                     }
+                                    else if (gprop == "pos")
+                                    {
+                                        val = vc.GetValue("x") + " , " + vc.GetValue("y");
+                                    }
+                                    else if (gprop == "posXYZ")
+                                    {
+                                        val = vc.GetValue("x") + " , " + vc.GetValue("y") + " , " + vc.GetValue("z");
+                                    }
                                     else
                                     {
                                         val = vc.GetValue(gprop).ToString();
@@ -1132,13 +1561,13 @@ namespace Triggernometry
                                         int arg1, arg2;
                                         int.TryParse(mx.Groups["arg1"].Value, out arg1);
                                         int.TryParse(mx.Groups["arg2"].Value, out arg2);
-                                        byte[] buffer = new byte[arg2 ];
+                                        byte[] buffer = new byte[arg2];
                                         Int64 ptr = Convert.ToInt64(vc.GetValue("pointer").ToString(), 16);
-                                        PluginBridges.BridgeFFXIV.ReadFFXIVMemory((IntPtr)(ptr + arg1 ), buffer, arg2 );
+                                        PluginBridges.BridgeFFXIV.ReadFFXIVMemory((IntPtr)(ptr + arg1), buffer, arg2);
                                         val = "";
-                                        for (int iptr = 0; iptr < arg2 ; iptr += 4)
+                                        for (int iptr = 0; iptr < arg2; iptr += 4)
                                         {
-                                            val += BitConverter.ToUInt32(buffer, iptr).ToString("X8")+" ";
+                                            val += BitConverter.ToUInt32(buffer, iptr).ToString("X8") + " ";
                                         }
                                     }
                                     found = true;
@@ -1178,6 +1607,14 @@ namespace Triggernometry
                                             {
                                                 val = vc.GetValue(gprop).ToString();
                                             }
+                                        }
+                                        else if (gprop == "pos")
+                                        {
+                                            val = vc.GetValue("x") + " , " + vc.GetValue("y");
+                                        }
+                                        else if (gprop == "posXYZ")
+                                        {
+                                            val = vc.GetValue("x") + " , " + vc.GetValue("y") + " , " + vc.GetValue("z");
                                         }
                                         else
                                         {
@@ -1366,7 +1803,7 @@ namespace Triggernometry
                             found = true;
                         }
                         else if (x == "_screenminx")
-                        {                            
+                        {
                             val = plug.MinX.ToString(CultureInfo.InvariantCulture);
                             found = true;
                         }

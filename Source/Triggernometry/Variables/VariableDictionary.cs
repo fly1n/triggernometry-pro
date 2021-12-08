@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 
 namespace Triggernometry.Variables
@@ -6,14 +8,25 @@ namespace Triggernometry.Variables
 
     public sealed class VariableDictionary : Variable
     {
-
         private Dictionary<string, Variable> Values { get; set; } = new Dictionary<string, Variable>();
-
+        
         public override string ToString()
         {
             return String.Join(",", Values);
         }
-
+        public override JToken ToJToken()
+        {
+            var obj = new JObject();
+            foreach (var key in Values.Keys)
+            {
+                obj[key] = Values[key].ToJToken();
+            }
+            return JToken.FromObject(obj);
+        }
+        public bool isEmpty()
+        {
+            return Values.Count == 0;
+        }
         public override int CompareTo(object o)
         {
             if ((o is Variable) == false)
@@ -72,7 +85,16 @@ namespace Triggernometry.Variables
             v.LastChanged = LastChanged;
             return v;
         }
-
+        public void CopyFrom(VariableDictionary source)
+        {
+            PluginBridges.BridgeFFXIV.ClearCombatant(this);
+            foreach (KeyValuePair<string, Variable> kp in source.Values)
+            {
+                Values[kp.Key] = kp.Value.Duplicate();
+            }
+            LastChanger = source.LastChanger;
+            LastChanged = source.LastChanged;
+        }
         public Variable GetValue(string id)
         {
             if (Values.ContainsKey(id) == true)

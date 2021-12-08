@@ -18,7 +18,7 @@ namespace TriggernometryProxy
         private Triggernometry.RealPlugin Instance;
 
         private ActPluginData ActPluginPrevious = null;
-
+        private string ActPluginVersionPrevious = null;
         private object CornerLock = new object();
         private bool CornerPopupVisible = false;
         private Control CornerPopup = null;
@@ -142,6 +142,7 @@ namespace TriggernometryProxy
             FailsafeRegisterHook("CornerHideHook", "HideCornerNotification");
             FailsafeRegisterHook("TabLocateHook", "LocateTab");
             FailsafeRegisterHook("InstanceHook", "GetInstance");
+            FailsafeRegisterHook("PluginObjectHook", "GetPluginObject");
             GetPluginNameAndPath();
             ActGlobals.oFormActMain.OnLogLineRead += OFormActMain_OnLogLineRead;
             //ActGlobals.oFormActMain.BeforeLogLineRead += OFormActMain_BeforeLogLineRead;
@@ -414,7 +415,19 @@ namespace TriggernometryProxy
             }
             return alltrigs;
         }
-
+        public Triggernometry.RealPlugin.PluginWrapper GetPluginObject(string ActPluginName, string ActPluginStatus)
+        {
+            foreach (ActPluginData p in ActGlobals.oFormActMain.ActPlugins)
+            {
+                string tn = p.pluginObj != null ? p.pluginObj.GetType().Name : "(null)";
+                if ((String.Compare(p.pluginFile.Name, ActPluginName, true) == 0) &&
+                    (p.lblPluginStatus.Text.Contains(ActPluginStatus)))
+                {
+                    return new Triggernometry.RealPlugin.PluginWrapper() { pluginObj = p.pluginObj };
+                }
+            }
+            return new Triggernometry.RealPlugin.PluginWrapper() { pluginObj = null };
+        }
         public Triggernometry.RealPlugin.PluginWrapper GetInstance(string ActPluginName, string ActPluginType)
         {
             foreach (ActPluginData p in ActGlobals.oFormActMain.ActPlugins)
@@ -427,17 +440,18 @@ namespace TriggernometryProxy
                         (String.Compare(tn, ActPluginType, true) == 0)
                     )
                     &&
-                    (String.Compare(p.lblPluginStatus.Text, "FFXIV Plugin Started.", true) == 0)
+                    (p.lblPluginStatus.Text.EndsWith("Started."))
                 )
                 {
                     if (ActPluginPrevious == p)
                     {
-                        return new Triggernometry.RealPlugin.PluginWrapper() { pluginObj = p.pluginObj, state = 1 };
+                        return new Triggernometry.RealPlugin.PluginWrapper() { pluginObj = p.pluginObj, state = 1 , fileversion = ActPluginVersionPrevious };
                     }
                     else
                     {
                         ActPluginPrevious = p;
                         System.Diagnostics.FileVersionInfo vi = System.Diagnostics.FileVersionInfo.GetVersionInfo(p.pluginFile.FullName);
+                        ActPluginVersionPrevious = vi.FileVersion.ToString();
                         int[] expectedActVer = new int[4] { 2, 0, 4, 6 };
                         string expectedActVers = "2.0.4.6";
                         int[] currentActVer = new int[4] { vi.FileMajorPart, vi.FileMinorPart, vi.FileBuildPart, vi.FilePrivatePart };                        
@@ -449,15 +463,16 @@ namespace TriggernometryProxy
                             }
                             if (currentActVer[i] < expectedActVer[i])
                             {                                
-                                return new Triggernometry.RealPlugin.PluginWrapper() { pluginObj = p.pluginObj, state = 2, fileversion = vi.FileVersion.ToString(), expectedversion = expectedActVers };
+                                return new Triggernometry.RealPlugin.PluginWrapper() { pluginObj = p.pluginObj, state = 2, fileversion = ActPluginVersionPrevious, expectedversion = expectedActVers };
                             }
                         }
-                        return new Triggernometry.RealPlugin.PluginWrapper() { pluginObj = p.pluginObj, state = 1 };
+                        return new Triggernometry.RealPlugin.PluginWrapper() { pluginObj = p.pluginObj, state = 1 , fileversion = ActPluginVersionPrevious };
                     }
                 }
             }
             return new Triggernometry.RealPlugin.PluginWrapper() { pluginObj = null, state = 0 };
         }
+        
     }
     public enum SwingTypeEnum
     {

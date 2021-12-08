@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Triggernometry</RootNamespace>
     <AssemblyName>TriggernometryPlugin</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
@@ -58,7 +58,7 @@
     <Reference Include="CsvHelper, Version=12.0.0.0, Culture=neutral, PublicKeyToken=8c4959082be5c823, processorArchitecture=MSIL">
       <HintPath>..\packages\CsvHelper.12.2.1\lib\net45\CsvHelper.dll</HintPath>
     </Reference>
-    <Reference Include="FFXIV_ACT_Plugin.Common, Version=2.0.4.10, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="FFXIV_ACT_Plugin.Common, Version=2.6.0.3, Culture=neutral, PublicKeyToken=9f740ac505d6bc50, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\Dev\FFXIV_ACT_Plugin_SDK_2.2.0.9\SDK\FFXIV_ACT_Plugin.Common.dll</HintPath>
     </Reference>
@@ -256,6 +256,12 @@
     <Compile Include="Forms\SubstitutionForm.Designer.cs">
       <DependentUpon>SubstitutionForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\JsonVariableEditorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\JsonVariableEditorForm.Designer.cs">
+      <DependentUpon>JsonVariableEditorForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\VariableEditorForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -349,6 +355,7 @@
       <DependentUpon>UserInterface.cs</DependentUpon>
     </Compile>
     <Compile Include="Variables\Variable.cs" />
+    <Compile Include="Variables\VariableJson.cs" />
     <Compile Include="Variables\VariableScalar.cs" />
     <Compile Include="Variables\VariableDictionary.cs" />
     <Compile Include="Forms\StateForm.cs">
@@ -491,6 +498,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\LogForm.resx">
       <DependentUpon>LogForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\RepositoryListForm.resx">
       <DependentUpon>RepositoryListForm.cs</DependentUpon>
@@ -500,6 +508,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SubstitutionForm.resx">
       <DependentUpon>SubstitutionForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\JsonVariableEditorForm.resx">
+      <DependentUpon>JsonVariableEditorForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\VariableEditorForm.resx">
       <DependentUpon>VariableEditorForm.cs</DependentUpon>
@@ -548,6 +559,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
     <None Include="readme.md" />
   </ItemGroup>
